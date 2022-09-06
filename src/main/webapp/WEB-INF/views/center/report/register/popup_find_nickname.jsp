@@ -23,7 +23,10 @@
     <!-- CSS : font 설정 -->
     <link rel="stylesheet" href="/resources/common/css/font.css">
     <link rel="stylesheet" href="/resources/center/report/css/popup_find_nickname.css">
-
+        
+    <link rel="shortcut icon" href="/resources/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="/resources/favicon.ico" type="image/x-icon">
+    
 </head>
 
 

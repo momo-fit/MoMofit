@@ -50,6 +50,13 @@
     <!-- 메인페이지 필수 CSS -->
     <link rel="stylesheet" href="/resources/common/css/main_section_card.css">
     <link rel="stylesheet" href="/resources/common/css/main_section_board.css">
+            
+    <link rel="shortcut icon" href="/resources/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="/resources/favicon.ico" type="image/x-icon">
+            
+    <link rel="shortcut icon" href="/resources/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="/resources/favicon.ico" type="image/x-icon">
+    
 
 
 </head>
@@ -120,6 +127,7 @@
                         
                         <!-- 수정하기 버튼 -->
                         <input type="submit" class="writing_submit" value="수정">
+                       </form>
                         
                     </div>
                     

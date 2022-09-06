@@ -52,7 +52,10 @@
 
         }); // .jq
     </script>
-
+        
+    <link rel="shortcut icon" href="/resources/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="/resources/favicon.ico" type="image/x-icon">
+    
 </head>
 
 <body>
@@ -60,6 +63,9 @@
 
         <!-- header -->
         <%@ include file = "/WEB-INF/views/include/header.jsp" %>
+        
+        <!-- 사이드 프로필 -->
+        <%@ include file = "/WEB-INF/views/include/sideLogin.jsp" %>
 
         <!-- 메인 컨텐츠부 -->
         <section>
@@ -262,7 +268,7 @@
 
                             <div class="deal_check_bottom">
                                 <a class="board_write" id="regBtn">
-                                    <button id="regBtn"><i class="fa-solid fa-pencil">글쓰기</i></button>
+                                    <button id="regBtn" ><i class="fa-solid fa-pencil">글쓰기</i></button>
                                 </a>
                             </div>
 

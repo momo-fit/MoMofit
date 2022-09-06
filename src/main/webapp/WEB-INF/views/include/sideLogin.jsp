@@ -1,5 +1,6 @@
 <!-- 사이드바 -->
 <link rel="stylesheet" href="/resources/include/css/side_profile.css">
+
 <input type="checkbox" id="side_profile_icon">
 <label for="side_profile_icon">
     <img src="/resources/include/img/user.png" width="50px">

@@ -45,6 +45,9 @@
     
     <!-- CSS : content 전체 설정 -->
     <link rel="stylesheet" href="/resources/group/css/groups.css">
+            
+    <link rel="shortcut icon" href="/resources/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="/resources/favicon.ico" type="image/x-icon">
     
     
 

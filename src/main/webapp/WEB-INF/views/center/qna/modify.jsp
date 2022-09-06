@@ -30,7 +30,10 @@
     <!-- CSS : main_footer 설정 -->
     <link rel="stylesheet" href="/resources/include/css/main_footer.css">
     
-
+        
+    <link rel="shortcut icon" href="/resources/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="/resources/favicon.ico" type="image/x-icon">
+    
 
 </head>
 

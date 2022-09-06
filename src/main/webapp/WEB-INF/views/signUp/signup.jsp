@@ -38,7 +38,10 @@
     
     <!-- CSS : main 회원가입 설정 -->
     <link href="/resources/signUp/css/main_signup.css" rel="stylesheet">
-
+        
+    <link rel="shortcut icon" href="/resources/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="/resources/favicon.ico" type="image/x-icon">
+    
 </head>
 
 <body>

@@ -43,8 +43,10 @@
      <!-- CSS : side_profile 설정 -->
     <link rel="stylesheet" href="/resources/include/css/side_profile.css">
     
-    
-    
+        
+    <link rel="shortcut icon" href="/resources/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="/resources/favicon.ico" type="image/x-icon">
+        
 
 </head>
 

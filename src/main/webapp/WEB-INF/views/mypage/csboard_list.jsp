@@ -53,13 +53,10 @@
     <link rel="stylesheet" href="/resources/mypage/css/mypage_content1.css">
 
         
-    <style>
-
-    </style>
-
-    <script>
-
-    </script>
+            
+    <link rel="shortcut icon" href="/resources/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="/resources/favicon.ico" type="image/x-icon">
+    
 
 </head>
 

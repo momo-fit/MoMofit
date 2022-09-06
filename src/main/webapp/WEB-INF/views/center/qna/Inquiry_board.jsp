@@ -64,7 +64,10 @@
 	
 	});//글쓰기 버튼 누르면 작성화면으로 이동하기
 	</script>
-
+        
+    <link rel="shortcut icon" href="/resources/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="/resources/favicon.ico" type="image/x-icon">
+    
 
 </head>
 

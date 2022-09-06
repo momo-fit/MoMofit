@@ -36,7 +36,11 @@
  	<!-- CSS : main footer 설정 -->
     <link rel="stylesheet" href="/resources/include/css/main_footer.css">
     <!-- CSS : main 미디어 태그 -->
-    <link rel="stylesheet" href="/resources/common/css/main_mediatag.css">
+    <link rel="stylesheet" href="/resources/common/css/main_mediatag.css">     
+       
+    <link rel="shortcut icon" href="/resources/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="/resources/favicon.ico" type="image/x-icon">
+    
 </head>
 
 <body>

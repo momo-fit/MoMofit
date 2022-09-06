@@ -30,7 +30,10 @@
     
     <link rel="stylesheet" href="/resources/signIn/css/login.css">
 
-
+        
+    <link rel="shortcut icon" href="/resources/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="/resources/favicon.ico" type="image/x-icon">
+    
 </head>
 
 <body>
