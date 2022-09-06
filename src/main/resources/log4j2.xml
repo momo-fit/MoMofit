@@ -13,7 +13,7 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="org.zerock.myapp" level="trace" />
+        <Logger name="org.zerock.momofit" level="trace" />
         <Logger name="org.springframework" level="warn" />
         <Logger name="com.zaxxer.hikari" level="warn" />
 
