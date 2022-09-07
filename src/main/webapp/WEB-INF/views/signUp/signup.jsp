@@ -39,9 +39,6 @@
     <!-- CSS : main 회원가입 설정 -->
     <link href="/resources/signUp/css/main_signup.css" rel="stylesheet">
         
-    <link rel="shortcut icon" href="/resources/favicon.ico" type="image/x-icon">
-	<link rel="icon" href="/resources/favicon.ico" type="image/x-icon">
-    
 </head>
 
 <body>
@@ -67,14 +64,14 @@
                             <table class="table table-boardered">
 
 
-                                <tr name3 class="name3 font-14-400">
+                                <tr class="name3 font-14-400">
                                     <th>아이디*</th>
                                     <td><input type="text" class="form-control" name="id" id="id" placeholder="id"></td>
                                     <td><input type="button" value="중복확인" onclick="idCheck()" class="btn btn-primary" />
                                     </td>
                                 </tr>
 
-                                <tr name3 class="name3 font-14-400">
+                                <tr class="name3 font-14-400">
                                     <th>닉네임*</th>
                                     <td><input type="text" class="form-control" name="nick_name" id="nick_name"
                                             placeholder="id"></td>
@@ -82,30 +79,30 @@
                                             class="btn btn-primary" /></td>
                                 </tr>
 
-                                <tr name3 class="name3 font-14-400">
+                                <tr class="name3 font-14-400">
                                     <th>비밀번호*</th>
                                     <td><input type="password" class="form-control" name="pass1" placeholder="비밀번호">
                                     </td>
                                 </tr>
 
-                                <tr name3 class="name3 font-14-400">
+                                <tr class="name3 font-14-400">
                                     <th>비밀번호확인*</th>
                                     <td><input type="password" class="form-control" name="pass2" placeholder="비밀번호 확인">
                                     </td>
                                 </tr>
 
-                                <tr name3 class="name3 font-14-400">
+                                <tr class="name3 font-14-400">
                                     <th>이름*</th>
                                     <td><input type="text" class="form-control" name="real_name"></td>
                                 </tr>
 
-                                <tr name3 class="name3 font-14-400">
+                                <tr class="name3 font-14-400">
                                     <th>전화번호*</th>
                                     <td><input type="tel" class="form-control" name="tel" placeholder="000-0000-0000">
                                     </td>
                                 </tr>
 
-                                <tr name3 class="name3 font-14-400">
+                                <tr class="name3 font-14-400">
                                     <th>성별*</th>
                                     <td>
                                         <select name="gender" class="form-control">
@@ -116,14 +113,14 @@
                                     </td>
                                 </tr>
 
-                                <tr name3 class="name3 font-14-400">
+                                <tr class="name3 font-14-400">
                                     <th>생년월일*</th>
                                     <td>
                                         <input type="date" name="birth" class="form-control">
                                     </td>
                                 </tr>
 
-                                <tr name3 class="name3 font-14-400">
+                                <tr class="name3 font-14-400">
                                     <th>이메일*</th>
                                     <td>
                                         <input class="form-control-sm" name="email1" type="text"> @ <input
@@ -141,7 +138,7 @@
 
                                 </tr>
 
-                                <tr name3 class="name3 font-14-400">
+                                <tr class="name3 font-14-400">
 
                                     <th>인증번호*</th>
                                     <td><input type="password" class="form-control" name="cer_num"
@@ -155,29 +152,29 @@
                                     </td>
                                 </tr>
 
-                                <tr name3 class="name3 font-14-400">
+                                <tr class="name3 font-14-400">
                                     <th>지역</th>
-                                    <td><input type="text" class="form-control" name="location" placeholder="지역"></td>
+                                    <td><input type="text" class="form-control" id="loc" name="location" placeholder="지역"></td>
                                     <td><button type="button" class="btn btn-primary">지역검색</button></td>
                                 </tr>
 
-                                <tr name3 class="name3 font-14-400">
+                                <tr class="name3 font-14-400">
                                     <th>관심운동</th>
                                     <td>
-                                        <input type="checkbox" name="hobby" value="헬스">헬스 &nbsp;
+                                        <input type="checkbox" name="hobby" value="헬스/크로스핏">헬스/크로스핏 &nbsp;
+                                        <input type="checkbox" name="hobby" value="요가/필라테스">등산 &nbsp;
                                         <input type="checkbox" name="hobby" value="등산">등산 &nbsp;
-                                        <input type="checkbox" name="hobby" value="축구">축구 &nbsp;
+                                        <input type="checkbox" name="hobby" value="런닝">런닝 &nbsp;
+                                        <input type="checkbox" name="hobby" value="싸이클">싸이클 &nbsp; <br>
+                                        <input type="checkbox" name="hobby" value="축구/풋살">축구/풋살 &nbsp;
                                         <input type="checkbox" name="hobby" value="농구">농구 &nbsp;
-                                        <input type="checkbox" name="hobby" value="농구">농구 &nbsp; <br>
-                                        <input type="checkbox" name="hobby" value="농구">농구 &nbsp;
-                                        <input type="checkbox" name="hobby" value="농구">농구 &nbsp;
-                                        <input type="checkbox" name="hobby" value="농구">농구 &nbsp;
-                                        <input type="checkbox" name="hobby" value="농구">농구 &nbsp;
-                                        <input type="checkbox" name="hobby" value="농구">농구 &nbsp;
+                                        <input type="checkbox" name="hobby" value="야구">야구 &nbsp;
+                                        <input type="checkbox" name="hobby" value="테니스">테니스 &nbsp;
+                                        <input type="checkbox" name="hobby" value="배드민턴">배드민턴 &nbsp;
                                     </td>
                                 </tr>
 
-                                <tr name3 class="name3 font-14-400">
+                                <tr class="name3 font-14-400">
                                     <th>프로필 사진</th>
                                     <td>
                                         <img src="/resources/signUp/img/profile.png" class="profile"><br>
@@ -187,7 +184,7 @@
                                     </td>
                                 </tr>
 
-                                <tr name3 class="name3 font-14-400">
+                                <tr class="name3 font-14-400">
                                     <th>한줄 소개</th>
                                     <td><input type="text" class="form-control" name="introduction" placeholder="(선택)">
                                     </td>
@@ -199,7 +196,7 @@
                                     </td>
                                 </tr>
 
-                                <tr name3 class="name3 font-14-400">
+                                <tr class="name3 font-14-400">
                                     <th>약관동의</th>
                                     <td>
                                         <div class="checkbox_group">

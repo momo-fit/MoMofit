@@ -5,9 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-        
-    <link rel="shortcut icon" href="/resources/favicon.ico" type="image/x-icon">
-	<link rel="icon" href="/resources/favicon.ico" type="image/x-icon">
+
     
 </head>
 <body>

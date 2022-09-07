@@ -43,15 +43,11 @@
     <link rel="stylesheet" href="/resources/include/css/main_header.css">
     <!-- CSS : main_footer 설정 -->
     <link rel="stylesheet" href="/resources/include/css/main_footer.css">
-    <!-- CSS : side_profile 설정 -->
-    <link rel="stylesheet" href="/resources/include/css/side_profile.css">
     <!-- CSS : main 미디어 태그 -->
     <link rel="stylesheet" href="/resources/common/css/main_mediatag.css">
 
 
-    <!-- 메인페이지 필수 CSS -->
-    <link rel="stylesheet" href="/resources/common/css/main_section_card.css">
-    <link rel="stylesheet" href="/resources/common/css/main_section_board.css">
+
 
 
 	<script>        
@@ -64,10 +60,7 @@
 	
 	});//글쓰기 버튼 누르면 작성화면으로 이동하기
 	</script>
-        
-    <link rel="shortcut icon" href="/resources/favicon.ico" type="image/x-icon">
-	<link rel="icon" href="/resources/favicon.ico" type="image/x-icon">
-    
+
 
 </head>
 

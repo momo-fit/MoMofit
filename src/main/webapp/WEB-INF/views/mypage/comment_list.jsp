@@ -51,10 +51,6 @@
     
     <!-- CSS : 마이페이지 컨텐츠 영역 CSS -->
     <link rel="stylesheet" href="/resources/mypage/css/mypage_content1.css">
-        
-    <link rel="shortcut icon" href="/resources/favicon.ico" type="image/x-icon">
-	<link rel="icon" href="/resources/favicon.ico" type="image/x-icon">
-    
 
 </head>
 

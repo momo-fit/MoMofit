@@ -55,12 +55,6 @@
     <!-- CSS : 마이페이지 개인정보수정 패스워드 확인 CSS -->
     <link rel="stylesheet" href="/resources/mypage/css/mypage_check_pw.css">
 
-        
-            
-    <link rel="shortcut icon" href="/resources/favicon.ico" type="image/x-icon">
-	<link rel="icon" href="/resources/favicon.ico" type="image/x-icon">
-    
-
 </head>
 
 <body>

@@ -54,9 +54,7 @@
  	
  	<!-- CSS : content 전체 설정 -->
     <link rel="stylesheet" href="/resources/board/tip/css/tip_board.css">
-        
-    <link rel="shortcut icon" href="/resources/favicon.ico" type="image/x-icon">
-	<link rel="icon" href="/resources/favicon.ico" type="image/x-icon">
+
     
 </head>
 

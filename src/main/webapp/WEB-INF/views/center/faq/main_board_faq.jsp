@@ -50,10 +50,7 @@
     <!-- 메인페이지 필수 CSS -->
     <link rel="stylesheet" href="/resources/common/css/main_section_card.css">
     <link rel="stylesheet" href="/resources/common/css/main_section_board.css">
-        
-    <link rel="shortcut icon" href="/resources/favicon.ico" type="image/x-icon">
-	<link rel="icon" href="/resources/favicon.ico" type="image/x-icon">
-    
+
 
 </head>
 

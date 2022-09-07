@@ -2,12 +2,6 @@ section {
     margin: 40px auto;
 }
 
-.section_wrap {
-    display: flex;
-    justify-content: space-between;
-}
-
-
 /* 게시판 큰 틀 */
 .free_board { 
     margin-top: 100px;
@@ -33,6 +27,7 @@ section {
 
 .free_board_menu{   
     border-bottom: 3px solid gray;
+
 }
 
 
@@ -45,10 +40,12 @@ section {
 /* 테이블 header */
 .menu_title{
     width: 500px;
+    text-align: center;
     
 }
 .menu_num{
     width: 60px;
+    text-align: center;
 }
 
 .menu_writer, .menu_date, .menu_up{
@@ -68,7 +65,7 @@ section {
 .contnet{
     border-bottom: 1px solid gray;
     height: 36px;
-    z-index: 20;
+    text-align: center;
 }
 
 .board_table{
