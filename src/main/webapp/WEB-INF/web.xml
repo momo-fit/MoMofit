@@ -9,22 +9,17 @@
 
 	<display-name>momofit</display-name>
 
-	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>index.htm</welcome-file>
-	</welcome-file-list>
 
 	<!-- ============================= -->
 	<!-- 1. JSP 공통설정               -->
 	<!-- ============================= -->
 	<jsp-config>
 		<jsp-property-group>
-		<url-pattern>*.jsp</url-pattern>
-		<page-encoding>utf8</page-encoding>
-		<include-prelude>/WEB-INF/views/include.jsp</include-prelude>
-		<trim-directive-whitespaces>true</trim-directive-whitespaces>
-		<default-content-type>text/html; charset=utf8</default-content-type>
+			<url-pattern>*.jsp</url-pattern>
+			<page-encoding>UTF-8</page-encoding>
+			<include-prelude>/WEB-INF/views/include.jsp</include-prelude>
+			<trim-directive-whitespaces>true</trim-directive-whitespaces>
+			<default-content-type>text/html; charset=UTF-8</default-content-type>
 		</jsp-property-group>
 	</jsp-config>
 
