@@ -14,6 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
+    
 
     <!-- 폰트어썸 -->
     <script src="https://kit.fontawesome.com/3b1ef86e4b.js" crossorigin="anonymous"></script>
@@ -123,28 +124,35 @@
                                 <tr class="name3 font-14-400">
                                     <th>이메일*</th>
                                     <td>
-                                        <input class="form-control-sm" name="email1" type="text"> @ <input
-                                            class="form-control-sm" name="email2" type="text">
-                                        <select class="form-control-sm" name="select_email"
+                                        <input class="form-control-sm" name="email1" type="text" id="email1"> @ <input
+                                            class="form-control-sm" name="email2" type="text" id="addr">
+                                        <select class="form-control-sm" name="select_email" id="email2"
                                             onChange="selectEmail(this)">
                                             <option value="" selected>선택하세요</option>
                                             <option value="naver.com">naver.com</option>
                                             <option value="gmail.com">gmail.com</option>
-                                            <option value="hanmail.com">hanmail.com</option>
+                                            <option value="daum.net">daum.net</option>
                                             <option value="1">직접입력</option>
                                         </select>
                                     </td>
-                                    <td><button type="button" class="btn btn-primary">인증</button></td>
+                                    <td><button type="button" class="btn btn-primary1" id="mailSend">인증</button></td>
 
                                 </tr>
 
                                 <tr class="name3 font-14-400">
 
                                     <th>인증번호*</th>
-                                    <td><input type="password" class="form-control" name="cer_num"
-                                            placeholder="인증번호를 입력하세요."></td>
+                                    <td><input type="text" class="form-control" id="form-control" name="cer_num"
+                                            placeholder="인증번호를 입력하세요." disabled></td>
+                                    <td><button type="button" class="btn btn-primary2" id="pinNumCheck">확인</button></td>
                                 </tr>
 
+                                <tr class="name3 font-14-400">
+
+                                    <th></th>
+                                    <td><span id="pinNum"></span></td>
+                                </tr>
+                               
                                 <tr>
                                     <td colspan="3">
                                         <hr>
@@ -155,7 +163,7 @@
                                 <tr class="name3 font-14-400">
                                     <th>지역</th>
                                     <td><input type="text" class="form-control" id="loc" name="location" placeholder="지역"></td>
-                                    <td><button type="button" class="btn btn-primary">지역검색</button></td>
+                                    <td><button type="button" class="btn btn-primary3">지역검색</button></td>
                                 </tr>
 
                                 <tr class="name3 font-14-400">
