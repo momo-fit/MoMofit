@@ -51,7 +51,7 @@
         <!-- 메인 컨텐츠부 -->
         <section>
 
-
+			
             <div class="section_wrap">
                 <div class="s_box_board">
                     <h2>회원가입</h2>
@@ -65,45 +65,60 @@
                             <table class="table table-boardered">
 
 
-                                <tr class="name3 font-14-400">
+                                <tr class="font-14-400">
                                     <th>아이디*</th>
                                     <td><input type="text" class="form-control" name="id" id="id" placeholder="id"></td>
-                                    <td><input type="button" value="중복확인" onclick="idCheck()" class="btn btn-primary" />
+                                    <td><input type="button" value="중복확인" class="btn btn-primary" id="idBtn" />
                                     </td>
                                 </tr>
 
-                                <tr class="name3 font-14-400">
+                                <tr>
+                                    <th></th>
+                                    <td><span id="idResult" class="font-12-400"></span></td>
+                                </tr>
+
+                                <tr class="font-14-400">
                                     <th>닉네임*</th>
                                     <td><input type="text" class="form-control" name="nick_name" id="nick_name"
-                                            placeholder="id"></td>
-                                    <td><input type="button" value="중복확인" onclick="nickCheck()"
-                                            class="btn btn-primary" /></td>
+                                            placeholder="닉네임"></td>
+                                    <td><input type="button" value="중복확인"
+                                            class="btn btn-primary" id="nickBtn" /></td>
+                                </tr>
+                                
+                                <tr>
+                                    <th></th>
+                                    <td><span id="nickNameResult" class="font-12-400"></span></td>
                                 </tr>
 
-                                <tr class="name3 font-14-400">
+                                <tr class="font-14-400">
                                     <th>비밀번호*</th>
-                                    <td><input type="password" class="form-control" name="pass1" placeholder="비밀번호">
+                                    <td><input type="password" class="form-control pass1" name="pass1" placeholder="비밀번호">
                                     </td>
                                 </tr>
 
-                                <tr class="name3 font-14-400">
+                                <tr class="font-14-400">
                                     <th>비밀번호확인*</th>
-                                    <td><input type="password" class="form-control" name="pass2" placeholder="비밀번호 확인">
+                                    <td><input type="password" class="form-control pass2" name="pass2" placeholder="비밀번호 확인">
                                     </td>
                                 </tr>
+                                
+                                <tr class="pwCheck">
+                                    <th></th>
+                                    <td><span id="pwCheck" class="font-12-400"></span></td>
+                                </tr>
 
-                                <tr class="name3 font-14-400">
+                                <tr class="font-14-400">
                                     <th>이름*</th>
                                     <td><input type="text" class="form-control" name="real_name"></td>
                                 </tr>
 
-                                <tr class="name3 font-14-400">
+                                <tr class="font-14-400">
                                     <th>전화번호*</th>
                                     <td><input type="tel" class="form-control" name="tel" placeholder="000-0000-0000">
                                     </td>
                                 </tr>
 
-                                <tr class="name3 font-14-400">
+                                <tr class="font-14-400">
                                     <th>성별*</th>
                                     <td>
                                         <select name="gender" class="form-control">
@@ -114,14 +129,14 @@
                                     </td>
                                 </tr>
 
-                                <tr class="name3 font-14-400">
+                                <tr class="font-14-400">
                                     <th>생년월일*</th>
                                     <td>
                                         <input type="date" name="birth" class="form-control">
                                     </td>
                                 </tr>
 
-                                <tr class="name3 font-14-400">
+                                <tr class="font-14-400">
                                     <th>이메일*</th>
                                     <td>
                                         <input class="form-control-sm" name="email1" type="text" id="email1"> @ <input
@@ -139,7 +154,7 @@
 
                                 </tr>
 
-                                <tr class="name3 font-14-400">
+                                <tr class="font-14-400">
 
                                     <th>인증번호*</th>
                                     <td><input type="text" class="form-control" id="form-control" name="cer_num"
@@ -147,7 +162,7 @@
                                     <td><button type="button" class="btn btn-primary2" id="pinNumCheck">확인</button></td>
                                 </tr>
 
-                                <tr class="name3 font-14-400">
+                                <tr class="font-14-400">
 
                                     <th></th>
                                     <td><span id="pinNum"></span></td>
@@ -160,29 +175,29 @@
                                     </td>
                                 </tr>
 
-                                <tr class="name3 font-14-400">
+                                <tr class="font-14-400">
                                     <th>지역</th>
                                     <td><input type="text" class="form-control" id="loc" name="location" placeholder="지역"></td>
                                     <td><button type="button" class="btn btn-primary3">지역검색</button></td>
                                 </tr>
 
-                                <tr class="name3 font-14-400">
+                                <tr class="font-14-400">
                                     <th>관심운동</th>
                                     <td>
-                                        <input type="checkbox" name="hobby" value="헬스/크로스핏">헬스/크로스핏 &nbsp;
-                                        <input type="checkbox" name="hobby" value="요가/필라테스">등산 &nbsp;
-                                        <input type="checkbox" name="hobby" value="등산">등산 &nbsp;
-                                        <input type="checkbox" name="hobby" value="런닝">런닝 &nbsp;
-                                        <input type="checkbox" name="hobby" value="싸이클">싸이클 &nbsp; <br>
-                                        <input type="checkbox" name="hobby" value="축구/풋살">축구/풋살 &nbsp;
-                                        <input type="checkbox" name="hobby" value="농구">농구 &nbsp;
-                                        <input type="checkbox" name="hobby" value="야구">야구 &nbsp;
-                                        <input type="checkbox" name="hobby" value="테니스">테니스 &nbsp;
-                                        <input type="checkbox" name="hobby" value="배드민턴">배드민턴 &nbsp;
+                                        <input type="checkbox" name="hobby" value="헬스/크로스핏" id="label1" onclick="CountChecked(this)"><label for="label1">헬스/크로스핏</label>&nbsp;
+                                        <input type="checkbox" name="hobby" value="요가/필라테스" id="label2" onclick="CountChecked(this)"><label for="label2"></label>등산&nbsp;
+                                        <input type="checkbox" name="hobby" value="등산" id="label3" onclick="CountChecked(this)"><label for="label3">등산&nbsp;</label>
+                                        <input type="checkbox" name="hobby" value="런닝" id="label4" onclick="CountChecked(this)"><label for="label4">런닝&nbsp;</label>
+                                        <input type="checkbox" name="hobby" value="싸이클" id="label5" onclick="CountChecked(this)"><label for="label5">싸이 &nbsp;</label> <br>
+                                        <input type="checkbox" name="hobby" value="축구/풋살" id="label6" onclick="CountChecked(this)"><label for="label6">축구풋살 &nbsp;</label>
+                                        <input type="checkbox" name="hobby" value="농구" id="label7" onclick="CountChecked(this)"><label for="label7">농구&nbsp;</label>
+                                        <input type="checkbox" name="hobby" value="야구" id="label8" onclick="CountChecked(this)"><label for="label8">야구&nbsp;</label>
+                                        <input type="checkbox" name="hobby" value="테니스" id="label9" onclick="CountChecked(this)"><label for="label9">테니 &nbsp;</label>
+                                        <input type="checkbox" name="hobby" value="배드민턴" id="label10" onclick="CountChecked(this)"><label for="label10">배드턴 &nbsp;</label>
                                     </td>
                                 </tr>
 
-                                <tr class="name3 font-14-400">
+                                <tr class="font-14-400">
                                     <th>프로필 사진</th>
                                     <td>
                                         <img src="/resources/signUp/img/profile.png" class="profile"><br>
@@ -192,7 +207,7 @@
                                     </td>
                                 </tr>
 
-                                <tr class="name3 font-14-400">
+                                <tr class="font-14-400">
                                     <th>한줄 소개</th>
                                     <td><input type="text" class="form-control" name="introduction" placeholder="(선택)">
                                     </td>
@@ -204,7 +219,7 @@
                                     </td>
                                 </tr>
 
-                                <tr class="name3 font-14-400">
+                                <tr class="font-14-400">
                                     <th>약관동의</th>
                                     <td>
                                         <div class="checkbox_group">
@@ -248,9 +263,7 @@
     <!-- 체크박스 전체동의 자바스크립트 -->
     <script src="/resources/signUp/js/main_checkbox.js"></script>
     <!-- 이메일 선택 자바스크립트 -->
-    <script src="/resources/signUp/js/main_email.js"></script>
-    <!-- 아이디 중복확인 자바스크립트-->
-    <script src="/resources/signUp/js/main_idcheck.js"></script>
+    <script src="/resources/signUp/js/main_check.js"></script>
 
     <!-- 부트스트랩 자바스크립트 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

@@ -13,3 +13,23 @@ $(".checkbox_group").on("click", ".normal", function() {
 
     $("#agree_all").prop("checked", is_checked);
 });
+
+
+// 취미선택
+let maxCount = 3;								
+let count = 0;   								
+
+function CountChecked(field){ 					
+	if (field.checked) {						
+		count += 1;								
+	}
+	else {										
+		count -= 1;							
+	}
+	
+	if (count > maxCount) {						
+		alert("최대 3개까지만 선택가능합니다.");	
+        field.checked = false;			
+        count -= 1;									
+	}
+}

@@ -1,4 +1,4 @@
-package org.zerock.momofit.service.mail;
+package org.zerock.momofit.service.signUpCheck.mail;
 
 import java.util.Random;
 

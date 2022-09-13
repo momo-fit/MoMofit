@@ -35,11 +35,16 @@
 
 .table{
     border-bottom: white;
+
 }
 
 th, td{
     text-align: left;
     vertical-align: middle;
+
+}
+th{
+	width: 110px;
 }
 
 .profile{
@@ -84,4 +89,10 @@ th, td{
     color: white;
     background-color: rgb(20 167 255);
 }
+
+#idResult, #nickNameResult, #pwCheck {
+    position: relative;
+    top: -10px;
+}
+
 
