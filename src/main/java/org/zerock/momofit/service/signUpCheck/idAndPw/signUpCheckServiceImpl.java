@@ -3,7 +3,7 @@ package org.zerock.momofit.service.signUpCheck.idAndPw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zerock.momofit.exception.ServiceException;
-import org.zerock.momofit.mapper.signUpCheckMapper.checkMapper;
+import org.zerock.momofit.mapper.signUpMapper.checkMapper;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;

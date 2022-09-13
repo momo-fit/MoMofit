@@ -1,4 +1,4 @@
-package org.zerock.momofit.mapper.signUpCheckMapper;
+package org.zerock.momofit.mapper.signUpMapper;
 
 import org.zerock.momofit.exception.DAOException;
 
