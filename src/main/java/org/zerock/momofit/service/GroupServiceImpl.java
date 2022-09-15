@@ -40,10 +40,10 @@ public class GroupServiceImpl implements GroupService {
 	
 	// 조회
 	@Override
-	public GroupVO detail(Integer group_no) {
-		log.info("detail: {}", group_no);
+	public GroupVO detail(Integer groupNo) {
+		log.info("detail: {}", groupNo);
 		
-		return mapper.read(group_no);
+		return mapper.read(groupNo);
 	}
 
 	// 수정
@@ -56,10 +56,10 @@ public class GroupServiceImpl implements GroupService {
 
 	// 삭제
 	@Override
-	public boolean remove(Integer group_no) {
-		log.info("remove: {}", group_no);
+	public boolean remove(Integer groupNo) {
+		log.info("remove: {}", groupNo);
 		
-		return mapper.delete(group_no) == 1;
+		return mapper.delete(groupNo) == 1;
 	}
 
 
