@@ -17,10 +17,17 @@ public interface GroupMapper {
 	public void insertSelectKey(GroupVO group);		// *** : 새로 입력된 게시글의 bno를 반환받기를 원하는 경우
 	
 	// 3. 상세조회 (read)
+<<<<<<< HEAD
 	public GroupVO read(Integer groupNo);
 	
 	// 4. 삭제 (delete)
 	public int delete(Integer groupNo);		
+=======
+	public GroupVO read(Integer group_no);
+	
+	// 4. 삭제 (delete)
+	public int delete(Integer group_no);		
+>>>>>>> f82d7c7560e48ae27039d40d3049a6980c8da377
 	
 	// 5. 수정 (update)
 	public int update(GroupVO group);		// 삭제/수정 여부 -> 0 or 1 ( int타입으로 설계 )
