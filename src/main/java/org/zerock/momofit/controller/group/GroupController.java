@@ -6,10 +6,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.zerock.momofit.service.GroupService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -21,14 +23,18 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/group/")
 public class GroupController {
 	
+	private GroupService service;
+	
 	
 	// 1. 전체목록 조회하기
 	
 	@GetMapping("/list")
-	public String list() {
+	public void list(Model model) {
 		log.trace("list() invoked.");
 		
-		return "/group/list";
+		model.addAttribute("list", service.getList());
+		
+//		return "/group/list";
 		
 	} // list
 	

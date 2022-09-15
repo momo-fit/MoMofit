@@ -67,7 +67,7 @@
     
                             <!-- 폼 왼쪽 배치 (모임 이미지&첨부) -->
                             <div class="make_group_left">
-                                <img src="/resources/group/img/woman-1177630.png" width="300px"><br><br>
+                                <img src="/resources/group/img/basket.jpg" width="300px"><br><br>
                                 <input type="file" id="input_file">
                                 <label class="input_file_button" for="input_file">
                                     파일찾기

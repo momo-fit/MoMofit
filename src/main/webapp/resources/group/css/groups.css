@@ -80,7 +80,6 @@ section {
 .group_box_inner {
     width: 250px;
     height: 150px;
-    
 }
 
 .group_box_img{
@@ -98,10 +97,10 @@ section {
 .group_inner {
     display: flex;
     flex-wrap: wrap;
-    align-content: space-around;
+    /* align-content: space-around; */
     justify-content: center;
     width: 1050px;
-    height: 1800px;
+    /* height: 1800px; */
 }
 
 

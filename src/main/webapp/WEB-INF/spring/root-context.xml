@@ -70,7 +70,7 @@
    </bean>
 
 
-   <!-- <context:component-scan base-package="org.zerock.momofit.service"></context:component-scan>
-   <mybatis-spring:scan base-package="org.zerock.momofit.mapper"/> -->
+   <context:component-scan base-package="org.zerock.momofit.service"></context:component-scan>
+   <mybatis-spring:scan base-package="org.zerock.momofit.mapper"/>
 
 </beans>

@@ -157,17 +157,28 @@
                         <div class="group_outter">
                             <!-- 내부 틀 -->
                             <div class="group_inner">
+
+                                <c:forEach items="${list}" var="group">
                                 
                                 <!-- 모임 : 한개만 a태그 -->
                                 <a href="" class="group_aTag">
+                                
                                     <div class="group_box">
+                                    
                                         <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                        <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                            Architecto, nesciunt?</p>
+
+                                        <p class="font-14-500"><c:out value="${group.schedule}"/> **<c:out value="${group.group_no}" /></p>
+                                        
+                                        <p class="font-14-500"><c:out value="${group.group_name}"/> </p>
+                                        
                                     </div>
                                 </a>
 
-                                <div class="group_box">
+                                <!-- <div class="group_box">
+                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
+                                    <p class="font-14-500"><c:out value="${group.group_name}"/></p>
+                                </div> -->
+                                <!-- <div class="group_box">
                                     <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
                                     <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
                                         Architecto, nesciunt?</p>
@@ -296,13 +307,10 @@
                                     <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
                                     <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
                                         Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-
+                                </div> -->
+                            
+                                    
+                                </c:forEach>
                             </div>
                             
                         </div>

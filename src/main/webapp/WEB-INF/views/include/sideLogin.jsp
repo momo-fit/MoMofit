@@ -16,8 +16,8 @@
     </div><br>
     
     <div class="side_profile_1_person">
-        <!-- <img src="/resources/include/img/woman-1177630.png"> -->
-        <img src="/resources/include/img/송송이.jpg">
+
+        <img src="/resources/include/img/side_sample.jpg">
     </div>
 
     <div class="side_profile_1_text">
