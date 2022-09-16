@@ -13,9 +13,7 @@
     
     </settings> 
     
-    <typeAliases> 
-    	<package name="com.myport.domain"/>    
-    </typeAliases> 
+
     
 </configuration>
  

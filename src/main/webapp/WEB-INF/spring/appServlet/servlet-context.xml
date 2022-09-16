@@ -19,10 +19,17 @@
 	<view-resolvers>
 		<jsp prefix="/WEB-INF/views/" suffix=".jsp" />
 	</view-resolvers>
+
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		 <beans:property name="defaultEncoding" value="utf8"/>
+		 <beans:property name="maxInMemorySize" value="1048576"/>
+		 <beans:property name="maxUploadSize" value="1048576"/>
+		 <beans:property name="maxUploadSizePerFile" value="2097152"/>
+		 <beans:property name="preserveFilename" value="true"/>
+		 <beans:property name="uploadTempDir" value="file:///C:/Temp"/> 
+	</beans:bean>
 	
 	
 	<context:component-scan base-package="org.zerock.momofit.controller" />
-	
-	
 	
 </beans:beans>

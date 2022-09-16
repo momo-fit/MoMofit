@@ -4,7 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.momofit.domain.signUp.UserDTO;
 import org.zerock.momofit.exception.ControllerException;
@@ -31,11 +33,12 @@ public class signUpController {
 	} // signUp
 	
 	@PostMapping
-	public String signUpProcess(UserDTO dto, RedirectAttributes rttrs) throws ControllerException {
-		log.trace("signUpProcess() invoked.");
+	public String signUpProcess(UserDTO dto, RedirectAttributes rttrs, @RequestParam("file") MultipartFile file) throws ControllerException {
+		log.trace("signUpProcess({}) invoked.", file);
 		
-		try {
-			boolean result = this.userSignUpService.UserSignUp(dto);
+		try {		
+			
+			boolean result = this.userSignUpService.UserSignUp(dto, file);
 
 			rttrs.addFlashAttribute("result", (result)? "회원가입에 성공했습니다" : "회원가입에 실패했습니다." );
 			
@@ -46,6 +49,7 @@ public class signUpController {
 		} // try-catch	
 		
 	} // signUpProcess
+	
 	
 	@GetMapping("/map")
 	public String location() {
@@ -69,7 +73,7 @@ public class signUpController {
 		} // try-catch
 	
 
-	} // idCheck
+	} // location
 	
 	@ResponseBody
 	@PostMapping("/nickNameCheck")
@@ -83,8 +87,9 @@ public class signUpController {
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		} // try-catch
+
+	} // nickNameCheck
 	
 
-	} // idCheck
 		
 } // end class

@@ -28,7 +28,9 @@ $('.btn-primary1').click(()=> {
             
             success: ((data) => {
                 currentNum=data;
-                alert("전송되었습니다.");            
+                alert("전송되었습니다.");   
+                $('#email1').attr('readonly', true);
+                $('#email2').attr('readonly', true); 
             }),
             error: ((data) => {
                 alert("발송이 실패 했습니다.");
@@ -151,12 +153,6 @@ function autoHypenPhone(str){
 }
 
 
-// 엔터 막기
-$("input").keydown((e) => {
-    if(e.keyCode == 13){
-        return false;
-    }
-});
 
 function handleOnInput(e)  {
     e.value = e.value.replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/, '')

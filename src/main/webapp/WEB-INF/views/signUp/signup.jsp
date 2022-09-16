@@ -60,7 +60,7 @@
 
                         <div class="name2 font-22-700">기본정보</div>
 
-                        <form action="/signup" method="post">
+                        <form action="/signup" method="post" enctype="multipart/form-data">
 
                             <table class="table table-boardered">
 
@@ -198,9 +198,9 @@
                                     <th>프로필 사진</th>
                                     <td>
                                         <img src="/resources/signUp/img/profile.png" class="profile"><br>
-                                        <label class="btn btn-sm" for="input-file">추가</label><input type="file"
-                                            id="input-file" style="display: none;">
-                                        <button type="button" class="btn btn-secondary btn-sm">기본</button>
+                                        <label class="btn btn-sm" for="file" id="fileUp">추가</label>
+                                        <input type="file" id="file" name="file" style="display: none;" accept="image/*" >  
+                                        <button type="button" class="btn btn-secondary btn-sm" id="currImg">기본</button>                                         
                                     </td>
                                 </tr>
 
@@ -253,19 +253,20 @@
     </div>
 
 
-    <!-- 메인화면 자바스크립트
-    <script src="js/main.js"></script> -->
     <!-- 팝업 open -->
     <script src="/resources/signUp/js/mapPopup.js"></script>
     <!-- 체크박스 전체동의 자바스크립트 -->
     <script src="/resources/signUp/js/main_checkbox.js"></script>
     <!-- 이메일 선택 자바스크립트 -->
     <script src="/resources/signUp/js/main_check.js"></script>
+    <!-- 이메일 선택 자바스크립트 -->
+    <script src="/resources/signUp/js/fileUplode.js"></script>
 
     <!-- 부트스트랩 자바스크립트 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+    </script>
 </body>
 
 </html>
