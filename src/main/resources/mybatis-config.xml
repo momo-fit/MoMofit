@@ -4,7 +4,18 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
-<configuration>
+<configuration> 
 
-  
+	<settings>
+	
+    	<!-- Null 입력 가능 -->
+        <setting name="jdbcTypeForNull" value="NULL" /> 
+    
+    </settings> 
+    
+    <typeAliases> 
+    	<package name="com.myport.domain"/>    
+    </typeAliases> 
+    
 </configuration>
+ 

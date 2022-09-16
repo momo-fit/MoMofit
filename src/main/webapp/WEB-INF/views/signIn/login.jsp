@@ -29,6 +29,14 @@
     <link rel="stylesheet" href="/resources/common/css/main_mediatag.css">
     
     <link rel="stylesheet" href="/resources/signIn/css/login.css">
+    <!-- 회원가입 status -->
+    <script>
+	    let result = '${result}';
+	
+	    if(result != null && result.length > 0){
+	        alert(result);
+	    }
+    </script>
 
 </head>
 
@@ -88,6 +96,7 @@
 
     <!-- 메인화면 자바스크립트 -->
     <script src="/resources/main/js/main.js"></script>
+    
 
     <!-- 부트스트랩 자바스크립트 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
