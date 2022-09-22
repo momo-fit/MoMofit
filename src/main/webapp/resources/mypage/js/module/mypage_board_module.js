@@ -11,7 +11,7 @@ var mypageBoardService = (function () {
     //--------------------------
     function getBoardList(param, filter, callback, error){
 
-        // let page = page;
+
         var page = param.page;
         var category = param.category;
         var keyword = filter.keyword;  
@@ -48,7 +48,7 @@ var mypageBoardService = (function () {
         
         $.ajax({
             type: 'delete',
-            url: '/mypage/article/' + bno,
+            url: '/mypage/board/articles/' + bno,
             async: false,
             success : function(result){
 				if(callback){

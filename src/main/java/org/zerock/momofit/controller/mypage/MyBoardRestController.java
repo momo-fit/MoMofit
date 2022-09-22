@@ -19,24 +19,25 @@ import org.zerock.momofit.domain.mypage.PageDTO;
 import org.zerock.momofit.exception.ControllerException;
 import org.zerock.momofit.service.mypage.MyBoardService;
 
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
-@NoArgsConstructor
+@AllArgsConstructor
 
 @RestController
-@RequestMapping("/mypage/")
+@RequestMapping("/mypage/board/")
 public class MyBoardRestController {
 
-	@Setter(onMethod_= {@Autowired})
+	
 	private MyBoardService myboardService;
 	
 	
 	// 1. myPage 내글 조회하기
 	@GetMapping(
-			value="/board/categorys/{category}/pages/{page}",
+			value="/categorys/{category}/pages/{page}",
 			consumes = "application/json",
 			produces = {
 					MediaType.APPLICATION_JSON_VALUE
@@ -50,8 +51,6 @@ public class MyBoardRestController {
 		log.trace("getMyPageBoardList({},{}, {}) invoked.",category, page, cri);
 		
 		try {			
-			//Step.0 : Criteria 객체 생성
-//			Criteria cri = new Criteria();
 			
 			//Step.1 : Session으로부터 유저 정보 획득하여 Criteria에 저장
 			//------------------------------------------------
@@ -91,7 +90,7 @@ public class MyBoardRestController {
 	
 	// 2. 내글 삭제하기
 	@DeleteMapping(
-			value = "/article/{bno}",
+			value = "/articles/{bno}",
 			produces = MediaType.TEXT_PLAIN_VALUE
 			)
 	public ResponseEntity<String> removeMyPageArticle(@PathVariable("bno") int board_no) 
