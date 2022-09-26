@@ -48,13 +48,6 @@ public class mypageController {
 		
 	} // noteReceiveList
 	
-	
-	@GetMapping("/board_list")
-	public void boardList() {
-		
-	} // boardList
-	
-	
 	@GetMapping("/comment_list")
 	public void commentList() {
 		
