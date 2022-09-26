@@ -22,6 +22,8 @@
 	
 	
 	<context:component-scan base-package="org.zerock.momofit.controller" />
+	<context:component-scan base-package="org.zerock.momofit.mapper" />
+	<context:component-scan base-package="org.zerock.momofit.service" />
 	
 	
 	

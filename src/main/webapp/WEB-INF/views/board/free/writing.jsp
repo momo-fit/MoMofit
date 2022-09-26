@@ -75,25 +75,24 @@
                         <!-- 게시글 작성 내용부분 -->
 
                         <form class="writing_form" 
-                            action="register" method="post">
+                            action="/board/free/register" method="post">
 
                             <div class="writing_content">
 
                                 <!-- 1. 게시판 선택 -->
                                 게시판&nbsp;
-                                <select id="select_board" required>
+                                <select id="select_board" name="category_no" required>
                                     <option value="">선택</option>
-                                    <option value="자유게시판">자유게시판</option>
-                                    <option value="운동팁">운동팁</option>
-                                    <option value="운동인증">운동인증</option>
-                                    <option value="중고거래">중고거래</option>
-                                    <option value="문의">문의</option>
+                                    <option value="1">자유게시판</option>
+                                    <option value="2">운동팁</option>
+                                    <option value="3">운동인증</option>
+                                    <option value="4">중고거래</option>
                                 </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <br>
 
                                 <!-- 2. 제목 -->
                                 <br>제목&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input type="text" class="writing_title" required>
+                                <input type="text" class="writing_title" name="title" required>
                                 <br><br>
 
                                 <!-- 3. 첨부파일 -->
@@ -111,12 +110,17 @@
 
                                 <!-- 4. 내용 -->
                                 내용<br>
-                                <textarea class="textarea_content" required>안녕하세요</textarea>
+                                <textarea class="textarea_content" name="text" required>안녕하세요</textarea>
+                                
+                                <input type="hidden" name="board_like" value=0>
+                                <input type="hidden" name="hits" value=0>
+                                <input type="hidden" name="img_check" value=0>
+                                <input type="hidden" name="user_no" value=1>
 
                             </div>
 
                         <!-- 목록 버튼 -->
-                        <input type="button" class="list_btn" value="취소" onClick="location='/board/free/list'"></input>                         
+                        <input type="button" class="list_btn" value="취소" onClick="location='/board/free/list?currPage=${param.currPage}'"></input>                         
 
                         <!-- 작성하기 버튼 -->
                         <input type="submit" class="writing_submit" value="작성"></input>
