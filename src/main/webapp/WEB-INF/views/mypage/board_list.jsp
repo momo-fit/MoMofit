@@ -51,9 +51,11 @@
     <!-- CSS : 마이페이지 컨텐츠 영역 CSS -->
     <link rel="stylesheet" href="/resources/mypage/css/mypage_content1.css">
 
-    <script src="/resources/mypage/js/mypage_board_module.js"></script>
+    <script src="/resources/mypage/js/module/mypage_board_module.js"></script>
+	<script src="/resources/mypage/js/module/mypage_util_module.js"></script>
+	
 	<script src="/resources/mypage/js/mypage_board.js"></script>
-	<script src="/resources/mypage/js/mypage_util_module.js"></script>
+	
 
 </head>
 
@@ -77,7 +79,7 @@
 
                     <div class="s_box_content">
                                                 <!-- 각 페이지 제목 -->
-                        <div class="mypage-content-title font-24-700">내글</div>
+                        <div class="mypage-content-title font-24-700">내글<span class="font-12-400 mp-total-page"></span></div>
                         <div class="mypage-border"></div><br>
 
                         <!-- 내가 쓴 글 게시판 테이블 -->
@@ -182,11 +184,12 @@
                 console.log(param, filter);
                 mypageBoardService.getBoardList({page: param.page||1, category : param.category|| 0}, filter, function(data){
 
-                    let listVO = data.voList
+                    let listVO = data.voList;
                     let pageDTO = data.pageDTO;
 
                     let str = "";
                     let boardBox = $(".board-tbody");    // 내 글 목록 parent
+                    let infoPageBox = $(".mp-total-page");     // 총  글 개수 + 페이지 위치
 
                     for(var i=0, len = listVO.length; i<len; i++){
 
@@ -259,6 +262,12 @@
 
                     pagingul.html(pagingli);
                     boardBox.html(str);
+
+                    var totalAmount = pageDTO.totalAmount;
+                    var realEndPage = pageDTO.realEndPage;
+
+                    var info = `total:\${totalAmount}, page \${currPage}/\${realEndPage}`;
+                    infoPageBox.text(info);
 
                     //---------------------
                     // 페이징 이동하기

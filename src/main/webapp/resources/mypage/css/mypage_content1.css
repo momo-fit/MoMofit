@@ -103,7 +103,7 @@
 
 /* 마이페이지 내의 체크박스에 공통 적용되는 속성 */
 .mypage-checkbox {
-	display: flex;
+	/* display: flex; */
 	justify-content: center;
 	align-items: center;
 
@@ -245,7 +245,7 @@
 }
 
 
-/* 페이징 처리 */
+/* 페이징 처리 : 게시판, 댓글*/ 
 .board-paging-div {
 	margin-top: 10px;
 }
@@ -255,7 +255,28 @@
 	justify-content: center;
 }
 
-.mb-currPage-step {
+/* 페이징 처리 : qna */ 
+.qna-paging-div {
+	margin-top: 10px;
+}
+
+.qna-paging-div ul {
+	display: flex;
+	justify-content: center;
+}
+
+/* 페이징 처리 : report */ 
+.report-paging-div {
+	margin-top: 10px;
+}
+
+.report-paging-div ul {
+	display: flex;
+	justify-content: center;
+}
+
+
+.mb-currPage-step, .mr-currPage-step, .mq-currPage-step {
 	padding : 10px, 10px;
 	text-align: center;
 	background-color: rgb(240, 240, 240);
@@ -266,7 +287,7 @@
 	cursor: pointer;
 }
 
-.mb-next {
+.mb-next, .mr-next {
 	margin-left: 15px;
 	padding : 10px, 10px;
 	text-align: center;
@@ -282,7 +303,7 @@
 }
 
 
-.mb-prev {
+.mb-prev, .mr-prev {
 	margin-right: 15px;
 	padding : 10px, 10px;
 	text-align: center;
@@ -351,4 +372,60 @@
 }
 .mp-hits {
 	width: 5%;
+}
+
+/* 마이페이지 댓글 */
+
+/* 게시 + 댓글 박스 */
+.mp-b-comm-wrap {
+	display: flex;
+	flex-direction: column;
+}
+
+.mp-comm {
+	margin-left : 40px;
+}
+
+/* 댓글 테이블 잘 확인 */
+.mc-checkbox {
+	width: 7%;
+}
+
+.mc-select {
+	width: 10%;
+}
+
+.mc-title {
+	width: 68%;
+}
+
+.mc-date {
+	width: 15%;
+}
+
+#select-board-category {
+	text-align : center;
+}
+
+.mc-title-content {
+	color:rgb(180, 180, 180);
+}
+
+/* 마이페이지 총 글/댓글 개수 및 페이지 표시 */
+.mp-total-page {
+	float: right;
+	margin-top: 20px;
+	margin-right: 15px;
+}
+
+
+/* QnA , Report 처리결과 */
+.non-result {
+	font-weight: 700;
+	color: #DB4455;
+}
+
+.on-result {
+	font-weight: 700;
+	color: #4B89DC;
 }
