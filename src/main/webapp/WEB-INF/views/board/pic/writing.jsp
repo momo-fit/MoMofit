@@ -36,6 +36,7 @@
 </head>
 
 <body>
+
     <div class="page">
 
         <!-- header -->
@@ -55,19 +56,19 @@
                         <hr>
                         <!-- 게시글 작성 내용부분 -->
 
-                        <form action="#" method="POST">
-
+                        <form action="/board/pic/register" method="POST">
+													
                             <div class="writing_content">
 
                                 <!-- 1. 게시판 선택 -->
                                 게시판&nbsp;
-                                <select id="select_board" required>
+                                <select id="select_board" name="category_no" required>
                                     <option value="">선택</option>
-                                    <option value="자유게시판">자유게시판</option>
-                                    <option value="운동팁">운동팁</option>
-                                    <option value="운동인증">운동인증</option>
-                                    <option value="중고거래">중고거래</option>
-                                    <option value="문의">문의</option>
+                                    <option value="1">자유게시판</option>
+                                    <option value="2">운동팁</option>
+                                    <option value="3">운동인증</option>
+                                    <option value="4">중고거래</option>
+                                    
                                 </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                                 <!-- 2-1. (중고거래 선택시) 팝니다/삽니다/나눔 선택 -->
@@ -83,10 +84,10 @@
                                     <input type="radio" name="access" value="1"> 공개
                                     <input type="radio" name="access" value="2" checked> 비공개
                                 </span><br>
-
+                                
                                 <!-- 3. 제목 -->
                                 <br>제목&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input type="text" class="writing_title" required>
+                                <input type="text" class="writing_title" name="title" required>
                                 <br><br>
 
                                 <!-- 4. 첨부파일 -->
@@ -104,13 +105,22 @@
 
                                 <!-- 5. 내용 -->
                                 내용<br>
-                                <textarea class="textarea_content" required></textarea>
+                                <textarea class="textarea_content" name="text" required></textarea>
 
                             </div>
 
                         <!-- 작성하기/취소하기 버튼 -->
-                        <input type="button" class="cancel_button" value="취소" onClick="location='/board/pic/list'"></input>
+                        <input type="button" class="cancel_button" value="취소" onClick="location='/board/pic/list?currPage=${cri.currPage}'"></input>
                         <input type="submit" class="writing_submit" value="작성"></input>
+                        
+                        <!-- 임의의 값 넣어주기 (안넣으면 NULL값 떠서 게시글작성이 안됨 ) -->
+                        <input type="hidden" name="board_like" value=0>
+                        <input type="hidden" name="hits" value=0>
+                        <input type="hidden" name="img_check" value=0>
+                        <input type="hidden" name="user_no" value=1>
+                        
+
+
                         
 
                         </form>

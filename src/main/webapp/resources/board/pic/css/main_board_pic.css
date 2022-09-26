@@ -10,6 +10,7 @@ section {
     display: flex;
     justify-content: space-between;
     width: 1050px;
+
     text-align: left;
 }
 
@@ -48,6 +49,10 @@ section {
 .edit_delete a{
     text-decoration: none;
     color: black;
+}
+
+.modifyBtn:hover{
+    text-decoration: none;
 }
 
 .space1 {

@@ -1,0 +1,50 @@
+    /* 페이지네이션*/
+
+    #pagination{
+        width:27%;
+        margin: 0 auto;
+        margin-top:20px;
+
+        
+      
+    }
+    #pagination ul li{   
+        float:left;
+		text-align:center;
+        width:30px;
+        height:30px; 
+        
+        margin-left:2px;
+
+        list-style:none;
+        
+        line-height:30px;
+        
+        border-radius: 50%;
+        
+        text-decoration:none;
+        
+        
+        }
+        
+        #pagination ul li a{
+        text-decoration: none;
+        color:rgb(0, 0, 0, 0.797);
+        
+        }
+        
+    #pagination ul li.prev,#pagination ul li.next{ 
+    	
+        width:70px;
+
+        font-weight: bold;
+        cursor:pointer;
+        
+    }
+
+    .currPage{
+        
+        background-color: #2E4361;
+        cursor:pointer;
+        
+    }

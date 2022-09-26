@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>운동인증</title>
+    <title>자유게시판</title>
     <!-- 부트스트랩 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
@@ -44,23 +44,26 @@
     <!-- CSS : main footer 설정 -->
     <link rel="stylesheet" href="/resources/include/css/main_footer.css">
 
-    <!-- CSS : main_board_pic -->
-    <link rel="stylesheet" href="/resources/board/pic/css/main_board_pic.css">
+    <!-- CSS : main_board_freeboard -->
+    <link rel="stylesheet" href="/resources/board/free/css/main_board_freeboard.css">
 
     <!-- 메인페이지 필수 CSS -->
     <link rel="stylesheet" href="/resources/common/css/main_section_card.css">
     <link rel="stylesheet" href="/resources/common/css/main_section_board.css">
 
-    	
+    
+
 </head>
 
 <body>
     <div class="page">
 
         <!-- header -->
-        <%@ include file = "/WEB-INF/views/include/header.jsp" %>    
-        <!-- side -->
+        <%@ include file = "/WEB-INF/views/include/header.jsp" %>   
+
+        <!-- 사이드 프로필 -->
         <%@ include file = "/WEB-INF/views/include/sideLogin.jsp" %>
+
 
         <!-- 메인 컨텐츠부 -->
         <section>
@@ -69,28 +72,34 @@
                 <div class="view">
 
                     <div class="board_name font-20-500">
-                        <img src="/resources/board/pic/img/workout.png" height="20px">
+                        <img src="/resources/board/free/img/workout.png" height="20px">
                         운동인증
                     </div>
 
                     <div class="title font-28-400">
-                        운동인증입니다 글 제목 입니다 
+                        <c:out value="${PicBoard.title}"/>
                     </div>
                 
                     <div class="info"> 
-                        <div class="info2">
-                            <span class="font-12-400"> 작성자 <b class="font-12-400">홍길동</b> </span>
+                          <div class="info2">
+                            <span class="font-12-400"> 작성자 <b class="font-12-400"><c:out value="${PicBoard.user_no}"/></b> </span>
                             <div class="space1"></div>
-                            <span class="font-12-400"> 조회수 <b class="font-12-400">1</b> </span>
+                            <span class="font-12-400"> 조회수 <b class="font-12-400"><c:out value="${PicBoard.hits}"/></b> </span>
                             <div class="space1"></div>
-                            <span class="font-12-400"> 작성시간 <b class="font-12-400">2022.08.15 12:37</b> </span>
+                            <span class="font-12-400"> 작성시간 <b class="font-12-400"><fmt:formatDate pattern="yyyy/MM/dd" value="${PicBoard.board_date}"></fmt:formatDate></b> </span>
                             <div class="space1"></div>
                         </div>
               
                         <div class="edit_delete">
-                            <a href="#" onClick="location.href='/board/pic/modify'"><span class="font-12-400"> 수정 </span></a>
+                            <a class="btn" onClick="location.href='/board/pic/modify?board_no=${PicBoard.board_no}&currPage=${cri.currPage}'"><span class="font-12-400">수정 </span></a>
+                            
                             <div class="space1"></div>
-                            <a href="#" onClick="location.href='/board/pic/list'" method="POST"><span class="font-12-400"> 삭제 </span></a>
+
+                            <form action="/board/pic/remove?board_no=${PicBoard.board_no}" method="post" style="display: inline;">
+                        	    <input type="hidden" id="board_no" name="board_no" value='<c:out value="${PicBoard.board_no}"/>'>
+								<input type="hidden" id="currPage" name="currPage" value='<c:out value="${cri.currPage}"/>'>
+                                <button style="border: none; background: none;"><span class="font-12-400"> 삭제 </span></button>
+                            </form>
                         </div>
                     </div>
 
@@ -104,17 +113,12 @@
                         
                         <!-- 본문 텍스트 -->
                         <div class="font-14-400">
-                            글 내용이 들어갑니다 운동 인증을 할 수 있습니다 글 내용이 들어갑니다 운동 인증을 할 수 있습니다 글 내용이 들어갑니다 운동 인증을 할 수 있습니다 글 내용이 들어갑니다 운동 인증을 할 수 있습니다 글 내용이 들어갑니다 운동 인증을 할 수 있습니다 <br>
-                            글 내용이 들어갑니다 운동 인증을 할 수 있습니다 글 내용이 들어갑니다 운동 인증을 할 수 있습니다 글 내용이 들어갑니다 운동 인증을 할 수 있습니다 글 내용이 들어갑니다 운동 인증을 할 수 있습니다 글 내용이 들어갑니다 운동 인증을 할 수 있습니다 <br>
-                            글 내용이 들어갑니다 운동 인증을 할 수 있습니다 글 내용이 들어갑니다 운동 인증을 할 수 있습니다 글 내용이 들어갑니다 운동 인증을 할 수 있습니다 글 내용이 들어갑니다 운동 인증을 할 수 있습니다 글 내용이 들어갑니다 운동 인증을 할 수 있습니다 <br> <br>
-                            글 내용이 들어갑니다 운동 인증을 할 수 있습니다 글 내용이 들어갑니다 운동 인증을 할 수 있습니다 글 내용이 들어갑니다 운동 인증을 할 수 있습니다 글 내용이 들어갑니다 운동 인증을 할 수 있습니다 글 내용이 들어갑니다 운동 인증을 할 수 있습니다 <br>
-                            글 내용이 들어갑니다 운동 인증을 할 수 있습니다 글 내용이 들어갑니다 운동 인증을 할 수 있습니다 글 내용이 들어갑니다 운동 인증을 할 수 있습니다 글 내용이 들어갑니다 운동 인증을 할 수 있습니다 글 내용이 들어갑니다 운동 인증을 할 수 있습니다 <br>
-                            글 내용이 들어갑니다 운동 인증을 할 수 있습니다 글 내용이 들어갑니다 운동 인증을 할 수 있습니다 글 내용이 들어갑니다 운동 인증을 할 수 있습니다 글 내용이 들어갑니다 운동 인증을 할 수 있습니다 글 내용이 들어갑니다 운동 인증을 할 수 있습니다 <br> <br>
+                             <c:out value="${PicBoard.text}"/> <br> <br>
                         </div>
 
                         <!-- 좋아요 -->
                         <div class="like_div">
-                            <img src="/resources/board/pic/img/like.png" height="70" class="like_btn">
+                            <img src="/resources/board/free/img/like.png" height="70" class="like_btn">
                             <div id="like_cnt" class="font-14-700">0</div>                            
                         </div>
 
@@ -215,9 +219,9 @@
                     
                     <!-- 이전글 목록 다음글 -->
                     <div class="btn_row">
-                        <a href=""><button type="button" class="btn btn-primary btn-sm btn_color_blue">이전글</button></a>
-                        <a href="#" onClick="location.href='/board/pic/list'"><button type="button" class="btn btn-secondary btn-sm">목록</button></a>
-                        <a href=""><button type="button" class="btn btn-primary btn-sm btn_color_blue" >다음글</button></a>
+                        <button type="button" class="btn btn-primary btn-sm btn_color_blue" >이전글</button>
+                        <button type="button" class="btn btn-secondary btn-sm" onClick="location.href='/board/pic/list?currPage=${cri.currPage}'">목록</button>
+                        <button type="button" class="btn btn-primary btn-sm btn_color_blue" >다음글</button>
                     </div>
             
                 </div>
@@ -228,10 +232,13 @@
         <!-- 하단 Footer -->
         <%@ include file = "/WEB-INF/views/include/footer.jsp" %>
     </div>
+  
 
-    <!-- 운동인증 자바스크립트 -->
-    <script src=/resources/board/pic/js/main_board_pic.js></script>
+    <!-- 자유게시판 자바스크립트 -->
+    <script src="/resources/board/free/js/main_board_freeboard.js"></script>
 
+    <!-- 메인화면 섹션 자바스크립트` -->
+    <script src="/resources/common/js/main_section.js"></script>
 
     <!-- 메인화면 자바스크립트 -->
     <script src="/resources/include/js/main_header.js"></script>
@@ -241,3 +248,4 @@
 
 </body>
 </html>
+
