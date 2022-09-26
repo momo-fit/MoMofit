@@ -15,7 +15,29 @@ import lombok.extern.log4j.Log4j2;
 
 @RequestMapping("/mypage/")
 @Controller
-public class mypageController {
+public class MyPageController {
+	
+	// 1. mypage "내 글" 이동
+	@GetMapping("/board_list")
+	public void myboardList() {
+		log.trace("myboardList() invoked.");
+		
+	} // myboardList
+	
+	
+	// 2. mypage "내 댓글" 이동
+	@GetMapping("/comment_list")
+	public void commentList() {
+		
+	} // commentList
+	
+	
+	// 3. mypage "내 문의/신고" 이동
+	@GetMapping("/csboard_list")
+	public void csboardList() {
+		
+	} // csboardList
+	
 	
 	@GetMapping("/my_group")
 	public void myGroupList() {
@@ -47,23 +69,6 @@ public class mypageController {
 	public void noteReceiveList() {
 		
 	} // noteReceiveList
-	
-	
-	@GetMapping("/board_list")
-	public void boardList() {
-		
-	} // boardList
-	
-	
-	@GetMapping("/comment_list")
-	public void commentList() {
-		
-	} // commentList
-	
-	@GetMapping("/csboard_list")
-	public void csboardList() {
-		
-	} // csboardList
 	
 
 } // end class

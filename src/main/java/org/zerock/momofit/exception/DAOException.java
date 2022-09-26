@@ -1,7 +1,6 @@
 package org.zerock.momofit.exception;
 
 
-
 public class DAOException extends Exception {	
 	private static final long serialVersionUID = 1L;
 	
@@ -13,5 +12,6 @@ public class DAOException extends Exception {
 	public DAOException(Exception e) {
 		super(e);
 	} // constructor
+
 
 } // end class

@@ -57,7 +57,7 @@
 
 /* 게시판에서 글 내용에 적용 */
 .mypage-title-content {
-	margin-left: 50px;
+	margin-left: 20px;
 	float: left;        	
 }
 
@@ -103,8 +103,13 @@
 
 /* 마이페이지 내의 체크박스에 공통 적용되는 속성 */
 .mypage-checkbox {
+	/* display: flex; */
+	justify-content: center;
+	align-items: center;
+
 	margin-left: 10px;
-	float: left;        	
+	/* float: left;        	 */
+	height: 50px;
 }
 
 /* 내 댓글에 적용되는 속성 */
@@ -237,4 +242,190 @@
 .mypage-link {
 	text-decoration:none;
 	color:black;
+}
+
+
+/* 페이징 처리 : 게시판, 댓글*/ 
+.board-paging-div {
+	margin-top: 10px;
+}
+
+.board-paging-div ul {
+	display: flex;
+	justify-content: center;
+}
+
+/* 페이징 처리 : qna */ 
+.qna-paging-div {
+	margin-top: 10px;
+}
+
+.qna-paging-div ul {
+	display: flex;
+	justify-content: center;
+}
+
+/* 페이징 처리 : report */ 
+.report-paging-div {
+	margin-top: 10px;
+}
+
+.report-paging-div ul {
+	display: flex;
+	justify-content: center;
+}
+
+
+.mb-currPage-step, .mr-currPage-step, .mq-currPage-step {
+	padding : 10px, 10px;
+	text-align: center;
+	background-color: rgb(240, 240, 240);
+	width: 36px;
+	height: 36px;
+	line-height: 36px;
+	border-radius: 18px;
+	cursor: pointer;
+}
+
+.mb-next, .mr-next {
+	margin-left: 15px;
+	padding : 10px, 10px;
+	text-align: center;
+	background-color: rgb(240, 240, 240);
+	width: 36px;
+	height: 36px;
+	line-height: 36px;
+
+	border-radius: 18px;
+
+	color: rgb(20 167 255);
+	cursor: pointer;
+}
+
+
+.mb-prev, .mr-prev {
+	margin-right: 15px;
+	padding : 10px, 10px;
+	text-align: center;
+	background-color: rgb(240, 240, 240);
+	width: 36px;
+	height: 36px;
+	line-height: 36px;
+
+	border-radius: 18px;
+
+	color: rgb(20 167 255);
+	cursor: pointer;
+}
+
+.mb-currPage {
+	background-color: #2E4361;
+	color: white;
+}
+
+/* 내글 검색 기능 */
+.bs-wrap {
+	display: inline-block;
+	margin-top: 15px;
+	
+	border: 2px solid #808080;
+	border-radius: 6px;
+	overflow: hidden;
+}
+
+.bs-select {
+	border: none;
+	text-align: center;
+}
+
+.bs-text {
+	border: none;
+}
+
+.bs-btn {
+	border: 1px solid #808080;
+	background-color: #808080;
+	color: white;
+
+	padding: 5px 5px;
+}
+
+.bs-select:focus, .bs-text:focus {
+	outline: none;
+}
+
+/* 게시판 테이블 크기 재정렬 */
+.mp-checkbox {
+	width: 7%;
+}
+.mp-selected {
+	width: 10%;
+}
+.mp-title {
+	width: 58%;
+}
+.mp-date {
+	width: 15%;
+}
+.mp-like {
+	width: 5%;
+}
+.mp-hits {
+	width: 5%;
+}
+
+/* 마이페이지 댓글 */
+
+/* 게시 + 댓글 박스 */
+.mp-b-comm-wrap {
+	display: flex;
+	flex-direction: column;
+}
+
+.mp-comm {
+	margin-left : 40px;
+}
+
+/* 댓글 테이블 잘 확인 */
+.mc-checkbox {
+	width: 7%;
+}
+
+.mc-select {
+	width: 10%;
+}
+
+.mc-title {
+	width: 68%;
+}
+
+.mc-date {
+	width: 15%;
+}
+
+#select-board-category {
+	text-align : center;
+}
+
+.mc-title-content {
+	color:rgb(180, 180, 180);
+}
+
+/* 마이페이지 총 글/댓글 개수 및 페이지 표시 */
+.mp-total-page {
+	float: right;
+	margin-top: 20px;
+	margin-right: 15px;
+}
+
+
+/* QnA , Report 처리결과 */
+.non-result {
+	font-weight: 700;
+	color: #DB4455;
+}
+
+.on-result {
+	font-weight: 700;
+	color: #4B89DC;
 }

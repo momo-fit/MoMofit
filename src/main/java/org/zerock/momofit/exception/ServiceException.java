@@ -8,6 +8,7 @@ public class ServiceException extends Exception {
 		super(message);
 	}
 
+
 	public ServiceException(Exception e) {
 		super(e);
 	}
