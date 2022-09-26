@@ -20,9 +20,14 @@
 		<jsp prefix="/WEB-INF/views/" suffix=".jsp" />
 	</view-resolvers>
 	
-	
 	<context:component-scan base-package="org.zerock.momofit.controller" />
 	
+	<!-- 파일업로드 처리 설정 -->
+	<beans:bean id="multipartResolver"
+    class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
 	
+	</beans:bean>
+
+
 	
 </beans:beans>

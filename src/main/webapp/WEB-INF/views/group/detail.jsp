@@ -27,6 +27,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gugi&family=Hi+Melody&family=Sunflower:wght@500&display=swap" rel="stylesheet">
 
     <!-- fontawesome -->
     <script src="https://kit.fontawesome.com/7d82554876.js" crossorigin="anonymous"></script>
@@ -53,7 +54,7 @@
     <!-- 메인페이지 필수 CSS -->
     <link rel="stylesheet" href="/resources/main/css/main_section_card.css">
     <link rel="stylesheet" href="/resources/main/css/main_section_board.css">
-
+    
 </head>
 
 <body>
@@ -71,13 +72,30 @@
             <div class="section_wrap">
                 <div class="view">
 
-                    <div class="board_name font-20-500">
-                        <img src="/resources/group/img/group.png" height="20px">
-                        모임보기
+                    <div class="font-16-500">
+                        <div class="board_name">
+                            
+                            &#128692;모임보기
+                            <form action="/group/remove" method="post">
+
+                                <input type='hidden' name='group_no' value='<c:out value="${group.group_no}"/>' readonly="readonly">
+                                <input type='hidden' name="currPage" value='<c:out value="${cri.currPage}" />'>
+                                
+
+                                <input type="submit" value="삭제" id="del" 
+                                        onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;">
+
+                                <label for="del">
+                                    삭제  <img src="/resources/group/img/remove-button.png" width="30px">
+                                </label>        
+                            </form>
+                            
+                        </div>
                     </div>
+  
 
                     <div class="title font-28-400">
-                        모임보기입니다 글 제목 입니다 
+                        ${group.group_name}
                     </div>
                 
                     <div class="info"> 
@@ -86,16 +104,32 @@
                             <div class="space1"></div>
                             <span class="font-12-400"> 조회수 <b class="font-12-400">1</b> </span>
                             <div class="space1"></div>
-                            <span class="font-12-400"> 작성시간 <b class="font-12-400">2022.08.15 12:37</b> </span>
+                            <span class="font-12-400">작성일- <fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${group.group_date}" /></span>
+
+                            <span class="font-12-400" id="edit">
+                                &nbsp; 수정일- 
+                            	<fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${group.edit}" />
+                            </span>
+
+
                             <div class="space1"></div>
+
                         </div>
 
                         <div class="edit_delete">
-                            <a href="/group/modify"><span class="font-14-400"> 수정 </span></a>
+                            <a href="/group/modify?group_no=${group.group_no}&currPage=${cri.currPage}"><span class="font-14-500"> 수정 </span></a>
                             <div class="space1"></div>
-                            <a href=""><span class="font-14-400"> 삭제 </span></a>
+                            
+
+
+                            <!-- <a onclick="if ( confirm('삭제하시겠습니까?') == false ) return false;" 
+                            href="/group/remove" ><span class="font-14-500"> 삭제 </span></a> -->
+
                             <div class="space1"></div>
-                            <a href="/group/memberList"><span class="font-14-400"> 모임장 위임 </span></a>
+                            <a href="/group/memberList"><span class="font-14-500"> 모임장 위임 </span></a>
+
+                            
+
                         </div>
                     </div>
 
@@ -107,13 +141,22 @@
 
                                 <!-- 본문 이미지 -->
                                 <div class="content_img">
-                                    <img src="/resources/group/img/group_workout.jpg" alt="">
+
+                                    <c:if test="${group.group_img != null}">
+                                        <img class="group_box_img" src="/group/display?fileName=${group.path}/${group.temp}_${group.group_img}">
+                                    </c:if>
+
+                                    <c:if test="${group.group_img == null}">
+                                        <img class="group_box_img" src="/resources/group/img/basket.jpg">
+                                    </c:if>
+
                                 </div>
 
                                 <!-- 소개글 -->
                                 <div class="content_intro font-14-400">
-                                    글 내용이 들어갑니다 모임 소개글을 작성 할 수 있습니다 글 내용이 들어갑니다 모임 소개글을 작성 할 수 있습니다 글 내용이 들어갑니다 모임 소개글을 작성 할 수 있습니다 글 내용이 들어갑니다 모임 소개글을 작성 할 수 있습니다 글 내용이 들어갑니다 모임 소개글을 작성 할 수 있습니다 <br>
-                                    글 내용이 들어갑니다 모임 소개글을 작성 할 수 있습니다 글 내용이 들어갑니다 모임 소개글을 작성 할 수 있습니다 글 내용이 들어갑니다 모임 소개글을 작성 할 수 있습니다 글 내용이 들어갑니다 모임 소개글을 작성 할 수 있습니다 글 내용이 들어갑니다 모임 소개글을 작성 할 수 있습니다 <br>                                    
+                                    <h6 id="text_info"><span class="bottom-line"> 모임을 소개합니다.</span></h6>
+                                    ${group.info}
+                                    <br>                                    
                                 </div>
 
                             </div>
@@ -124,12 +167,12 @@
 
                                 <div class="font-20-700"> 모임장 </div>
                                 <div class="side_profile_1_person">
-                                    <!-- <img src="./img/woman-1177630.png"> -->
-                                    <img src="/resources/group/img/송송이.jpg">
+                                    
+                                    <img src="/resources/include/img/side_sample.jpg">
                                 </div>
                     
                                 <div class="side_profile_1_text">
-                                    <span class="side_profile_nickname">헬짱</span>
+                                    <span class="side_profile_nickname">작성자</span>
                                     <img src="/resources/group/img/female-2404482.png" width="20px" alt="">
                                     <!-- <img src="./img/male-272547.png" width="20px"alt=""> -->
                                     <!-- <span class="side_profile_gender">여</span> -->
@@ -256,7 +299,12 @@
                     <!-- 이전글 목록 다음글 -->
                     <div class="btn_row">
                         <a href=""><button type="button" class="btn btn-primary btn-sm btn_color_blue">이전글</button></a>
-                        <a href=""><button type="button" class="btn btn-secondary btn-sm">목록</button></a>
+
+                        <!-- 페이지번호를 가지고 목록으로 넘어가야함 -->
+                        <a href="/group/list?currPage=${cri.currPage}">
+                            <button type="button" class="btn btn-secondary btn-sm" id="listBtn">목록</button>
+                        </a>
+
                         <a href=""><button type="button" class="btn btn-primary btn-sm btn_color_blue" >다음글</button></a>
                     </div>
             

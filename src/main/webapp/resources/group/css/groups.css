@@ -17,6 +17,10 @@ section {
 
 }
 
+.linear-gradient{
+    background: linear-gradient(to top, rgba(255, 179, 0, 0.419) 50%, transparent 50%);
+}
+
 .best_inner {
     width: 1050px;
     height: 243px;
@@ -61,6 +65,10 @@ section {
 
 
 /* 모임목록 */
+
+
+	
+	
 .groups {
     margin-top: 100px;
     margin-left: 40px;
@@ -75,6 +83,8 @@ section {
 
     border-radius: 7px 7px 7px 7px;
     overflow: hidden;
+
+    color:#32305b;
 }
 
 .group_box_inner {
@@ -195,13 +205,71 @@ section {
 }
 
 .board_write>button{
+    
     background-color: white;
     border: none;
     width: 130px;
     float: right;
     margin-right: 30px;
     font-size: 22px;
-    margin-top: 10px;
+    margin-top: 10px; 
+}
 
+/* 페이징 처리 : 게시판, 댓글*/ 
+#paging-div {
+    margin-top: 10px;
+}
+
+#paging-div ul a {
+    text-decoration: none;
     
 }
+
+#paging-div ul {
+    display: flex;
+    justify-content: center;
+}
+
+.mb-currPage-step {
+    padding : 10px, 10px;
+    text-align: center;
+    background-color: rgb(240, 240, 240);
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 18px;
+    cursor: pointer;
+
+}
+
+.mb-currPage-step a {
+    color: rgba(0, 0, 0, 0.797);
+}
+
+.mb-next, .mb-prev {
+    margin-left: 15px;
+    padding : 10px, 10px;
+    text-align: center;
+    background-color: rgb(240, 240, 240);
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+
+    border-radius: 18px;
+    cursor: pointer;
+}
+
+.mb-next a , .mb-prev a {
+    color: rgb(7, 92, 141);
+}
+
+.mb-currPage {
+    background-color: #2E4361;
+    
+}
+
+.mb-currPage a {
+    color: white;
+}
+
+

@@ -5,11 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-    
 </head>
+
 <body>
-	<h1>/WEB-INF/views/group/chatting.jsp</h1>
-	<p>채팅화면입니다.</p>
+	<h1>파일 업로드 성공!</h1>
+	<a href="uploadForm"><button>업로드페이지로 가기</button></a>
+
 </body>
+
 </html>

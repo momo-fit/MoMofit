@@ -1,8 +1,9 @@
 package org.zerock.momofit.mapper;
 
 import java.util.Date;
+import java.util.List;
 
-import org.apache.ibatis.annotations.SelectKey;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -13,8 +14,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.zerock.momofit.domain.GroupVO;
+import org.zerock.momofit.domain.group.Criteria;
+import org.zerock.momofit.domain.group.GroupDTO;
+import org.zerock.momofit.domain.group.GroupVO;
+import org.zerock.momofit.exception.DAOException;
+import org.zerock.momofit.mapper.group.GroupMapper;
 
+import lombok.Cleanup;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
@@ -36,84 +42,124 @@ public class GroupMapperTests {
 	private GroupMapper mapper;
 	
 	
-//	@Test
-//	@Order(1)
-//	public void testGroupMapper()  {
-//		log.trace("testGroupMapper() invoked.");
-//		
-//		@Cleanup("clear")
-//		List<GroupVO> list = this.mapper.getList();
-//		
+	@Disabled
+	@Test
+	@Order(1)
+	public void testGroupMapper() throws DAOException  {
+		log.trace("testGroupMapper() invoked.");
+		
+		@Cleanup("clear")
+		List<GroupVO> list = this.mapper.getList();
+		
+		for(GroupVO vo : list ) {
+			log.info("\t+ vo : {}", vo);
+		} // enhanced for
+	}
+	
+	
+	// ** 페이징 test **
+	
+	@Disabled
+	@Test
+	@Order(1)
+	public void testGetListWithPaging() throws DAOException  {
+		log.trace("testGetListWithPaging() invoked.");
+		
+		Criteria cri = new Criteria();
+		cri.setCurrPage(1);
+		cri.setAmount(16);
+		
+		@Cleanup("clear")
+		List<GroupVO> list = this.mapper.getListWithPaging(cri);
+		
+		list.forEach(log::info);
+		
 //		for(GroupVO vo : list ) {
 //			log.info("\t+ vo : {}", vo);
 //		} // enhanced for
-//	}
+	}
 	
-//	@Test
-//	@Order(1)
-//	public void testInsert()  {
-//		log.trace("testInsert() invoked.");
-//		
-//		GroupVO group = new GroupVO();
-//		
-//		Date d = new Date();
-//		
-//		group.setGroup_name("새로 작성하는 모임 이름");
-//		group.setMember_max(10);
-//		group.setSchedule(d);
-//		group.setGroup_date(d);
-//		group.setGroup_like(30);
-//		group.setUser_no(1);
-//		
-//
-//		mapper.insert(group);
-//		
-//		log.info(group);
-//		} 
 	
-//	@Test
-//	@Order(1)
-//	public void testRead()  {
-//		log.trace("testRead() invoked.");
-//		
-//		// 존재하는 게시물 번호로 테스트
-//		GroupVO group = mapper.read(5);
-//		
-//		log.info(group);
-//	}
 	
-//	@Test
-//	@Order(1)
-//	public void testDelete()  {
-//		log.trace("testDelete() invoked.");
-//		
-//		// 존재하는 게시물 번호로 테스트 --> 1 반환	
-//		log.info("DELETE COUNT: " + mapper.delete(53));
-//		
-//		// 존재하지 않는 게시물 번호로 테스트 --> 0 반환	
-//		log.info("DELETE COUNT: " + mapper.delete(5000));
-//	}
-	
+	@Disabled
 	@Test
-	public void testUpdate()  {
+	@Order(1)
+	public void testInsert() throws DAOException  {
+		log.trace("testInsert() invoked.");
+		
+		GroupDTO dto = new GroupDTO();
+		
+		Date d = new Date();
+		
+		dto.setGroup_name("새로 작성하는 모임 이름");
+		dto.setMember_max(10);
+		dto.setSchedule(d);
+		dto.setGroup_date(d);
+//		dto.setGroup_like(30);
+//		dto.setUser_no(1);
+		
+
+		mapper.insert(dto);
+		
+		log.info(dto);
+		} 
+	
+	@Disabled
+	@Test
+	@Order(1)
+	public void testRead() throws DAOException  {
+		log.trace("testRead() invoked.");
+		
+		// 존재하는 게시물 번호로 테스트
+		GroupDTO group = mapper.read(172);
+		
+		log.info(group);
+	}
+	
+	/*이미지 정보 반환*/
+	@Test
+	public void getAttachListTests() {
+		log.trace("getAttachListTests() invoked.");
+		int group_no = 173;
+		
+		log.info("이미지 정보 : " + mapper.getAttach(group_no));
+			
+	}
+	
+	
+	@Disabled
+	@Test
+	@Order(1)
+	public void testDelete() throws DAOException  {
+		log.trace("testDelete() invoked.");
+		
+		// 존재하는 게시물 번호로 테스트 --> 1 반환	
+		log.info("DELETE COUNT: " + mapper.delete(53));
+		
+		// 존재하지 않는 게시물 번호로 테스트 --> 0 반환	
+		log.info("DELETE COUNT: " + mapper.delete(5000));
+	}
+	
+	@Disabled
+	@Test
+	public void testUpdate() throws DAOException  {
 		log.trace("testUpdate() invoked.");
 		
-		GroupVO group = new GroupVO();
+		GroupDTO dto = new GroupDTO();
 		
 		Date d = new Date();
 		
 		// 실행 전 존재하는 번호인지 확인할 것
 		
-		group.setGroup_no(56);
-		group.setGroup_name("수정된 모임 이름");
-		group.setMember_max(8);
-		group.setSchedule(d);
+		dto.setGroup_no(56);
+		dto.setGroup_name("수정된 모임 이름");
+		dto.setMember_max(8);
+		dto.setSchedule(d);
 		
-		int count = mapper.update(group);
+		int count = mapper.update(dto);
 		log.info("UPDATE COUNT: " + count);
 
 	}
 	
-	
-	
+		
 }

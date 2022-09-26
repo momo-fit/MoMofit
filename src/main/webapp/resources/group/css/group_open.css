@@ -35,6 +35,38 @@
 
 }
 
+/* 이미지 업로드 */
+
+
+#result_card img{
+    max-width: 80%;
+    height: auto;
+    display: block;
+    padding: 5px;
+    margin-top: 10px;
+    margin: auto;	
+}
+#result_card {
+    position: relative;
+}
+.imgDeleteBtn{
+    position: absolute;
+    top: 0;
+    right: 20%;
+    background-color: #ef7d7d;
+    color: wheat;
+    font-weight: 900;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    line-height: 26px;
+    text-align: center;
+    border: none;
+    display: block;
+    cursor: pointer;	
+}
+
+
 /* 파일첨부 */
 .input_file_button {
     display: inline-block;
@@ -45,9 +77,9 @@
     vertical-align: middle;
     background-color: #fdfdfd;
     cursor: pointer;
-    /* border: 1px solid #ebebeb; */
+
     background-color: #14A7FF;;
-    /* border-bottom-color: #e2e2e2; */
+
     border-radius: .25em;
 }
 
@@ -152,6 +184,10 @@ textarea:focus{
 
 }
 
+#addressSiGunGu {
+	width: 150px;
+}
+
 /* 최대 인원  */
 .make_group_num > input {
     width: 110px;
@@ -210,16 +246,35 @@ textarea:focus{
     color: white;
     font-weight: bold;
     /* 박스 */
-    background-color: #14A7FF;
+    background-color: #ff1466e3;
     border: none; 
     border-radius: 6px;
     line-height: 48px;
     /* 위치 */
-    margin-left:150px;
+    margin-left:50px;
+    margin-right: 20px;
     margin-top: 30px;
     /* margin-bottom:0px; */
     width: 150px;
 }
+
+.make_group_cancel {
+        /* 글자 */
+        font-size: 18px;
+        color: white;
+        font-weight: bold;
+        /* 박스 */
+        background-color: gray;
+        border: none; 
+        border-radius: 6px;
+        line-height: 48px;
+        /* 위치 */
+        /* margin-left:150px;
+        margin-top: 30px; */
+        /* margin-bottom:0px; */
+        width: 150px;
+    }
+
 
 #sports_add_text { display: none; }
 
