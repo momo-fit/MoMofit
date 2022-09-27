@@ -29,32 +29,11 @@ import net.coobird.thumbnailator.Thumbnails;
 
 @Log4j2
 
-@RequestMapping("/group/")
 public class UploadController {
 	
 	@Autowired
 	private GroupMapper mapper;
 
-	@GetMapping("/display")
-	public ResponseEntity<byte[]> getImage(String fileName){
-		File file = new File("c://upload/temp/" + fileName);
-		
-		ResponseEntity<byte[]> result = null;
-		
-		try {
-			
-			HttpHeaders header = new HttpHeaders();
-			
-			header.add("Content-type", Files.probeContentType(file.toPath()));
-			
-			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
-			
-		}catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		return result;
-	}
 //	------------------------------------------------------------------------------------------------------------
 	
 	/* 이미지 정보 반환 */
@@ -132,27 +111,8 @@ public class UploadController {
 		try {
 			
 			uploadFile.transferTo(saveFile);
-			
-			/* 썸네일 생성 - 방법1 */
-//			File thumbnailFile = new File(uploadPath, "s_" + uploadFileName);
-//			
-//			BufferedImage bo_image = ImageIO.read(saveFile);
-//			
-//			/* 비율 */
-//			double ratio = 3;
-//			/*넓이 높이*/
-//			int width = (int) (bo_image.getWidth() / ratio);
-//			int height = (int) (bo_image.getHeight() / ratio);		
-//
-//			BufferedImage bt_image = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
-//							
-//			Graphics2D graphic = bt_image.createGraphics();
-//			
-//			graphic.drawImage(bo_image, 0, 0,width,height, null);
-//				
-//			ImageIO.write(bt_image, "jpg", thumbnailFile);
-			
-			/* 썸네일 생성 - 방법2 ( pom.xml에 thumbnailator 의존성 추가 ) */
+				
+			/* 썸네일 생성 - ( pom.xml에 thumbnailator 의존성 추가 ) */
 			File thumbnailFile = new File(uploadPath, "s_" + uploadFileName);				
 			
 			Thumbnails.of(saveFile)

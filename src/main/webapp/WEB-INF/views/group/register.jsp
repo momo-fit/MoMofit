@@ -79,10 +79,7 @@
 
                                         <div id="uploadResult">
                                         
-                                            <!-- <div id="result_card">
-                                                <div class="imgDeleteBtn">x</div>
-                                                <img src="/group/display?fileName=test.png">
-                                            </div> -->
+                                            
                                         </div>
                                                                                     
 
@@ -98,7 +95,7 @@
                             <!-- 임시유저번호  -->
                             <input type="hidden" name="user_no" value="2">
                             <!-- 좋아요 수 -->
-                            <input type="hidden" name="group_like" value="34">
+                            <!-- <input type="hidden" name="group_like" value="30"> -->
 
                             <!-- 폼 오른쪽 배치 (모임이미지 제외한 폼) -->
                             <div class="make_group_right">
@@ -148,7 +145,6 @@
                                     <select name="addressRegion" id="addressRegion" required></select>
                                     <select name="group_loc" id="addressDo" required></select>
                                     <select name="group_loc" id="addressSiGunGu" required></select>
-                                    
                                     
                                 </div><br><br>
                                 <!-- 최대인원 required  -->

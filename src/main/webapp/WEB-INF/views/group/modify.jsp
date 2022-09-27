@@ -63,10 +63,10 @@
                                         <div id="result_card">
                                             <!-- 저장된 이미지 갖고오기 -->
                                             <c:if test="${group.group_img != null}">
-                                                <img src="/group/display?fileName=${group.path}/s_${group.temp}_${group.group_img}">
+                                                <img src="/display?fileName=${group.path}/s_${group.temp}_${group.group_img}">
                                                 <!-- 삭제버튼 생성 + js에 있는 삭제 메서드 수행 -->
                                                 <div class="imgDeleteBtn" 
-                                                    data-file="/group/display?fileName=${group.path}/s_${group.temp}_${group.group_img}">x</div>
+                                                    data-file="/display?fileName=${group.path}/s_${group.temp}_${group.group_img}">x</div>
                                             </c:if>
 
                                         </div>
@@ -181,7 +181,7 @@
                             <div class="make_group_intro">
                                 모임 소개&nbsp;&nbsp;<br>
                                 <textarea cols="30" rows="5" value='<c:out value="${group.info}"/>' 
-                                        name="info" required></textarea>
+                                        name="info" required><c:out value="${group.info}"/></textarea>
                             </div>
                             
                             <!-- 페이징 값 전송할 수 있도록 해주기 -->

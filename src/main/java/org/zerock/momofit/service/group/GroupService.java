@@ -16,6 +16,9 @@ public interface GroupService {
 	// 1-2. 페이징 처리된 게시글 목록
 	public abstract List<GroupVO> getListPerPage(Criteria cri) throws ServiceException;
 	
+	// 1-3. Best 글 (좋아요순) 목록
+	public abstract List<GroupVO> likeSelect();
+	
 	// 2. 새로운 게시글 등록
 	public abstract boolean register(GroupDTO dto) throws ServiceException, DAOException;
 	

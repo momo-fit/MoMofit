@@ -100,9 +100,9 @@
                 
                     <div class="info"> 
                         <div class="info2">
-                            <span class="font-12-400"> 작성자 <b class="font-12-400">홍길동</b> </span>
-                            <div class="space1"></div>
-                            <span class="font-12-400"> 조회수 <b class="font-12-400">1</b> </span>
+                            <span class="font-12-400"> 작성자 <b class="font-12-400"><c:out value="${group.user_no}"/></b> </span>
+                            <!-- <div class="space1"></div>
+                            <span class="font-12-400"> 조회수 <b class="font-12-400">1</b> </span> -->
                             <div class="space1"></div>
                             <span class="font-12-400">작성일- <fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${group.group_date}" /></span>
 
@@ -143,7 +143,7 @@
                                 <div class="content_img">
 
                                     <c:if test="${group.group_img != null}">
-                                        <img class="group_box_img" src="/group/display?fileName=${group.path}/${group.temp}_${group.group_img}">
+                                        <img class="group_box_img" src="/display?fileName=${group.path}/${group.temp}_${group.group_img}">
                                     </c:if>
 
                                     <c:if test="${group.group_img == null}">

@@ -17,6 +17,9 @@ public interface GroupMapper {
 	
 	// 1-2. 페이징 처리된 전체목록 조회
 	public abstract List<GroupVO> getListWithPaging(Criteria cri) throws DAOException;	
+	
+	// 1-3. Best 글 (좋아요순) 목록
+	public abstract List<GroupVO> likeSelect();
 
 	// 2. 게시글 등록 (Create) 
 	public abstract void insert(GroupDTO dto) throws DAOException;
@@ -24,8 +27,7 @@ public interface GroupMapper {
 
 	// 2-2. 이미지 데이터 반환
 	public abstract GroupDTO getAttach(Integer group_no);
-	
-	
+		
 	// 3. 상세조회 (Read)
 	public abstract GroupDTO read(Integer group_no) throws DAOException;
 

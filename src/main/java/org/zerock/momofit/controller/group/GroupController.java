@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -60,6 +61,9 @@ public class GroupController {
 			PageDTO pageDTO = new PageDTO(cri, this.service.getTotal());
 			model.addAttribute("pageMaker", pageDTO);
 			
+			// 상단 BEST글 
+			model.addAttribute("ls", service.likeSelect());
+			
 		} catch(Exception e) {
 			throw new ControllerException(e);
 		} // try-catch
@@ -78,7 +82,8 @@ public class GroupController {
 	
 	// 2-2. 모임 등록
 	@PostMapping("/register")
-	public String register(GroupDTO dto, RedirectAttributes rttr, Criteria cri, String sightingDateString) throws ControllerException {
+	public String register(GroupDTO dto, RedirectAttributes rttr, Criteria cri, 
+							String sightingDateString ) throws ControllerException {
 		
 		try {
 				
@@ -89,8 +94,6 @@ public class GroupController {
 			rttr.addAttribute("currPage", cri.getCurrPage());
 			
 			return "redirect:/group/list";
-			
-
 						
 		} catch(Exception e) {
 			throw new ControllerException(e);

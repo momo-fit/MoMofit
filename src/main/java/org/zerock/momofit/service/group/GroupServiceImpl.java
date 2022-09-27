@@ -47,6 +47,13 @@ public class GroupServiceImpl implements GroupService  {
 		}
 	} // getListPerPages
 	
+	// 1-3. Best 글 (좋아요순) 목록
+	public List<GroupVO> likeSelect() {
+		
+		return mapper.likeSelect();
+		
+	}
+	
 	
 	// 2. 새로운 게시글 등록
 	@Transactional
@@ -54,7 +61,7 @@ public class GroupServiceImpl implements GroupService  {
 	public boolean register(GroupDTO dto) throws DAOException {
 
 		log.info("register..." + dto);
-
+		
 		return mapper.insertSelectKey(dto) == 1;
 	}
 

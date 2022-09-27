@@ -75,12 +75,36 @@
                             <div class="best_inner">
 
                                 <!-- Best 모임 -->
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
+                                <c:forEach items="${ls}" var="ls">
+                                    <div class="group_box">
+                                        <a href="/group/detail?group_no=${ls.group_no}&currPage=${pageMaker.cri.currPage}" class="group_aTag">
+                                            <div class="group_box_inner">
+                                                <c:if test="${ls.group_img != null}">
+                                                    <img class="group_box_img" src="/display?fileName=${ls.path}/${ls.temp}_${ls.group_img}">
+                                                   
+                                                </c:if>
+
+                                                <c:if test="${ls.group_img == null}">
+                                                    <img class="group_box_img" src="/resources/group/img/basket.jpg">
+                                                </c:if>
+                                            </div>
+
+                                            <p class="font-14-500" style="margin-bottom: 5px;" >
+                                                &#128293;일정 - <fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${ls.schedule}" />
+                                                
+                                                No.<c:out value="${ls.group_no}" />
+                                            </p>
+                                            
+                                            <p class="font-16-500" style="margin-bottom: 5px;" ><c:out value="${ls.group_name}"/></p>
+
+                                            <p class="font-14-500" id="loc"><c:out value="${ls.group_loc}" /></p>
+                                        </a>
+                                    </div> 
+                                </c:forEach>
+                            </div>
+                        </div>
+                    </div>
+                                <!-- <div class="group_box">
                                     <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/683/220/130"></div>
                                     <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
                                         Architecto, nesciunt?</p>
@@ -112,12 +136,9 @@
                                     <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/676/220/130"></div>
                                     <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
                                         Architecto, nesciunt?</p>
-                                </div>
-                            </div>
+                                </div> -->
+                            
 
-
-                        </div>
-                    </div>
 
                     <!-- 모임목록 -->
                     <div class="groups">
@@ -175,7 +196,8 @@
                                         
                                             <div class="group_box_inner">
                                                 <c:if test="${group.group_img != null}">
-                                                    <img class="group_box_img" src="/group/display?fileName=${group.path}/${group.temp}_${group.group_img}">
+                                                    <img class="group_box_img" src="/display?fileName=${group.path}/${group.temp}_${group.group_img}">
+
                                                 </c:if>
 
                                                 <c:if test="${group.group_img == null}">
@@ -191,12 +213,12 @@
                                             
                                             <p class="font-16-500" style="margin-bottom: 5px;" ><c:out value="${group.group_name}"/></p>
 
-                                            <p class="font-14-500"><c:out value="${group.group_loc}" /></p>
+                                            <p class="font-14-500" id="loc"><c:out value="${group.group_loc}"/></p>
                                             
                                         </div>
                                     </a>
                                 
-                                </c:forEach>
+                                </c:forEach>  
 
                             </div>
                         </div>

@@ -26,7 +26,7 @@
         formData.append("uploadFile", fileObj);
 
         $.ajax({
-			url: '/group/uploadAjaxAction',     // url : 서버로 요청을 보낼 url
+			url: '/uploadAjaxAction',     // url : 서버로 요청을 보낼 url
 	        processData : false,                // processData : 서버로 전송할 데이터를 queryStirng 형태로 변환할지 여부
 	        contentType : false,                // contentType : 서버로 전송되는 데이터의 content-type
 	        data : formData,                    // data : 서버로 전송할 데이터
@@ -81,7 +81,7 @@
             );
 		
 		str += "<div id='result_card'>";
-		str += "<img src='/group/display?fileName=" +fileCallPath+"'>";
+		str += "<img src='/display?fileName=" +fileCallPath+"'>";
 		str += "<div class='imgDeleteBtn' data-file='" + fileCallPath + "'>x</div>";
         str += "<input type='hidden' name='group_img' value='"+ uploadResultParam.group_img +"'>";
 		str += "<input type='hidden' name='temp' value='"+ uploadResultParam.temp +"'>";
@@ -108,7 +108,7 @@
 		let targetDiv = $("#result_card");
 		
 		$.ajax({
-			url: '/group/deleteFile',
+			url: '/deleteFile',
 			data : {fileName : targetFile},
 			dataType : 'text',
 			type : 'POST',

@@ -3,7 +3,7 @@ package org.zerock.momofit.domain.group;
 
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import org.zerock.momofit.domain.signUp.UserDTO;
 
 import lombok.Data;
 
@@ -34,7 +34,6 @@ public class GroupDTO {
 	private String path;		// 경로
 	// 멤버수
 	private Integer member_count;
-	
 
 	
 }

@@ -22,6 +22,15 @@
 		OFFSET (#{currPage} -1 ) * #{amount} ROWS
 		FETCH NEXT #{amount} ROWS ONLY
 	</select>
+
+	<!-- Best글 -->
+	<select id="likeSelect" resultType="org.zerock.momofit.domain.group.GroupVO">
+		SELECT 
+			*
+		FROM GROUPS
+		WHERE group_like >= 35
+		ORDER BY group_like desc, group_no desc
+	</select>
 	
 	<!-- 총 게시물의 개수 -->
 	<select id="getTotalCount" resultType="int">
