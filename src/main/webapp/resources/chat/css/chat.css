@@ -1,0 +1,351 @@
+
+.outline-chat {
+    /* border: 5px solid red; */
+    width: 100vw;
+    height: 100vh;
+}
+
+/* 채팅영역(가장 바깥) */
+.view-chat-01 {
+    display: flex;
+    flex-direction: column;
+
+    /* border: 5px solid blue; */
+    
+    
+    height: 100%;
+}
+
+/* 채팅이 표현되는 화면 */
+.chatting-view{
+    min-height: 450px;
+    height: 100%;
+    width: 100%;
+    
+    border: 1px solid rgb(210,210,210);
+    text-decoration: none;
+
+    list-style: none;
+
+    overflow-y: scroll;
+
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 0px;
+
+}
+
+/* 스크롤바 커스텀 꾸미기 */
+.chatting-view::-webkit-scrollbar {
+    width: 10px;  /* 스크롤바의 너비 */
+}
+
+.chatting-view::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #217af4; /* 스크롤바의 색상 */
+    
+    border-radius: 10px;
+}
+
+.chatting-view::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}
+
+
+
+
+/* 내가 쓴 채팅 */
+.chat-right {
+    float: right;
+
+    margin-top: 10px;
+    padding: 10px 10px; 
+    
+    display: flex;
+            
+    /* border: 1px solid black;; */
+}
+
+.chat-right div[class=chat-content-2] {
+    background-color: #B4CCE3;  
+}
+
+.chat-left div[class=chat-content-2]  {
+    background-color: #DFEFED;
+}
+
+/* 상대방이 쓴 채팅 */
+.chat-left {
+    float: left;
+    display: flex;
+    margin-top: 10px;
+    padding: 10px 10px;
+
+    /* border: 1px solid black;; */
+}
+
+/* 채팅 프로필 박스 */
+.chat-content-1 {
+    height: 50px;
+    width: 50px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+.chat-content-1 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;;
+}
+
+/* 채팅 정보 박스 */
+.chat-content-2 {
+    max-width: 300px;
+    min-width: 200px;
+    padding: 10px 10px;
+    border-radius: 10px;
+}
+
+/* 실제 채팅이 입력되는 공간 */
+.chat-text {
+    max-width: 250px;
+    word-break:break-all;
+}
+
+/* 채팅 정보가 입력되는 공간 - 아이디, 입력시간 */
+.chat-info span {
+    margin-left : 5px;
+}
+
+
+.chatting-submit {
+    display: flex;
+    /* border: 5px solid yellow; */
+}
+
+.chat-textarea {
+    width: 80%;
+    height: 70px;
+    border: 1px solid rgb(210,210,210);
+    resize: none;
+}
+
+.chat-textarea:focus {
+    outline: none;
+}
+
+.chat-textarea-btn {
+    width: 20%;
+    background-color: #BFC8D7;
+    border: none;;
+}
+
+.chat-div {
+    width: 100%;
+    /* background-color: yellow;; */
+}
+
+
+
+/* 나의 모임 Drop Menu Down */
+.view-chat-01-header {
+    background-color: #1e416e;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 50px;
+}
+
+
+.dropdown{
+    position : relative;
+    display : inline-block;
+    margin-left : 5px;
+}
+
+.group-name {
+    width: 60%;
+}
+
+
+.dropbtn{
+border : none;
+border-radius : 4px;
+background-color: #7487b0;
+color : white;
+padding : 5px;
+width : 55px;
+text-align: center;
+cursor : pointer;
+}
+
+.dropdown-content{
+display : none;
+position : absolute;
+z-index : 1; /*다른 요소들보다 앞에 배치*/
+background-color: #ebebe3;
+min-width : 200px;
+
+max-height: 300px;
+overflow-y: scroll;
+
+box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+
+right: 0px;
+}
+
+.dropdown-content a{
+display : block;
+text-decoration : none;
+color : rgb(37, 37, 37);
+padding : 12px 20px;
+}
+
+.dropdown-content span{
+    display : block;
+    text-decoration : none;
+    color : rgb(37, 37, 37);
+    padding : 12px 20px;
+}
+
+.dropdown-content a:hover{
+background-color : #ececec
+}
+
+.dropdown:hover .dropdown-content {
+display: block;
+}
+
+
+.group-content {
+    width: 370px;
+    max-width: 750px;
+
+    right: -120px;
+    top : 28px;
+
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+    background-color: #ebebe3;
+
+}
+
+.notice-content {
+    width: 100px;
+
+    right: -50px;
+    top : 35px;
+
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+    background-color: #ebebe3;
+}
+
+.group-info-div {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    color: black;
+}
+
+.group-info-div > div {
+    width: 100%;
+    color: black;
+
+    /* border: 1px solid red; */
+    padding-right: 5px;
+
+    margin-bottom: 5px;
+}
+
+.group-info-img {
+    text-align: center;
+    height: 200px;
+}
+.group-info-img img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+/* 모임소개 */
+.gi-text {
+    display: flex;
+}
+
+.gi-text span {
+    background-color: #7487b03f;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+/* 모임정모 제목 div 태그조정 */
+.group-info-div div div {
+    width: 100px;
+    flex-shrink: 0;
+}
+
+
+.gi-content {
+    display: flex;
+    margin-top : 5px;
+    /* border: 1px solid blue; */
+}
+
+.gi-content span {
+    background-color: #7487b03f;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+/* 공지사항 CSS */
+
+.chat-notice {
+    margin-left: 5px;
+    padding: 5px;
+}
+
+.notice-hidden {
+    display: none;
+    z-index: 1;
+    background-color: white;
+    width: 100vw;
+    max-height: 100px;
+
+    overflow-y: scroll;
+
+    position: absolute;
+
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+}
+
+.view-chat-01-notice:hover .notice-hidden {
+    display: block;
+}
+
+.group-gropdown {
+    display: flex;
+}
+
+.group-member {
+	width: 240px !important;
+	/* border: 1px solid red; */
+    display: flex;
+
+    flex-wrap: wrap;
+}
+
+.group-member span {
+	display: inline;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    text-align: center;
+}
+
+.group-member-list {
+    right: -60px;
+}
