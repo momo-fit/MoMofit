@@ -104,7 +104,11 @@
                                         파일찾기
                                     </label>
 
-                                    <input type="file" id="input_file" class="upload-hidden" accept='image/jpg,image/png,image/jpeg,image/gif' >
+                                    <input type="file" id="input_file" name="uploadFile" class="upload-hidden" multiple>
+
+                                    <div id="uploadResult">
+                                        <!-- 여기에 미리보기 생성 -->
+                                    </div>
                                 </span>
                                 <br><br>
 
@@ -138,6 +142,123 @@
         <!-- 하단 Footer -->
         <%@ include file = "/WEB-INF/views/include/footer.jsp" %>
     </div>
+
+    <script>
+        // 이미지 업로드
+        $("input[type='file']").on("change", function(e){
+
+            // 이미지 존재시 삭제
+            if($(".imgDeleteBtn").length > 0){
+                deleteFile();
+            }
+            let formData = new FormData();
+
+            // let fileInput = $('input[name="uploadFile"]');
+            // let fileList = fileInput[0].files;
+            // let fileObj = fileList[0];
+
+            let fileInput = $('input[name="uploadFile"]');
+            let files = fileInput[0].files;
+
+            
+		    for(let i = 0; i < files.length; i++){
+                if(!fileCheck(files[i].name, files[i].size)){
+                    return false;
+                } // if
+
+            	formData.append("uploadFile", files[i]);		  
+		    } // for
+            
+            $.ajax({
+                url: '/uploadAjaxAction', // UploadController의 uploadAjaxAction으로 보냄
+                processData : false,
+                contentType : false,
+                data : formData,
+                type : 'POST',            // post 방식으로 보냄
+                dataType : 'json',
+                success : function(result){
+                    console.log(result);
+                    showUploadImage(result);
+                },
+                error : function(result){
+                    alert("이미지 파일이 아닙니다.");
+	    	    }
+                
+            });
+
+        });
+
+        // 이미지 체크
+        let regex = new RegExp("(.*?)\.(jpg|png|JPG|PNG)$");
+        let maxSize = 1048576; //1MB	
+        
+        // 이미지 체크 메서드
+        function fileCheck(fileName, fileSize){
+
+            if(fileSize >= maxSize){
+                alert("파일 사이즈 초과");
+                return false;
+            } // if
+                
+            if(!regex.test(fileName)){
+                alert("해당 종류의 파일은 업로드할 수 없습니다.");
+                return false;
+            } // if            
+            return true;		            
+        }
+
+        // 이미지 미리보기 출력
+	    function showUploadImage(uploadResultArr){
+            // 전달받은 데이터 검증
+            if(!uploadResultArr || uploadResultArr.length == 0){return}
+            
+            let uploadResult = $("#uploadResult");  
+            let obj = uploadResultArr[0];    
+            let str = "";  
+            let fileCallPath = encodeURIComponent(obj.uploadPath.replace(/\\/g, '/') + "/s_" + obj.uuid + "_" + obj.fileName);
+		
+            str += "<div id='result_card'>";
+            str += "<img src='/display?fileName=" + fileCallPath +"'>";
+            str += "<div class='imgDeleteBtn' data-file='" + fileCallPath + "'>x</div>";
+            str += "</div>";
+
+            uploadResult.append(str);     
+    	}
+
+    // 이미지 삭제 버튼 동작
+	$("#uploadResult").on("click", ".imgDeleteBtn", function(e){
+		
+		deleteFile();
+		
+	});
+
+    // 파일 삭제 메서드
+	function deleteFile(){
+		
+		let targetFile = $(".imgDeleteBtn").data("file");
+		
+		let targetDiv = $("#result_card");
+		
+		$.ajax({
+			url: '/deleteFile',
+			data : {fileName : targetFile},
+			dataType : 'text',
+			type : 'POST',
+			success : function(result){
+				console.log(result);
+				
+				targetDiv.remove();
+				$("input[type='file']").val("");
+				
+			},
+			error : function(result){
+				console.log(result);
+				
+				alert("파일을 삭제하지 못하였습니다.")
+			}
+		});
+	}
+    </script>
 
 
     <!-- 메인화면 자바스크립트 -->

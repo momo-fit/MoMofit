@@ -219,7 +219,34 @@
 			<version>2.0.7</version>
 		</dependency>
 
-		     
+		<!-- ================ fileupload ================= -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.4</version>
+		</dependency>
+		
+
+		<!-- ================ jackson-databind ================= -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.14.0-rc1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.14.0-rc1</version>
+		</dependency>
+
+		<!-- ================ Thumbnailator ================= -->
+		<dependency>
+			<groupId>net.coobird</groupId>
+			<artifactId>thumbnailator</artifactId>
+			<version>0.4.17</version>
+		</dependency>
+
 	</dependencies>
 
 

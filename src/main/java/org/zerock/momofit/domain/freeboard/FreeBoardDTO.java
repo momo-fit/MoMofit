@@ -16,4 +16,9 @@ public class FreeBoardDTO {
 	private Integer category_no;
 	private Integer subject_no;
 	
+	// 이미지 첨부
+//	private String uploadPath; // 경로
+//	private String uuid;
+//	private String fileName;   // 파일명
+	
 } // end class
