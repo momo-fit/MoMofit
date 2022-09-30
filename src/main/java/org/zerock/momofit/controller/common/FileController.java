@@ -14,25 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class FileController {
-<<<<<<< Updated upstream
-	
-	@GetMapping("/display")
-	public ResponseEntity<byte[]> getImage(String fileName){
-		File file = new File("c://project/uploadFile/" + fileName);
-		
-		ResponseEntity<byte[]> result = null;
-		
-		try {
-			
-
-			HttpHeaders header = new HttpHeaders();
-			
-			header.add("Content-type", Files.probeContentType(file.toPath()));
-			
-
-			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
-			
-=======
 
 	@GetMapping("/display")
 	public ResponseEntity<byte[]> getImage(String fileName){
@@ -47,22 +28,12 @@ public class FileController {
 			header.add("Content-type", Files.probeContentType(file.toPath()));
 
 			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
->>>>>>> Stashed changes
 
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
-<<<<<<< Updated upstream
-		
-		return result;
-	}
-
-} //end class
-
-=======
 
 		return result;
 	}
 
 } //end class
->>>>>>> Stashed changes

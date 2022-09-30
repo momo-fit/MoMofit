@@ -240,14 +240,6 @@
 		    <version>${org.springframework-version}</version>
 		</dependency>
 		
-		<!-- ================ 11. jackson ================= -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.13.4</version>
-		</dependency>
-
-		
 		<!-- ================ 12. fileupload ================= -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -259,16 +251,15 @@
             <groupId>org.imgscalr</groupId>
             <artifactId>imgscalr-lib</artifactId>
             <version>4.2</version>
-        </dependency>
+        </dependency>		
 
-		<!-- ================ fileupload ================= -->
+		<!--  ============= 13. spring-security ============= -->
 		<dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
-			<version>1.4</version>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-core</artifactId>
+		    <version>5.7.3</version>
 		</dependency>
 		
-
 		<!-- ================ jackson-databind ================= -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -289,20 +280,9 @@
 			<version>0.4.17</version>
 		</dependency>
 
-<<<<<<< Updated upstream
-=======
-		<!--  ============= 13. spring-security ============= -->
-		<dependency>
-		    <groupId>org.springframework.security</groupId>
-		    <artifactId>spring-security-core</artifactId>
-		    <version>5.7.3</version>
-		</dependency>
+		
 
 	
-
-
-		     
->>>>>>> Stashed changes
 	</dependencies>
 
 
