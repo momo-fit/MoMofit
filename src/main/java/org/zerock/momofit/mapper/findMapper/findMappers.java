@@ -13,6 +13,9 @@ public interface findMappers {
 	
 	// 임시비밀번호
 	public abstract void tempPwUpdate(@Param("id")String id, @Param("pass")String pass) throws DAOException;
+	
+	// 이메일 확인
+	public abstract String emailCheck(String email) throws DAOException;
 		
 	
 } // end class

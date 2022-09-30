@@ -15,4 +15,8 @@
         UPDATE USERS SET PASS = #{pass} WHERE id=#{id}
     </select>
 
+    <select id="emailCheck" resultType="String">
+        SELECT EMAIL FROM USERS WHERE EMAIL =  #{email}
+    </select>
+
 </mapper>

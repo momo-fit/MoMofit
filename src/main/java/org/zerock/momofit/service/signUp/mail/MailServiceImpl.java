@@ -43,21 +43,35 @@ public class MailServiceImpl implements MailService {
 	
 	// 메일 인증
 	@Override
-	public String mailSend(String email) throws MailSendException {
+	public String mailSend(String email) throws MailSendException, ServiceException {
 		makeRandomNumber();
 
-		String toMail = email;
-		String title = "회원가입 인증메일 입니다.";
-		String content = 
-				"<h2>MoMofit 서비스를 이용하기 위해 아래의 인증번호를 작성해 주세요</h2>" +
-				"<br><br>" +
-				"인증번호 : <b>"+ this.authNumber +"</b>" +
-				"<br><br><br>" +
-				"모두 모여라 피트니스 Team : 내손을 자바";
+		try {
+			email = email.replace("@", ",");
+			String currentEmail = this.mapper.emailCheck(email);
+			
+			if(currentEmail == null) {
+				email = email.replace(",", "@");
+
+				String toMail = email;
+				String title = "회원가입 인증메일 입니다.";
+				String content = 
+						"<h2>MoMofit 서비스를 이용하기 위해 아래의 인증번호를 작성해 주세요</h2>" +
+						"<br><br>" +
+						"인증번호 : <b>"+ this.authNumber +"</b>" +
+						"<br><br><br>" +
+						"모두 모여라 피트니스 Team : 내손을 자바";
+				
+				mailPush( toMail, title, content);
+				
+				return Integer.toString(this.authNumber);
+			} // if
+			
+			return null;
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
 		
-		mailPush( toMail, title, content);
-		
-		return Integer.toString(this.authNumber);
 	} // mailSend
 	
 	// 비밀번호 찾기
@@ -77,8 +91,7 @@ public class MailServiceImpl implements MailService {
 		}
 		
 		email = email.replace(",", "@");
-		log.info(email);
-		
+
 		String toMail = email;
 		String title = "비밀번호 찾기 메일 입니다.";
 		String content = 
@@ -110,5 +123,6 @@ public class MailServiceImpl implements MailService {
 		} // try-catch
 		
 	} // mailPush
+
 
 } // end class

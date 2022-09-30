@@ -8,14 +8,9 @@
         SELECT * FROM (
             SELECT * FROM GROUPS ORDER BY GROUP_LIKE desc
         )  
-        WHERE GROUP_DATE BETWEEN (
-            <!-- 달의 첫날 검색 -->
-            SELECT TRUNC(CURRENT_DATE, 'MM')FROM  DUAL
-        ) AND (
-            <!-- 달의 마지막날 검색 -->
-            SELECT LAST_DAY(CURRENT_DATE) FROM DUAL
-        ) AND
-        GROUP_LIKE IS NOT NULL AND 
+        WHERE GROUP_DATE 
+        BETWEEN CURRENT_DATE-30 AND CURRENT_DATE
+        AND GROUP_LIKE IS NOT NULL AND 
         <![CDATA[  ROWNUM <= #{amount} ]]>
 
     </select>

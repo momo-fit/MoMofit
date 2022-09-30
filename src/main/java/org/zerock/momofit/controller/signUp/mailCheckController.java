@@ -24,8 +24,13 @@ public class mailCheckController {
 	@ResponseBody
 	public String mailCheck(String email) throws ControllerException {
 		log.trace("mailCheck({}) invoked.", email);
-
-		return mailService.mailSend(email);
+		
+		try {
+			return mailService.mailSend(email);
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
+		
 				
 	} // mailCheck
 	
