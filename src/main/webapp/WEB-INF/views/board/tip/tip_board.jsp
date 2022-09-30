@@ -55,13 +55,53 @@
  	<!-- CSS : content 전체 설정 -->
     <link rel="stylesheet" href="/resources/board/tip/css/tip_board.css">
 
+    <style>
+        /* Pagination  */
+        #pagination {
+            width: 100%;
+            margin: 0 auto;
+            /* border: 1px solid red; */
+        }
+
+        #pagination ul {            
+            display: flex;
+	        justify-content: center;
+        }
+
+        #pagination ul li {
+            padding : 10px, 10px;
+            text-align: center;
+            background-color: rgb(240, 240, 240);
+            width: 36px;
+            height: 36px;
+            line-height: 36px;
+            border-radius: 18px;
+            cursor: pointer;
+        }
+
+        #pagination ul li.prev, #pagination ul li.next {
+            margin-left: 15px;
+            padding : 10px, 10px;
+            text-align: center;
+            background-color: rgb(240, 240, 240);
+            width: 36px;
+            height: 36px;
+            line-height: 36px;
+            border-radius: 18px;
+            color: rgb(20 167 255);
+            cursor: pointer;
+        }
+
+        .currPage {
+            color: blue !important;
+            background-color: red;
+        }
+    </style>
+
     
 </head>
 
 <body>
-    
-    
-
     <div class="page">
     
    		<!-- header -->
@@ -72,8 +112,6 @@
    		
         <!-- 메인 컨텐츠부 -->
         <section>
-			
-			
     		
             <div class="section_wrap">
                 <div class="s_box_board">
@@ -91,8 +129,7 @@
                                 
                                 <input type="search" placeholder="제목">
                                 <button><i class="fa-solid fa-magnifying-glass"></i></button>
-                                
-                            
+                             
                             </form>
                         </div>
 
@@ -106,10 +143,7 @@
                             
                             <div>
                                 <div class="tip_board_inner">
-                                    
                                     <table id="tip_board_table" style="height: 100%;">
-                                        
-                                        
                                         <thead class="board_table">
                                             <tr class="tip_board_menu">
                                                 <th class="menu_num"><text class="font-16-500">번호</text></th>
@@ -121,26 +155,38 @@
                                         </thead>
 
                                         <tbody>
-                                            <tr class="contnet">
-                                                <td><div>1</div></td>
-                                                <td><div><a href="/board/tip/view" class="aTile">테스트 제목</a></div></td>
-                                                <td class="context-menu-one btn btn-neutral"><div>닉네임</div></td>
-                                                <td><div>2022.08.19</div></td>
-                                                <td><div>77</div></td>
-                                            </tr>
-                                            <tr class="contnet">
-                                                <td><div>1</div></td>
-                                                <td><div>테스트 제목</div></td>
-                                                <td class="context-menu-one btn btn-neutral"><div>닉네임</div></td>
-                                                <td><div>2022.08.19</div></td>
-                                                <td><div>77</div></td>
-                                            </tr>
-                                                                                        
-                                        </tbody>
-                                    
+                                            <c:forEach var="tipboard" items="${list}">
+                                                
+                                                <tr class="contnet">
+                                                    <td><div>${tipboard.board_no}</div></td>
+                                                    <td><div><a href="/board/tip/view?board_no=${tipboard.board_no}&currPage=${pageMaker.cri.currPage}" class="aTile">${tipboard.title}</a></div></td>
+                                                    <td class="context-menu-one btn btn-neutral"><div>${tipboard.user_no}</div></td>
+                                                    <td><div><fmt:formatDate pattern="yyyy-MM-dd" value="${tipboard.board_date}" /></div></td>
+                                                    <td><div>${tipboard.board_like}</div></td>
+                                                </tr>
+
+                                            </c:forEach>                        
+                                        </tbody>  
                                     </table>
-                                </div>
-                                
+
+                                    <div id="pagination">
+                                        <ul>
+                                            <c:if test="${pageMaker.prev}">
+                                                <li class="prev"><a href="/board/tip/list?currPage=${pageMaker.startPage - 1}">Prev</a></li>
+                                            </c:if>
+                            
+                                            <c:forEach var="pageNum" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+                                                <li class="${pageMaker.cri.currPage == pageNum ? 'currPage' : ''}">
+                                                    <a href="/board/tip/list?currPage=${pageNum}">${pageNum}</a>
+                                                </li>
+                                            </c:forEach>
+                            
+                                            <c:if test="${pageMaker.next}">
+                                                <li class="next"><a href="/board/tip/list?currPage=${pageMaker.endPage + 1}">Next</a></li>
+                                            </c:if>
+                                        </ul>
+                                    </div>
+                                </div>                                
                             </div>
                             <!-- 구분선 -->
                             <hr class="hr-1"/>
@@ -153,24 +199,41 @@
                             </div>
 
                             <div class="tip_board_bottom">
-                                <a href="register" class="board_write">
+                                <a href="/board/tip/register?&currPage=${pageMaker.cri.currPage}" class="board_write">
                                     <button><i class="fa-solid fa-pencil"> 글쓰기</i></button>
                                 </a>
                             </div>       
-
                         </div>
                     </div>
-
                 </div>
             </div>
-
-            
-
         </section>
 
         <!-- 하단 Footer -->
         <%@ include file = "/WEB-INF/views/include/footer.jsp" %>
     </div>
+
+    <!-- controller (register) - addAttribute -->
+    <!-- <script>
+        var result = "${param.result}";
+
+        if(result != null && result.length > 0 ) {
+            alert(result);
+        } // if
+    </script> -->
+
+    <!-- controller (register) - addFlashAttribute -->
+    <script>
+        $(document).ready(function(){
+
+            let result = '<c:out value="${result}"/>';
+
+            if(result != null && result.length > 0 ) {
+                alert(result);
+            } // if
+
+        });
+    </script>
 
 
     <!-- 메인화면 자바스크립트 -->
@@ -178,7 +241,6 @@
 
     <!-- contextmenu js -->
     <script src="/resources/board/tip/js/contextMenu.js"></script>
-
 
     <!-- 부트스트랩 자바스크립트 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

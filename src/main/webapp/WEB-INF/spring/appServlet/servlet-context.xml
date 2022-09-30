@@ -27,9 +27,12 @@
 		 <beans:property name="maxUploadSizePerFile" value="2097152"/>
 		 <beans:property name="preserveFilename" value="true"/>
 		 <beans:property name="uploadTempDir" value="file:///C:/Temp"/> 
+
 	</beans:bean>
 	
 	<context:component-scan base-package="org.zerock.momofit.controller" />
+	<context:component-scan base-package="org.zerock.momofit.mapper" />
+	<context:component-scan base-package="org.zerock.momofit.service" />
 	
 	<!-- 파일업로드 처리 설정 
 	<beans:bean id="multipartResolver"

@@ -23,12 +23,15 @@ public class FileController {
 		
 		try {
 			
+
 			HttpHeaders header = new HttpHeaders();
 			
 			header.add("Content-type", Files.probeContentType(file.toPath()));
 			
+
 			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
 			
+
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -37,3 +40,4 @@ public class FileController {
 	}
 
 } //end class
+

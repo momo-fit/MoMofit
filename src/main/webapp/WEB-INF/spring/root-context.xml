@@ -88,6 +88,7 @@
 	<context:component-scan base-package="org.zerock.momofit.service"/>
 	<context:component-scan base-package="org.zerock.momofit.config"/>
 	<context:component-scan base-package="org.zerock.momofit.controller.chat" />
+	<context:component-scan base-package="org.zerock.momofit.controller" />
 	<mybatis-spring:scan base-package="org.zerock.momofit.mapper" />
 		
 </beans>

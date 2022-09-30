@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.momofit.mapper.tipboard.TipBoardMapper">
+
+    <!-- 1. 게시판 테이블의 전체 목록 조회하기 -->
+    <select id="selectAllList" resultType="org.zerock.momofit.domain.tipboard.TipBoardVO" >
+        SELECT /*+ index_desc(board) */ * FROM board WHERE category_no =2
+    </select>
+
+    <!-- 2. 새로운 게시글을 등록하기 (CREATE) -->
+    <insert id="insert" >
+        INSERT INTO board (board_no, title, text, board_like, hits, img_check, user_no, category_no) 
+        VALUES (BOARD_SEQ.nextval, #{title}, #{text}, #{board_like}, #{hits}, #{img_check}, #{user_no}, #{category_no})
+    </insert>
+
+    <!-- 2. 새로운 게시글을 등록하기 (CREATE) : 새로이 입력된 게시글의 board_no을 반환받기를 원하는 경우 -->
+    <insert id="insertSelectKey">
+		<selectKey keyProperty="board_no" order="BEFORE" resultType="Integer">
+			SELECT BOARD_SEQ.nextval FROM dual
+        </selectKey>
+        
+        INSERT INTO board (board_no, title, text, board_like, hits, img_check, user_no, category_no) 
+        VALUES (#{board_no}, #{title}, #{text}, #{board_like}, #{hits}, #{img_check}, #{user_no}, #{category_no})
+	</insert>
+	
+	<!-- 3. 기존 게시글 상세조회 하기 (READ) -->
+	<select id="select" resultType="org.zerock.momofit.domain.tipboard.TipBoardVO" >
+        SELECT * FROM board WHERE board_no = #{board_no}
+    </select>
+    
+    <!-- 4. 기존 게시글 수정하기 (UPDATE) -->
+    <update id="update">
+        UPDATE board
+        SET
+            title = #{title},
+            text = #{text},
+            board_like = #{board_like},
+            hits = #{hits},
+            img_check = #{img_check},
+            user_no = #{user_no},
+            category_no = #{category_no},
+            edit = current_date
+        WHERE
+            board_no = #{board_no}
+    </update>
+
+    <!-- 5. 기존 게시글 삭제하기 (DELETE) -->
+    <delete id="delete">
+        DELETE FROM board WHERE board_no = #{board_no}
+    </delete>
+
+
+    <!-- 1-1. 새로이 페이징 처리가 가능한, 게시물 목록 조회하기 -->
+    <select 
+        id="selectListWithPaging"
+        resultType="org.zerock.momofit.domain.tipboard.TipBoardVO">
+
+        <!-- OFFSET/FETCH 절이 적용된 DQL 문장 생성 -->
+        SELECT/*+ index_desc(board) */ *
+        FROM board
+        WHERE CATEGORY_NO = 2
+        OFFSET ( #{currPage} - 1 ) * #{amount} ROWS
+        FETCH NEXT #{amount} ROWS ONLY
+    </select>
+
+    <!-- 6. 총 게시물의 갯수를 반환 -->
+    <select 
+        id="getTotalCount"
+        resultType="int">
+
+        SELECT /*+ index(board)*/ count(board_no) 
+        FROM board
+        WHERE CATEGORY_NO = 2
+    </select>
+
+
+</mapper>
