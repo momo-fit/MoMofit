@@ -24,8 +24,8 @@
     <!-- 구글 폰트 적용 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gugi&family=Hi+Melody&family=Sunflower:wght@500&display=swap" rel="stylesheet">
 
     <!-- fontawesome -->
     <script src="https://kit.fontawesome.com/7d82554876.js" crossorigin="anonymous"></script>
@@ -65,7 +65,7 @@
 
                     <div class="best_group">
                         <div class="best_txt">
-                            <h3 class="font-28-500">Best 모임</h3>
+                            <h3 class="font-28-500"><span class="linear-gradient">Best 모임</span></h3>
                         </div>
 
                         <!-- Best 모임 틀(버튼포함) -->
@@ -75,79 +75,72 @@
                             <div class="best_inner">
 
                                 <!-- Best 모임 -->
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/683/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/682/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/681/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/679/220/130"></div>
-                                    <p class="font-14-500">123</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/676/220/130"></div>
-                                    <p>테스틈ㄴ아ㅓㅣㅜㄴ마ㅣㅇ</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/677/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/676/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
+                                <c:forEach items="${ls}" var="ls">
+                                    <div class="group_box">
+                                        <a href="/group/detail?group_no=${ls.group_no}&currPage=${pageMaker.cri.currPage}" class="group_aTag">
+                                            <div class="group_box_inner">
+                                                <c:if test="${ls.group_img != null}">
+                                                    <img class="group_box_img" src="/display?fileName=${ls.path}/${ls.temp}_${ls.group_img}">
+                                                   
+                                                </c:if>
+
+                                                <c:if test="${ls.group_img == null}">
+                                                    <img class="group_box_img" src="/resources/group/img/basket.jpg">
+                                                </c:if>
+                                            </div>
+
+                                            <p class="font-14-500" style="margin-bottom: 5px;" >
+                                                &#128293;일정 - <fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${ls.schedule}" />
+                                                
+                                                No.<c:out value="${ls.group_no}" />
+                                            </p>
+                                            
+                                            <p class="font-16-500" style="margin-bottom: 5px;" ><c:out value="${ls.group_name}"/></p>
+
+                                            <p class="font-14-500" id="loc"><c:out value="${ls.group_loc}" /></p>
+                                        </a>
+                                    </div> 
+                                </c:forEach>
                             </div>
-
-
                         </div>
                     </div>
+
 
                     <!-- 모임목록 -->
                     <div class="groups">
                         <div id="group_h3">
-                            <h3 class="font-28-500">모임</h3>
+                            <h3 class="font-28-500">	
+                                &#9885;<span class="linear-gradient">모임</span></h3>
                         </div>
 
                         <!-- 검색부분 -->
                         <div class="group_header">
-                            <form action="#" method="get" class="search">
-                                <input type="search" placeholder="모임검색">
+                            <form action="/group/list" method="get" class="search">
+                                <input type="search" placeholder="모임검색" name="keyword">
 
-                                <select name="sports" class="sport">
+                                <select name="keyword2" class="sport">
                                     <option value="0">관심운동</option>
-                                    <option value="1">헬스</option>
-                                    <option value="2">등산</option>
-                                    <option value="3">축구</option>
-                                    <option value="4">농구</option>
+                                    <option value="헬스/크로스핏">헬스/크로스핏</option>
+                                    <option value="요가/필라테스">요가/필라테스</option>
+                                    <option value="등산">등산</option>
+                                    <option value="런닝">런닝</option>
+                                    <option value="싸이클">싸이클</option>
+                                    <option value="축구/풋살">축구/풋살</option>
+                                    <option value="농구">농구</option>
+                                    <option value="야구">야구</option>
+                                    <option value="테니스">테니스</option>
+                                    <option value="배드민턴">배드민턴</option>
+                                    <option value="기타">기타</option>
                                 </select>
-
-
 
                                 <div class="make_group_address">
                                     <text class="font-16-500">지역</text>
-                                    <select name="addressRegion" id="addressRegion" required></select>
-                                    <select name="addressDo" id="addressDo" required></select>
-                                    <select name="addressSiGunGu" id="addressSiGunGu"></select>
+                                    <select name="addressRegion" id="addressRegion" ></select>
+                                    <select name="keyword3" id="addressDo" ></select>
+                                    <select name="keyword3" id="addressSiGunGu"></select>
                                 </div>
 
-                                <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                                <button class="search_btn"><i class="fa-solid fa-magnifying-glass"></i></button>
 
                             </form>
                         </div>
@@ -157,158 +150,49 @@
                         <div class="group_outter">
                             <!-- 내부 틀 -->
                             <div class="group_inner">
-                                
-                                <!-- 모임 : 한개만 a태그 -->
-                                <a href="" class="group_aTag">
-                                    <div class="group_box">
-                                        <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                        <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                            Architecto, nesciunt?</p>
-                                    </div>
-                                </a>
+                            
 
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
+                                <c:forEach items="${list}" var="group">
+                                
+                                    <!-- 모임 : a태그 -->
+                                    <a href="/group/detail?group_no=${group.group_no}&currPage=${pageMaker.cri.currPage}" class="group_aTag">
+                                    
+        
+                                        <div class="group_box">
+                                        
+                                            <div class="group_box_inner">
+                                                <c:if test="${group.group_img != null}">
+                                                    <img class="group_box_img" src="/display?fileName=${group.path}/${group.temp}_${group.group_img}">
+
+                                                </c:if>
+
+                                                <c:if test="${group.group_img == null}">
+                                                    <img class="group_box_img" src="/resources/group/img/basket.jpg">
+                                                </c:if>
+                                            </div>
+
+                                            <p class="font-14-500" style="margin-bottom: 5px;" >
+                                                &#128293;일정 - <fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${group.schedule}" />
+                                                
+                                                No.<c:out value="${group.group_no}" />
+                                            </p>
+                                            
+                                            <p class="font-16-500" style="margin-bottom: 5px;" ><c:out value="${group.group_name}"/></p>
+
+                                            <p class="font-14-500" id="loc"><c:out value="${group.group_loc}"/></p>
+                                            
+                                        </div>
+                                    </a>
+                                
+                                </c:forEach>  
 
                             </div>
-                            
                         </div>
+
                         <!-- 구분선 -->
                         <hr class="hr-1"/>
-                                
+                        
+                    
                         <!-- 하단 버튼 -->
                         <div class="notice_board_bottom">
                             <a href="" class="hot_button">
@@ -316,14 +200,38 @@
                             </a>
                         </div>
 
+
                         <div class="notice_board_bottom">
-                            <a href="" class="board_write">
-                                <button><i class="fa-solid fa-pencil"> 글쓰기</i></button>
+                            <a href="/group/register?currPage=${pageMaker.cri.currPage}" class="board_write">
+
+                                <button><i class="fa-solid fa-pencil"> 모집하기</i></button>
+
                             </a>
                         </div> 
-                    </div>
 
-                    
+                        <div id="paging-div">
+                            <ul>
+                                <c:if test="${pageMaker.prev}">
+                                    <li class="mb-prev font-16-700">
+                                        <a href="/group/list?currPage=${pageMaker.startPage - 1}"><</a>
+                                    </li>
+                                </c:if> 
+                            
+                                <c:forEach var="pageNum" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+                                    <li class="${pageMaker.cri.currPage == pageNum 
+                                                    ? 'mb-currPage mb-currPage-step font-16-700' 
+                                                    : 'mb-currPage-step font-16-700'}">
+                                        <a href="/group/list?currPage=${pageNum}">${pageNum}</a>
+                                    </li>
+                                </c:forEach>
+                            
+                                <c:if test="${pageMaker.next}">
+                                    <li class="mb-next font-16-900">
+                                        <a href="/group/list?currPage=${pageMaker.endPage + 1}">></a>
+                                    </li>
+                                </c:if>
+                            </ul>
+                        </div>
 
 
                 </div>
@@ -345,6 +253,12 @@
 
     <!-- 위치js -->
     <script src="/resources/group/js/group_open_location.js"></script>
+    
+    <!-- 목록js -->
+    <script src="/resources/group/js/list.js"></script>
+    
+    <!-- sweetalert2 자바스크립트 -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <!-- <script type="text/javascript">
       $.noConflict();

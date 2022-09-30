@@ -46,8 +46,8 @@
                     <span class="dropbtn_icon font-16-500">모임목록</span>
                 </button>
                 <div class="dropdown-content">
-                    <a href="/group/list" class="font-14-400">모임보기</a>
-                    <a href="/group/register" class="font-14-400">모임개설</a>
+                    <a href="/group/list?currPage=1" class="font-14-400">모임보기</a>
+                    <a href="/group/register?currPage=1" class="font-14-400">모임개설</a>
                 </div>
             </div>
 

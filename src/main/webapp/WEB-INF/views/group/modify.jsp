@@ -17,7 +17,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
-    
     <!-- CSS : font 설정 -->
     <link rel="stylesheet" href="/resources/common/css/font.css">
     <!-- CSS : main 전체 페이지 설정 -->
@@ -52,15 +51,40 @@
                         <hr>
 
                         <form class="make_group_form" 
-                            action="http://localhost:8080/group/modify" method="post">
+                            action="/group/modify" method="post">
 
                         <!-- 폼 왼쪽 배치 (모임 이미지&첨부) -->
                         <div class="make_group_left">
-                            <img src="/resources/group/img/모임농구이미지.jpg" width="300px"><br><br>
-                            <input type="file" id="input_file">
-                            <label class="input_file_button" for="input_file">
-                                파일찾기
-                            </label>
+                            <div class="form_section">                               	
+                                <div class="form_section_content">
+                                    <input type="file" id="input_file" name="uploadFile" style="height:30px;">
+
+                                    <div id="uploadResult">
+                                        <div id="result_card">
+                                            <input type='hidden' name='group_img' value='<c:out value="${group.group_img}"/>'>
+                                            <input type='hidden' name='temp' value='<c:out value="${group.temp}"/>'>
+                                            <input type='hidden' name='path' value='<c:out value="${group.path}"/>'>
+                                            <!-- 저장된 이미지 갖고오기 -->
+                                            <c:if test="${group.group_img != null}">
+                                                <img src="/display?fileName=${group.path}/s_${group.temp}_${group.group_img}">
+                                                <!-- 삭제버튼 생성 + js에 있는 삭제 메서드 수행 -->
+                                                <div class="imgDeleteBtn" 
+                                                    data-file="/display?fileName=${group.path}/s_${group.temp}_${group.group_img}">x</div>
+                                            </c:if>
+
+                                        </div>
+                                    </div>
+
+                                    <label class="input_file_button" for="input_file">
+                                        이미지 찾기
+                                    </label>
+                                </div>                                   
+                            </div>
+
+                            <!-- <img src="/resources/group/img/basket.jpg" width="300px"><br><br> -->
+
+                            <!-- 모임번호 -->
+                        	<input type='hidden' name='group_no' value='<c:out value="${group.group_no}"/>' readonly="readonly">
                         </div>
                         
                         <!-- 폼 오른쪽 배치 (모임이미지 제외한 폼) -->
@@ -68,25 +92,40 @@
 
                         <!-- 모임명 -->
                         &nbsp;&nbsp;모임명&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="text" class="make_group_name" placeholder="같이 3대500 도전하실분!!" required>
+                        <input type="text" class="make_group_name" value='<c:out value="${group.group_name}"/>' name="group_name">
                         <br><br>
                         <br>
+                        
+                        <!-- select box에서, 가져온 데이터가 체크되어 있도록 
+                        	 c:if 태그 사용  -->
+                        	 
                         <!-- 운동종목 -->
                             <div class="make_group_sport">
                                 운동 종목&nbsp;&nbsp;
-                                <select id="select_group_sport" required>
+                                <select id="select_group_sport" value='<c:out value="${group.sports}"/>' name="sports">
                                     <option value="">운동을 선택하세요</option>
-                                    <option value="헬스/크로스핏">헬스/크로스핏</option>
-                                    <option value="요가/필라테스">요가/필라테스</option>
-                                    <option value="등산">등산</option>
-                                    <option value="런닝">런닝</option>
-                                    <option value="싸이클">싸이클</option>
-                                    <option value="축구/풋살">축구/풋살</option>
-                                    <option value="농구">농구</option>
-                                    <option value="야구">야구</option>
-                                    <option value="테니스">테니스</option>
-                                    <option value="배드민턴">배드민턴</option>
-                                    <option value="기타" id="sports_add">기타</option>
+                                    <option value="헬스/크로스핏" 
+                                        <c:if test="${group.sports == '헬스/크로스핏'}">selected</c:if>>헬스/크로스핏</option>
+                                    <option value="요가/필라테스"
+                                        <c:if test="${group.sports == '요가/필라테스'}">selected</c:if>>요가/필라테스</option>
+                                    <option value="등산"
+                                        <c:if test="${group.sports == '등산'}">selected</c:if>>등산</option>
+                                    <option value="런닝"
+                                        <c:if test="${group.sports == '런닝'}">selected</c:if>>런닝</option>
+                                    <option value="싸이클"
+                                        <c:if test="${group.sports == '싸이클'}">selected</c:if>>싸이클</option>
+                                    <option value="축구/풋살"
+                                        <c:if test="${group.sports == '축구/풋살'}">selected</c:if>>축구/풋살</option>
+                                    <option value="농구"
+                                        <c:if test="${group.sports == '농구'}">selected</c:if>>농구</option>
+                                    <option value="야구"
+                                        <c:if test="${group.sports == '야구'}">selected</c:if>>야구</option>
+                                    <option value="테니스"
+                                        <c:if test="${group.sports == '테니스'}">selected</c:if>>테니스</option>
+                                    <option value="배드민턴"
+                                        <c:if test="${group.sports == '배드민턴'}">selected</c:if>>배드민턴</option>
+                                    <option value="기타"
+                                        <c:if test="${group.sports == '기타'}">selected</c:if> id="sports_add">기타</option>
                                 </select>
                                 
                                 <input type="text" id="sports_add_text">
@@ -95,55 +134,73 @@
                             <!-- 모집 성별 -->
                             <div class="make_group_gender">
                                 모집 성별&nbsp;&nbsp;
-                                <select class="select_group_gender" required>
+                                <select class="select_group_gender" value='<c:out value="${group.gender}"/>' name="gender" required>
                                     <option value="">성별</option>
-                                    <option value="1">남성</option>
-                                    <option value="2">여성</option>
-                                    <option value="3">상관없음</option>
+                                    <option value="남성" <c:if test="${group.gender == '남성'}">selected</c:if>
+                                        >남성</option>
+                                    <option value="여성" <c:if test="${group.gender == '여성'}">selected</c:if>
+                                        >여성</option>
+                                    <option value="상관없음" <c:if test="${group.gender == '상관없음'}">selected</c:if>
+                                        >상관없음</option>
                                 </select>
                             </div><br><br>
 
                             <!-- 지역 required -->
                             <div class="make_group_address">
                                 &nbsp;&nbsp;&nbsp;&nbsp;지역&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <select name="addressRegion" id="addressRegion" required></select>
-                                <select name="addressDo" id="addressDo" required></select>
-                                <select name="addressSiGunGu" id="addressSiGunGu" ></select>
+                                <input type="text" id="locInput" value='<c:out value='${group.group_loc}'/>' name="group_loc" readonly>
+
+                                <button type="button" id="locBtn">재선택</button>
+                                
+                                <div id=locDiv>
+                                    <select name="addressRegion" id="addressRegion" ></select>
+                                    <select name="group_loc" id="addressDo" ></select>
+                                    <select name="group_loc" id="addressSiGunGu"></select>
+                                </div>
                             </div><br><br>
+                            
                             <!-- 최대인원 required  -->
                             <div class="make_group_num">
                                 최대 인원&nbsp;&nbsp;
-                                <input type="number" min="2" required>
+                                <input type="number" min="2" value='<c:out value="${group.member_max}"/>' name="member_max"required>
                             </div><br><br>
 
                             <!-- 일정(선택)-->
-                            <div class="make_group_schedule">
+                            <div class="make_group_schedule" >
                                 &nbsp;&nbsp;&nbsp;&nbsp;일정&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input type="date">
-                                <input type="time">
+                                <!-- <input type="text" id="dateInput" value='<c:out value='${group.schedule}'/>' name="schedule" readonly> -->
+                                <!-- <select id="dateSelect" name="schedule" >
+                                    <option value="">변경안함</option>
+                                    <option value="변경">일정 재선택</option> -->
+
+                                <input type="datetime-local" name="schedule" id="currentDatetime" value='<c:out value="${group.schedule}"/>' >
+                                
 
                             </div><br><br>
 
                             <!-- 해시태그(선택) / 첫번째칸에는 운동종목 자동입력 -->
                             <div class="make_group_hash">
                                 해시태그&nbsp;&nbsp;
-                                #<input type="text" id="input_hash1" placeholder="최대8자">
-                                #<input type="text" id="input_hash2" placeholder="최대8자">
-                                #<input type="text" id="input_hash3" placeholder="최대8자">
+                                #<input type="text" id="input_hash1" placeholder="최대8자" value='<c:out value="${group.hashtag1}"/>' name="hashtag1">
+                                #<input type="text" id="input_hash2" placeholder="최대8자" value='<c:out value="${group.hashtag2}"/>' name="hashtag2">
+                                #<input type="text" id="input_hash3" placeholder="최대8자" value='<c:out value="${group.hashtag3}"/>' name="hashtag3">
                         
                             </div><br><br>
 
                             <!-- 모임소개 required -->
                             <div class="make_group_intro">
                                 모임 소개&nbsp;&nbsp;<br>
-                                <textarea name="group_intro" cols="30" rows="5" required></textarea>
+                                <textarea cols="30" rows="5" value='<c:out value="${group.info}"/>' 
+                                        name="info" required><c:out value="${group.info}"/></textarea>
                             </div>
-
+                            
+                            <!-- 페이징 값 전송할 수 있도록 해주기 -->
+                            <input type='hidden' name="currPage" value='1'>
 
                             <!-- 생성하기 -->
                             
-                            <input type="submit" class="make_group_submit" value="수정하기"></input>
-
+                            <input type="submit" class="make_group_submit" value="수정하기">
+                            <input type="submit" class="make_group_cancel" value="취소">
 
                             
                             </div>
@@ -160,6 +217,8 @@
         <!-- 모임화면 자바스크립트 -->
         <script src="/resources/group/js/group_open_location.js"></script>
         <script src="/resources/group/js/group_open_select.js"></script>
+        <script src="/resources/group/js/upload.js"></script>
+    
     
     	<script src="/resources/include/js/main_header.js"></script>
     	<script src="/resources/include/js/main_section.js"></script>
