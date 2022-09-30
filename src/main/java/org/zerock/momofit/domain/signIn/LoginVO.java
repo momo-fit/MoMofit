@@ -1,16 +1,14 @@
-package org.zerock.momofit.domain.signUp;
+package org.zerock.momofit.domain.signIn;
 
 import java.sql.Date;
 
-import lombok.Data;
 import lombok.Value;
 
 @Value
-public class UserVO {
+public class LoginVO {
 	
 	private Integer user_no;
 	private String id;
-	private String pass;
 	private String nickname;
 	private String email;
 	private String user_name;

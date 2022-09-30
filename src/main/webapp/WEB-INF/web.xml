@@ -70,6 +70,7 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
+			
 		</init-param>
 
 		<!-- Handler : 웹브라우저에서 온 요청을 실제 처리하는 컨트롤러의 메소드를 의미 -->

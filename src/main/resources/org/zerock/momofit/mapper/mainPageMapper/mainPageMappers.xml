@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.momofit.mapper.mainPageMapper.mainPageMappers">
+
+    <select id="bestGroupSelect" resultType="org.zerock.momofit.domain.group.GroupVO">
+
+        SELECT * FROM (
+            SELECT * FROM GROUPS ORDER BY GROUP_LIKE desc
+        )  
+        WHERE GROUP_DATE BETWEEN (
+            <!-- 달의 첫날 검색 -->
+            SELECT TRUNC(CURRENT_DATE, 'MM')FROM  DUAL
+        ) AND (
+            <!-- 달의 마지막날 검색 -->
+            SELECT LAST_DAY(CURRENT_DATE) FROM DUAL
+        ) AND
+        GROUP_LIKE IS NOT NULL AND 
+        <![CDATA[  ROWNUM <= #{amount} ]]>
+
+    </select>
+
+    <select id="newGroupSelect" resultType="org.zerock.momofit.domain.group.GroupVO">
+        SELECT /*+index_desc(groups) */ * FROM GROUPS
+        WHERE  <![CDATA[ ROWNUM <= #{amount} ]]> 
+    </select>
+
+        
+    <select id="freeBoardBestSelect" resultType="org.zerock.momofit.domain.main.BoardVO">
+        SELECT 
+            BOARD_NO,
+            TITLE,
+            BOARD_DATE,
+            (SELECT COUNT(*) FROM COMM b WHERE b.BOARD_NO = a.BOARD_NO) comm_cnt
+        FROM (
+            SELECT * FROM BOARD ORDER BY BOARD_LIKE desc
+        ) a
+        WHERE a.BOARD_DATE BETWEEN (
+            SELECT TRUNC(CURRENT_DATE, 'MM')FROM  DUAL
+        ) AND (
+            SELECT LAST_DAY(CURRENT_DATE) FROM DUAL
+        ) AND 
+        a.BOARD_LIKE > 0
+        AND a.CATEGORY_NO = 1
+        AND <![CDATA[ ROWNUM <= #{BoaedAmount}]]> 
+    </select>
+
+    <select id="tipBoardBestSelect" resultType="org.zerock.momofit.domain.main.BoardVO">
+        SELECT 
+            BOARD_NO,
+            TITLE,
+            BOARD_DATE,
+            (SELECT COUNT(*) FROM COMM b WHERE b.BOARD_NO = a.BOARD_NO) comm_cnt
+        FROM (
+            SELECT * FROM BOARD ORDER BY BOARD_LIKE desc
+        ) a
+        WHERE a.BOARD_DATE BETWEEN (
+            SELECT TRUNC(CURRENT_DATE, 'MM')FROM  DUAL
+        ) AND (
+            SELECT LAST_DAY(CURRENT_DATE) FROM DUAL
+        ) AND 
+        a.BOARD_LIKE > 0
+        AND a.CATEGORY_NO = 2
+        AND <![CDATA[ ROWNUM <= #{BoaedAmount} ]]> 
+    </select>
+
+    <select id="picBoardBestSelect" resultType="org.zerock.momofit.domain.main.BoardVO">
+        SELECT 
+            BOARD_NO,
+            TITLE,
+            BOARD_DATE,
+            (SELECT COUNT(*) FROM COMM b WHERE b.BOARD_NO = a.BOARD_NO) comm_cnt
+        FROM (
+            SELECT * FROM BOARD ORDER BY BOARD_LIKE desc
+        ) a
+        WHERE a.BOARD_DATE BETWEEN (
+            SELECT TRUNC(CURRENT_DATE, 'MM')FROM  DUAL
+        ) AND (
+            SELECT LAST_DAY(CURRENT_DATE) FROM DUAL
+        ) AND 
+        a.BOARD_LIKE > 0
+        AND a.CATEGORY_NO = 3
+        AND <![CDATA[ ROWNUM <= #{BoaedAmount} ]]> 
+    </select>
+
+    <select id="tradeBoardBestSelect" resultType="org.zerock.momofit.domain.main.BoardVO">
+        SELECT 
+            BOARD_NO,
+            TITLE,
+            BOARD_DATE,
+            (SELECT COUNT(*) FROM COMM b WHERE b.BOARD_NO = a.BOARD_NO) comm_cnt
+        FROM (
+            SELECT * FROM BOARD ORDER BY BOARD_LIKE desc
+        ) a
+        WHERE a.BOARD_DATE BETWEEN (
+            SELECT TRUNC(CURRENT_DATE, 'MM')FROM  DUAL
+        ) AND (
+            SELECT LAST_DAY(CURRENT_DATE) FROM DUAL
+        ) AND 
+        a.BOARD_LIKE > 0
+        AND a.CATEGORY_NO = 4
+        AND <![CDATA[ ROWNUM <= #{BoaedAmount} ]]> 
+    </select>
+
+</mapper>

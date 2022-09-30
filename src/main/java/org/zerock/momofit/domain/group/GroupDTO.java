@@ -34,4 +34,8 @@ public class GroupDTO {
 	private Integer member_count;
 
 	
+<<<<<<< Updated upstream
 }
+=======
+}
+>>>>>>> Stashed changes

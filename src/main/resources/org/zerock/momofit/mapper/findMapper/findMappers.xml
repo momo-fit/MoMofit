@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.momofit.mapper.findMapper.findMappers">
+
+    <select id="idFindSelect" resultType="String">
+        SELECT id FROM users WHERE EMAIL = #{email}
+    </select>
+
+    <select id="pwFindSelect" resultType="String">
+        SELECT pass FROM users WHERE EMAIL = #{email} AND id=#{id}
+    </select>
+
+    <select id="tempPwUpdate">
+        UPDATE USERS SET PASS = #{pass} WHERE id=#{id}
+    </select>
+
+</mapper>

@@ -88,5 +88,9 @@ public class PageDTO {
 	} // constructor
 	
 
+<<<<<<< Updated upstream
 } // end class
 
+=======
+} // end class
+>>>>>>> Stashed changes

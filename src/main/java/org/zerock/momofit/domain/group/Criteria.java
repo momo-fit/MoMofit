@@ -36,4 +36,8 @@ public class Criteria {
 		return builder.toUriString();
 	} // getPagingUri
 
+<<<<<<< Updated upstream
 }
+=======
+}
+>>>>>>> Stashed changes

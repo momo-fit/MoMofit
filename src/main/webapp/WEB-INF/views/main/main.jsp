@@ -60,9 +60,7 @@
         <%@ include file = "/WEB-INF/views/include/header.jsp" %>
 
         <!-- 사이드 프로필 -->
-        <%@ include file = "/WEB-INF/views/include/sideLogin.jsp" %> 
-
-        
+        <%@ include file = "/WEB-INF/views/include/sideLogin.jsp" %>         
 
         <!-- 메인 컨텐츠부 -->
         <section>
@@ -85,48 +83,31 @@
     
                     <div class="wrap_group">
                         <div class="wrap_group_inner">
-                            <!-- Best모임 카드섹션 #1 -->
-                            <div class="group_box">
-                                <a href="#">
-                                    <div class="group_box_inner"><img src="/resources/main/img/temp/temp1.jpg" class="group_img"></div>
-                                    <div class="group_box_text"><span class="font-14-300">1. Lorem ipsum dolor sit amet consectetur adipisicing.Lorem ipsum dolor sit amet consectetur adipisicingLorem ipsum dolor</span></div>
-                                </a>
-                            </div>
-                            <!-- Best모임 카드섹션 #2 -->
-                            <div class="group_box">
-                                <div class="group_box_inner"><img src="/resources/main/img/temp/temp2.jpg" class="group_img"></div>
-                                <div class="group_box_text"><span class="font-14-300">2. Lorem ipsum dolor sit amet consectetur adipisicing.</span></div>
-                            </div>
-                            <!-- Best모임 카드섹션 #3 -->
-                            <div class="group_box">
-                                <div class="group_box_inner"><img src="/resources/main/img/temp/temp3.jpg" class="group_img"></div>
-                                <div class="group_box_text"><span class="font-14-300">3. Lorem ipsum dolor sit amet consectetur adipisicing.</span></div>
-                            </div>
-                            <!-- Best모임 카드섹션 #4 -->
-                            <div class="group_box">
-                                <div class="group_box_inner"><img src="/resources/main/img/temp/temp4.jpg" class="group_img"></div>
-                                <div class="group_box_text"><span class="font-14-300">4. Lorem ipsum dolor sit amet consectetur adipisicing.</span></div>
-                            </div>
-                            <!-- Best모임 카드섹션 #5 -->
-                            <div class="group_box">
-                                <div class="group_box_inner"><img src="/resources/main/img/temp/temp5.jpg" class="group_img"></div>
-                                <div class="group_box_text"><span class="font-14-300">5. Lorem ipsum dolor sit amet consectetur adipisicing.</span></div>
-                            </div>
-                            <!-- Best모임 카드섹션 #6 -->
-                            <div class="group_box">
-                                <div class="group_box_inner"><img src="/resources/main/img/temp/temp6.jpg" class="group_img"></div>
-                                <div class="group_box_text"><span class="font-14-300">6. Lorem ipsum dolor sit amet consectetur adipisicing.</span></div>
-                            </div>
-                            <!-- Best모임 카드섹션 #7 -->
-                            <div class="group_box">
-                                <div class="group_box_inner"><img src="/resources/main/img/temp/temp7.jpg" class="group_img"></div>
-                                <div class="group_box_text"><span class="font-14-300">7. Lorem ipsum dolor sit amet consectetur adipisicing.</span></div>
-                            </div>
-                            <!-- Best모임 카드섹션 #8 -->
-                            <div class="group_box">
-                                <div class="group_box_inner"><img src="/resources/main/img/temp/temp8.jpg" class="group_img"></div>
-                                <div class="group_box_text"><span class="font-14-300">8. Lorem ipsum dolor sit amet consectetur adipisicing.</span></div>
-                            </div>
+                            
+                            <c:forEach var="bestGroup" items="${BestGroupList}">
+                                <div class="group_box">
+                                    <a href="/group/detail/?group_no=${bestGroup.group_no}">
+                                        <div class="group_box_inner">
+                                            <c:if test="${bestGroup.group_img != null}">
+                                                <img src="/display?fileName=${bestGroup.path}/${bestGroup.temp}_${bestGroup.group_img}" class="group_img">
+                                            </c:if> 
+                                            <c:if test="${bestGroup.group_img == null}">
+                                                <img src="/resources/group/img/basket.jpg" class="group_img">
+                                            </c:if>
+                                        </div>
+                                        <div class="group_box_title">
+                                            <span class="font-16-700">${bestGroup.group_name}</span>
+                                        </div>
+                                        <div class="group_box_text">
+                                            <span class="font-12-500">${bestGroup.info}</span>
+                                        </div>
+                                        <div class="group_box_loc">
+                                            <span class="font-12-400">${bestGroup.group_loc}</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </c:forEach>      
+
                         </div>
                     </div>
                 </div>
@@ -139,52 +120,34 @@
     
                     <div class="wrap_group">
                         <div class="wrap_group_inner">
-                            <!-- 오늘의 모임 카드섹션 #1 -->
-                            <div class="group_box">
-                                <a href="#">
-                                    <div class="group_box_inner"><img src="/resources/main/img/temp/temp8.jpg" class="group_img"></div>
-                                    <div class="group_box_text"><span class="font-14-300">1. Lorem ipsum dolor sit amet consectetur adipisicing.Lorem ipsum dolor sit amet consectetur adipisicingLorem ipsum dolor</span></div>
-                                </a>
-                            </div>
-                            <!-- 오늘의 모임 카드섹션 #2 -->
-                            <div class="group_box">
-                                <div class="group_box_inner"><img src="/resources/main/img/temp/temp7.jpg" class="group_img"></div>
-                                <div class="group_box_text"><span class="font-14-300">2. Lorem ipsum dolor sit amet consectetur adipisicing.</span></div>
-                            </div>
-                            <!-- 오늘의 모임 카드섹션 #3 -->
-                            <div class="group_box">
-                                <div class="group_box_inner"><img src="/resources/main/img/temp/temp6.jpg" class="group_img"></div>
-                                <div class="group_box_text"><span class="font-14-300">3. Lorem ipsum dolor sit amet consectetur adipisicing.</span></div>
-                            </div>
-                            <!-- 오늘의 모임 카드섹션 #4 -->
-                            <div class="group_box">
-                                <div class="group_box_inner"><img src="/resources/main/img/temp/temp5.jpg" class="group_img"></div>
-                                <div class="group_box_text"><span class="font-14-300">4. Lorem ipsum dolor sit amet consectetur adipisicing.</span></div>
-                            </div>
-                            <!-- 오늘의 모임 카드섹션 #5 -->
-                            <div class="group_box">
-                                <div class="group_box_inner"><img src="/resources/main/img/temp/temp4.jpg" class="group_img"></div>
-                                <div class="group_box_text"><span class="font-14-300">5. Lorem ipsum dolor sit amet consectetur adipisicing.</span></div>
-                            </div>
-                            <!-- 오늘의 모임 카드섹션 #6 -->
-                            <div class="group_box">
-                                <div class="group_box_inner"><img src="/resources/main/img/temp/temp3.jpg" class="group_img"></div>
-                                <div class="group_box_text"><span class="font-14-300">6. Lorem ipsum dolor sit amet consectetur adipisicing.</span></div>
-                            </div>
-                            <!-- 오늘의 모임 카드섹션 #7 -->
-                            <div class="group_box">
-                                <div class="group_box_inner"><img src="/resources/main/img/temp/temp2.jpg" class="group_img"></div>
-                                <div class="group_box_text"><span class="font-14-300">7. Lorem ipsum dolor sit amet consectetur adipisicing.</span></div>
-                            </div>
-                            <!-- 오늘의 모임 카드섹션 #8 -->
-                            <div class="group_box">
-                                <div class="group_box_inner"><img src="/resources/main/img/temp/temp1.jpg" class="group_img"></div>
-                                <div class="group_box_text"><span class="font-14-300">8. Lorem ipsum dolor sit amet consectetur adipisicing.</span></div>
-                            </div>
+                            
+                            <c:forEach var="newGroup" items="${NewGroupList}">
+                                <div class="group_box">
+                                    <a href="/group/detail/?group_no=${newGroup.group_no}">
+                                        <div class="group_box_inner">
+                                            <c:if test="${newGroup.group_img != null}">
+                                                <img src="/display?fileName=${newGroup.path}/${newGroup.temp}_${newGroup.group_img}" class="group_img">
+                                            </c:if> 
+                                            <c:if test="${newGroup.group_img == null}">
+                                                <img src="/resources/group/img/basket.jpg" class="group_img">
+                                            </c:if>
+                                        </div>
+                                        <div class="group_box_title">
+                                            <span class="font-16-700">${newGroup.group_name}</span>
+                                        </div>
+                                        <div class="group_box_text">
+                                            <span class="font-12-500">${newGroup.info}</span>
+                                        </div>
+                                        <div class="group_box_loc">
+                                            <span class="font-12-400">${newGroup.group_loc}</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </c:forEach> 
+
                         </div>
                     </div>
                 </div>
-    
     
                 <div class="section_wrap">
                     
@@ -198,36 +161,22 @@
                                 <table class="main_board_table font-14-500">
                                     <thead class="main_board_thead">
                                         <tr>
-                                            <th class="font-14-500">제목</th>
-                                            <th class="font-14-500">작성일</th>
+                                            <th>제목</th>
+                                            <th>작성일</th>
                                         </tr>
                                     </thead>
                                     <tbody class="main_board_tbody">
-                                        <!-- <%
-                                            for (int i = 0; i < 5; i++) {      // DB에서 작성한 게시글의 수만큼 for문 돌리기 
-                                        %> -->
+                                        <c:forEach var="freeList" items="${BestFreeBoard}">
                                             <tr class="tr-border">
                                                 <td class="table-title">
                                                     <div>
-                                                        <a href="#"><div class="title-content font-14-400">우영우 안보는 어르신들 상황</div></a>
-                                                        <div class="comm-count font-12-400">44</div>
+                                                        <a href="board/free/view?board_no=${freeList.board_no}"><div class="title-content font-14-400">${freeList.title}</div></a>
+                                                        <div class="comm-count font-12-400">${freeList.comm_cnt}</div>
                                                     </div>
                                                 </td>
-                                                <td class=font-14-400>22.01.12</td>
-                                            </tr>
-                                            <!-- 이 부분은 나중에 반복문으로 사용해야되므로, 삭제 임시 -->
-                                            <tr class="tr-border">
-                                                <td class="table-title">
-                                                    <div>
-                                                        <div class="title-content font-14-400">우영우 마지막화</div>
-                                                        <div class="comm-count font-12-400">33</div>
-                                                    </div>
-                                                </td>
-                                                <td class=font-14-400>22.07.12</td>
-                                            </tr>
-                                        <!-- <%
-                                            }
-                                        %> -->
+                                                <td class=font-14-400>${freeList.board_date}</td>
+                                            </tr>   
+                                        </c:forEach>
                                     </tbody>
                                 </table>
 
@@ -244,32 +193,21 @@
                                             <th>작성일</th>
                                         </tr>
                                     </thead>
+
                                     <tbody class="main_board_tbody">
-                                        <!-- <%
-                                            for (int i = 0; i < 5; i++) {      // DB에서 작성한 게시글의 수만큼 for문 돌리기 
-                                        %> -->
+                                        
+                                        <c:forEach var="tipList" items="${BestTipBoard}">
                                             <tr class="tr-border">
                                                 <td class="table-title">
                                                     <div>
-                                                        <a href="#"><div class="title-content font-14-400">우영우 안보는 어르신들 상황</div></a>
-                                                        <div class="comm-count font-12-400">44</div>
+                                                        <a href="/board/tip/view?board_no=${tipList.board_no}"><div class="title-content font-14-400">${tipList.title}</div></a>
+                                                        <div class="comm-count font-12-400">${tipList.comm_cnt}</div>
                                                     </div>
                                                 </td>
-                                                <td class="font-14-400">22.01.12</td>
+                                                <td class="font-14-400">${tipList.board_date}</td>
                                             </tr>
-                                            <!-- 이 부분은 나중에 반복문으로 사용해야되므로, 삭제 임시 -->
-                                            <tr class="tr-border">
-                                                <td class="table-title">
-                                                    <div>
-                                                        <div class="title-content font-14-400">우영우 마지막화</div>
-                                                        <div class="comm-count font-12-400">33</div>
-                                                    </div>
-                                                </td>
-                                                <td class="font-14-400">22.07.12</td>
-                                            </tr>
-                                        <!-- <%
-                                            }
-                                        %> -->
+                                        </c:forEach>
+                                      
                                     </tbody>
                                 </table>
                             </div>
@@ -286,31 +224,19 @@
                                         </tr>
                                     </thead>
                                     <tbody class="main_board_tbody">
-                                        <!-- <%
-                                            for (int i = 0; i < 5; i++) {      // DB에서 작성한 게시글의 수만큼 for문 돌리기 
-                                        %> -->
+                                            
+                                        <c:forEach var="picList" items="${BestPicBoard}">
                                             <tr class="tr-border">
                                                 <td class="table-title">
                                                     <div>
-                                                        <a href="#"><div class="title-content font-14-400">우영우 안보는 어르신들 상황</div></a>
-                                                        <div class="comm-count font-12-400">44</div>
+                                                        <a href="/board/pic/view?board_no=${picList.board_no}"><div class="title-content font-14-400">${picList.title}</div></a>
+                                                        <div class="comm-count font-12-400">${picList.comm_cnt}</div>
                                                     </div>
                                                 </td>
-                                                <td>22.01.12</td>
+                                                <td>${picList.board_date}</td>
                                             </tr>
-                                            <!-- 이 부분은 나중에 반복문으로 사용해야되므로, 삭제 임시 -->
-                                            <tr class="tr-border">
-                                                <td class="table-title">
-                                                    <div>
-                                                        <div class="title-content font-14-400">우영우 마지막화</div>
-                                                        <div class="comm-count font-12-400">33</div>
-                                                    </div>
-                                                </td>
-                                                <td class="font-14-400">22.07.12</td>
-                                            </tr>
-                                        <!-- <%
-                                            }
-                                        %> -->
+                                        </c:forEach>
+                                                                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -327,31 +253,19 @@
                                         </tr>
                                     </thead>
                                     <tbody class="main_board_tbody">
-                                        <!-- <%
-                                            for (int i = 0; i < 5; i++) {      // DB에서 작성한 게시글의 수만큼 for문 돌리기 
-                                        %> -->
+
+                                        <c:forEach var="tradeList" items="${BestTradeBoard}">
                                             <tr class="tr-border">
                                                 <td class="table-title">
                                                     <div>
-                                                        <a href="#"><div class="title-content font-14-400">우영우 안보는 어르신들 상황</div></a>
-                                                        <div class="comm-count font-12-400">44</div>
+                                                        <a href="board/trade/view?board_no=${tradeList.board_no}"><div class="title-content font-14-400">${tradeList.title}</div></a>
+                                                        <div class="comm-count font-12-400">${tradeList.comm_cnt}</div>
                                                     </div>
                                                 </td>
-                                                <td class="font-14-400">22.01.12</td>
+                                                <td class="font-14-400">${tradeList.board_date}</td>
                                             </tr>
-                                            <!-- 이 부분은 나중에 반복문으로 사용해야되므로, 삭제 임시 -->
-                                            <tr class="tr-border">
-                                                <td class="table-title">
-                                                    <div>
-                                                        <div class="title-content font-14-400">우영우 마지막화</div>
-                                                        <div class="comm-count font-12-400">33</div>
-                                                    </div>
-                                                </td>
-                                                <td class="font-14-400">22.07.12</td>
-                                            </tr>
-                                        <!-- <%
-                                            }
-                                        %> -->
+                                        </c:forEach>
+                                            
                                     </tbody>
                                 </table>
                             </div>

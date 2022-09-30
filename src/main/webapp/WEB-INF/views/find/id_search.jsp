@@ -56,6 +56,8 @@
                                 확인
                             </button><br>
 
+                            <div id="resultId"></div>
+
                         </div>
                     </form>
                 </div>
@@ -70,6 +72,8 @@
 
     <!-- 메인화면 자바스크립트 -->
     <script src="/resources/main/js/main.js"></script>
+    <!-- 아이디 칮기 -->
+    <script src="/resources/find/js/Idfind.js"></script>
 
     <!-- 부트스트랩 자바스크립트 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

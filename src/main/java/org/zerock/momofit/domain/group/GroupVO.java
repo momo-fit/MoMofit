@@ -29,4 +29,8 @@ public class GroupVO {
 	// 멤버수
 	private Integer member_count;
 	
+<<<<<<< Updated upstream
 }
+=======
+}
+>>>>>>> Stashed changes
