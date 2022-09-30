@@ -17,7 +17,7 @@ public class FileController {
 	
 	@GetMapping("/display")
 	public ResponseEntity<byte[]> getImage(String fileName){
-		File file = new File("c://upload/temp/" + fileName);
+		File file = new File("c://project/uploadFile/" + fileName);
 		
 		ResponseEntity<byte[]> result = null;
 		

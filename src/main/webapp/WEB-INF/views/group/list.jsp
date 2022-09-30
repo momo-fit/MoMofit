@@ -104,40 +104,6 @@
                             </div>
                         </div>
                     </div>
-                                <!-- <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/683/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/682/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/681/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/679/220/130"></div>
-                                    <p class="font-14-500">123</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/676/220/130"></div>
-                                    <p>테스틈ㄴ아ㅓㅣㅜㄴ마ㅣㅇ</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/677/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="group_box">
-                                    <div class="group_box_inner"><img class="group_box_img" src="https://picsum.photos/id/676/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div> -->
-                            
 
 
                     <!-- 모임목록 -->
@@ -149,10 +115,10 @@
 
                         <!-- 검색부분 -->
                         <div class="group_header">
-                            <form action="#" method="get" class="search">
-                                <input type="search" placeholder="모임검색">
+                            <form action="/group/list" method="get" class="search">
+                                <input type="search" placeholder="모임검색" name="keyword">
 
-                                <select name="sports" class="sport">
+                                <select name="keyword2" class="sport">
                                     <option value="0">관심운동</option>
                                     <option value="헬스/크로스핏">헬스/크로스핏</option>
                                     <option value="요가/필라테스">요가/필라테스</option>
@@ -169,12 +135,12 @@
 
                                 <div class="make_group_address">
                                     <text class="font-16-500">지역</text>
-                                    <select name="addressRegion" id="addressRegion" required></select>
-                                    <select name="addressDo" id="addressDo" required></select>
-                                    <select name="addressSiGunGu" id="addressSiGunGu"></select>
+                                    <select name="addressRegion" id="addressRegion" ></select>
+                                    <select name="keyword3" id="addressDo" ></select>
+                                    <select name="keyword3" id="addressSiGunGu"></select>
                                 </div>
 
-                                <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                                <button class="search_btn"><i class="fa-solid fa-magnifying-glass"></i></button>
 
                             </form>
                         </div>

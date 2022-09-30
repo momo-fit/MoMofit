@@ -10,9 +10,12 @@ $(function() {
 		
 		// 현재날짜,시간보다 이전은 선택 못하도록 막음	
 		let dateInput = document.getElementById("currentDatetime");
-		dateInput.min = new Date().toISOString().slice(0,new Date().toISOString().lastIndexOf(":"));
+		dateInput.min = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000)
+							.toISOString().slice(0,new Date().toISOString().lastIndexOf(":"));
 
 });
+
+
 
 $(function() {
 	$(".make_group_cancel").on('click', function () {
@@ -32,6 +35,27 @@ $(function(){
         } else {
             jQuery('#sports_add_text').hide();
         }
+    })
+});
+
+// 일정 '변경' 선택시 입력칸 등장
+// $(function(){
+//     jQuery('#dateSelect').change(function() {
+//         var state = jQuery('#dateSelect option:selected').val();
+//         if ( state == '변경' ) {
+//             jQuery('#currentDatetime').show();
+//         } else {
+//             jQuery('#currentDatetime').hide();
+//         }
+//     })
+// });
+
+// 지역 버튼 클릭시 이벤트
+$(function(){
+    $("#locBtn").on('click', function(e) {      
+        $("#locDiv").show();                      // div 박스 나타나게
+        $("#locInput").removeAttr("value");          // input 박스 안의 value 값을 삭제시킨다. (재설정 눌렀을 때 기존값 삭제시키기 위해서)
+        console.log(e);
     })
 });
 

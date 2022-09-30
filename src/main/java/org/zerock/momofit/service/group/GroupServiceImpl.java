@@ -1,5 +1,9 @@
 package org.zerock.momofit.service.group;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +66,10 @@ public class GroupServiceImpl implements GroupService  {
 
 		log.info("register..." + dto);
 		
+		String ttt = dto.getGroup_loc();
+		String loc = ttt.replace("," , " ");
+		dto.setGroup_loc(loc);
+		
 		return mapper.insertSelectKey(dto) == 1;
 	}
 
@@ -85,6 +93,10 @@ public class GroupServiceImpl implements GroupService  {
 	@Override
 	public boolean modify(GroupDTO dto) throws DAOException {
 		log.info("modify: {}", dto);
+		
+		String ttt = dto.getGroup_loc();
+		String loc = ttt.replace("," , " ");
+		dto.setGroup_loc(loc);
 
 		return mapper.update(dto) == 1;
 	}

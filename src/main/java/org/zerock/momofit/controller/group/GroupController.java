@@ -1,11 +1,12 @@
 package org.zerock.momofit.controller.group;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -93,6 +94,8 @@ public class GroupController {
 			
 			rttr.addAttribute("currPage", cri.getCurrPage());
 			
+			
+			
 			return "redirect:/group/list";
 						
 		} catch(Exception e) {
@@ -146,10 +149,11 @@ public class GroupController {
 		
 		try {
 			model.addAttribute("group", service.detail(group_no));
-		
+			
 		} catch(Exception e) {
 			throw new ControllerException(e);
 		}
+
 	} // modify
 	
 	// 4-2. 모임 수정
@@ -170,7 +174,7 @@ public class GroupController {
 		} catch(Exception e) {
 			throw new ControllerException(e);
 		}
-		
+				
 	} // update
 	
 

@@ -2,6 +2,7 @@ package org.zerock.momofit.service;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -102,7 +103,7 @@ public class GroupServiceTests {
 	
 	// 등록 test
 	
-	@Disabled
+//	@Disabled
 	@Test
 	public void testRegister() throws ServiceException, DAOException  {
 		log.trace("testRegister() invoked.");
@@ -110,14 +111,14 @@ public class GroupServiceTests {
 		GroupDTO dto = new GroupDTO();
 		Date d = new Date();
 		
-		dto.setGroup_name("새로 작성하는 모임 이름");
+		dto.setGroup_name("test");
 		dto.setMember_max(10);
 		dto.setSchedule(d);
 		dto.setGroup_date(d);
 //		dto.setGroup_like(32);
-//		dto.setUser_no(1);
+		dto.setUser_no(1);
 		dto.setSports("헬스/크로스핏");
-		
+
 		service.register(dto);
 		
 		log.info("생성된 게시물의 번호: " + dto.getGroup_no());

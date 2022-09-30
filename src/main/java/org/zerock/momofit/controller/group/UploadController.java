@@ -70,7 +70,7 @@ public class UploadController {
 			
 		}
 				
-		String uploadFolder = "C://upload/temp";
+		String uploadFolder = "c://project/uploadFile/";
 		
 		// 날짜 폴더 경로
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
@@ -147,7 +147,7 @@ public class UploadController {
 		try {
 			
 			/* 썸네일 파일 삭제 */
-			file = new File("c://upload/temp/" + URLDecoder.decode(fileName, "UTF-8"));
+			file = new File("c://project/uploadFile/" + URLDecoder.decode(fileName, "UTF-8"));
 			
 			file.delete();
 			

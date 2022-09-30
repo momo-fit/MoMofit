@@ -159,6 +159,8 @@ textarea:focus{
     background-color: rgb(249, 247, 247);
 }
 
+
+
 /* 성별 선택 */
 .select_group_gender {
     width: 110px;
@@ -179,6 +181,46 @@ textarea:focus{
     border: 0;
     border-radius: 15px;
     outline: none;
+    padding-left: 10px;
+    background-color: rgb(249, 247, 247);
+
+}
+
+#locInput {
+	width: 150px;
+    height: 32px;
+    font-size: 15px;
+    border: 0;
+    padding-left: 10px;
+    border-radius: 15px;
+    outline: none;
+    background-color: rgb(249, 247, 247);
+}
+
+#locBtn {
+        font-size: 14px;
+        color: white;
+        font-weight: bold;
+        /* 박스 */
+        background-color: #ff1466e3;
+        border: none; 
+        border-radius: 6px;
+        line-height: 30px;
+        /* 위치 */
+        /* margin-left:150px;
+        margin-top: 30px; */
+        /* margin-bottom:0px; */
+        width: 60px;
+}
+
+#locDiv > select {
+    width: 110px;
+    height: 32px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 15px;
+    outline: none;
+    margin-top : 20px;
     padding-left: 10px;
     background-color: rgb(249, 247, 247);
 
@@ -209,6 +251,18 @@ textarea:focus{
     border-radius: 15px;
     outline: none;
     padding-left: 10px;
+    background-color: rgb(249, 247, 247);
+}
+
+#dateSelect {
+	width: 120px;
+    height: 32px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 15px;
+    outline: none;
+    padding-left: 10px;
+    margin-right: 20px;
     background-color: rgb(249, 247, 247);
 }
 
@@ -275,6 +329,7 @@ textarea:focus{
         width: 150px;
     }
 
-
+/* js 이벤트 발생 전에는 숨기기 위한 설정 */
 #sports_add_text { display: none; }
-
+/* #currentDatetime { display: none; } */
+#locDiv{ display: none; }

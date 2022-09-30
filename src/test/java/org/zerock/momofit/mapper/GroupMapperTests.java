@@ -71,7 +71,7 @@ public class GroupMapperTests {
 		
 		@Cleanup("clear")
 		List<GroupVO> list = this.mapper.getListWithPaging(cri);
-		
+			
 		list.forEach(log::info);
 		
 //		for(GroupVO vo : list ) {
@@ -80,6 +80,24 @@ public class GroupMapperTests {
 	}
 	
 	
+	// ** 검색 test **
+	
+//	@Disabled
+	@Test
+	@Order(1)
+	public void testSearch() throws DAOException  {
+		log.trace("testGetListWithPaging() invoked.");
+		
+		Criteria cri = new Criteria();
+		cri.setKeyword("강남구");
+//		cri.setType("C");
+		
+		List<GroupVO> list = this.mapper.getListWithPaging(cri);
+			
+		list.forEach(log::info);
+		
+	}
+
 	
 	@Disabled
 	@Test

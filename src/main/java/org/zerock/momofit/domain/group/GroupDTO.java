@@ -3,8 +3,6 @@ package org.zerock.momofit.domain.group;
 
 import java.util.Date;
 
-import org.zerock.momofit.domain.signUp.UserDTO;
-
 import lombok.Data;
 
 @Data

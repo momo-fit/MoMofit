@@ -61,6 +61,9 @@
 
                                     <div id="uploadResult">
                                         <div id="result_card">
+                                            <input type='hidden' name='group_img' value='<c:out value="${group.group_img}"/>'>
+                                            <input type='hidden' name='temp' value='<c:out value="${group.temp}"/>'>
+                                            <input type='hidden' name='path' value='<c:out value="${group.path}"/>'>
                                             <!-- 저장된 이미지 갖고오기 -->
                                             <c:if test="${group.group_img != null}">
                                                 <img src="/display?fileName=${group.path}/s_${group.temp}_${group.group_img}">
@@ -99,7 +102,7 @@
                         <!-- 운동종목 -->
                             <div class="make_group_sport">
                                 운동 종목&nbsp;&nbsp;
-                                <select id="select_group_sport" value='<c:out value="${group.sports}"/>' name="sports" required>
+                                <select id="select_group_sport" value='<c:out value="${group.sports}"/>' name="sports">
                                     <option value="">운동을 선택하세요</option>
                                     <option value="헬스/크로스핏" 
                                         <c:if test="${group.sports == '헬스/크로스핏'}">selected</c:if>>헬스/크로스핏</option>
@@ -145,12 +148,15 @@
                             <!-- 지역 required -->
                             <div class="make_group_address">
                                 &nbsp;&nbsp;&nbsp;&nbsp;지역&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <select name="addressRegion" id="addressRegion" 
-                                	required></select>
-                                <select name="group_loc" id="addressDo" 
-                                	required></select>
-                                <select name="group_loc" id="addressSiGunGu" 
-                                	value='<c:out value="${group.group_loc}"/>'></select>
+                                <input type="text" id="locInput" value='<c:out value='${group.group_loc}'/>' name="group_loc" readonly>
+
+                                <button type="button" id="locBtn">재선택</button>
+                                
+                                <div id=locDiv>
+                                    <select name="addressRegion" id="addressRegion" ></select>
+                                    <select name="group_loc" id="addressDo" ></select>
+                                    <select name="group_loc" id="addressSiGunGu"></select>
+                                </div>
                             </div><br><br>
                             
                             <!-- 최대인원 required  -->
@@ -162,9 +168,13 @@
                             <!-- 일정(선택)-->
                             <div class="make_group_schedule" >
                                 &nbsp;&nbsp;&nbsp;&nbsp;일정&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <!-- <input type="text" id="dateInput" value='<c:out value='${group.schedule}'/>' name="schedule" readonly> -->
+                                <!-- <select id="dateSelect" name="schedule" >
+                                    <option value="">변경안함</option>
+                                    <option value="변경">일정 재선택</option> -->
 
-                                <input type="datetime-local" name="schedule" value='<c:out value="${group.schedule}"/>'>
-
+                                <input type="datetime-local" name="schedule" id="currentDatetime" value='<c:out value="${group.schedule}"/>' >
+                                
 
                             </div><br><br>
 
