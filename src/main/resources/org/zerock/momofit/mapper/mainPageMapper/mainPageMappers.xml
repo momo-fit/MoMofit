@@ -30,11 +30,8 @@
         FROM (
             SELECT * FROM BOARD ORDER BY BOARD_LIKE desc
         ) a
-        WHERE a.BOARD_DATE BETWEEN (
-            SELECT TRUNC(CURRENT_DATE, 'MM')FROM  DUAL
-        ) AND (
-            SELECT LAST_DAY(CURRENT_DATE) FROM DUAL
-        ) AND 
+        WHERE a.BOARD_DATE
+        BETWEEN CURRENT_DATE-30 AND CURRENT_DATE AND
         a.BOARD_LIKE > 0
         AND a.CATEGORY_NO = 1
         AND <![CDATA[ ROWNUM <= #{BoaedAmount}]]> 
@@ -49,11 +46,8 @@
         FROM (
             SELECT * FROM BOARD ORDER BY BOARD_LIKE desc
         ) a
-        WHERE a.BOARD_DATE BETWEEN (
-            SELECT TRUNC(CURRENT_DATE, 'MM')FROM  DUAL
-        ) AND (
-            SELECT LAST_DAY(CURRENT_DATE) FROM DUAL
-        ) AND 
+        WHERE a.BOARD_DATE 
+        BETWEEN CURRENT_DATE-30 AND CURRENT_DATE AND
         a.BOARD_LIKE > 0
         AND a.CATEGORY_NO = 2
         AND <![CDATA[ ROWNUM <= #{BoaedAmount} ]]> 
@@ -68,11 +62,8 @@
         FROM (
             SELECT * FROM BOARD ORDER BY BOARD_LIKE desc
         ) a
-        WHERE a.BOARD_DATE BETWEEN (
-            SELECT TRUNC(CURRENT_DATE, 'MM')FROM  DUAL
-        ) AND (
-            SELECT LAST_DAY(CURRENT_DATE) FROM DUAL
-        ) AND 
+        WHERE a.BOARD_DATE 
+        BETWEEN CURRENT_DATE-30 AND CURRENT_DATE AND
         a.BOARD_LIKE > 0
         AND a.CATEGORY_NO = 3
         AND <![CDATA[ ROWNUM <= #{BoaedAmount} ]]> 
@@ -87,11 +78,8 @@
         FROM (
             SELECT * FROM BOARD ORDER BY BOARD_LIKE desc
         ) a
-        WHERE a.BOARD_DATE BETWEEN (
-            SELECT TRUNC(CURRENT_DATE, 'MM')FROM  DUAL
-        ) AND (
-            SELECT LAST_DAY(CURRENT_DATE) FROM DUAL
-        ) AND 
+        WHERE a.BOARD_DATE 
+        BETWEEN CURRENT_DATE-30 AND CURRENT_DATE AND
         a.BOARD_LIKE > 0
         AND a.CATEGORY_NO = 4
         AND <![CDATA[ ROWNUM <= #{BoaedAmount} ]]> 
