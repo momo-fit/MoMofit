@@ -31,7 +31,11 @@
 		 <beans:property name="uploadTempDir" value="file:///C:/Temp"/> 
 	</beans:bean>
 	
-	
+	<context:component-scan base-package="org.zerock.momofit.listener" />
 	<context:component-scan base-package="org.zerock.momofit.controller" />
+	<context:component-scan base-package="org.zerock.momofit.config"/>
+	<context:component-scan base-package="org.zerock.momofit.repository"/>
+	<context:component-scan base-package="org.zerock.momofit.interceptor"/>
+
 	
 </beans:beans>

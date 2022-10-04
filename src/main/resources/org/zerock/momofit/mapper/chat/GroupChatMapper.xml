@@ -19,8 +19,13 @@
         
         
         <collection 
-                    property="list"
-                    resultMap="GroupMemberVO">
+        	property="list"
+        	resultMap="GroupMemberVO">
+        </collection>
+        
+        <collection 
+        	property="list_chat_notice"
+        	resultMap="ChatNoticeVO">
         </collection>
         
     </resultMap>
@@ -33,9 +38,18 @@
         <result column="nickname" property="nickname"/>
     </resultMap>
     
+    
+    <resultMap id="ChatNoticeVO" type="org.zerock.momofit.domain.chat.GroupChatDomain$ChatNoticeVO">
+    	<result column="chat_notice_no" property="chat_notice_no"/>
+        <result column="group_no" property="group_no"/>
+        <result column="chat_notice_context" property="chat_notice_context"/>
+        <result column="chat_notice_time" property="chat_notice_time"/>
+    </resultMap>
+    
     <!-- 참여한, 그룹정보와 멤버들 구하기 -->
     <select id="selectGroupInfoWithMembers" resultMap="GroupChatVO">
-    	SELECT 
+		SELECT 
+		        /*+ index(t2 pk_group_member) index_desc(t4 pk_chat_notice) */
 		    t1.group_no,
 		    t1.group_name,
 		    t1.sports,
@@ -51,7 +65,12 @@
 		    t2.group_member_no,
 		    t2.user_no AS group_user_no,
 		    t2.join_date,
-		    t3.nickname
+		    t3.nickname,
+		
+		    t4.chat_notice_no,
+		    t4.group_no,
+		    t4.chat_notice_context,
+		    t4.chat_notice_time
 		FROM groups t1
 		
 		INNER JOIN group_member t2
@@ -59,6 +78,9 @@
 		
 		INNER JOIN users t3
 		ON t2.user_no = t3.user_no
+		
+		LEFT OUTER JOIN chat_notice T4
+		ON t1.group_no = t4.group_no
 		
 		WHERE t1.group_no = #{group_no}
     </select>
@@ -74,6 +96,35 @@
         ON t1.group_no = t2.group_no
         WHERE t1.user_no = #{user_no}
     </select>
+    
+    
+    <select id="selectMyChatNoticeList" resultType="org.zerock.momofit.domain.chat.GroupChatDomain$ChatNoticeVO">
+		SELECT /*+ index_desc(chat_notice) */
+			*
+		FROM
+			chat_notice
+		WHERE
+			group_no = #{group_no}
+    </select>
+    
+    <delete id="deleteMyChatNotice">
+    	DELETE FROM
+		    chat_notice
+		WHERE
+		    chat_notice_no = #{chat_notice_no}
+    </delete>
+
+    <insert id="insertMyChatNotice">
+        INSERT INTO chat_notice (chat_notice_no, group_no, chat_notice_context, chat_notice_time)
+
+        values (
+            chat_notice_seq.NEXTVAL,
+            #{vo.group_no},
+            #{vo.chat_notice_context},
+            current_date
+        )
+    </insert>
+    
 
 
 </mapper>

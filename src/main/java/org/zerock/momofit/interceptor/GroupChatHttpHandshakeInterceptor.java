@@ -7,11 +7,15 @@ import javax.servlet.http.HttpSession;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.http.server.ServletServerHttpRequest;
+import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.WebSocketHandler;
+import org.springframework.web.socket.WebSocketMessage;
+import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.server.HandshakeInterceptor;
 import org.zerock.momofit.domain.signUp.UserDTO;
 
 import lombok.extern.log4j.Log4j2;
+
 
 
 @Log4j2
@@ -39,20 +43,17 @@ public class GroupChatHttpHandshakeInterceptor implements HandshakeInterceptor {
 			// WebSocketSession에 앞서 저장한 HttpSession 객체를 저장
 			attributes.put("session", session);
 			
-			
 		} // if
 		
 		return true;
 		
 	} // beforeHandshake
 
-
 	@Override
 	public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
 			Exception exception) {
 		// TODO Auto-generated method stub
 		
-	} // afterHandshake
-
+	}
 	
 }

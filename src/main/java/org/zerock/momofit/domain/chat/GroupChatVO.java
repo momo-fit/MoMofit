@@ -3,6 +3,8 @@ package org.zerock.momofit.domain.chat;
 import java.util.Date;
 import java.util.List;
 
+import org.zerock.momofit.domain.chat.GroupChatDomain.ChatNoticeVO;
+
 import lombok.Data;
 
 
@@ -23,5 +25,7 @@ public class GroupChatVO {
 	private String temp;
 	
 	private List<GroupMemberVO> list;
+	
+	private List<ChatNoticeVO> list_chat_notice;
 
 } // end class

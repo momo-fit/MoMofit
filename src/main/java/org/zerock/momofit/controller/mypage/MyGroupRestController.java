@@ -71,6 +71,7 @@ public class MyGroupRestController {
 			result.put("voList", voList);
 			result.put("pageDTO", pageDTO);
 			log.info("result : {}, {}", result);
+
 			
 			return new ResponseEntity<>(result, HttpStatus.OK);
 			
@@ -80,6 +81,6 @@ public class MyGroupRestController {
 		
 		
 	} // getMyPageGroupList
-	
+
 	
 } // end class

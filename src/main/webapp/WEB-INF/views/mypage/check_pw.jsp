@@ -32,6 +32,9 @@
     <script src="https://kit.fontawesome.com/7d82554876.js" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/556efa47d7.js" crossorigin="anonymous"></script>
 
+    <!-- RSA 암호화 라이브러리 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/3.2.1/jsencrypt.min.js" integrity="sha512-hI8jEOQLtyzkIiWVygLAcKPradIhgXQUl8I3lk2FUmZ8sZNbSSdHHrWo5mrmsW1Aex+oFZ+UUK7EJTVwyjiFLA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <!-- 전 페이지 공통 설정 -->
     <!-- CSS : font 설정 -->
     <link rel="stylesheet" href="/resources/common/css/font.css">
@@ -54,6 +57,21 @@
 
     <!-- CSS : 마이페이지 개인정보수정 패스워드 확인 CSS -->
     <link rel="stylesheet" href="/resources/mypage/css/mypage_check_pw.css">
+
+
+    <script>
+    
+        var result = '${failCheckPass}';
+
+        console.log("결과 : ", result);
+
+        if(result != null && result > 0){
+
+            alert(result);
+        }
+
+        
+    </script>
 
 </head>
 
@@ -86,11 +104,12 @@
                             <p></p>
                             
                             <div class="card-body">
-                            <form class="form-signin" method="POST" action="/mypage/check_pw">
-                                <input type="password" id="pw" class="form-control" placeholder="비밀번호" required><br>
-                                
+                            <form class="form-signin" method="POST" action="/mypage/check_pw" onsubmit="return false">
+                                <input type="password" id="pw" class="form-control" name="myPassword" placeholder="비밀번호" required><br>
+                                <input type="hidden" name="clientPublicKey">
+                                <input type="hidden" name="serverPublicKey" id="serverPublicKey" value="${publicKey}">
                                 <div class="d-grid gap-2">
-                                    <button class="btn btn-primary" id="pw_check_btn" type="submit">확 인</button>
+                                    <button class="btn btn-primary" id="pw_check_btn" type="button">확 인</button>
                                 </div>
                             </form>
                           
@@ -105,6 +124,61 @@
         <!-- 하단 Footer -->
  		<%@include file="../include/footer.jsp" %>
     </div>
+
+    <script>
+
+
+
+        $(function() {
+
+            var generateKeys = function() {
+                
+                // var keySize = 2048;
+                // var crypt = new JSEncrypt(keySize);
+                
+                // crypt.getKey();
+
+                // var privateKey = crypt.getPrivateKey();
+                // var publicKey = crypt.getPublicKey();
+
+                // console.log('개인키 :', crypt.getPrivateKey());
+                // console.log('공개키:', crypt.getPublicKey());
+
+                // console.log('개인키 :', privateKey);
+                // console.log('공개키:', publicKey);
+
+            } // generateKeys
+
+            $("#pw_check_btn").on('click', function (){
+
+                // generateKeys();
+
+                var crypt = new JSEncrypt(2048);
+
+                //암호화할 문장
+                var pass = $('#pw').val();
+                console.log("암호화할 문장:",pass);
+
+                var serverPublicKey = $("#serverPublicKey").val();
+
+                crypt.setPublicKey(serverPublicKey);
+
+                var encrypted = crypt.encrypt(pass);
+                console.log("서버 공개키로 암호화 : ", encrypted);
+
+                $('#pw').val(encrypted);
+
+                $('.form-signin').attr('onsubmit', 'return true');
+                $('.form-signin').submit();
+
+            })
+
+        })
+
+
+        
+
+    </script>
 
 
     <!-- 마이페이지 LEFT SIDE 메뉴 자바스크립트 -->

@@ -18,7 +18,7 @@
 
 /* 채팅이 표현되는 화면 */
 .chatting-view{
-    min-height: 450px;
+    min-height: 440px;
     height: 100%;
     width: 100%;
     
@@ -59,7 +59,6 @@
 .chat-right {
     float: right;
 
-    margin-top: 10px;
     padding: 10px 10px; 
     
     display: flex;
@@ -79,7 +78,6 @@
 .chat-left {
     float: left;
     display: flex;
-    margin-top: 10px;
     padding: 10px 10px;
 
     /* border: 1px solid black;; */
@@ -142,6 +140,7 @@
 
 .chat-div {
     width: 100%;
+    margin: 5px 0;
     /* background-color: yellow;; */
 }
 
@@ -185,7 +184,7 @@ cursor : pointer;
 display : none;
 position : absolute;
 z-index : 1; /*다른 요소들보다 앞에 배치*/
-background-color: #ebebe3;
+background-color: white;
 min-width : 200px;
 
 max-height: 300px;
@@ -223,12 +222,15 @@ display: block;
     width: 370px;
     max-width: 750px;
 
+    max-height: 1000px;
+
     right: -120px;
     top : 28px;
 
     padding: 10px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
-    background-color: #ebebe3;
+    background-color: white;
+    overflow-y : hidden;
 
 }
 
@@ -306,7 +308,10 @@ display: block;
 
 .chat-notice {
     margin-left: 5px;
-    padding: 5px;
+    padding: 5px 10px;
+
+    /* border: 1px solid red; */
+
 }
 
 .notice-hidden {
@@ -326,6 +331,28 @@ display: block;
 .view-chat-01-notice:hover .notice-hidden {
     display: block;
 }
+
+.view-chat-01-notice:hover .remove-notice-btn {
+    display: flex;
+}
+
+
+/* 공지사항 삭제 버튼 */
+.remove-notice-btn {
+    background-color: white;
+    border: none;
+
+    float: right;
+
+    margin-top: 2px;
+
+    align-items: center;
+    justify-content: center;
+    
+    display: none;
+
+}
+
 
 .group-gropdown {
     display: flex;
@@ -348,4 +375,59 @@ display: block;
 
 .group-member-list {
     right: -60px;
+
+    display: none;
+    flex-direction: column;
+
+    max-height: 1000px;
+
+    overflow-y : hidden;
 }
+
+/* 그룹 멤버리스트 */
+.group-member-row {
+    display: flex;
+    /* border: 1px solid red; */
+    width: 100%;
+    align-items : center;
+    min-height: 30px;
+    color: black;
+
+    padding: 0px 10px;
+}
+
+.group-member-row span {
+    padding : 5px 5px;
+}
+
+.connecting {
+    background-color: #55FF00;
+    width:50px;
+    padding: 5px;
+    border-radius: 15px !important;
+
+    text-align: center;
+}
+
+.connecting-span {
+    display: flex;
+    width: 100%;
+}
+
+.connecting-ninkname {
+    min-width: 100px;
+    padding-left: 10px;
+}
+
+/* 메시지 공지사항 */
+.chat-notice-message {
+    width: 100%;
+    background-color: #ebebe3;
+    border-radius: 10px;
+    text-align: center;
+
+    padding: 5px 5px;
+
+}
+
+

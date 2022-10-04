@@ -11,12 +11,11 @@ var groupChatService = (function () {
     //--------------------------
     function getGroupInfo(group_no, callback, error){
 
-
-
         $.ajax({
             url: "/chat/rooms/" + group_no,
             type: "GET",
             dataType: "json",
+	
 
             success:function(data){
                 if(callback){
@@ -33,11 +32,63 @@ var groupChatService = (function () {
         })
 
     } // getGroupInfo
+    
+    
+    function removeChatNotice(chat_notice_no, callback, error){
+        
+        $.ajax({
+            url: "/chat/notices/" + chat_notice_no,
+            type : "DELETE",
+
+            
+            success : function(data){
+                if(callback){
+                    callback(data);
+                }
+            }, // success
+
+            error : function(xhr, status, error){
+                if(error){
+                    error();
+                }
+            } // error
+
+        })
+
+	} // removeChatNotice
+
+
+    function registerChatNotice(notice, callback, error){
+
+        $.ajax({
+            url : "/chat/insert",
+            type : "POST",
+            data : JSON.stringify(notice),
+            contentType : "application/json; charset=utf-8",
+
+            success : function(data){
+                if(callback){
+                    callback(data);
+                }
+            }, // success
+            
+            error : function(xhr, status, error){
+                if(error){
+                    error();
+                }
+            }, // error
+
+        })
+
+
+    } // registerChatNotice
 
 
 
     return {
-        getGroupInfo: getGroupInfo
+        getGroupInfo: getGroupInfo,
+        removeChatNotice : removeChatNotice,
+        registerChatNotice : registerChatNotice
     }
 
 })();
