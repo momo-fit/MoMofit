@@ -8,7 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSendException;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.zerock.momofit.exception.DAOException;
+import org.zerock.momofit.exception.ServiceException;
+import org.zerock.momofit.mapper.findMapper.findMappers;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,6 +26,10 @@ public class MailServiceImpl implements MailService {
 	
 	@Setter(onMethod_ = {@Autowired}) 
 	private JavaMailSenderImpl mailSender;
+	
+	@Setter(onMethod_ = {@Autowired}) 
+	private findMappers mapper;
+	
 	private int authNumber;
 	
 	public void makeRandomNumber() {
@@ -33,24 +41,69 @@ public class MailServiceImpl implements MailService {
 		
 	} // makeRandomNumber
 	
-	
+	// 메일 인증
 	@Override
-	public String mailSend(String email) throws MailSendException {
+	public String mailSend(String email) throws MailSendException, ServiceException {
 		makeRandomNumber();
 
+		try {
+			email = email.replace("@", ",");
+			String currentEmail = this.mapper.emailCheck(email);
+			
+			if(currentEmail == null) {
+				email = email.replace(",", "@");
+
+				String toMail = email;
+				String title = "회원가입 인증메일 입니다.";
+				String content = 
+						"<h2>MoMofit 서비스를 이용하기 위해 아래의 인증번호를 작성해 주세요</h2>" +
+						"<br><br>" +
+						"인증번호 : <b>"+ this.authNumber +"</b>" +
+						"<br><br><br>" +
+						"모두 모여라 피트니스 Team : 내손을 자바";
+				
+				mailPush( toMail, title, content);
+				
+				return Integer.toString(this.authNumber);
+			} // if
+			
+			return null;
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
+		
+	} // mailSend
+	
+	// 비밀번호 찾기
+	@Override
+	public void pwMailSend(String email, String id) throws MailSendException, ServiceException {
+		makeRandomNumber();
+		
+		// pw 암호화
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String salt = "_SALT";
+		String Pass = encoder.encode(salt+this.authNumber);
+		
+		try {
+			this.mapper.tempPwUpdate(id, Pass);
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
+		
+		email = email.replace(",", "@");
+
 		String toMail = email;
-		String title = "회원가입 인증메일 입니다.";
+		String title = "비밀번호 찾기 메일 입니다.";
 		String content = 
-				"<h2>MoMofit 서비스를 이용하기 위해 아래의 인증번호를 작성해 주세요</h2>" +
+				"<h2>MoMofit 비밀번호 찾기 서비스 메일 입니다.</h2>" +
 				"<br><br>" +
-				"인증번호 : <b>"+ this.authNumber +"</b>" +
+				"비밀번호 : <b>"+ this.authNumber +"</b>" +
 				"<br><br><br>" +
 				"모두 모여라 피트니스 Team : 내손을 자바";
 		
 		mailPush( toMail, title, content);
-		
-		return Integer.toString(this.authNumber);
-	} // mailSend
+
+	} // pwMailSend
 	
 	public void mailPush(String toMail, String title, String content) {
 		MimeMessage message = mailSender.createMimeMessage();
@@ -70,5 +123,6 @@ public class MailServiceImpl implements MailService {
 		} // try-catch
 		
 	} // mailPush
+
 
 } // end class

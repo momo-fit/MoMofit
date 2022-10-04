@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.momofit.mapper.mainPageMapper.mainPageMappers">
+
+    <select id="bestGroupSelect" resultType="org.zerock.momofit.domain.group.GroupVO">
+
+        SELECT * FROM (
+            SELECT * FROM GROUPS ORDER BY GROUP_LIKE desc
+        )  
+        WHERE GROUP_DATE 
+        BETWEEN CURRENT_DATE-30 AND CURRENT_DATE
+        AND GROUP_LIKE IS NOT NULL AND 
+        <![CDATA[  ROWNUM <= #{amount} ]]>
+
+    </select>
+
+    <select id="newGroupSelect" resultType="org.zerock.momofit.domain.group.GroupVO">
+        SELECT /*+index_desc(groups) */ * FROM GROUPS
+        WHERE  <![CDATA[ ROWNUM <= #{amount} ]]> 
+    </select>
+
+    <select id="selectBestBoard" resultType="org.zerock.momofit.domain.main.BoardVO">
+        SELECT * 
+        FROM (
+            SELECT
+                a.BOARD_NO,
+                a.CATEGORY_NO,
+                a.TITLE,
+                a.BOARD_DATE,
+                (SELECT /* index(b pk_comm_no) */ COUNT(*) FROM COMM b WHERE b.BOARD_NO = a.BOARD_NO) comm_cnt,
+            ROW_NUMBER() OVER ( PARTITION BY CATEGORY_NO
+            ORDER BY a.board_like DESC
+            ) AS NUM
+            FROM
+                BOARD a
+            WHERE a.BOARD_DATE BETWEEN CURRENT_DATE-30 AND CURRENT_DATE
+            AND a.BOARD_LIKE > 0
+        )
+        WHERE <![CDATA[ NUM <= #{BoaedAmount} ]]> 
+    </select>
+
+</mapper>

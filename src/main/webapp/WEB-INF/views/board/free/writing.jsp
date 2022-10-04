@@ -170,7 +170,7 @@
 		    } // for
             
             $.ajax({
-                url: '/uploadAjaxAction', // UploadController의 uploadAjaxAction으로 보냄
+                url: '/freeBoard/uploadAjaxAction', // UploadController의 uploadAjaxAction으로 보냄
                 processData : false,
                 contentType : false,
                 data : formData,
@@ -240,7 +240,7 @@
 		let targetDiv = $("#result_card");
 		
 		$.ajax({
-			url: '/deleteFile',
+			url: '/freeBoard/deleteFile',
 			data : {fileName : targetFile},
 			dataType : 'text',
 			type : 'POST',

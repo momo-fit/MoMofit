@@ -27,10 +27,16 @@ $('.btn-primary1').click(()=> {
             url: '/mailCheck?email='+email,
             
             success: ((data) => {
-                currentNum=data;
-                alert("전송되었습니다.");   
-                $('#email1').attr('readonly', true);
-                $('#email2').attr('readonly', true); 
+				if(data != ''){
+					currentNum=data;
+	                alert("전송되었습니다.");   
+	                $('#email1').attr('readonly', true);
+	                $('#email2').attr('readonly', true); 
+				} else {
+					alert("이미 존재하는 메일 입니다.");
+				}
+	
+                
             }),
             error: ((data) => {
                 alert("발송이 실패 했습니다.");

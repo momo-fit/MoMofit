@@ -54,7 +54,7 @@
                         
 
                             <!-- 메일 발송 버튼 -->
-                            <button type="button" class="button_mail" onclick="alert('메일이 발송되었습니다.')" name="button_mail">
+                            <button type="button" class="button_mail" name="button_mail">
                                 메일 발송
                             </button><br>
 
@@ -70,8 +70,8 @@
     </div>
 
 
-    <!-- 메인화면 자바스크립트 -->
-    <script src="/resources/js/main.js"></script>
+    <!-- 비밀번호 칮기 -->
+    <script src="/resources/find/js/pwfind.js"></script>
 
     <!-- 부트스트랩 자바스크립트 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
