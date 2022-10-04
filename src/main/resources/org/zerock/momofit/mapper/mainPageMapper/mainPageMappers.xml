@@ -20,69 +20,24 @@
         WHERE  <![CDATA[ ROWNUM <= #{amount} ]]> 
     </select>
 
-        
-    <select id="freeBoardBestSelect" resultType="org.zerock.momofit.domain.main.BoardVO">
-        SELECT 
-            BOARD_NO,
-            TITLE,
-            BOARD_DATE,
-            (SELECT COUNT(*) FROM COMM b WHERE b.BOARD_NO = a.BOARD_NO) comm_cnt
+    <select id="selectBestBoard" resultType="org.zerock.momofit.domain.main.BoardVO">
+        SELECT * 
         FROM (
-            SELECT * FROM BOARD ORDER BY BOARD_LIKE desc
-        ) a
-        WHERE a.BOARD_DATE
-        BETWEEN CURRENT_DATE-30 AND CURRENT_DATE AND
-        a.BOARD_LIKE > 0
-        AND a.CATEGORY_NO = 1
-        AND <![CDATA[ ROWNUM <= #{BoaedAmount}]]> 
-    </select>
-
-    <select id="tipBoardBestSelect" resultType="org.zerock.momofit.domain.main.BoardVO">
-        SELECT 
-            BOARD_NO,
-            TITLE,
-            BOARD_DATE,
-            (SELECT COUNT(*) FROM COMM b WHERE b.BOARD_NO = a.BOARD_NO) comm_cnt
-        FROM (
-            SELECT * FROM BOARD ORDER BY BOARD_LIKE desc
-        ) a
-        WHERE a.BOARD_DATE 
-        BETWEEN CURRENT_DATE-30 AND CURRENT_DATE AND
-        a.BOARD_LIKE > 0
-        AND a.CATEGORY_NO = 2
-        AND <![CDATA[ ROWNUM <= #{BoaedAmount} ]]> 
-    </select>
-
-    <select id="picBoardBestSelect" resultType="org.zerock.momofit.domain.main.BoardVO">
-        SELECT 
-            BOARD_NO,
-            TITLE,
-            BOARD_DATE,
-            (SELECT COUNT(*) FROM COMM b WHERE b.BOARD_NO = a.BOARD_NO) comm_cnt
-        FROM (
-            SELECT * FROM BOARD ORDER BY BOARD_LIKE desc
-        ) a
-        WHERE a.BOARD_DATE 
-        BETWEEN CURRENT_DATE-30 AND CURRENT_DATE AND
-        a.BOARD_LIKE > 0
-        AND a.CATEGORY_NO = 3
-        AND <![CDATA[ ROWNUM <= #{BoaedAmount} ]]> 
-    </select>
-
-    <select id="tradeBoardBestSelect" resultType="org.zerock.momofit.domain.main.BoardVO">
-        SELECT 
-            BOARD_NO,
-            TITLE,
-            BOARD_DATE,
-            (SELECT COUNT(*) FROM COMM b WHERE b.BOARD_NO = a.BOARD_NO) comm_cnt
-        FROM (
-            SELECT * FROM BOARD ORDER BY BOARD_LIKE desc
-        ) a
-        WHERE a.BOARD_DATE 
-        BETWEEN CURRENT_DATE-30 AND CURRENT_DATE AND
-        a.BOARD_LIKE > 0
-        AND a.CATEGORY_NO = 4
-        AND <![CDATA[ ROWNUM <= #{BoaedAmount} ]]> 
+            SELECT
+                a.BOARD_NO,
+                a.CATEGORY_NO,
+                a.TITLE,
+                a.BOARD_DATE,
+                (SELECT /* index(b pk_comm_no) */ COUNT(*) FROM COMM b WHERE b.BOARD_NO = a.BOARD_NO) comm_cnt,
+            ROW_NUMBER() OVER ( PARTITION BY CATEGORY_NO
+            ORDER BY a.board_like DESC
+            ) AS NUM
+            FROM
+                BOARD a
+            WHERE a.BOARD_DATE BETWEEN CURRENT_DATE-30 AND CURRENT_DATE
+            AND a.BOARD_LIKE > 0
+        )
+        WHERE <![CDATA[ NUM <= #{BoaedAmount} ]]> 
     </select>
 
 </mapper>

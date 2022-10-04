@@ -50,48 +50,17 @@ public class mainPageServiceImpl implements mainPageService {
 	
 	} // selectNewGroups
 
+	
 	@Override
-	public List<BoardVO> selectBestFreeBoard() throws ServiceException {
-		log.trace("selectBestGroups() invoked.");
-		
-		try {
-			return this.mapper.freeBoardBestSelect(this.BoaedAmount);	
-		}catch (Exception e) {
-			throw new ServiceException(e);
-		} // try-catch	
-	} // selectBestFreeBoard
-
-	@Override
-	public List<BoardVO> selectBestTipBoard() throws ServiceException {
-		log.trace("selectBestGroups() invoked.");
-		
-		try {
-			return this.mapper.tipBoardBestSelect(this.BoaedAmount);	
-		}catch (Exception e) {
-			throw new ServiceException(e);
-		} // try-catch	
-	} // selectBestTipBoard
-
-	@Override
-	public List<BoardVO> selectBestPicBoard() throws ServiceException {
-		log.trace("selectBestGroups() invoked.");
-		
-		try {
-			return this.mapper.picBoardBestSelect(this.BoaedAmount);
-		}catch (Exception e) {
-			throw new ServiceException(e);
-		} // try-catch	
-	} // selectBestPicBoard
-
-	@Override
-	public List<BoardVO> selectBestTradeBoard() throws ServiceException {
-		log.trace("selectBestGroups() invoked.");
+	public List<BoardVO> selectBestBoard() throws ServiceException {
+		log.trace("test() invoked.");
 		
 		try {		
-			return this.mapper.tradeBoardBestSelect(this.BoaedAmount);
+			return this.mapper.selectBestBoard(this.BoaedAmount);
 		}catch (Exception e) {
 			throw new ServiceException(e);
 		} // try-catch	
-	} // selectBestTradeBoard
+		
+	} // selectBestBoard
 
 } // end class

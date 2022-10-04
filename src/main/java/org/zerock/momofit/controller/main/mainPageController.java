@@ -1,5 +1,6 @@
 package org.zerock.momofit.controller.main;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,11 +35,34 @@ public class mainPageController {
 		try {
 			List<GroupVO> BestGroupList = this.service.selectBestGroups();
 			List<GroupVO> NewGroupList = this.service.selectNewGroups();
+			List<BoardVO> BestBoard = this.service.selectBestBoard();
 			
-			List<BoardVO> BestFreeBoard = this.service.selectBestFreeBoard();
-			List<BoardVO> BestTipBoard = this.service.selectBestTipBoard();
-			List<BoardVO> BestPicBoard = this.service.selectBestPicBoard();
-			List<BoardVO> BestTradeBoard = this.service.selectBestTradeBoard();
+			List<BoardVO> BestFreeBoard = new ArrayList<>();
+			List<BoardVO> BestTipBoard = new ArrayList<>();
+			List<BoardVO> BestPicBoard = new ArrayList<>();
+			List<BoardVO> BestTradeBoard = new ArrayList<>();
+			
+			for(BoardVO vo : BestBoard) {
+				
+				switch (vo.getCategory_no()) {
+				case 1:
+					BestFreeBoard.add(vo);	
+					break;
+				case 2:
+					BestTipBoard.add(vo);
+					break;
+				case 3:
+					BestPicBoard.add(vo);
+					break;
+				case 4:
+					BestTradeBoard.add(vo);
+					break;
+
+				default:
+					break;
+				} // switch
+	
+			} // for
 			
 			model.addAttribute("BestGroupList",BestGroupList);
 			model.addAttribute("NewGroupList", NewGroupList);

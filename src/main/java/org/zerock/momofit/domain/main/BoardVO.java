@@ -9,6 +9,7 @@ import lombok.Value;
 public class BoardVO {
 	
 	private Integer board_no;
+	private Integer category_no;
 	private String title;
 	private Date board_date;
 	private int comm_cnt;

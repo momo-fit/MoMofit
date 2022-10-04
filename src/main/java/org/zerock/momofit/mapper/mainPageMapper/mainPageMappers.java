@@ -14,15 +14,6 @@ public interface mainPageMappers {
 	// NEW 모임
 	public abstract List<GroupVO> newGroupSelect(int amount) throws DAOException;
 	
-	// free board
-	public abstract List<BoardVO> freeBoardBestSelect (int BoaedAmount) throws DAOException;
-	
-	// tip board
-	public abstract List<BoardVO> tipBoardBestSelect(int BoaedAmount) throws DAOException;
-	
-	// pic board
-	public abstract List<BoardVO> picBoardBestSelect(int BoaedAmount) throws DAOException;
-	
-	// trade Board
-	public abstract List<BoardVO> tradeBoardBestSelect(int BoaedAmount) throws DAOException;
+	// Best Board
+	public abstract List<BoardVO> selectBestBoard(int BoaedAmount) throws DAOException;
 }

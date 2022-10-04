@@ -13,16 +13,8 @@ public interface mainPageService {
 	
 	// mainPage New Groups
 	public abstract List<GroupVO> selectNewGroups() throws ServiceException; 
-	
-	// mainPage free board
-	public abstract List<BoardVO> selectBestFreeBoard() throws ServiceException; 
 
-	// mainPage tip board
-	public abstract List<BoardVO> selectBestTipBoard() throws ServiceException; 
+	// mainPage Best Board
+	public abstract List<BoardVO> selectBestBoard() throws ServiceException; 
 	
-	// mainPage pic board
-	public abstract List<BoardVO> selectBestPicBoard() throws ServiceException; 
-	
-	// mainPage trade Board
-	public abstract List<BoardVO> selectBestTradeBoard() throws ServiceException; 
 } // end interface
