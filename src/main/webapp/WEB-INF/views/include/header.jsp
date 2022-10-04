@@ -1,14 +1,16 @@
- <!-- header -->
- <header>
+
+
+<!-- header -->
+<header>
     <div class="header_wrap_top">
         <div class="h_top_item">
             <!-- 비로그인 시, 나와야 될 항목 -->
-            <a href="/signin" class="link1 font-12-400">로그인</a>
-            <div class="space"></div>
-            <a href="/signup" class="link1 font-12-400">회원가입</a>
-            <div class="space"></div>
+            <a href="/signin" class="link1 font-12-400" id="login">로그인</a>
+            <div class="space" id="space1"></div>
+            <a href="/signup" class="link1 font-12-400" id="signup">회원가입</a>
+            <div class="space" id="space2"></div>
             <!-- 로그인 시, 나와야 될 항목  -->
-            <a href="" class="link1 font-12-400">로그아웃</a>
+            <a href="/signout" id="signout" class="link1 font-12-400">로그아웃</a>
             <div class="space"></div>
             <div class="box_message">
                 <a href="/mypage/message_receive" class="link1 font-12-400">쪽지</a>
@@ -27,6 +29,18 @@
         <div></div>
     </div>
 </header>
+<script>
+    let result = '${__USER__.nickname}';
+    if(result != null && result.length > 0){
+        $('#login').css('display', 'none');
+        $('#space1').css('display', 'none');
+        $('#signup').text(result);
+        $('#signup').attr('href', '');
+    } else {
+        $('#signout').css('display', 'none');
+        $('#space2').css('display', 'none');
+    }
+</script>
 
 <!-- header-navbar box -->
 <div class="header_bottom">
@@ -46,8 +60,8 @@
                     <span class="dropbtn_icon font-16-500">모임목록</span>
                 </button>
                 <div class="dropdown-content">
-                    <a href="/group/list" class="font-14-400">모임보기</a>
-                    <a href="/group/register" class="font-14-400">모임개설</a>
+                    <a href="/group/list?currPage=1" class="font-14-400">모임보기</a>
+                    <a href="/group/register?currPage=1" class="font-14-400">모임개설</a>
                 </div>
             </div>
 
@@ -95,7 +109,5 @@
             </form>
         </div>
     </div>
-
-	
     <div></div>
-</div>  
+</div>

@@ -12,8 +12,6 @@
         <setting name="jdbcTypeForNull" value="NULL" /> 
     
     </settings> 
-    
-
-    
+      
 </configuration>
  

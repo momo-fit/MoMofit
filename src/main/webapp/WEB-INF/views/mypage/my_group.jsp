@@ -149,31 +149,18 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
     <!-- 임시 유저정보를 Session에 저장 -->
-    <%@ page session="true" %>
-    <%@ page import = "org.zerock.momofit.domain.signUp.*" %>
-
-
-	<%
-        UserDTO dto = new UserDTO();
-
-        dto.setUser_no(1);
-        dto.setId("id1");
-        dto.setNickname("nickname1");
-        dto.setUser_name("user_name1");
-
-        session.setAttribute("userDTO", dto);
-    %>
+    <%@ page import = "org.zerock.momofit.domain.signIn.*" %>
 
 
     <% 
-        UserDTO myDto = (UserDTO) session.getAttribute("userDTO");
+        LoginVO vo = (LoginVO) session.getAttribute("__USER__");
 
-        Integer user_no = myDto.getUser_no();
-        String id = myDto.getId();
+        Integer user_no = vo.getUser_no();
+        String id = vo.getId();
 
-        String nickname = myDto.getNickname();
-        String email = myDto.getEmail();
-        String user_name = myDto.getUser_name();
+        String nickname = vo.getNickname();
+        String email = vo.getEmail();
+        String user_name = vo.getUser_name();
 
     %>
 

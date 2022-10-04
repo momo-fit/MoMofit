@@ -179,17 +179,17 @@
 
     <!-- Session으로부터, UESR 정보 얻기... -->
 
-    <%@ page import = "org.zerock.momofit.domain.signUp.*" %>
+    <%@ page import = "org.zerock.momofit.domain.signIn.*" %>
 
     <% 
-    UserDTO myDto = (UserDTO) session.getAttribute("userDTO");
+        LoginVO vo = (LoginVO) session.getAttribute("__USER__");
 
-    Integer user_no = myDto.getUser_no();
-    String id = myDto.getId();
+        Integer user_no = vo.getUser_no();
+        String id = vo.getId();
 
-    String nickname = myDto.getNickname();
-    String email = myDto.getEmail();
-    String user_name = myDto.getUser_name();
+        String nickname = vo.getNickname();
+        String email = vo.getEmail();
+        String user_name = vo.getUser_name();
 
     %>
 

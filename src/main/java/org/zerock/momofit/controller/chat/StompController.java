@@ -9,9 +9,10 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
+import org.zerock.momofit.common.SharedScopeKeys;
 import org.zerock.momofit.domain.chat.GroupChatDomain.ChatDTO;
 import org.zerock.momofit.domain.chat.GroupChatDomain.ConnectionUser;
-import org.zerock.momofit.domain.signUp.UserDTO;
+import org.zerock.momofit.domain.signIn.LoginVO;
 import org.zerock.momofit.repository.StompRepository;
 
 import lombok.AllArgsConstructor;
@@ -48,8 +49,8 @@ public class StompController {
 		log.info("\t+ sessionId : {}", sessionId);
 
 		// (코드수정필요) SessionScope에서 UserVO 객체 획득
-		UserDTO userDTO = (UserDTO) session.getAttribute("userDTO");
-		log.info("\t+ udto : {}", userDTO);	 	
+		LoginVO userVO = (LoginVO) session.getAttribute(SharedScopeKeys.USER_KEY);
+		log.info("\t+ udto : {}", userVO);	 	
 
 		
 		
@@ -65,16 +66,16 @@ public class StompController {
 		ConnectionUser user = connectionUsers
 				.getOrDefault(sessionId, new ConnectionUser());
 		
-		user.setUser_no(userDTO.getUser_no());
-		user.setNickname(userDTO.getNickname());
+		user.setUser_no(userVO.getUser_no());
+		user.setNickname(userVO.getNickname());
 		user.setRoom(targetRoom);
 		
 		
 		connectionUsers.put(sessionId, user);
 		
 		// subcribe한 Client에게 전송할 ChatDTO 생성
-		dto.setNickname(userDTO.getNickname());
-		dto.setUser_no(userDTO.getUser_no());
+		dto.setNickname(userVO.getNickname());
+		dto.setUser_no(userVO.getUser_no());
 		dto.setConnectionUsers(connectionUsers);	// targetRoom에 속해 있는, User객체		
 
 		return dto;

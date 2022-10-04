@@ -75,25 +75,24 @@
                         <!-- 게시글 작성 내용부분 -->
 
                         <form class="writing_form" 
-                            action="register" method="post">
+                            action="/board/free/register" method="post">
 
                             <div class="writing_content">
 
                                 <!-- 1. 게시판 선택 -->
                                 게시판&nbsp;
-                                <select id="select_board" required>
+                                <select id="select_board" name="category_no" required>
                                     <option value="">선택</option>
-                                    <option value="자유게시판">자유게시판</option>
-                                    <option value="운동팁">운동팁</option>
-                                    <option value="운동인증">운동인증</option>
-                                    <option value="중고거래">중고거래</option>
-                                    <option value="문의">문의</option>
+                                    <option value="1">자유게시판</option>
+                                    <option value="2">운동팁</option>
+                                    <option value="3">운동인증</option>
+                                    <option value="4">중고거래</option>
                                 </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <br>
 
                                 <!-- 2. 제목 -->
                                 <br>제목&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input type="text" class="writing_title" required>
+                                <input type="text" class="writing_title" name="title" required>
                                 <br><br>
 
                                 <!-- 3. 첨부파일 -->
@@ -105,18 +104,27 @@
                                         파일찾기
                                     </label>
 
-                                    <input type="file" id="input_file" class="upload-hidden" accept='image/jpg,image/png,image/jpeg,image/gif' >
+                                    <input type="file" id="input_file" name="uploadFile" class="upload-hidden" multiple>
+
+                                    <div id="uploadResult">
+                                        <!-- 여기에 미리보기 생성 -->
+                                    </div>
                                 </span>
                                 <br><br>
 
                                 <!-- 4. 내용 -->
                                 내용<br>
-                                <textarea class="textarea_content" required>안녕하세요</textarea>
+                                <textarea class="textarea_content" name="text" required>안녕하세요</textarea>
+                                
+                                <input type="hidden" name="board_like" value=0>
+                                <input type="hidden" name="hits" value=0>
+                                <input type="hidden" name="img_check" value=0>
+                                <input type="hidden" name="user_no" value=1>
 
                             </div>
 
                         <!-- 목록 버튼 -->
-                        <input type="button" class="list_btn" value="취소" onClick="location='/board/free/list'"></input>                         
+                        <input type="button" class="list_btn" value="취소" onClick="location='/board/free/list?currPage=${param.currPage}'"></input>                         
 
                         <!-- 작성하기 버튼 -->
                         <input type="submit" class="writing_submit" value="작성"></input>
@@ -134,6 +142,123 @@
         <!-- 하단 Footer -->
         <%@ include file = "/WEB-INF/views/include/footer.jsp" %>
     </div>
+
+    <script>
+        // 이미지 업로드
+        $("input[type='file']").on("change", function(e){
+
+            // 이미지 존재시 삭제
+            if($(".imgDeleteBtn").length > 0){
+                deleteFile();
+            }
+            let formData = new FormData();
+
+            // let fileInput = $('input[name="uploadFile"]');
+            // let fileList = fileInput[0].files;
+            // let fileObj = fileList[0];
+
+            let fileInput = $('input[name="uploadFile"]');
+            let files = fileInput[0].files;
+
+            
+		    for(let i = 0; i < files.length; i++){
+                if(!fileCheck(files[i].name, files[i].size)){
+                    return false;
+                } // if
+
+            	formData.append("uploadFile", files[i]);		  
+		    } // for
+            
+            $.ajax({
+                url: '/freeBoard/uploadAjaxAction', // UploadController의 uploadAjaxAction으로 보냄
+                processData : false,
+                contentType : false,
+                data : formData,
+                type : 'POST',            // post 방식으로 보냄
+                dataType : 'json',
+                success : function(result){
+                    console.log(result);
+                    showUploadImage(result);
+                },
+                error : function(result){
+                    alert("이미지 파일이 아닙니다.");
+	    	    }
+                
+            });
+
+        });
+
+        // 이미지 체크
+        let regex = new RegExp("(.*?)\.(jpg|png|JPG|PNG)$");
+        let maxSize = 1048576; //1MB	
+        
+        // 이미지 체크 메서드
+        function fileCheck(fileName, fileSize){
+
+            if(fileSize >= maxSize){
+                alert("파일 사이즈 초과");
+                return false;
+            } // if
+                
+            if(!regex.test(fileName)){
+                alert("해당 종류의 파일은 업로드할 수 없습니다.");
+                return false;
+            } // if            
+            return true;		            
+        }
+
+        // 이미지 미리보기 출력
+	    function showUploadImage(uploadResultArr){
+            // 전달받은 데이터 검증
+            if(!uploadResultArr || uploadResultArr.length == 0){return}
+            
+            let uploadResult = $("#uploadResult");  
+            let obj = uploadResultArr[0];    
+            let str = "";  
+            let fileCallPath = encodeURIComponent(obj.uploadPath.replace(/\\/g, '/') + "/s_" + obj.uuid + "_" + obj.fileName);
+		
+            str += "<div id='result_card'>";
+            str += "<img src='/display?fileName=" + fileCallPath +"'>";
+            str += "<div class='imgDeleteBtn' data-file='" + fileCallPath + "'>x</div>";
+            str += "</div>";
+
+            uploadResult.append(str);     
+    	}
+
+    // 이미지 삭제 버튼 동작
+	$("#uploadResult").on("click", ".imgDeleteBtn", function(e){
+		
+		deleteFile();
+		
+	});
+
+    // 파일 삭제 메서드
+	function deleteFile(){
+		
+		let targetFile = $(".imgDeleteBtn").data("file");
+		
+		let targetDiv = $("#result_card");
+		
+		$.ajax({
+			url: '/freeBoard/deleteFile',
+			data : {fileName : targetFile},
+			dataType : 'text',
+			type : 'POST',
+			success : function(result){
+				console.log(result);
+				
+				targetDiv.remove();
+				$("input[type='file']").val("");
+				
+			},
+			error : function(result){
+				console.log(result);
+				
+				alert("파일을 삭제하지 못하였습니다.")
+			}
+		});
+	}
+    </script>
 
 
     <!-- 메인화면 자바스크립트 -->

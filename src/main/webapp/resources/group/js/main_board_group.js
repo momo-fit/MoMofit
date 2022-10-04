@@ -1,3 +1,4 @@
+
 // 좋아요 이미지 클릭시 숫자 올라가는 제이쿼리
 $(function () {
 
@@ -11,6 +12,19 @@ $(function () {
         }
     })
 
+});
+
+
+// 수정일자 - 코드수정필요
+$(function () {
+    $('#edit').change(function() {
+        var state = $('#edit').val();
+        if ( state !== ' ' ) {
+            $('#edit').show();
+        } else {
+            $('#edit').hide();
+        }
+    })
 });
 
 // 댓글창 나왔다 숨기는 자바스크립트

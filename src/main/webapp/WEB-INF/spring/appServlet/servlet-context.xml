@@ -29,13 +29,41 @@
 		 <beans:property name="maxUploadSizePerFile" value="2097152"/>
 		 <beans:property name="preserveFilename" value="true"/>
 		 <beans:property name="uploadTempDir" value="file:///C:/Temp"/> 
+
 	</beans:bean>
+
+	<!-- 암호화를 위한 bean -->
+	<beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+
+	<beans:bean id="LoginInterceptor" class="org.zerock.momofit.interceptor.login.LoginInterceptor"/>
+	<beans:bean id="LogoutInterceptor" class="org.zerock.momofit.interceptor.login.LogoutInterceptor"/>
+	<beans:bean id="AuthInterceptor" class="org.zerock.momofit.interceptor.login.AuthInterceptor"/>
 	
+	<interceptors>
+		<interceptor>
+			<mapping path="/signin" />
+			<beans:ref bean="LoginInterceptor" />
+		</interceptor>
+
+		<interceptor>
+			<mapping path="/signout" />
+			<beans:ref bean="LogoutInterceptor" />
+		</interceptor>
+
+		<interceptor>
+			<mapping path="/mypage/*" />
+			<beans:ref bean="AuthInterceptor" />
+		</interceptor>
+
+	</interceptors>
+
+	<!-- 화면을 표시하는 용도 -->
+	<view-controller path="/signout" view-name="/main/main" status-code="200"/>
+		
 	<context:component-scan base-package="org.zerock.momofit.listener" />
 	<context:component-scan base-package="org.zerock.momofit.controller" />
 	<context:component-scan base-package="org.zerock.momofit.config"/>
 	<context:component-scan base-package="org.zerock.momofit.repository"/>
 	<context:component-scan base-package="org.zerock.momofit.interceptor"/>
-
 	
 </beans:beans>

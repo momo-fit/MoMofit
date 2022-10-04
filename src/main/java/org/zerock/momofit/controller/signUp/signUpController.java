@@ -42,7 +42,7 @@ public class signUpController {
 
 			rttrs.addFlashAttribute("result", (result)? "회원가입에 성공했습니다" : "회원가입에 실패했습니다." );
 			
-			return "redirect:/signin";
+			return "redirect:/";
 			
 		}catch (Exception e) {
 			throw new ControllerException(e);
