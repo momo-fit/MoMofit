@@ -1,4 +1,4 @@
-package org.zerock.momofit.interceptor;
+package org.zerock.momofit.interceptor.chat;
 
 import java.util.Map;
 

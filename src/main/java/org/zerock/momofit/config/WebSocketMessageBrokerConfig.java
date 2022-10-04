@@ -6,8 +6,8 @@ import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
-import org.zerock.momofit.interceptor.GroupChatHttpHandshakeInterceptor;
-import org.zerock.momofit.interceptor.StompMessageInterceptor;
+import org.zerock.momofit.interceptor.chat.GroupChatHttpHandshakeInterceptor;
+import org.zerock.momofit.interceptor.chat.StompMessageInterceptor;
 
 import lombok.AllArgsConstructor;
 

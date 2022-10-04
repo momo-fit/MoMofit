@@ -238,7 +238,14 @@
                 console.log("그룹장 : ",admin_user_no);
 
                 // 그룹장 닉네임 (처음 index는 항상 방장!)
-                admin_user_nickname = listVO[0].nickname;
+
+                for(var i=0, len=listVO.length; i < len ; i++){
+
+                    if(listVO[i].group_user_no == admin_user_no){
+                        admin_user_nickname = listVO[i].nickname;
+                    }
+
+                }
                 console.log("그룹장 닉네임 : ", admin_user_nickname);
 
                 var group_img = data.group_img;
