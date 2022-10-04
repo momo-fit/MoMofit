@@ -20,6 +20,7 @@
 		<jsp prefix="/WEB-INF/views/" suffix=".jsp" />
 	</view-resolvers>
 	
+	<view-controller path="/board/trade/writing" view-name="/board/trade/writing" status-code="200" />
 	
 	<context:component-scan base-package="org.zerock.momofit.controller" />
 	
