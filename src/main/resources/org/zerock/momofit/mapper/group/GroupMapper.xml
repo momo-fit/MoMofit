@@ -16,19 +16,23 @@
 
 	<!-- criteria(검색조건) -->
  <sql id="criteria">
-        <trim prefix="AND (" suffix=")" prefixOverrides="OR">
+        <trim prefix="(" suffix=") AND" prefixOverrides="OR">
             <foreach collection="typeArr" item="type">
                 <trim prefix="OR">
                     <choose>
                         <when test="type == 'N'.toString()">
-                            title like '%'||#{keyword}||'%' 
+                            group_name like '%'||#{keyword}||'%' 
                         </when>
                         <when test="type == 'S'.toString()">
-                            content like '%'||#{keyword}||'%' 
+                            sports like '%'||#{keyword}||'%' 
                         </when>
                         <when test="type == 'L'.toString()">
-                            writer like '%'||#{keyword}||'%' 
+                            group_loc like '%'||#{keyword}||'%' 
                         </when>
+                        <otherwise>
+                        	group_name like '%'||#{keyword}||'%' OR sports like '%'||#{keyword}||'%' 
+                        	OR group_loc like '%'||#{keyword}||'%'
+                        </otherwise>
                     </choose>
                 </trim>
             </foreach>
@@ -42,15 +46,19 @@
 		SELECT /*+ index_desc(groups) */ 
 			*
 		FROM GROUPS
-
+		where
 		<!-- 키워드가 입력되었다면 검색조건 발동 -->
 
 		<if test="keyword != null">
         	<include refid="criteria"></include> 
         </if>
-    
+    	group_no >  (#{currPage} -1) * #{amount}
+    	
 		OFFSET (#{currPage} -1 ) * #{amount} ROWS
 		FETCH NEXT #{amount} ROWS ONLY
+		
+		
+
 
 	</select>
 

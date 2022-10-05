@@ -90,7 +90,7 @@ public class GroupMapperTests {
 		
 		Criteria cri = new Criteria();
 		cri.setKeyword("강남구");
-//		cri.setType("C");
+		cri.setType("N");
 		
 		List<GroupVO> list = this.mapper.getListWithPaging(cri);
 			

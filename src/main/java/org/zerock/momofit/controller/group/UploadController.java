@@ -159,6 +159,7 @@ public class UploadController {
 			file = new File(originFileName);
 			
 			file.delete();
+
 			
 		} catch(Exception e) {
 			

@@ -115,34 +115,66 @@
 
                         <!-- 검색부분 -->
                         <div class="group_header">
-                            <form action="/group/list" method="get" class="search">
-                                <input type="search" placeholder="모임검색" name="keyword">
+                            <form action="/group/list" method="get" class="searchForm">
 
-                                <select name="keyword2" class="sport">
-                                    <option value="0">관심운동</option>
-                                    <option value="헬스/크로스핏">헬스/크로스핏</option>
-                                    <option value="요가/필라테스">요가/필라테스</option>
-                                    <option value="등산">등산</option>
-                                    <option value="런닝">런닝</option>
-                                    <option value="싸이클">싸이클</option>
-                                    <option value="축구/풋살">축구/풋살</option>
-                                    <option value="농구">농구</option>
-                                    <option value="야구">야구</option>
-                                    <option value="테니스">테니스</option>
-                                    <option value="배드민턴">배드민턴</option>
-                                    <option value="기타">기타</option>
-                                </select>
+                                <div class="search_area">
 
-                                <div class="make_group_address">
-                                    <text class="font-16-500">지역</text>
-                                    <select name="addressRegion" id="addressRegion" ></select>
-                                    <select name="keyword3" id="addressDo" ></select>
-                                    <select name="keyword3" id="addressSiGunGu"></select>
+                                    <!-- c:out 의 3항 연산 : 페이지를 이동하였을 때 옵션이 선택되어 있도록 하기 위함 -->
+                                    <select name="type">
+                                        <option value="" <c:out value="${pageMaker.cri.type == null?'selected':'' }"/>>선택하세요</option>
+                                        <option value="N" <c:out value="${pageMaker.cri.type eq 'N'?'selected':'' }"/>>모임명</option>
+                                        <option value="S" <c:out value="${pageMaker.cri.type eq 'S'?'selected':'' }"/>>운동명</option>
+                                        <option value="L" <c:out value="${pageMaker.cri.type eq 'L'?'selected':'' }"/>>지역</option>
+                                        <option value="NSL" <c:out value="${pageMaker.cri.type eq 'NSL'?'selected':'' }"/>>모임명 + 운동명 + 지역</option>
+                                    </select>   
+                                   
+
+                                    <!-- <input type="hidden" name="type"> 
+                                    <button type="button" id="N"  value="N">이름검색</button>
+                                    <button type="button" id="S"  value="S">운동</button>
+                                    <button type="button" id="L"  value="L">지역</button> -->
+
+
+                                    <!-- 모임 검색 -->
+                                    <input type="text" placeholder="모임검색" name="keyword" value="${pageMaker.cri.keyword }" id="key">
+                                                                
+              
+                                    <button class="search_btn"><i class="fa-solid fa-magnifying-glass"></i></button> 
+
+                                    <!-- 운동 검색 -->
+                                    <!-- <select name="keyword2" class="sport" >
+                                        <option value="">관심운동</option>
+                                        <option value="헬스/크로스핏">헬스/크로스핏</option>
+                                        <option value="요가/필라테스">요가/필라테스</option>
+                                        <option value="등산">등산</option>
+                                        <option value="런닝">런닝</option>
+                                        <option value="싸이클">싸이클</option>
+                                        <option value="축구/풋살">축구/풋살</option>
+                                        <option value="농구">농구</option>
+                                        <option value="야구">야구</option>
+                                        <option value="테니스">테니스</option>
+                                        <option value="배드민턴">배드민턴</option>
+                                        <option value="기타">기타</option>
+                                    </select> -->
+
+                                    <!-- 지역 검색 -->
+                                    <!-- <div class="make_group_address">
+                                        <text class="font-16-500">지역</text>
+                                        <select name="addressRegion" id="addressRegion" ></select>
+                                        <select name="keyword3" id="addressDo" ></select>
+                                        <select name="keyword3" id="addressSiGunGu" ></select>
+                                    </div> -->
                                 </div>
 
-                                <button class="search_btn"><i class="fa-solid fa-magnifying-glass"></i></button>
-
                             </form>
+
+                            <form id="actionForm" action="group/list" method="get">
+                                <input type="hidden" name="currPage" value="${pageMaker.cri.currPage}">
+                                <input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+                                <input type="hidden" name="type" value="${pageMaker.cri.type }">
+                                <input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
+                            </form>
+
                         </div>
                         <hr class="hr-1"/>
 

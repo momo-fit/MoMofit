@@ -16,8 +16,12 @@ public class Criteria {
 	private int pagesPerPage = 5;		// 한 페이지당 보여줄 페이지 목록 길이
 	
 	private String type;				// 검색유형
-	private String keyword;				//
-
+	private String keyword;				
+			
+	
+	public String[] getTypeArr() {
+		return type == null ? new String[] {} : type.split("");
+	}
 
 	
 	public String getPagingUri() {
