@@ -175,6 +175,9 @@ public class MyInfoModifyController {
 				PrivateKey privateKey = (PrivateKey)session.getAttribute(SharedScopeKeys.PRIVATE_KEY);
 				String decrypted = RSAEncryptionUtil.decrypt(dto.getPass(), privateKey);
 				
+				// -- 사용한 PrivateKey는 삭제
+				session.removeAttribute(SharedScopeKeys.PRIVATE_KEY);
+				
 				dto.setPass(decrypted);
 				
 			} // if
