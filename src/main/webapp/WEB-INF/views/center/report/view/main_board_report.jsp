@@ -71,23 +71,23 @@
 
                     <div class="board_name font-20-500">
                         <img src="/resources/center/report/img/cs.png" height="25px">
-                        신고
+                        
                     </div>
 
                     <div class="title font-28-400">
-                        신고합니다 글 제목 입니다 
+                        
                     </div>
                 
                     <div class="info"> 
                         <div class="info2">
-                            <span class="font-12-400"> 작성자 <b class="font-12-400">홍길동</b> </span>
+                            <span class="font-12-400"> 작성자 <b class="reportNickname font-12-400"></b> </span>
                             <div class="space1"></div>
-                            <span class="font-12-400"> 작성시간 <b class="font-12-400">2022.08.15 12:37</b> </span>
+                            <span class="font-12-400"> 작성시간 <b class="reportDate font-12-400"></b> </span>
                             <div class="space1"></div>
                         </div>
               
                         <div class="edit_delete">
-                            <a href="modify"><span class="font-12-400"> 수정 </span></a>
+                            <a href="" id="modifyLink"><span class="font-12-400"> 수정 </span></a>
 
                             <div class="space1"></div>
 
@@ -102,18 +102,13 @@
                     <div class="content_wrap">
     
                         <!-- 본문 이미지 -->
-                        <div>
-                            <img src="https://picsum.photos/id/684/600/400" alt="picsum img"> <br><br>
+                        <div id="repotImg">
+                            
                         </div>
                         
                         <!-- 본문 텍스트 -->
-                        <div class="font-14-400">
-                            글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 <br>
-                            글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 <br>
-                            글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 <br> <br>
-                            글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 <br>
-                            글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 <br>
-                            글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 <br> <br>
+                        <div class="font-14-400" id="repotContent">
+                           
                         </div>
 
                     </div>
@@ -136,3 +131,61 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
+
+<script>
+
+    $(()=> {
+        const urlParams = new URL(location.href).searchParams;
+        const report_no = urlParams.get('report_no');
+
+        $.ajax({
+            method : 'get',
+            url : '/center/report//report-view',
+            dataType: 'json',
+            data : {'reportNum' : report_no},
+            async: false,
+            success : ((data)=> {
+                reportView(data);
+            })
+        })
+
+        function imgLoad() {
+            // 이미지 불러오기 ( 일시 보류 )
+        }
+
+
+        function reportView(data) {
+
+            $('#modifyLink').attr('href', '/center/report/modify?report_no='+report_no);
+
+            console.log(data.content.title);
+
+            let reportTitle = $('.Title');
+            let title = data.content.title;
+
+            let reportNickname = $('.reportNickname');
+            let nickname = data.content.nickname;
+
+            let reportDate = $('.reportDate');
+            let Date = data.content.report_date;           
+
+            if(data.content.img_check == 1){
+                let repotImg = $('#repotImg');
+                let img = '';
+            }
+            
+            let repotContent = $('#repotContent');
+            let content = data.content.text;
+
+            reportTitle.append(title);
+            reportNickname.append(nickname);
+            reportDate.append(Date);
+            repotContent.append(content);
+
+        }
+
+
+
+    })
+
+</script>

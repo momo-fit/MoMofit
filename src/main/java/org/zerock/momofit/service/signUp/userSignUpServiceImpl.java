@@ -42,7 +42,7 @@ public class userSignUpServiceImpl implements userSignUpService {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		
 		String today = sdf.format(date);
-		String targetDir = SharedScopeKeysCommon.UPLOAD_PATH+"uploadFile/"+today;
+		String targetDir = SharedScopeKeysCommon.UPLOAD_PATH+today;
 		
 		String original = file.getOriginalFilename();
 		

@@ -15,7 +15,7 @@
 	</select>
 
 	<!-- criteria(검색조건) -->
- <sql id="criteria">
+	<sql id="criteria">
         <trim prefix="AND (" suffix=")" prefixOverrides="OR">
             <foreach collection="typeArr" item="type">
                 <trim prefix="OR">

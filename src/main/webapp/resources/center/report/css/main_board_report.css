@@ -65,3 +65,8 @@ section {
 	border: none;
     background: none;
 }
+
+#repotContent{
+    min-width: 1050px;
+    min-height: 500px;
+}

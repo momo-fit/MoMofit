@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>main</title>
+    <title>신고 게시판</title>
     <!-- 부트스트랩 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -37,7 +37,9 @@
     <link rel="stylesheet" href="/resources/include/css/main_footer.css">
     <!-- CSS : main 미디어 태그 -->
     <link rel="stylesheet" href="/resources/common/css/main_mediatag.css">     
-
+    <style>
+       
+    </style>
 </head>
 
 <body>
@@ -92,19 +94,12 @@
                                                 <th class="menu_num"><text class="font-16-500">번호</text></th>
                                                 <th class="menu_title"><text class="font-16-500">제목</text></th>
                                                 <th class="menu_writer"><text class="font-16-500">작성자</text></th>
-                                                <th class="menu_date"><text class="font-16-500">작성일</text></th>
-                                                <th class="menu_up"><text class="font-16-500">추천수</text></th>
+                                                <th class="menu_date"><text class="font-16-500">작성일</text></th>            
                                             </tr>
                                         </thead>
 
-                                        <tbody>
-                                            <tr class="contnet">
-                                                <td><div>1</div></td>
-                                                <td><div><a href="/center/report/view" class="aTile">테스트 제목</a><div class="inquery_status"><t class="font-12-400">처리중</t></div></div></td>
-                                                <td><div>닉네임</div></td>
-                                                <td><div>2022.08.19</div></td>
-                                                <td><div>77</div></td>
-                                            </tr>                                                                                
+                                        <tbody class="table_body">
+                                                                                                                          
                                         </tbody>
                                     
                                     </table>
@@ -126,7 +121,15 @@
                                 <a href="/center/report/register" class="board_write">
                                     <button><i class="fa-solid fa-pencil">글쓰기</i></button>
                                 </a>
-                            </div>                           
+                            </div>  
+
+                            <div id="report-paging-div">
+                                <ul>
+
+                                </ul>
+                            </div>
+
+                                                     
 
                         </div>
                     </div>
@@ -134,14 +137,125 @@
                 </div>
             </div>
 
-            
-
         </section>
 
         <!-- 하단 Footer -->
         <%@ include file = "/WEB-INF/views/include/footer.jsp" %>
 
     </div>
+
+        
+    <script>
+
+
+
+        $(() => {
+            
+            function listSelect(page) {
+                $.ajax({
+                    url:'/center/report/report-list',
+                    method:'get',
+                    data: {'page':page},
+                    dataType: 'json',
+                    async: false,
+                    success : ((data)=> {
+                        console.log(data);
+                        view(data, page);
+                        
+                    }),
+                    error:(() => {
+                        console.log("통신에러");
+                    })
+
+                })
+            }
+
+
+            // 기본 페이지 
+            var page = 1;
+
+            listSelect(page);
+
+
+            function view(data, page) {
+
+                let list = data.list;
+                let pageMaker = data.pageMaker;
+
+                let str = '';
+
+                $.each(data.list , ((i)=> {
+                        str +=
+                        `<tr class="contnet">
+                            <td><div>\${list[i].report_no}</div></td>
+                            <td><div><a href='/center/report/view/?report_no=\${list[i].report_no}' class='aTile'>\${list[i].title}</a><div class='inquery_status'><t class='font-12-400'>\${list[i].report_result}</t></div></div></td>
+                            <td><div>\${list[i].nickname}</div></td>
+                            <td><div>\${list[i].report_date}</div></td>
+                        </tr>`;
+                }))
+                $('.table_body').html(str);
+                
+                if(($('.inquery_status>t').text()) == 0 ){
+                    $('.inquery_status>t').text('처리중');
+                    $('.inquery_status').css("background","gray");
+                } else {
+                    $('.inquery_status>t').text('처리완료');
+                    $('.inquery_status').css("background","rgb(20 167 255)");
+                }
+
+                // 페이징
+                let pageination = $('#report-paging-div ul');
+                let pageli = '';
+
+                if(pageMaker.prev) {
+                    pageli += `<li class="mb-prev font-16-700"><</li>`;
+
+                }
+
+                for(let pageNum=pageMaker.startPage; pageNum <= pageMaker.endPage; pageNum++ ){
+                    if(pageNum == 0){
+                        break;  
+                    } 
+
+                    if(pageMaker.cri.currPage == pageNum){
+                        pageli +=  `<li class="mb-currPage mb-currPage-step font-16-700">\${pageNum}</li>`
+                    } else {
+                        pageli += `<li class="mb-currPage-step font-16-700">\${pageNum}</li>`
+                    }
+                    
+                }
+
+                if( pageMaker.next) {
+                    pageli += `<li class="mb-next font-16-900">></li>`;
+                }
+
+                pageination.html(pageli);
+
+                // 페이지 이동
+                $(".mb-currPage-step").on('click', function() {
+                    page = $(this).text(); 
+
+                    listSelect(page);
+                })
+                
+                $(".mb-next").on('click', (()=> {
+                    page = pageMaker.endPage + 1;
+
+                    listSelect(page);
+                }))
+
+                $(".mb-prev").on('click', (()=> {
+                    page = pageMaker.startPage - 1;
+
+                    listSelect(page);
+                }))
+               
+            }
+        
+
+        })
+    </script>   
+
 
 
     <!-- 메인화면 자바스크립트 -->
@@ -155,5 +269,6 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 </body>
+
 
 </html>
