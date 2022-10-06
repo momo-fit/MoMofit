@@ -218,13 +218,7 @@ public class GroupController {
 		return "redirect:/group/detail";
 	} // delegate
 	
-	// 7. 모임채팅
-	@GetMapping("/chatting")
-	public String chatting() {
-		log.trace("chatting() invoked.");
-		
-		return "/group/chat";
-	}
+
 	
 
 } // class

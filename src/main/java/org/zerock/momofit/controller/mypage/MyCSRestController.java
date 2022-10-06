@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,10 +14,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.zerock.momofit.common.SharedScopeKeys;
 import org.zerock.momofit.domain.mypage.Criteria;
 import org.zerock.momofit.domain.mypage.MyQnaVO;
 import org.zerock.momofit.domain.mypage.MyReportVO;
 import org.zerock.momofit.domain.mypage.PageDTO;
+import org.zerock.momofit.domain.signIn.LoginVO;
+import org.zerock.momofit.domain.signUp.UserDTO;
 import org.zerock.momofit.exception.ControllerException;
 import org.zerock.momofit.service.mypage.MyCSService;
 
@@ -40,13 +45,19 @@ public class MyCSRestController {
 			)
 	public ResponseEntity<Map<String, Object>> getMyPageQnaList(
 			@PathVariable("result") int result,
-			@PathVariable("page") int page
+			@PathVariable("page") int page,
+			HttpSession session
 			) throws ControllerException{
 		log.trace("getMyPageQnaList({}, {}, {}) invoked.", result, page);
 	
 		try {
-			// Step.1 : 유저정보 획득
-			int user_no = 1;
+			//Step.1 : Session으로부터 유저 정보 획득하여 Criteria에 저장
+			//------------------------------------------------
+			// 세션객체로부터, 회원정보 얻기
+			LoginVO vo = (LoginVO) session.getAttribute(SharedScopeKeys.USER_KEY);
+			
+			int user_no = vo.getUser_no();	// 임시코드 : 1번 User NO조회
+			//------------------------------------------------
 			
 			Criteria cri = new Criteria();
 			
