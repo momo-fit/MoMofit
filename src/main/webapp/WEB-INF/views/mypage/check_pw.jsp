@@ -61,7 +61,7 @@
 
     <script>
     
-        var resultPass = '${failCheckPass}';
+        var resultPass = '${__ERROR__}';
 
         console.log("결과 : ", resultPass);
 
@@ -111,7 +111,6 @@
                                     <button class="btn btn-primary" id="pw_check_btn" type="button">확 인</button>
                                 </div>
                             </form>
-                          
                             </div>
                         </div>
     
@@ -126,8 +125,7 @@
 
     <script>
 
-
-
+ 
         $(function() {
 
             $("#pw_check_btn").on('click', function (){
@@ -138,14 +136,14 @@
 
                 //암호화할 문장
                 var pass = $('#pw').val();
-                console.log("암호화할 문장:",pass);
+                // console.log("암호화할 문장:",pass);
 
                 var serverPublicKey = $("#serverPublicKey").val();
 
                 crypt.setPublicKey(serverPublicKey);
 
                 var encrypted = crypt.encrypt(pass);
-                console.log("서버 공개키로 암호화 : ", encrypted);
+                // console.log("서버 공개키로 암호화 : ", encrypted);
 
                 $('#sendpw').val(encrypted);
 
@@ -155,10 +153,6 @@
             })
 
         })
-
-
-        
-
     </script>
 
 
