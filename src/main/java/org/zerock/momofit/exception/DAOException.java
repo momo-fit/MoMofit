@@ -9,9 +9,11 @@ public class DAOException extends Exception {
 		super(message);
 	} // constructor
 	
+
 	public DAOException(Exception e) {
 		super(e);
 	} // constructor
 
 
 } // end class
+

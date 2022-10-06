@@ -110,7 +110,7 @@
                     <div class="groups">
                         <div id="group_h3">
                             <h3 class="font-28-500">	
-                                &#9885;<span class="linear-gradient">모임</span></h3>
+                                <span class="linear-gradient">모든 모임</span></h3>
                         </div>
 
                         <!-- 검색부분 -->
@@ -206,7 +206,6 @@
                                             <p class="font-14-500" style="margin-bottom: 5px;" >
                                                 &#128293;일정 - <fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${group.schedule}" />
                                                 
-                                                No.<c:out value="${group.group_no}" />
                                             </p>
                                             
                                             <p class="font-16-500" style="margin-bottom: 5px;" ><c:out value="${group.group_name}"/></p>

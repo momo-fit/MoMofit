@@ -28,5 +28,6 @@ public class GroupVO {
 	private String path;
 	// 멤버수
 	private Integer member_count;
-	
+
 }
+

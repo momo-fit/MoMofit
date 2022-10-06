@@ -33,5 +33,5 @@ public class GroupDTO {
 	// 멤버수
 	private Integer member_count;
 
-	
 }
+

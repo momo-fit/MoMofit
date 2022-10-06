@@ -1,17 +1,16 @@
 package org.zerock.momofit.service.signUp;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import org.zerock.momofit.common.SharedScopeKeysCommon;
 import org.zerock.momofit.domain.signUp.UserDTO;
-import org.zerock.momofit.domain.signUp.UserVO;
 import org.zerock.momofit.exception.ServiceException;
 import org.zerock.momofit.mapper.signUpMapper.signUpMapper;
 
@@ -27,16 +26,23 @@ public class userSignUpServiceImpl implements userSignUpService {
 	
 	@Setter(onMethod_ = {@Autowired})
 	private signUpMapper signUpMapper;
-
+	
 	@Override
 	public boolean UserSignUp(UserDTO dto, MultipartFile file) throws ServiceException {
 		log.trace("UserSignUp() invoked.");		
 		
+		// pw 암호화
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String salt = "_SALT";
+		String Pass = encoder.encode(salt+dto.getPass());
+		dto.setPass(Pass);
+		
+		// 파일 저장 저리
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		
 		String today = sdf.format(date);
-		String targetDir = "C:/project/uplodeFile/"+today;
+		String targetDir = SharedScopeKeysCommon.UPLOAD_PATH+"uploadFile/"+today;
 		
 		String original = file.getOriginalFilename();
 		
@@ -45,11 +51,10 @@ public class userSignUpServiceImpl implements userSignUpService {
 		
 		File folder = new File(targetDir);
 		
+		// 해당폴더 없을시 생성
 		if(!folder.isDirectory()) {
 			folder.mkdirs();
 		} // if
-		
-		log.info("original : {}", original);
 		
 		try {	
 			if( original != "") {
