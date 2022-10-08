@@ -84,13 +84,13 @@
                         <div class="mypage-content-title font-24-700">나의 모임</div>
                         <div class="mypage-border"></div><br>
                         <!-- 진행중인 모임 버튼 -->
-                        <button class="mypage-group-btn mypage-blue-btn" onClick="change_ing();"> 
+                        <!-- <button class="mypage-group-btn mypage-blue-btn" onClick="change_ing();"> 
                             <span>진행중인 모임</span>
-                        </button>
+                        </button> -->
                         <!-- 종료된 모임 버튼 -->
-                        <button class="mypage-group-btn" onClick="change_end();"> 
+                        <!-- <button class="mypage-group-btn" onClick="change_end();"> 
                             <span>종료된 모임</span>
-                        </button>	
+                        </button>	 -->
     
                         <!-- 진행중인 모임 박스 -->
                         <div class="mypage-group-box">
@@ -244,7 +244,7 @@
 
                                         
                         str +=         `<!-- 모임 정보 -->
-                                        <p class="mypage-group-p font-20-700"><a href="#">\${group_name}</a></p>
+                                        <p class="mypage-group-p font-20-700"><a href="/group/detail?group_no=\${group_no}">\${group_name}</a></p>
                                         <p class="mypage-group-p">\${group_loc} \${format_schedule}</p>
                                         <button class="mypage-group-p">\${member_count}/\${member_max} 참가중</button>
                                     </div>
@@ -252,12 +252,14 @@
                                     <div class="mypage-group-func-wrapper">`
 
                                     if(uno == group_admin_no){
-                                        str += `<a href=# class="a-edit-group"><img src="/resources/mypage/img/edit.png" class="mypage-group-edit-photo"/></a>`
+                                        str += `<a href="/group/modify?group_no=\${group_no}" class="a-edit-group"><img src="/resources/mypage/img/edit.png" class="mypage-group-edit-photo"/></a>`
                                     } else {
                                         str += `<div class="none-group-edit"></div>`
                                     } 
 
-                        str +=         `<div><button class="mypage-group-func-btn mypage-blue-btn btn-group-chat" value="\${group_no}"> 
+                        str +=        
+                                    `<div>
+                                        <button class="mypage-group-func-btn mypage-blue-btn btn-group-chat" value="\${group_no}"> 
                                             <span class="font-14-500">채팅</span>
                                         </button>
                                         <button class="mypage-group-func-btn mypage-gray-btn"> 

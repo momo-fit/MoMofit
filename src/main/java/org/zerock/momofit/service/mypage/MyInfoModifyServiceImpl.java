@@ -24,13 +24,18 @@ public class MyInfoModifyServiceImpl implements MyInfoModifyService {
 	
 	private MyInfoModifyMapper myInfoModifyMapper;
 	
-	// 1. Password 유효성 CHECK
+	/*
+	 * 1. 패스워드 유효성 검사
+	 * @Param : Client로부터 전송 된 패스워드
+	 * @Param : 고객 user_no
+	 * 
+	 * @return : 유효성 검사 참/거짓
+	 */
 	@Override
 	public boolean checkValidPass(String pass, int user_no) throws ServiceException {
 		log.trace("checkValidPass() invoked.");
 		
-		try {
-			
+		try {			
 			// password 복호화
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			
@@ -101,7 +106,7 @@ public class MyInfoModifyServiceImpl implements MyInfoModifyService {
 			int updateResult = this.myInfoModifyMapper.updateUserInfo(dto);
 			log.info("\t+ dto.getProfile_name :{}", dto.getProfile_name());
 			
-			// Default 이미지 시, 기본 물리적 이미지 삭제
+			// Default 이미지 시, 기본 물리적 이미지 삭제 / 단 DB 업데이트는 성공해야함
 			if(dto.getProfile_name() == null || dto.getProfile_name().isBlank() && updateResult == 1) {
 				log.info("default Img selected. And Delete File....");
 				FileUploadUtil.deleteFile(vo.getProfile_path(), vo.getProfile_name(), vo.getProfile_temp());

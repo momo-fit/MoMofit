@@ -55,7 +55,8 @@ public class MyGroupRestController {
 			// 세션객체로부터, 회원정보 얻기
 			LoginVO vo = (LoginVO) session.getAttribute(SharedScopeKeys.USER_KEY);
 			
-			int user_no = vo.getUser_no();	// 임시코드 : 1번 User NO조회
+			int user_no = vo.getUser_no();
+			log.info("\t+ user_no : {}", user_no);
 			//------------------------------------------------
 			
 			Criteria cri = new Criteria();

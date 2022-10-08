@@ -251,7 +251,7 @@
     
                                     <tr name3 class="name3 font-14-400">
                                         <th>한줄 소개</th>
-                                        <td><input type="text" class="form-control" name="profile_info" placeholder="(선택)" value="<c:out value='${sessionScope.__USER__.profile_info}'/>">
+                                        <td><input type="text" class="form-control" name="profile_info" placeholder="(선택)" value="<c:out value='${__USER__.profile_info}'/>">
                                         </td>
                                     </tr>
     
@@ -280,7 +280,7 @@
         var myUserSports2 = "<c:out value='${sessionScope.__USER__.sports2}'/>";
         var myUserSports3 = "<c:out value='${sessionScope.__USER__.sports3}'/>";
 
-        var serverPublicKey = "<c:out value='${sessionScope.__PUBLIC_KEY__}'/>";
+        var serverPublicKey = "<c:out value='${__PUBLIC_KEY__}'/>";
 
         // 이미지 - 기본버튼클릭
         $("#currImg").on('click', function (){

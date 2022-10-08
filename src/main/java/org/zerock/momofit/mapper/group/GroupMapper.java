@@ -2,6 +2,7 @@ package org.zerock.momofit.mapper.group;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.zerock.momofit.domain.group.Criteria;
 import org.zerock.momofit.domain.group.GroupDTO;
 import org.zerock.momofit.domain.group.GroupVO;
@@ -22,7 +23,7 @@ public interface GroupMapper {
 	public abstract List<GroupVO> likeSelect();
 
 	// 2. 게시글 등록 (Create) 
-	public abstract void insert(GroupDTO dto) throws DAOException;
+	public abstract int insert(GroupDTO dto) throws DAOException;
 	public abstract int insertSelectKey(GroupDTO dto) throws DAOException;		// 새로 입력된 게시글의 bno를 반환받기
 
 	// 2-2. 이미지 데이터 반환
@@ -39,5 +40,11 @@ public interface GroupMapper {
 
 	// 6. 총 게시물의 개수 반환
 	public abstract int getTotalCount() throws DAOException;
+	
+	// 7. 그룹멤버에 등록
+	public abstract int joinGroup(@Param("group_no") int group_no, @Param("user_no") int user_no) throws DAOException;
+	
+	// 8. 그룹 삭제 시, 그룹멤버 삭제(그룹 자체를 삭제)
+	public abstract int deleteGroupMember(@Param("group_no") int group_no) throws DAOException;
 
 }

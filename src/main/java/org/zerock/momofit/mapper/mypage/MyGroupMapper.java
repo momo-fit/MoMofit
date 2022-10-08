@@ -17,6 +17,4 @@ public interface MyGroupMapper {
 	// 2. 내가 참여한 그룹의 총 "개수" 구하기
 	public abstract int getMyGroupCount(@Param("user_no")int user_no) throws DAOException;
 	
-	
-	
 } // end interface

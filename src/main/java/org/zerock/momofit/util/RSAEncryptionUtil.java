@@ -60,6 +60,7 @@ public class RSAEncryptionUtil {
 		Cipher cipher = Cipher.getInstance("RSA");
 		
 		// Bas64기반 바이트 배열로
+		// 
 		byte[] byteEncrypted = Base64.getDecoder().decode(encrypted.getBytes());
 		
 		// Cipher 초기화 -> (복호화 모드 / PrivateKey 이용)
@@ -87,7 +88,5 @@ public class RSAEncryptionUtil {
 		return Base64.getEncoder().encodeToString(key.getEncoded());
 
 	} // base64EncoderToString
-	
-	
 	
 } // end class
