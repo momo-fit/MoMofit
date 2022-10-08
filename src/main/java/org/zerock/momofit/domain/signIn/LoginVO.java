@@ -24,4 +24,16 @@ public class LoginVO {
 	private String sports2;
 	private String sports3;
 	
+	/* 
+	 * 이미지 파일 확인여부
+	 * @param : profile_name
+	 * 
+	 * return : 빈문자열, 비어있으면 true리턴
+	 */
+	public boolean isEmptyProfileImg() {
+		
+		return this.profile_name == null || this.profile_name.isBlank();
+		
+	} // isProfileImg
+	
 } // end class

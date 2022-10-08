@@ -22,9 +22,12 @@ public class RSAEncryptionUtil {
 
 	private static final int KEY_SIZE = 2048;
 
-	//----------------------
-	// RSA KEY-Pair 생성
-	//----------------------
+	/*
+	 * 1. RSA KEY-Pair 생성
+	 * KEY Pair객체로 PrivateKey와 PublicKey를 얻을 수 있는 객체
+	 * 
+	 * @return : KeyPair
+	 */
 	public static KeyPair createRSAKeyPair() throws NoSuchAlgorithmException {
 		log.trace("createRSAKeyPairToString() invoked.");
 	
@@ -40,9 +43,15 @@ public class RSAEncryptionUtil {
 	
 	} // createKeyPairToSring
 	
-	//-----------------------
-	// PrivateKey로 복호화
-	//-----------------------
+	
+	/*
+	 * 2. Encrypted된 암호문을 복호화
+	 * 
+	 * @Param (encrypted) : 암호화된 문자열
+	 * @Param (privateKey) : PrivateKey -> 복호화 Key
+	 * 
+	 * @return : 복호화가 완료 된 문자열
+	 */
 	public static String decrypt(String encrypted, PrivateKey privateKey) 
 			throws NoSuchAlgorithmException, NoSuchPaddingException, 
 			InvalidKeyException, IllegalBlockSizeException, 
@@ -65,10 +74,14 @@ public class RSAEncryptionUtil {
 		return decrypted;
 	} // decrypt
 	
-	
-	//-----------------------
-	// Base64로 Encoder
-	//-----------------------
+	/*
+	 * 3. Key객체를 Base64방식으로 문자열 Encoding
+	 * Client에서 Base64기반 PublicKey로 Encrypt 사용하므로, 인코딩한다.
+	 * Client 사용 라이브러리 : jsencrypt
+	 * 
+	 * @Param (key) : RSA Key
+	 * @Return : Base64기반 인코딩 된 문자열
+	 */
 	public static String base64EncoderToString(Key key) {
 		
 		return Base64.getEncoder().encodeToString(key.getEncoded());
