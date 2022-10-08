@@ -9,7 +9,14 @@
     id="getQnaListWithPaging" 
     resultType="org.zerock.momofit.domain.mypage.MyQnaVO">
         SELECT /*+ index_desc(qna) */
-            *
+            qna_no,
+            title,
+            text,
+            qna_date,
+            edit,
+            img_check,
+            qna_result,
+            user_no
         FROM
             qna
         WHERE user_no = #{cri.user_no}
@@ -41,7 +48,14 @@
     id="getReportListWithPaging" 
     resultType="org.zerock.momofit.domain.mypage.MyReportVO">
         SELECT /*+ index_desc(report) */
-        *
+        	report_no,
+        	title,
+        	text,
+        	report_date,
+        	edit,
+        	img_check,
+        	report_result,
+        	user_no
         FROM
             report
         WHERE user_no = #{cri.user_no}

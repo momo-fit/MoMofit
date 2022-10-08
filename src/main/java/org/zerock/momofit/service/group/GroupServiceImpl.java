@@ -60,17 +60,31 @@ public class GroupServiceImpl implements GroupService  {
 	
 	
 	// 2. 새로운 게시글 등록
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public boolean register(GroupDTO dto) throws DAOException {
+	public boolean register(GroupDTO dto) throws ServiceException {
 
 		log.info("register..." + dto);
-		
-		String ttt = dto.getGroup_loc();
-		String loc = ttt.replace("," , " ");
-		dto.setGroup_loc(loc);
-		
-		return mapper.insertSelectKey(dto) == 1;
+		try {
+			
+			String ttt = dto.getGroup_loc();
+			String loc = ttt.replace("," , " ");
+			dto.setGroup_loc(loc);
+			
+			// Step.1 : Group생성
+			mapper.insertSelectKey(dto);
+			
+			// Step.2 : Step.1로부터 Group_no획득
+			int group_no = dto.getGroup_no();
+			log.info("\t+ group_no : {}", group_no);
+			int user_no = dto.getUser_no();
+			log.info("\t+ useR_no : {},", user_no);
+			
+			// Step.3 : Group_member(그룹에 속한 사용자) 등록하기
+			return this.mapper.joinGroup(group_no, user_no) == 1;
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
 	}
 
 	// 2-2. 이미지 데이터 반환
@@ -102,12 +116,20 @@ public class GroupServiceImpl implements GroupService  {
 	}
 
 	// 5. 기존 게시글 삭제
+	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public boolean remove(Integer group_no) throws DAOException {
+	public boolean remove(Integer group_no) throws ServiceException {
 		log.info("remove: {}", group_no);
 
-		return mapper.delete(group_no) == 1;
-	}
+		try {
+			mapper.delete(group_no);
+		
+			return mapper.deleteGroupMember(group_no) == 1;
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
+		
+	} // remove
 
 	// 6. 총 게시글 개수 조회	
 	@Override

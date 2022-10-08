@@ -127,31 +127,27 @@
 
  
         $(function() {
-
             $("#pw_check_btn").on('click', function (){
 
-                // generateKeys();
-
+                // JSEncrypt 생성
                 var crypt = new JSEncrypt(2048);
-
                 //암호화할 문장
                 var pass = $('#pw').val();
-                // console.log("암호화할 문장:",pass);
-
+                // Server에서 전송 된 PublicKey를 바인딩
                 var serverPublicKey = $("#serverPublicKey").val();
 
+                // JSEncrypt에 PublicKey 설정
                 crypt.setPublicKey(serverPublicKey);
 
+                // 암호화 진행
+                // Base64타입 문자열
                 var encrypted = crypt.encrypt(pass);
-                // console.log("서버 공개키로 암호화 : ", encrypted);
 
                 $('#sendpw').val(encrypted);
 
                 $('.form-signin').attr('onsubmit', 'return true');
                 $('.form-signin').submit();
-
             })
-
         })
     </script>
 

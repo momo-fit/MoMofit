@@ -80,10 +80,8 @@ public class MyInfoModifyController {
 			// 세션객체로부터, 회원정보 얻기
 			LoginVO vo = (LoginVO) session.getAttribute(SharedScopeKeys.USER_KEY);
 			
-			int user_no = vo.getUser_no();	// 임시코드 : 1번 User NO조회
-			//------------------------------------------------
-			
-			
+			int user_no = vo.getUser_no();
+			//------------------------------------------------				
 			// Step.1 : 개인키(Server)
 			PrivateKey privateKey = 
 					(PrivateKey)session.getAttribute(SharedScopeKeys.PRIVATE_KEY);
@@ -103,24 +101,22 @@ public class MyInfoModifyController {
 				
 				session.setAttribute("SUCCESS_CHECKPASS", "SUCCESS");
 				
-				return "redirect:/mypage/info_modify";
-				
+				return "redirect:/mypage/info_modify";			
 			} else {
-				rttrs.addFlashAttribute(SharedScopeKeys.ERROR_MESSAGE, "패스워드가 일치하지 않습니다.");
+				rttrs.addFlashAttribute(SharedScopeKeys.ERROR_MESSAGE,
+						"패스워드가 일치하지 않습니다.");
 				
-				return "redirect:/mypage/check_pw";
-				
+				return "redirect:/mypage/check_pw";			
 			} // if-else
-			
-			
+					
 		// RSA 복호화 실패 예외처리
 		} catch (IllegalArgumentException e) {
-			rttrs.addFlashAttribute(SharedScopeKeys.ERROR_MESSAGE, "오류가 발생하였습니다. 다시 시도해주십시오.");
+			rttrs.addFlashAttribute(SharedScopeKeys.ERROR_MESSAGE,
+					"오류가 발생하였습니다. 다시 시도해주십시오.");
 			return "redirect:/mypage/check_pw";
 		} catch (Exception e) {			
 			throw new ControllerException(e);		
 		} // try-catch
-		
 
 	} // check_pw_post
 	
@@ -177,12 +173,11 @@ public class MyInfoModifyController {
 				
 				// -- 사용한 PrivateKey는 삭제
 				session.removeAttribute(SharedScopeKeys.PRIVATE_KEY);
+				session.removeAttribute(SharedScopeKeys.PUBLIC_KEY);
 				
 				dto.setPass(decrypted);
 				
 			} // if
-			
-			
 			
 			// SessionScope에서 기존User정보 획득
 			LoginVO vo = (LoginVO)session.getAttribute(SharedScopeKeys.USER_KEY);

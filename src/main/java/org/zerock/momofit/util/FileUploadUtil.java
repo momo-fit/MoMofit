@@ -87,7 +87,6 @@ public class FileUploadUtil {
 		
 	} // makeFolder
 	
-
 	/*
 	 * 3. 파일삭제
 	 * @param : 파일경로, 원본파일명, 임시파일명
@@ -101,6 +100,5 @@ public class FileUploadUtil {
 		deleteFile.delete();
 		
 	} // deleteFile
-	
 	
 } // end class
