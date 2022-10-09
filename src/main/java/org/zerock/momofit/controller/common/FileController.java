@@ -32,11 +32,7 @@ public class FileController {
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
-<<<<<<< HEAD
-		
-=======
 
->>>>>>> 9ae8429b98b26b26588a292ddde42c7457702136
 		return result;
 	}
 
