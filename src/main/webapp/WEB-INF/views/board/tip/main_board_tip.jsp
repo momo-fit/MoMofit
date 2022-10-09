@@ -76,25 +76,25 @@
                     </div>
 
                     <div class="title font-28-400">
-                        운동Tip입니다 글 제목 입니다 
+                        ${tipboard.title}
                     </div>
                 
                     <div class="info"> 
                         <div class="info2">
-                            <span class="font-12-400"> 작성자 <b class="font-12-400">홍길동</b> </span>
+                            <span class="font-12-400"> 작성자 <b class="font-12-400">${tipboard.user_no}</b> </span>
                             <div class="space1"></div>
-                            <span class="font-12-400"> 조회수 <b class="font-12-400">1</b> </span>
+                            <span class="font-12-400"> 조회수 <b class="font-12-400">${tipboard.hits}</b> </span>
                             <div class="space1"></div>
-                            <span class="font-12-400"> 작성시간 <b class="font-12-400">2022.08.15 12:37</b> </span>
+                            <span class="font-12-400"> 작성시간 <b class="font-12-400"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${tipboard.board_date}" /></b> </span>
                             <div class="space1"></div>
                         </div>
               
                         <div class="edit_delete">
-                            <a href="modify"><span class="font-12-400"> 수정 </span></a>
+                            <a href="modify?board_no=${tipboard.board_no}&currPage=${cri.currPage}"><span class="font-12-400"> 수정 </span></a>
                             
                             <div class="space1"></div>
 
-                            <form action="remove" method="post" style="display: inline;">
+                            <form action="remove?board_no=${tipboard.board_no}" method="post" style="display: inline;">
                                 <button style="border: none; background: none;"><span class="font-12-400"> 삭제 </span></button>
                             </form>
                         </div>
@@ -110,18 +110,13 @@
                         
                         <!-- 본문 텍스트 -->
                         <div class="font-14-400">
-                            글 내용이 들어갑니다 운동Tip을 작성 할 수 있습니다 글 내용이 들어갑니다 운동Tip을 작성 할 수 있습니다 글 내용이 들어갑니다 운동Tip을 작성 할 수 있습니다 글 내용이 들어갑니다 운동Tip을 작성 할 수 있습니다 글 내용이 들어갑니다 운동Tip을 작성 할 수 있습니다 <br>
-                            글 내용이 들어갑니다 운동Tip을 작성 할 수 있습니다 글 내용이 들어갑니다 운동Tip을 작성 할 수 있습니다 글 내용이 들어갑니다 운동Tip을 작성 할 수 있습니다 글 내용이 들어갑니다 운동Tip을 작성 할 수 있습니다 글 내용이 들어갑니다 운동Tip을 작성 할 수 있습니다 <br>
-                            글 내용이 들어갑니다 운동Tip을 작성 할 수 있습니다 글 내용이 들어갑니다 운동Tip을 작성 할 수 있습니다 글 내용이 들어갑니다 운동Tip을 작성 할 수 있습니다 글 내용이 들어갑니다 운동Tip을 작성 할 수 있습니다 글 내용이 들어갑니다 운동Tip을 작성 할 수 있습니다 <br> <br>
-                            글 내용이 들어갑니다 운동Tip을 작성 할 수 있습니다 글 내용이 들어갑니다 운동Tip을 작성 할 수 있습니다 글 내용이 들어갑니다 운동Tip을 작성 할 수 있습니다 글 내용이 들어갑니다 운동Tip을 작성 할 수 있습니다 글 내용이 들어갑니다 운동Tip을 작성 할 수 있습니다 <br>
-                            글 내용이 들어갑니다 운동Tip을 작성 할 수 있습니다 글 내용이 들어갑니다 운동Tip을 작성 할 수 있습니다 글 내용이 들어갑니다 운동Tip을 작성 할 수 있습니다 글 내용이 들어갑니다 운동Tip을 작성 할 수 있습니다 글 내용이 들어갑니다 운동Tip을 작성 할 수 있습니다 <br>
-                            글 내용이 들어갑니다 운동Tip을 작성 할 수 있습니다 글 내용이 들어갑니다 운동Tip을 작성 할 수 있습니다 글 내용이 들어갑니다 운동Tip을 작성 할 수 있습니다 글 내용이 들어갑니다 운동Tip을 작성 할 수 있습니다 글 내용이 들어갑니다 운동Tip을 작성 할 수 있습니다 <br> <br>
+                            ${tipboard.text}
                         </div>
 
                         <!-- 좋아요 -->
                         <div class="like_div">
                             <img src="/resources/board/tip/img/like.png" height="70" class="like_btn">
-                            <div id="like_cnt" class="font-14-700">0</div>                            
+                            <div id="like_cnt" class="font-14-700">${tipboard.board_like}</div>                            
                         </div>
 
                         <!-- 좋아요 체크박스로 만든거 -->
@@ -221,9 +216,9 @@
                     
                     <!-- 이전글 목록 다음글 -->
                     <div class="btn_row">
-                        <button type="button" class="btn btn-primary btn-sm btn_color_blue">이전글</button>
-                        <button type="button" class="btn btn-secondary btn-sm" onClick="location.href='/board/tip/list'">목록</button>
-                        <button type="button" class="btn btn-primary btn-sm btn_color_blue" >다음글</button>
+                        <button type="button" class="btn btn-primary btn-sm btn_color_blue" onClick="location.href='/board/free/view?board_no=${freeboard.board_no-1}&currPage=${cri.currPage}'">이전글</button>
+                        <button type="button" class="btn btn-secondary btn-sm" onClick="location.href='/board/tip/list?currPage=${cri.currPage}'">목록</button>
+                        <button type="button" class="btn btn-primary btn-sm btn_color_blue" onClick="location.href='/board/free/view?board_no=${freeboard.board_no+1}&currPage=${cri.currPage}'">다음글</button>
                     </div>
             
                 </div>

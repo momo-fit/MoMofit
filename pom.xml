@@ -218,7 +218,15 @@
 			<artifactId>mybatis-spring</artifactId>
 			<version>2.0.7</version>
 		</dependency>
+			
+		<!-- ================ Thumbnailator ================= -->
+		<dependency>
+		    <groupId>net.coobird</groupId>
+		    <artifactId>thumbnailator</artifactId>
+		    <version>0.4.17</version>
+		</dependency>
 		
+
 		<!-- ================ 10. Mail ================= -->
 		<dependency>
 		    <groupId>javax.mail</groupId>
@@ -238,6 +246,17 @@
             <artifactId>gson</artifactId>
             <version>2.9.1</version>
         </dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.13.4</version>
+		</dependency>
+
+
+
+
 		
 		<!-- ================ 12. fileupload ================= -->
 		<dependency>
@@ -245,6 +264,43 @@
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.4</version>
 		</dependency>
+		
+		<dependency>
+            <groupId>org.imgscalr</groupId>
+            <artifactId>imgscalr-lib</artifactId>
+            <version>4.2</version>
+        </dependency>		
+
+		<!-- ================ 13. chat ================= -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+
+
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-messaging</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+
+		<!-- ================ 14. Scheduler Task ================= -->
+		<dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.3.2</version>
+        </dependency>
+
+
+		<!-- ================ 15. security ================= -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>5.7.3</version>
+		</dependency>
+
 
 		<!-- ================ Thumbnailator================= -->
 		<dependency>

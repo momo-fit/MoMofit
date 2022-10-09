@@ -1,0 +1,64 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.momofit.mapper.mypage.MyInfoModifyMapper">
+    
+    <select id="selectUserPass" resultType="String">
+    	SELECT
+		    pass
+		FROM
+		    users
+		WHERE 
+		    user_no = #{user_no}	
+    </select>
+    
+    <update id="updateUserInfo">
+    	UPDATE users
+		SET
+		    <if test="pass!=null and !pass.equals('')">
+		        pass = #{pass},
+		    </if>
+			nickname = #{nickname},
+			user_name = #{user_name},
+			birth = #{birth},
+			tel = #{tel},
+			gender = #{gender},
+			user_loc = #{user_loc},
+			profile_name = #{profile_name},
+			profile_temp = #{profile_temp},
+			profile_path = #{profile_path},
+			profile_info = #{profile_info},
+			sports1 = #{sports1},
+			sports2 = #{sports2},
+			sports3 = #{sports3}
+		WHERE
+		    user_no = #{user_no}
+    </update>
+    
+    <select id="selectUserInfo" resultType="org.zerock.momofit.domain.signIn.LoginVO">
+    	SELECT
+			user_no,
+			id,
+			nickname,
+			email,
+			user_name,
+			birth,
+			tel,
+			gender,
+			user_loc,
+			profile_name,
+			profile_temp,
+			profile_path,
+			profile_info,
+			sports1,
+			sports2,
+			sports3
+    	FROM
+    		users
+    	WHERE
+    		user_no = #{user_no}
+    </select>
+
+
+</mapper>

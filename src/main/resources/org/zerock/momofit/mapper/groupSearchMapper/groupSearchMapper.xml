@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.momofit.mapper.##">
+
+    <select id="">
+       	SELECT /*+ index_desc(groups)*/ * FROM GROUPS
+		WHERE GROUP_NAME || HASHTAG1 || HASHTAG2 || HASHTAG3 LIKE  '%#{input}%';
+    </select>
+
+
+</mapper>

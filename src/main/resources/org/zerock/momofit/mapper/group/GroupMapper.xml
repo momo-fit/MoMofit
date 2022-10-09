@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.momofit.mapper.group.GroupMapper">
+
+	<!-- 전체 목록 조회 -->
+	<select id="getList" resultType="org.zerock.momofit.domain.group.GroupVO">
+		SELECT  /*+ index_desc(groups)*/ 
+			*
+		FROM GROUPS
+		WHERE group_no > 0
+	</select>
+
+	<!-- criteria(검색조건) -->
+ <sql id="criteria">
+        <trim prefix="AND (" suffix=")" prefixOverrides="OR">
+            <foreach collection="typeArr" item="type">
+                <trim prefix="OR">
+                    <choose>
+                        <when test="type == 'N'.toString()">
+                            title like '%'||#{keyword}||'%' 
+                        </when>
+                        <when test="type == 'S'.toString()">
+                            content like '%'||#{keyword}||'%' 
+                        </when>
+                        <when test="type == 'L'.toString()">
+                            writer like '%'||#{keyword}||'%' 
+                        </when>
+                    </choose>
+                </trim>
+            </foreach>
+        </trim>
+    
+    </sql>
+
+
+	<!-- 페이징된 목록 조회 -->
+	<select id="getListWithPaging" resultType="org.zerock.momofit.domain.group.GroupVO">
+		SELECT /*+ index_desc(groups) */ 
+			*
+		FROM GROUPS
+
+		<!-- 키워드가 입력되었다면 검색조건 발동 -->
+
+		<if test="keyword != null">
+        	<include refid="criteria"></include> 
+        </if>
+    
+		OFFSET (#{currPage} -1 ) * #{amount} ROWS
+		FETCH NEXT #{amount} ROWS ONLY
+
+	</select>
+
+	<!-- 총 게시물의 개수 -->
+	<select id="getTotalCount" resultType="int">
+		SELECT /*+ index(groups) */ count(group_no)
+		FROM groups
+		<if test="keyword != null">
+            <include refid="criteria"></include>
+        </if>    
+		
+	</select>
+
+	<!-- Best글 -->
+	<select id="likeSelect" resultType="org.zerock.momofit.domain.group.GroupVO">
+		SELECT 
+			*
+		FROM GROUPS
+		WHERE group_like >= 35
+		ORDER BY group_like desc, group_no desc
+	</select>
+	
+	<!-- 게시글 등록(C / Insert) -->
+	<insert id="insert">
+		INSERT INTO Groups(group_no, group_name, member_max, schedule, group_date ) 
+		VALUES (groups_seq.nextval, #{group_name}, #{member_max}, #{schedule}, #{group_date} )
+	</insert>
+
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="group_no" order="BEFORE"
+		resultType="int">
+			SELECT
+			    LAST_NUMBER
+			FROM
+			    USER_SEQUENCES
+			WHERE
+			    sequence_name = 'GROUPS_SEQ'
+		</selectKey>
+
+		insert into Groups ( 
+			group_no, 
+			user_no,
+			group_name, 
+			sports, 
+			gender,
+			group_loc, 
+			member_max, 
+			schedule, 
+			group_date, 
+			info, 
+			hashtag1, hashtag2, hashtag3,
+			group_like,
+			group_img, temp, path,
+			member_count
+			)
+		values ( 
+			groups_seq.nextval, 
+			#{user_no},
+			#{group_name}, 
+			#{sports}, 
+			#{gender},
+			#{group_loc}, 
+			#{member_max}, 
+			#{schedule}, 
+			current_date, 
+			#{info}, 
+			#{hashtag1}, #{hashtag2}, #{hashtag3},		
+			#{group_like},
+			#{group_img}, #{temp}, #{path},
+			#{member_count}
+			)
+	</insert>
+	
+	<select id="getAttach" resultType="org.zerock.momofit.domain.group.GroupDTO">
+	
+		select group_no, group_img, temp, path 
+		from groups 
+		where group_no = #{group_no}
+	
+	</select>
+
+	<!-- 게시글 조회(R) -->
+	<select id="read" resultType="org.zerock.momofit.domain.group.GroupDTO">
+		SELECT * 
+		FROM Groups 
+		WHERE group_no = #{group_no}
+	</select>
+
+	<!-- 게시글 수정(U) -->
+	<update id="update">
+		UPDATE Groups
+		SET group_name = #{group_name}, sports = #{sports}, gender = #{gender}, group_loc = #{group_loc},
+			member_max = #{member_max}, schedule = #{schedule}, edit = current_date, info = #{info},
+			hashtag1 = #{hashtag1}, hashtag2 = #{hashtag2}, hashtag3 = #{hashtag3}, 
+			group_img = #{group_img}, temp = #{temp}, path = #{path}
+		WHERE group_no = #{group_no}
+	</update>
+
+	<!-- 게시글 삭제(D) -->
+	<delete id="delete" parameterType="Integer">
+		DELETE 
+		FROM Groups 
+		WHERE group_no = #{group_no}
+	</delete>
+	
+	<insert id="joinGroup">
+		INSERT INTO group_member(group_member_no, group_no, user_no)
+		values(
+			group_member_seq.nextval,
+			#{group_no},
+			#{user_no}
+		)
+	</insert>
+
+	<delete id="deleteGroupMember">
+		DELETE 
+		FROM Group_member
+		WHERE group_no = #{group_no}
+	</delete>
+
+</mapper>
