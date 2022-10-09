@@ -15,10 +15,14 @@ public class Criteria {
 	private int amount = 20;			// 한 페이지당 보여줄 레코드 건수
 	private int pagesPerPage =5;		// 한 페이지당 보여줄 페이지목록의 길이	
 	
-	private String searchType;			// 검색유형(원 파일은 type였음)
+	private String type;			// 검색유형
 	private String keyword;				// 검색어
 	
 	private int pageNum;  //현재 페이지 넘버 
+	
+	public String[] getTypeArr() {
+		return type==null? new String[] {}:type.split("");
+	}
 	
 
 	
@@ -30,13 +34,15 @@ public class Criteria {
 		builder.queryParam("currPage", this.currPage);
 		builder.queryParam("amount", this.amount);
 		builder.queryParam("pagesPerPage", this.pagesPerPage);
-		builder.queryParam("searchType", this.searchType);
+		builder.queryParam("searchType", this.type);
 		builder.queryParam("keyword", this.keyword);
 		
 		log.info("\t+ pagingUri: " + builder.toUriString());
 		
 		return builder.toUriString();
 	} // getPagingUri
+	
+	
 	
 	
 	

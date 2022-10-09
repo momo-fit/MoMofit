@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,9 +14,10 @@ import org.zerock.momofit.domain.picboard.Criteria;
 import org.zerock.momofit.domain.picboard.PageDTO;
 import org.zerock.momofit.domain.picboard.PicBoardDTO;
 import org.zerock.momofit.domain.picboard.PicBoardVO;
-
+import org.zerock.momofit.domain.picboard.board_imgDTO;
 import org.zerock.momofit.exception.ControllerException;
 import org.zerock.momofit.service.picboard.PicBoardService;
+
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,28 +32,13 @@ public class PicController {
 	
 	@Setter(onMethod_= {@Autowired})
 	private PicBoardService PicBoardservice;
+
 	
-//	@GetMapping("/list")
-//	public String list(Model model) throws ControllerException {
-//		log.trace("list invoke");
-//		try {
-//			List<PicBoardVO> list = this.PicBoardservice.getList();
-//			
-//			model.addAttribute("PicBoardList", list);
-//			
-//			return "/board/pic/sports_check";
-//		} catch (Exception e) {
-//			
-//			throw new ControllerException(e);
-//			
-//		}
-//	}//list 목록
-	
-@Transactional	
+
 	@GetMapping({"/view"})  
 	public String view(
 //			Integer board_no,
-			PicBoardDTO dto,
+			PicBoardDTO dto,board_imgDTO imageDto,
 			@ModelAttribute("cri")Criteria cri,
 			Model model) 
 					throws ControllerException {
@@ -62,7 +47,8 @@ public class PicController {
 		try {
 //			PicBoardDTO dto= new PicBoardDTO();
 //			dto.setBoard_no(board_no);
-			 PicBoardVO vo=this.PicBoardservice.get(dto);
+			PicBoardVO vo=this.PicBoardservice.get(dto);
+			 
 	         log.info("\t+vo:{}", vo);
 	        
 	          model.addAttribute("PicBoard", vo);  //여기까지는 상세조회에 대한 코드
@@ -134,7 +120,7 @@ public class PicController {
 			boolean isRegister=this.PicBoardservice.register(dto);
 			log.info("\t+isRegister",isRegister);
 			
-			 rttrs.addAttribute("result", isRegister ? "게시글이 작성되었습니다.(" + dto.getBoard_no() + ")" : "게시글이 작성되지않았습니다.");
+			 rttrs.addAttribute("result", isRegister ? "게시글이 작성되었습니다." : "게시글이 작성되지않았습니다.");
 			
 			 return "redirect:/board/pic/list";
 			 
@@ -185,25 +171,7 @@ public class PicController {
 	}//list 목록 (페이징처리)
 	
 	
-//	@GetMapping("/list")
-//	public String listPerPage(@ModelAttribute("searchCriteria") SearchCriteria searchCriteria,Model model) throws ControllerException {
-//		log.trace("listPerPage() invoke");
-//		try {
-//			List<PicBoardVO> list = this.PicBoardservice.getListWithPaging(searchCriteria);
-//			
-//			model.addAttribute("PicBoardList", list);
-//			
-//			PageDTO pageDTO = new PageDTO(searchCriteria,this.PicBoardservice.getTotal());
-// 			
-//			model.addAttribute("pageMaker", pageDTO);
-//			
-//			return "/board/pic/sports_check";  
-//		} catch (Exception e) {
-//			
-//			throw new ControllerException(e);
-//			
-//		}
-//	}//list 목록 (페이징처리)
+
 		
 	
 	

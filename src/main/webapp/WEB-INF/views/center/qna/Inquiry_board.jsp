@@ -177,7 +177,7 @@
 
     <!-- 메인화면 자바스크립트 -->
     <script src="/resources/include/js/main_header.js"></script> 
-    
+     <!-- 문의게시판 처리중/처리완료에 대한 자바스크립트 -->
     <script src="/resources/center/qna/js/status.js"></script>  
   
     <!-- 부트스트랩 자바스크립트 -->

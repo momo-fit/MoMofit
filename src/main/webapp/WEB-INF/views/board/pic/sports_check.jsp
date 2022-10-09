@@ -50,13 +50,16 @@
 </head>
 
 <body>
+	<script src="/resources/board/pic/js/list_image_file.js"></script>
+	
     <script>
-    	var result="${param.result}";
+	    var result="${param.result}";
     	if(result != null && result.length>0){
     		alert(result);
     	}//글 작성,수정,삭제 결과가 참일시, Alert창이 띄워진다.
         
     </script>
+    
     <div class="page">        
         <!-- header -->
         <%@ include file = "/WEB-INF/views/include/header.jsp" %>
@@ -101,18 +104,24 @@
                         <div class="check_outter">
                             <!-- 내부 틀 -->
                             <div class="check_inner">
-                                
                                 <!-- 글 : 한개만 a태그/리스트목록  -->
-                                
+
                                 <c:forEach var="PicBoardList" items="${PicBoardList}">
-                                <a onClick="location.href='/board/pic/view?board_no=${PicBoardList.board_no}&currPage=${pageMaker.cri.currPage}'">
-	                                    <div class="sport_check">
-	                                        <div class="sport_check_inner"><img class="sport_check_img" src="https://picsum.photos/id/684/220/130"></div>
+	                                <a onClick="location.href='/board/pic/view?board_no=${PicBoardList.board_no}&currPage=${pageMaker.cri.currPage}'">
+	                                    <div class="sport_check" >
+
+	                                    <div class="sport_check_inner"><img class="sport_check_img" src="/display?fileName=${PicBoardList.path}/${PicBoardList.temp}_${PicBoardList.board_img_name}" onerror="this.src='/display?fileName=no-pictures.png'"></div>
+	                                        <!-- <div class="uploadResult" class="sport_check_inner" >
+
+	                                        </div> -->
+	             
 	                                        <p class="font-16-500 title_position"><c:out value="${PicBoardList.title}"/></p>
 	                                    </div>
 	                                </a>
+                                <!-- <script>$("#uploadResult").empty();</script> -->
                                 </c:forEach>    
-                                
+
+
                             </div>
 
                             <!-- 구분선 -->
@@ -169,9 +178,9 @@
 
     <!-- 메인화면 자바스크립트 -->
     <script src="/resources/include/js/main_header.js"></script>
-    
-    
-
+ 
+	<!-- 업로드 된 이미지 리스트 대표이미지로 뜨게하기 -->
+	 <script src="/resources/board/pic/js/list_image_file.js"></script>
 
     <!-- 부트스트랩 자바스크립트 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

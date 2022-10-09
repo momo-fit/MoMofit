@@ -2,10 +2,10 @@ package org.zerock.momofit.mapper.picboard;
 
 import java.util.List;
 
-import org.zerock.momofit.domain.picboard.CategoryVO;
 import org.zerock.momofit.domain.picboard.Criteria;
 import org.zerock.momofit.domain.picboard.PicBoardDTO;
 import org.zerock.momofit.domain.picboard.PicBoardVO;
+import org.zerock.momofit.domain.picboard.board_imgDTO;
 import org.zerock.momofit.exception.DAOException;
 
 public interface PicBoardMapper {
@@ -14,10 +14,10 @@ public interface PicBoardMapper {
 	public abstract List<PicBoardVO> selectAllList() throws DAOException;
 	
 	//1-1 페이징처리가 적용된 게시글 목록 조회하기 
-	public abstract List<PicBoardVO> selectListWithPaging(Criteria cri) throws DAOException;
+	public abstract List<PicBoardVO> selectListWithPaging(Criteria cri) throws DAOException; //@Param("cri")
 		
 	// 2. 새로운 게시글을 등록하기
-	public abstract Integer insert(PicBoardDTO dto) throws DAOException;
+	
 	public abstract Integer insertSelectKey(PicBoardDTO dto) throws DAOException;
 	
 	// 3. 기존 게시글 상세 조회하기
@@ -35,4 +35,9 @@ public interface PicBoardMapper {
 	// 7. 게시글 조회수 올리기 
 	public abstract Integer plusHits(PicBoardDTO dto)throws DAOException;
 	
+	// 8. 새로운 게시글 등록시 첨부파일 이미지 함께 등록
+	public abstract Integer insert_img(board_imgDTO dto) throws DAOException;
+	
+	// 9. 해당 게시물의 업로드 된 파일 조회하기 
+	public abstract List<board_imgDTO> imageList(int board_no) throws DAOException;
 }

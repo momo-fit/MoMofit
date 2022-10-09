@@ -56,6 +56,9 @@
 </head>
 
 <body>
+	<script>
+	var board_no = '<c:out value="${PicBoard.board_no}"/>'
+	</script>
     <div class="page">
 
         <!-- header -->
@@ -107,9 +110,15 @@
                     <div class="content_wrap">
                         
                         <!-- 본문 이미지 -->
-                        <div>
+                        <!-- <div>
                             <img src="https://picsum.photos/id/684/600/400" alt="picsum img"> <br><br>
-                        </div>
+                        </div>-->
+                        
+
+						<div id="uploadResult">
+						
+						</div>
+                    	
                         
                         <!-- 본문 텍스트 -->
                         <div class="font-14-400">
@@ -215,7 +224,7 @@
                             
                         <br>
                         
-                    </div>
+                    </div> <!-- 댓글마무리 -->
                     
                     <!-- 이전글 목록 다음글 -->
                     <div class="btn_row">
@@ -234,11 +243,11 @@
     </div>
   
 
-    <!-- 자유게시판 자바스크립트 -->
-    <script src="/resources/board/free/js/main_board_freeboard.js"></script>
-
     <!-- 메인화면 섹션 자바스크립트` -->
-    <script src="/resources/common/js/main_section.js"></script>
+    <!--<script src="/resources/common/js/main_section.js"></script>-->
+	
+	<!-- 상세 조회 페이지 자바스크립트 -->
+	<script src="/resources/board/pic/js/main_board_pic.js"></script>
 
     <!-- 메인화면 자바스크립트 -->
     <script src="/resources/include/js/main_header.js"></script>

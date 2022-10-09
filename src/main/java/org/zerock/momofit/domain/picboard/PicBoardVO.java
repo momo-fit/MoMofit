@@ -1,9 +1,14 @@
 package org.zerock.momofit.domain.picboard;
 
 import java.util.Date;
+import java.util.List;
 
-import lombok.Value;
-@Value
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+//VO에서 @NoArgsConstructor가 안먹혀서 @Date로 바꿔버림 (=DTO로 임시 세팅)
+@NoArgsConstructor
+@Data
 public class PicBoardVO {
 	
 	//게시판 번호
@@ -36,7 +41,24 @@ public class PicBoardVO {
 	//카테고리
 	private Integer category_no;
 	
+	//말머리(중고거래만쓰긴함)
+	private Integer subject_no;
+	
+	// --------- board_img 테이블 데이터 --------
+	private Integer img_no;//이미지 파일 번호
+	
+	private Integer boardNo;	//게시판 번호 (얘는 이미지 테이블에 있는데 argument type mismatch 방지용으로 선언만)
 
+	private String board_img_name; //이미지파일 이름
+	
+	private String temp; //uuid
+	
+	private String path; //파일 경로 
+	
+	// --------- board_img 테이블 데이터 --------
+	
+	//파일업로드관련 
+	private List<board_imgDTO> imageList;
 	
 	
 }
