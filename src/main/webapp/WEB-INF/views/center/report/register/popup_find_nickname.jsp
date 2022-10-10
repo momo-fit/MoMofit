@@ -34,32 +34,16 @@
         </div>
 
         <div class="wrap_find_nickname_search">
-            <form action="#">
                 <input type="text" name="" id="" class="find_nickname_search font-16-500" placeholder="닉네임">
                 <button type="button" class="font-16-500">검색</button>
-            </form>
         </div>
 
         <div class="wrap_find_nickname_content">
 
-            <form action="#">
+ 
 
-                <!-- 반복하여, 화면 출력  -->
-                <div class="find_nickname_content">
-                    <!-- value값에 닉네임 값일 불러와져아 한다. -->
-                    <!-- value값과 span태그에 들어가는 값은 똑같은 값으로 입력필요! -->
-                    <!-- id는 순차적으로 증가하도록 넣어야함!! -->
-                    <input type="radio" name="nickname" id="nickname1" value="헬짱">
-                    <label class="font-16-400" for="nickname1">헬짱</label>
-                </div>
+            
 
-                <!-- 더미데이터 -->
-                <div class="find_nickname_content">
-                    <input type="radio" name="nickname" id="nickname2" value="헬짱구">
-                    <label class="font-16-400" for="nickname2">헬짱구</label>
-                </div>
-
-            </form>
 
         </div>
 
@@ -74,3 +58,42 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
+
+
+<script>
+    $(() => {
+
+        $('.find_nickname_search').keypress(()=> {
+            let inputText = $('.find_nickname_search').val();
+
+            $.ajax({
+                type: 'get',
+                url: '/center/report//report-userfind',
+                data: {'inputNic': inputText},
+                dataType: 'json',
+                success:((data)=> {
+                    printUser(data);
+                    // console.log(data.vo[1].nickname);
+                })
+
+            })
+
+            function printUser(data) {
+                let str = '';
+
+                $.each(data.vo ,((i)=> {
+
+                    str += 
+                    `<div class="find_nickname_content">
+                        <input type="radio" name="nickname" id="nickname\${i}" value="\${data.vo[i].nickname}">
+                        <label class="font-16-400" for="nickname\${i}">\${data.vo[i].nickname}</label>
+                    </div>`
+                }))
+
+                $('.wrap_find_nickname_content').html(str);
+            }
+           
+        })
+
+    })
+</script>

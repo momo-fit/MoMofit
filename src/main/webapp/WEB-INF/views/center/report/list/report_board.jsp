@@ -188,14 +188,20 @@
                         str +=
                         `<tr class="contnet">
                             <td><div>\${list[i].report_no}</div></td>
-                            <td><div><a href='/center/report/view/?report_no=\${list[i].report_no}' class='aTile'>\${list[i].title}</a><div class='inquery_status'><t class='font-12-400'>\${list[i].report_result}</t></div></div></td>
+                            <td><div><a href='/center/report/view/?report_no=\${list[i].report_no}' class='aTile'>\${list[i].title}</a>
+                                <div class='inquery_status'>
+                                    <t class='font-12-400' id='sta'>\${list[i].report_result}</t>
+                                </div>
+                            </td>
                             <td><div>\${list[i].nickname}</div></td>
                             <td><div>\${list[i].report_date}</div></td>
                         </tr>`;
                 }))
                 $('.table_body').html(str);
-                
-                if(($('.inquery_status>t').text()) == 0 ){
+
+               
+
+                if($('.inquery_status>t').text() != 0 ){
                     $('.inquery_status>t').text('처리중');
                     $('.inquery_status').css("background","gray");
                 } else {

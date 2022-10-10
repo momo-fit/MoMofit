@@ -5,7 +5,7 @@
 <mapper namespace="org.zerock.momofit.mapper.reportMapper.reportMapper">
 
     <select id="getTotalCnt" resultType="int">
-        SELECT /*+ index(tbl_board) */ count(REPORT_NO) 
+        SELECT /*+ index_desc(REPORT) */ count(REPORT_NO) 
         FROM REPORT
     </select>
 
@@ -49,14 +49,16 @@
         <choose>
             <when test='report_img_name != null and report_img_name != "" ' >
                 INSERT ALL
-                    INTO REPORT (REPORT_NO, TITLE, TEXT, REPORT_USER, USER_NO, REPORT_TYPE) 
+                    INTO REPORT (REPORT_NO, TITLE, TEXT, IMG_CHECK, REPORT_USER, USER_NO, REPORT_TYPE) 
                     VALUES(
                         REPORT_SEQ.nextval,
                         #{title},
                         #{text},
+                        #{img_check},
                         #{report_user},
                         #{user_no},
                         #{report_type}
+    
                     )
                     INTO REPORT_IMG (REPORT_IMG_NO, REPORT_NO, REPORT_IMG_NAME, TEMP, PATH)
                     VALUES (
@@ -64,7 +66,7 @@
                         REPORT_SEQ.CURRVAL,
                         #{report_img_name},
                         #{temp},
-                        #{path} 
+                        #{path}
                     )
                 SELECT * FROM DUAL
 
@@ -84,5 +86,9 @@
         </choose>
         
     </insert>
+
+    <select id="selectReportUsers" resultType="org.zerock.momofit.domain.report.reportViewVO">
+        SELECT NICKNAME, USER_NO FROM USERS WHERE NICKNAME LIKE '%'||#{inputNic}||'%'
+    </select>
 
 </mapper>

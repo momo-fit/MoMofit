@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.zerock.momofit.domain.report.Criteria;
 import org.zerock.momofit.domain.report.reportDTO;
+import org.zerock.momofit.domain.report.reportFindUsersVO;
 import org.zerock.momofit.domain.report.reportListVO;
 import org.zerock.momofit.domain.report.reportViewVO;
 import org.zerock.momofit.exception.DAOException;
@@ -22,5 +23,7 @@ public interface reportMapper {
 	// 등록
 	public abstract boolean postReportContent(reportDTO dto) throws DAOException;
 
+	// 유저 검색
+	public abstract List<reportFindUsersVO> selectReportUsers(String inputNic) throws DAOException;
 	
 }

@@ -37,9 +37,6 @@
 
         let user_no = '${__USER__.user_no}'
         
-
-    
-
         $().ready(function() {
             $('#user_no').val(user_no);
             let t =  $('#user_no').val();
@@ -57,7 +54,6 @@
             });
         })
 
-        
     </script>
 </head>
 
@@ -128,7 +124,7 @@
 
                                 <!-- 6. 내용 -->
                                 내용<br>
-                                <textarea class="report_textarea_content" name="text" required>제재 부탁드립니다...</textarea>
+                                <textarea class="report_textarea_content" name="text" required></textarea>
 																
                             </div>                
                             <!-- 돌아가기 버튼 -->
@@ -136,10 +132,6 @@
                                       
                             <!-- 작성하기 버튼 -->
                             <input type="submit" class="report_submit" value="신고하기">
-                            
-                            
-                           
-
 							
                         </form>
                         

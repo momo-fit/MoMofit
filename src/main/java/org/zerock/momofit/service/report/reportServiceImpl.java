@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.zerock.momofit.common.SharedScopeKeysCommon;
 import org.zerock.momofit.domain.report.Criteria;
 import org.zerock.momofit.domain.report.reportDTO;
+import org.zerock.momofit.domain.report.reportFindUsersVO;
 import org.zerock.momofit.domain.report.reportListVO;
 import org.zerock.momofit.domain.report.reportViewVO;
 import org.zerock.momofit.exception.ServiceException;
@@ -81,7 +82,7 @@ public class reportServiceImpl implements reportService {
 			
 			UUID uuid = UUID.randomUUID();
 			
-			if(imgName != null) {
+			if(imgName != "") {
 				
 				String profile_temp = uuid + "_" +file.getOriginalFilename();	
 				File folder = new File(targetDir);
@@ -96,7 +97,8 @@ public class reportServiceImpl implements reportService {
 				file.transferTo( new File(targetFile));
 				
 				dto.setTemp(profile_temp);
-				dto.setPath(targetFile);
+				dto.setPath(targetDir);
+				dto.setImg_check(1);
 				log.info("dto: {}", dto);
 				return this.mapper.postReportContent(dto);
 			} else {
@@ -107,6 +109,17 @@ public class reportServiceImpl implements reportService {
 		} catch (Exception e) {
 			throw new ServiceException(e);
 		} // try-catch
-	} // getReportView
+	}
+
+	@Override
+	public List<reportFindUsersVO> getReportUsersList(String inputNic) throws ServiceException {
+		log.trace("getTotalCnt() invoked.");
+		
+		try {
+			return this.mapper.selectReportUsers(inputNic);
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
+	} // getReportUsersList
 
 }

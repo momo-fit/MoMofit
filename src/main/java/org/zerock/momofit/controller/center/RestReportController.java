@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.momofit.domain.report.Criteria;
 import org.zerock.momofit.domain.report.PageDTO;
 import org.zerock.momofit.domain.report.reportDTO;
+import org.zerock.momofit.domain.report.reportFindUsersVO;
 import org.zerock.momofit.domain.report.reportListVO;
 import org.zerock.momofit.domain.report.reportViewVO;
 import org.zerock.momofit.exception.ControllerException;
@@ -107,6 +108,22 @@ public class RestReportController {
 		} // try-catch
 		
 		
+	}
+	
+	@GetMapping("/report-userfind")
+	public  ResponseEntity<Map<String, Object>> getUsersNickname(String inputNic) throws ControllerException {
+		
+		try {
+			Map<String, Object> findResult = new HashMap<>();
+			
+			List<reportFindUsersVO> vo = this.service.getReportUsersList(inputNic);
+			
+			findResult.put("vo", vo);
+			
+			return new ResponseEntity<>(findResult, HttpStatus.OK);
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		} // try-catch
 	}
 	
 

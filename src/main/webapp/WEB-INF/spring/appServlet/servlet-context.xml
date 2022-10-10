@@ -54,6 +54,11 @@
 			<mapping path="/mypage/*" />
 			<beans:ref bean="AuthInterceptor" />
 		</interceptor>
+		
+		<interceptor>
+			<mapping path="/center/report/*" />
+			<beans:ref bean="AuthInterceptor" />
+		</interceptor>
 
 	</interceptors>
 

@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.momofit.common.SharedScopeKeys;
 import org.zerock.momofit.domain.signIn.LoginVO;
@@ -78,10 +80,8 @@ public class MyInfoModifyController {
 			// 세션객체로부터, 회원정보 얻기
 			LoginVO vo = (LoginVO) session.getAttribute(SharedScopeKeys.USER_KEY);
 			
-			int user_no = vo.getUser_no();	// 임시코드 : 1번 User NO조회
-			//------------------------------------------------
-			
-			
+			int user_no = vo.getUser_no();
+			//------------------------------------------------				
 			// Step.1 : 개인키(Server)
 			PrivateKey privateKey = 
 					(PrivateKey)session.getAttribute(SharedScopeKeys.PRIVATE_KEY);
@@ -101,21 +101,22 @@ public class MyInfoModifyController {
 				
 				session.setAttribute("SUCCESS_CHECKPASS", "SUCCESS");
 				
-				return "redirect:/mypage/info_modify";
-				
+				return "redirect:/mypage/info_modify";			
 			} else {
-				rttrs.addFlashAttribute("failCheckPass", "패스워드가 일치하지 않습니다.");
+				rttrs.addFlashAttribute(SharedScopeKeys.ERROR_MESSAGE,
+						"패스워드가 일치하지 않습니다.");
 				
-				return "redirect:/mypage/check_pw";
-				
+				return "redirect:/mypage/check_pw";			
 			} // if-else
-			
-			
-			
-		} catch (Exception e) {
-			throw new ControllerException(e);
+					
+		// RSA 복호화 실패 예외처리
+		} catch (IllegalArgumentException e) {
+			rttrs.addFlashAttribute(SharedScopeKeys.ERROR_MESSAGE,
+					"오류가 발생하였습니다. 다시 시도해주십시오.");
+			return "redirect:/mypage/check_pw";
+		} catch (Exception e) {			
+			throw new ControllerException(e);		
 		} // try-catch
-		
 
 	} // check_pw_post
 	
@@ -124,30 +125,83 @@ public class MyInfoModifyController {
 	public String infoModify(
 			Model model,
 			HttpSession session
-			) {
+			) throws ControllerException {
 		log.trace("infoModify() invoked.");
 		
-		String result = (String) session.getAttribute("SUCCESS_CHECKPASS");
-		
-		LoginVO vo = (LoginVO)model.getAttribute(SharedScopeKeys.USER_KEY);
-		
-		log.info("\t+ vo : {}", vo);
-		log.info("\t+ result : {}", result);
-		
-		if(result != null) {
+		try {
+			String result = (String)session.getAttribute("SUCCESS_CHECKPASS");		
+	
 			
-			
-			
-			
-			
-			return "/mypage/info_modify";
-		} else {
-			
-			return "redirect: /mypage/check_pw";
-		} // if-else
-		
-		
+			if(result != null && !result.isBlank()) {
+				log.trace("RSAKeyGenerator invoked.");
+				KeyPair keyPair = RSAEncryptionUtil.createRSAKeyPair();
+				
+				PrivateKey privateKey = keyPair.getPrivate();
+				PublicKey publicKey = keyPair.getPublic();
+				
+				String base64PublicKey = RSAEncryptionUtil.base64EncoderToString(publicKey);
+				
+				session.setAttribute(SharedScopeKeys.PUBLIC_KEY, base64PublicKey);
+				session.setAttribute(SharedScopeKeys.PRIVATE_KEY, privateKey);
+				
+				return "/mypage/info_modify";
+			} else {		
+				return "redirect: /mypage/check_pw";
+			} // if-else
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
 	} // infoModify
+	
+	@PostMapping("/info_modify")
+	public String infoUserModify(
+			UserDTO dto,
+			@RequestParam("file")MultipartFile file,
+			HttpSession session,
+			RedirectAttributes rttrs
+			) throws ControllerException {
+		log.trace("infoUserModify() invoked.");
+		
+		log.info("\t+ file : {}", file);
+		
+		try {
+			// RSA 복호화 작업
+			if(dto.getPass() != null && !dto.getPass().isBlank()) {
+				
+				PrivateKey privateKey = (PrivateKey)session.getAttribute(SharedScopeKeys.PRIVATE_KEY);
+				String decrypted = RSAEncryptionUtil.decrypt(dto.getPass(), privateKey);
+				
+				// -- 사용한 PrivateKey는 삭제
+				session.removeAttribute(SharedScopeKeys.PRIVATE_KEY);
+				session.removeAttribute(SharedScopeKeys.PUBLIC_KEY);
+				
+				dto.setPass(decrypted);
+				
+			} // if
+			
+			// SessionScope에서 기존User정보 획득
+			LoginVO vo = (LoginVO)session.getAttribute(SharedScopeKeys.USER_KEY);
+			dto.setUser_no(vo.getUser_no());
+			// 유저정보 업데이트
+			boolean updateResult = this.myInfoModifyService.modifyUserInfo(dto, vo, file);
+			
+			if(updateResult) {			
+				// 업데이트 된 새로운 유저정보 회득 -> Session Scope 업데이트
+				LoginVO updateVO = this.myInfoModifyService.getUserInfo(vo.getUser_no());
+				session.setAttribute(SharedScopeKeys.USER_KEY, updateVO);
+				
+				return "redirect:/mypage/my_group";
+			} else {
+				rttrs.addFlashAttribute(SharedScopeKeys.ERROR_MESSAGE, "오류가 발생하였습니다.");			
+				return "redirect:/mypage/info_modify";
+			} // if-else
+			
+			
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		}
+
+	} // infoUserModify
 	
 
 } // end class

@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.zerock.momofit.common.SharedScopeKeysCommon;
+import org.zerock.momofit.common.SharedScopeKeys;
 import org.zerock.momofit.domain.signUp.UserDTO;
 import org.zerock.momofit.exception.ServiceException;
 import org.zerock.momofit.mapper.signUpMapper.signUpMapper;
@@ -42,7 +42,11 @@ public class userSignUpServiceImpl implements userSignUpService {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		
 		String today = sdf.format(date);
+<<<<<<< HEAD
 		String targetDir = SharedScopeKeysCommon.UPLOAD_PATH+today;
+=======
+		String targetDir = SharedScopeKeys.UPLOAD_PATH + today;
+>>>>>>> 9ae8429b98b26b26588a292ddde42c7457702136
 		
 		String original = file.getOriginalFilename();
 		

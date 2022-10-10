@@ -10,6 +10,7 @@ $(function () {
         
         let e = $(".find_nickname_content input[name='nickname']:checked").val();
         // console.log(e);
+        
         $(".username", opener.document).val(e);
 
         window.close();
