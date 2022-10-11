@@ -6,19 +6,15 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -160,25 +156,31 @@ public class RestReportController {
 		
 	} // getUploadImg
 	
-	@RequestMapping(
-			value = "/report-modifyPut",
-			consumes = "application/json",
-			produces = {
-					MediaType.APPLICATION_JSON_VALUE
-			})
+	@RequestMapping(value = "/report-modifyPut", 
+			  produces = "application/json", 
+			  method= RequestMethod.PUT)
 	public void putModifyReport( @RequestBody reportUpdateDTO dto, HttpServletResponse res) throws ControllerException {
-		
+
 		try {
 			
 			log.info("/t+ dto : {}" ,dto);
 			
-			this.service.putUpdateReport(dto);
+			boolean status = this.service.putUpdateReport(dto);
+			log.info("/t+ status : {}" ,status);
 
-			res.sendRedirect("/center/report/list");
+//			if(status) {
+////				res.sendRedirect("/center/report/list");
+//				return new ResponseEntity<>("success", HttpStatus.OK);
+//			} else {
+//				return new ResponseEntity<>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
+//						
+//			}			
 			
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		} // try-catch
+		
+		
 		
 	} // getUploadImg
 	

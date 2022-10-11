@@ -1,6 +1,5 @@
 package org.zerock.momofit.domain.group;
 
-
 import java.util.Date;
 
 import lombok.Data;

@@ -52,7 +52,7 @@
                         <!-- 게시글 작성 내용부분 -->
 
                         <form action="#" method="#" class="writing_form" name="reportForm">
-                            <!-- <input type="hidden" name="_method" value="PUT"/> -->
+                            <input type="hidden" name="_method" value="PUT"/>
 
                             <div class="writing_content">
 
@@ -153,7 +153,6 @@
             data: {'report_no':report_no},
             dataType: 'json',
             success: ((data) => {
-                console.log(data);
                 updateView(data);
             })
 
@@ -218,14 +217,15 @@
 
             $.ajax({
                 url:'/center/report/report-modifyPut',
-                method:'put',
+                method:'put',	
                 data:JSON.stringify(param),
-                contentType: 'application/json',
-                success: ((data)=> {
-                    alert("수정 완료");
+                contentType : "application/json; charset=utf-8",
+                async: false,
+                success:((data)=> {
+                    console.log(data);
                 }),
-                error: ((data)=> {
-                    alert('수정을 완료하지 못했습니다.');
+                error:((request,status,error) => {
+                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                 })
             })
 
