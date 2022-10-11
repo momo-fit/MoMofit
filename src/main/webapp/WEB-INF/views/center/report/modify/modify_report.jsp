@@ -223,6 +223,7 @@
                 async: false,
                 success:((data)=> {
                     console.log(data);
+                    location.href = "/center/report/list"
                 }),
                 error:((request,status,error) => {
                     alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);

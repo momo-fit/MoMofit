@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -157,9 +158,10 @@ public class RestReportController {
 	} // getUploadImg
 	
 	@RequestMapping(value = "/report-modifyPut", 
-			  produces = "application/json", 
-			  method= RequestMethod.PUT)
-	public void putModifyReport( @RequestBody reportUpdateDTO dto, HttpServletResponse res) throws ControllerException {
+					consumes = "application/json",
+			         produces = {MediaType.TEXT_PLAIN_VALUE},
+			         method= RequestMethod.PUT)
+	public ResponseEntity<String> putModifyReport( @RequestBody reportUpdateDTO dto, HttpServletResponse res) throws ControllerException {
 
 		try {
 			
@@ -168,13 +170,13 @@ public class RestReportController {
 			boolean status = this.service.putUpdateReport(dto);
 			log.info("/t+ status : {}" ,status);
 
-//			if(status) {
-////				res.sendRedirect("/center/report/list");
-//				return new ResponseEntity<>("success", HttpStatus.OK);
-//			} else {
-//				return new ResponseEntity<>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
-//						
-//			}			
+			if(status) {
+//				res.sendRedirect("/center/report/list");
+				return new ResponseEntity<>("success", HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
+						
+			}			
 			
 		} catch (Exception e) {
 			throw new ControllerException(e);

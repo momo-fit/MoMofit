@@ -15,13 +15,9 @@
 	</select>
 
 	<!-- criteria(검색조건) -->
-<<<<<<< HEAD
-	<sql id="criteria">
-        <trim prefix="AND (" suffix=")" prefixOverrides="OR">
-=======
+
  	<sql id="criteria">
         <trim prefix="(" suffix=") AND" prefixOverrides="OR">
->>>>>>> 949ac598c7390eb7d9022737ebe8da8a345336f8
             <foreach collection="typeArr" item="type">
                 <trim prefix="OR">
                     <choose>
