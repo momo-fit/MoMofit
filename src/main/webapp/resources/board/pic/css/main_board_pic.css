@@ -10,6 +10,7 @@ section {
     display: flex;
     justify-content: space-between;
     width: 1050px;
+
     text-align: left;
 }
 
@@ -48,6 +49,10 @@ section {
 .edit_delete a{
     text-decoration: none;
     color: black;
+}
+
+.modifyBtn:hover{
+    text-decoration: none;
 }
 
 .space1 {
@@ -140,3 +145,15 @@ section {
 .comment_input_text:focus {
     outline: none;
 }
+/*업로드된파일뜨게 */
+#result_card img{
+	max-width: 100%;
+    height: auto;
+    display: block;
+    padding: 5px;
+    margin-top: 10px;
+    margin: auto;	
+}
+
+
+

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="org.zerock.momofit.mapper.qnaboard.QnaBoardMapper">
+
+	<select id="SelectList" resultType="org.zerock.momofit.domain.qnaboard.QnaBoardVO">
+		SELECT /*+ index_desc(qna)*/ *
+        FROM qna
+        OFFSET (#{currPage}-1)*#{amount} ROWS
+        FETCH NEXT #{amount} ROWS ONLY
+    
+	</select>
+	
+	 <!-- 작성하기 -->
+    <insert id="insert">
+        INSERT INTO QNA(qna_no,title, text, img_check,qna_result, user_no)
+        VALUES(QNA_SEQ.nextval,#{title}, #{text},#{img_check}, #{qna_result},#{user_no} )
+    </insert>
+    
+
+
+
+
+
+
+</mapper>
