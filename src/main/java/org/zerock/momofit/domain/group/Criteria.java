@@ -24,21 +24,21 @@ public class Criteria {
 	}
 
 	
-	public String getPagingUri() {
-		log.debug("getPagingUri() invoked.");
-		
-		UriComponentsBuilder builder = UriComponentsBuilder.fromPath("");
-		
-		builder.queryParam("currPage", this.currPage);
-		builder.queryParam("amount", this.amount);
-		builder.queryParam("pagesPerPage", this.pagesPerPage);
-		builder.queryParam("type", this.type);
-		builder.queryParam("keyword", this.keyword);
-		
-		log.info("\t+ pagingUri: " + builder.toUriString());
-		
-		return builder.toUriString();
-	} // getPagingUri
+//	public String getPagingUri() {
+//		log.debug("getPagingUri() invoked.");
+//		
+//		UriComponentsBuilder builder = UriComponentsBuilder.fromPath("");
+//		
+//		builder.queryParam("currPage", this.currPage);
+//		builder.queryParam("amount", this.amount);
+//		builder.queryParam("pagesPerPage", this.pagesPerPage);
+//		builder.queryParam("type", this.type);
+//		builder.queryParam("keyword", this.keyword);
+//		
+//		log.info("\t+ pagingUri: " + builder.toUriString());
+//		
+//		return builder.toUriString();
+//	}
 
 
 }

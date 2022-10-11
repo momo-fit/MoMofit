@@ -29,9 +29,6 @@ public interface GroupMapper {
 		
 	// 3. 상세조회 (Read)
 	public abstract GroupDTO read(Integer group_no) throws DAOException;
-	
-	// 3-2. 댓글
-	public abstract int enrollReply(ReplyDTO rdto) throws DAOException;
 
 	// 4. 삭제 (Delete)
 	public abstract int delete(Integer group_no) throws DAOException;		

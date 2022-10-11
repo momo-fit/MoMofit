@@ -14,5 +14,6 @@ public class ReplyDTO {
     private Date edit;
     private Integer parent_no;
     private Integer user_no;        // users FK
+    private String writer;
     
 } //end

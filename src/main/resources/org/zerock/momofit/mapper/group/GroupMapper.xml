@@ -83,8 +83,7 @@
 	</insert>
 
 	<insert id="insertSelectKey">
-		<selectKey keyProperty="group_no" order="BEFORE"
-		resultType="Integer">
+		<selectKey keyProperty="group_no" order="BEFORE" resultType="Integer">
 			SELECT groups_seq.nextval 
 			FROM dual
 		</selectKey>

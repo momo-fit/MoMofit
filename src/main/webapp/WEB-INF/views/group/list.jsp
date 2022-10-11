@@ -92,7 +92,6 @@
                                             <p class="font-14-500" style="margin-bottom: 5px;" >
                                                 &#128293;일정 - <fmt:formatDate pattern="yyyy/MM/dd HH:mm" value="${ls.schedule}" />
                                                 
-                                                No.<c:out value="${ls.group_no}" />
                                             </p>
                                             
                                             <p class="font-16-500" style="margin-bottom: 5px;" ><c:out value="${ls.group_name}"/></p>
