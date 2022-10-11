@@ -87,8 +87,39 @@
         
     </insert>
 
-    <select id="selectReportUsers" resultType="org.zerock.momofit.domain.report.reportViewVO">
+    <select id="selectReportUsers" resultType="org.zerock.momofit.domain.report.reportFindUsersVO">
         SELECT NICKNAME, USER_NO FROM USERS WHERE NICKNAME LIKE '%'||#{inputNic}||'%'
     </select>
+
+    <select id="selectReportImg" resultType="org.zerock.momofit.domain.report.reportImgVO">
+        SELECT REPORT_IMG_NAME, TEMP, PATH FROM REPORT_IMG WHERE REPORT_NO = #{reportNo}
+    </select>
+
+    <!-- UPDATE -->
+    <select id="selectReportUpdateData" resultType="org.zerock.momofit.domain.report.reportUpdateVO">
+        SELECT 
+            a.REPORT_NO,
+            a.TITLE,
+            a.TEXT, 
+            a.IMG_CHECK, 
+            a.REPORT_USER, 
+            a.REPORT_TYPE,
+            b.REPORT_IMG_NAME,
+            b.TEMP,
+            b.PATH
+        FROM REPORT a, REPORT_IMG b
+        WHERE a.REPORT_NO = #{report_no}
+        AND a.REPORT_NO = b.REPORT_NO(+)
+    </select>
+
+    <update id="updateReport">
+        UPDATE REPORT
+        SET 
+        TITLE = #{title},
+        TEXT = #{text},
+        EDIT = CURRENT_DATE
+        WHERE REPORT_NO = #{report_no}
+    </update>
+
 
 </mapper>

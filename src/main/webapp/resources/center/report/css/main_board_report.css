@@ -68,5 +68,7 @@ section {
 
 #repotContent{
     min-width: 1050px;
-    min-height: 500px;
+    min-height: 200px;
+
+    max-height: 1000px;
 }

@@ -13,7 +13,10 @@ import org.zerock.momofit.common.SharedScopeKeysCommon;
 import org.zerock.momofit.domain.report.Criteria;
 import org.zerock.momofit.domain.report.reportDTO;
 import org.zerock.momofit.domain.report.reportFindUsersVO;
+import org.zerock.momofit.domain.report.reportImgVO;
 import org.zerock.momofit.domain.report.reportListVO;
+import org.zerock.momofit.domain.report.reportUpdateDTO;
+import org.zerock.momofit.domain.report.reportUpdateVO;
 import org.zerock.momofit.domain.report.reportViewVO;
 import org.zerock.momofit.exception.ServiceException;
 import org.zerock.momofit.mapper.reportMapper.reportMapper;
@@ -57,7 +60,7 @@ public class reportServiceImpl implements reportService {
 
 	@Override
 	public reportViewVO getReportView(int reportNum) throws ServiceException {
-		log.trace("getTotalCnt() invoked.");
+		log.trace("getReportView() invoked.");
 		
 		try {
 			return this.mapper.selectReportView(reportNum);
@@ -68,7 +71,7 @@ public class reportServiceImpl implements reportService {
 
 	@Override
 	public boolean registerReport(reportDTO dto, MultipartFile file) throws ServiceException {
-		log.trace("getTotalCnt() invoked.");
+		log.trace("registerReport() invoked.");
 		
 		try {
 			// 파일 저장 저리
@@ -97,7 +100,7 @@ public class reportServiceImpl implements reportService {
 				file.transferTo( new File(targetFile));
 				
 				dto.setTemp(profile_temp);
-				dto.setPath(targetDir);
+				dto.setPath(today);
 				dto.setImg_check(1);
 				log.info("dto: {}", dto);
 				return this.mapper.postReportContent(dto);
@@ -120,6 +123,42 @@ public class reportServiceImpl implements reportService {
 		} catch (Exception e) {
 			throw new ServiceException(e);
 		} // try-catch
-	} // getReportUsersList
+	}
 
-}
+	@Override
+	public reportImgVO getReportImg(int reportNo) throws ServiceException {		
+		log.trace("getReportImg() invoked.");
+		
+		try {
+			return this.mapper.selectReportImg(reportNo);
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
+		
+	}
+
+	@Override
+	public reportUpdateVO getReportModifyContent(int report_no) throws ServiceException {
+		log.trace("getReportRegiserContent() invoked.");
+		
+		try {
+			return this.mapper.selectReportUpdateData(report_no);
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
+		
+	} // getReportRegiserContent
+
+	@Override
+	public boolean putUpdateReport(reportUpdateDTO dto) throws ServiceException {
+		log.trace("putUpdateReport({}) invoked.", dto);
+		
+		try {
+			return this.mapper.updateReport(dto);
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
+		
+	} // putUpdateReport
+
+} // end class

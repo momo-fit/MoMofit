@@ -127,65 +127,10 @@
     <!-- 메인화면 자바스크립트 -->
     <script src="/resources/main/js/main.js"></script>
 
+    <!-- 데이터 불러오기 -->
+    <script src="/resources/center/report/js/reportView.js"></script>
+
     <!-- 부트스트랩 자바스크립트 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
-
-<script>
-
-    $(()=> {
-        const urlParams = new URL(location.href).searchParams;
-        const report_no = urlParams.get('report_no');
-
-        $.ajax({
-            method : 'get',
-            url : '/center/report//report-view',
-            dataType: 'json',
-            data : {'reportNum' : report_no},
-            async: false,
-            success : ((data)=> {
-                reportView(data);
-            })
-        })
-
-        function imgLoad() {
-            // 이미지 불러오기 ( 일시 보류 )
-        }
-
-
-        function reportView(data) {
-
-            $('#modifyLink').attr('href', '/center/report/modify?report_no='+report_no);
-
-            console.log(data.content.title);
-
-            let reportTitle = $('.Title');
-            let title = data.content.title;
-
-            let reportNickname = $('.reportNickname');
-            let nickname = data.content.nickname;
-
-            let reportDate = $('.reportDate');
-            let Date = data.content.report_date;           
-
-            if(data.content.img_check == 1){
-                let repotImg = $('#repotImg');
-                let img = '';
-            }
-            
-            let repotContent = $('#repotContent');
-            let content = data.content.text;
-
-            reportTitle.append(title);
-            reportNickname.append(nickname);
-            reportDate.append(Date);
-            repotContent.append(content);
-
-        }
-
-
-
-    })
-
-</script>

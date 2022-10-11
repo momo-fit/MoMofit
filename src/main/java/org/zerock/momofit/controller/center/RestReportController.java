@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +23,10 @@ import org.zerock.momofit.domain.report.Criteria;
 import org.zerock.momofit.domain.report.PageDTO;
 import org.zerock.momofit.domain.report.reportDTO;
 import org.zerock.momofit.domain.report.reportFindUsersVO;
+import org.zerock.momofit.domain.report.reportImgVO;
 import org.zerock.momofit.domain.report.reportListVO;
+import org.zerock.momofit.domain.report.reportUpdateDTO;
+import org.zerock.momofit.domain.report.reportUpdateVO;
 import org.zerock.momofit.domain.report.reportViewVO;
 import org.zerock.momofit.exception.ControllerException;
 import org.zerock.momofit.service.report.reportService;
@@ -105,10 +109,9 @@ public class RestReportController {
 
 		} catch (Exception e) {
 			throw new ControllerException(e);
-		} // try-catch
+		} // try-catch	
 		
-		
-	}
+	} // postContent
 	
 	@GetMapping("/report-userfind")
 	public  ResponseEntity<Map<String, Object>> getUsersNickname(String inputNic) throws ControllerException {
@@ -124,7 +127,52 @@ public class RestReportController {
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		} // try-catch
-	}
+	} // getUsersNickname
+	
+	@GetMapping("/report-uploadImg")
+	public  ResponseEntity<reportImgVO> getUploadImg(int reportNo) throws ControllerException {
+		
+		try {
+		
+			reportImgVO imgVO = this.service.getReportImg(reportNo);
+
+			return new ResponseEntity<>(imgVO, HttpStatus.OK);
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		} // try-catch
+		
+	} // getUploadImg
+	
+	@GetMapping("/report-modifyView")
+	public  ResponseEntity<reportUpdateVO> getModifyData(int report_no) throws ControllerException {
+		
+		try {
+		
+			reportUpdateVO modifyVO = this.service.getReportModifyContent(report_no);
+
+			return new ResponseEntity<>(modifyVO, HttpStatus.OK);
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		} // try-catch
+		
+	} // getUploadImg
+	
+	@PutMapping("/report-modifyPut")
+	public void putModifyReport(reportUpdateDTO dto, HttpServletResponse res) throws ControllerException {
+		
+		try {
+			
+			log.info("/t+ dto : {}" ,dto);
+			
+//			this.service.putUpdateReport(dto);
+
+//			res.sendRedirect("/center/report/list");
+			
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		} // try-catch
+		
+	} // getUploadImg
 	
 
 }
