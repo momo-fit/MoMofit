@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.zerock.momofit.domain.picboard.Criteria;
+import org.zerock.momofit.domain.picboard.PicBoardCommDTO;
+import org.zerock.momofit.domain.picboard.PicBoardCommVO;
 import org.zerock.momofit.domain.picboard.PicBoardDTO;
 import org.zerock.momofit.domain.picboard.PicBoardVO;
 import org.zerock.momofit.domain.picboard.board_imgDTO;
@@ -37,9 +39,6 @@ public interface PicBoardService {
 	//7. 해당 게시물의 업로드 된 파일 조회하기 
 	public abstract List<board_imgDTO> imageList(int board_no) throws ServiceException;
 
-
-	
-	
 	
 	
  }

@@ -66,7 +66,7 @@ public class PicUploadController {
 			}
 		}
 		
-		String uploadFolder="C:\\project\\uploadFile";
+		String UPLOAD_PATH="C:\\project\\uploadFile";
 		
 		
 		SimpleDateFormat sdf= new SimpleDateFormat("yyyyMMdd"); //저장되는경로를 날짜별로 폴더생성해주기위해 SimpleDateFormat를 사용.. 초기화해준다.
@@ -74,7 +74,7 @@ public class PicUploadController {
 		String datePath= sdf.format(date); //오늘의 날짜 데이터 값을 가지고 있는 date변수를 yyyy-MM-dd형식의 문자열로 변환하기위해 SimpleDateFormat의 format메소드를 호출합니다.
 		
 		/*폴더 생성******* */
-		File uploadPath = new File(uploadFolder, datePath);
+		File uploadPath = new File(UPLOAD_PATH, datePath);
 		
 			if(uploadPath.exists()==false) { //폴더가 이미 존재하는 상황에, 중복으로 생성되는걸 방지함 
 				uploadPath.mkdirs(); //여러개의 폴더 생성 

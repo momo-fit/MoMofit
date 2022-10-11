@@ -110,10 +110,6 @@
                     <div class="content_wrap">
                         
                         <!-- 본문 이미지 -->
-                        <!-- <div>
-                            <img src="https://picsum.photos/id/684/600/400" alt="picsum img"> <br><br>
-                        </div>-->
-                        
 
 						<div id="uploadResult">
 						
@@ -145,17 +141,26 @@
                         <div class="comment_wrap">
                             <span class="font-14-700">댓글</span> <br><br>
     
-                            <!-- 댓글1 -->
-                            <form action="" class="comment font-14-400">
-                                <span class="font-16-500">닉네임1</span>
-                                <input type="text" class="comment_input_text" name="" id="" value="댓글내용입니다1" disabled>
-                                <span>02:28</span>
+                            
+                            <!-- 댓글작성버튼누르면 실행되게 form에 연결 -->
+                            <form action="" method="" class="comment font-14-400">
+                            
+                            <!-- 댓글작성컨트롤러에 쿼리스트링으로 board_no값을 받아오게했으니, 넘겨주게하기 (사용자에게는 안보이게) -->
+                            <input type="hidden" name="board_no" value="${commDto.board_no}">
+                            <input type="hidden" name="parent_no" value="${commDto.parent_no}">
+
+								<!-- 댓글1 -->
+								<c:forEach var="commList" items="${commList}">
+                                <span class="font-16-500"><c:out value="${commList.user_no}"/></span>
+                                <input type="text" class="comment_input_text" name="" id="" value=<c:out value="${commList.text}"/> disabled>
+                                <span><fmt:formatDate pattern="yyyy/MM/dd" value="${commList.comm_date}"/></span>
                                 <span onclick="clickFunc()" class="link1 cursor_pointer"> 답글달기</span>
                                 <span class="edit_delete">
                                     <button type="button" class="cursor_pointer font-12-400 comment_modify_btn"> 수정 </button>
                                     <div class="space1"></div>
                                     <a href=""><span class="font-12-400"> 삭제 </span></a>
                                 </span>
+                                 </c:forEach>  
                             </form>
 
                             <!-- 대댓글 작성창 -->  
@@ -212,10 +217,10 @@
                         </div>
 
                         <!-- 댓글 작성창 -->
-                        <form action="">
+                        <form action="/board/pic/registerComm" method="POST"">
                             <div id="comment_write" class="card">
                                 <div class="card-body">
-                                    <textarea class="form-control" row="1" style="width: 90%;" placeholder="여기에 댓글을 입력하세요"
+                                    <textarea class="form-control" name="" row="1" style="width: 90%;" placeholder="여기에 댓글을 입력하세요"
                                     onfocus="this.placeholder=''" onblur="this.placeholder='여기에 댓글을 입력하세요'"></textarea>
                                     <button type="submit" class="btn btn-primary btn_color_blue float_right">작성</button>
                                 </div>

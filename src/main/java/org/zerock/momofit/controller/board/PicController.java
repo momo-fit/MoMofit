@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.momofit.domain.picboard.Criteria;
 import org.zerock.momofit.domain.picboard.PageDTO;
+import org.zerock.momofit.domain.picboard.PicBoardCommDTO;
+import org.zerock.momofit.domain.picboard.PicBoardCommVO;
 import org.zerock.momofit.domain.picboard.PicBoardDTO;
 import org.zerock.momofit.domain.picboard.PicBoardVO;
 import org.zerock.momofit.domain.picboard.board_imgDTO;
 import org.zerock.momofit.exception.ControllerException;
 import org.zerock.momofit.service.picboard.PicBoardService;
-
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -52,6 +53,10 @@ public class PicController {
 	         log.info("\t+vo:{}", vo);
 	        
 	          model.addAttribute("PicBoard", vo);  //여기까지는 상세조회에 대한 코드
+	          
+	          List<PicBoardCommVO> commList = this.PicBoardservice.readCommList(dto.getBoard_no());//댓글조회
+	          
+	          model.addAttribute("commList",commList);
 	          
 	          return "/board/pic/main_board_pic";
 			}catch(Exception e) {
@@ -120,8 +125,6 @@ public class PicController {
 			boolean isRegister=this.PicBoardservice.register(dto);
 			log.info("\t+isRegister",isRegister);
 			
-			 rttrs.addAttribute("result", isRegister ? "게시글이 작성되었습니다." : "게시글이 작성되지않았습니다.");
-			
 			 return "redirect:/board/pic/list";
 			 
 			 
@@ -162,6 +165,8 @@ public class PicController {
  			
 			model.addAttribute("pageMaker", pageDTO);
 			
+			
+			
 			return "/board/pic/sports_check";
 		} catch (Exception e) {
 			
@@ -169,7 +174,7 @@ public class PicController {
 			
 		}
 	}//list 목록 (페이징처리)
-	
+
 	
 
 		

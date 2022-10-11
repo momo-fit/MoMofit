@@ -1,6 +1,5 @@
 package org.zerock.momofit.service.picboard;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -8,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.momofit.domain.picboard.Criteria;
+import org.zerock.momofit.domain.picboard.PicBoardCommDTO;
+import org.zerock.momofit.domain.picboard.PicBoardCommVO;
 import org.zerock.momofit.domain.picboard.PicBoardDTO;
 import org.zerock.momofit.domain.picboard.PicBoardVO;
 import org.zerock.momofit.domain.picboard.board_imgDTO;
@@ -137,6 +138,12 @@ public class PicBoardServiceImpl implements PicBoardService {
 			throw new ServiceException(e);
 		}
 	}//해당 게시물의 업로드 된 파일 조회하기 
+
+	
+	
+	
+	
+	
 
 	
 	

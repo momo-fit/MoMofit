@@ -6,8 +6,10 @@ import java.util.List;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 //VO에서 @NoArgsConstructor가 안먹혀서 @Date로 바꿔버림 (=DTO로 임시 세팅)
 @NoArgsConstructor
+
 @Data
 public class PicBoardVO {
 	
