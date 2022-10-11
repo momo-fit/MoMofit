@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.momofit.mapper.picboard.PicBoardCommMapper">
+
+      <!-- 조회하기 (댓글) -->
+	 <select id="read_comm" resultType="org.zerock.momofit.domain.picboard.PicBoardCommVO">
+        SELECT 
+        	/*+ INDEX_DESC(COMM)*/ 
+            comm_no,board_no,text,comm_date,edit,user_no
+        FROM COMM
+        WHERE board_no = #{board_no}
+    
+   	 </select>
+
+	 <!-- 작성하기 (댓글) -->
+	 <insert id="writeComm">
+	  	INSERT INTO COMM(comm_no,board_no,text,parent_no,user_no)
+	  	VALUES(COMM_SEQ.nextval,#{board_no},#{text},#{parent_no},#{user_no})
+	 
+	 </insert>
+	 
+	 <!-- 삭제하기 (댓글) -->
+	 <delete id="deleteComm">
+	 	DELETE FROM COMM WHERE comm_no=#{comm_no}
+	 </delete>
+	 
+	  <!-- 수정하기 (댓글) -->
+	  <update id="updateComm">
+	  UPDATE COMM
+	  SET text= #{text},edit=current_date
+	  
+	  WHERE board_no=#{board_no}
+	  </update>
+	 
+
+
+    
+
+
+
+    
+
+    
+
+
+    
+
+    
+
+    
+
+
+    
+  
+    
+</mapper> 

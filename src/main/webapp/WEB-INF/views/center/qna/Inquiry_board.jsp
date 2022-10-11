@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>main</title>
+    
     <!-- 부트스트랩 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
@@ -119,25 +120,21 @@
                                                 <th class="menu_title"><p class="font-16-500">제목</p></th>
                                                 <th class="menu_writer"><p class="font-16-500">작성자</p></th>
                                                 <th class="menu_date"><p class="font-16-500">작성일</p></th>
-                                                <th class="menu_up"><p class="font-16-500">추천수</p></th>
+                                                
                                             </tr>
                                         </thead>
 
                                         <tbody>
+                                        <c:forEach var="QnaBoardList" items="${QnaBoardList}" > 
                                             <tr class="contnet">
-                                                <td><div>1</div></td>
-                                                <td><div><a onClick="location.href='/center/qna/view'" class="aTile">테스트 제목</a><div class="inquery_status"><p class="font-12-400">처리중</p></div></div></td>
-                                                <td><div>닉네임</div></td>
-                                                <td><div>2022.08.19</div></td>
-                                                <td><div>77</div></td>
+                                                <td><div><c:out value="${QnaBoardList.qna_no}"/></div></td>
+                                                <td><div><a onClick="location.href='/center/qna/view'" class="aTile"><c:out value="${QnaBoardList.title}"/></a><div class="inquery_status"><p class="font-12-400">처리중</p></div></div></td>
+                                                <td><div><c:out value="${QnaBoardList.user_no}"/></div></td>
+                                                <td><div><fmt:formatDate pattern="yyyy/MM/dd" value="${QnaBoardList.qna_date}"></fmt:formatDate></div></td>
+                                                
                                             </tr>
-                                            <tr class="contnet">
-                                                <td><div>1</div></td>
-                                                <td><div><a onClick="location.href='/center/qna/view'" class="aTile">테스트 제목</a><div class="inquery_status"><p class="font-12-400">처리완료</p></div></div></td>
-                                                <td><div>닉네임</div></td>
-                                                <td><div>2022.08.19</div></td>
-                                                <td><div>77</div></td>
-                                            </tr>                                                                                 
+                                           </c:forEach>
+                                                                                                        
                                         </tbody>
                                     
                                     </table>
@@ -180,7 +177,7 @@
 
     <!-- 메인화면 자바스크립트 -->
     <script src="/resources/include/js/main_header.js"></script> 
-    
+     <!-- 문의게시판 처리중/처리완료에 대한 자바스크립트 -->
     <script src="/resources/center/qna/js/status.js"></script>  
   
     <!-- 부트스트랩 자바스크립트 -->
