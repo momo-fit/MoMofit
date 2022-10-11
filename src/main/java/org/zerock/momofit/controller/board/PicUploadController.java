@@ -24,17 +24,18 @@ import org.zerock.momofit.exception.DAOException;
 import org.zerock.momofit.exception.ServiceException;
 import org.zerock.momofit.service.picboard.PicBoardService;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.coobird.thumbnailator.Thumbnails;
 
 @Controller
 
 @Log4j2
-
+@AllArgsConstructor
 @RequestMapping("/board/pic")
 public class PicUploadController {
 	
-	@Autowired
+	
 	private PicBoardService PicBoardService;
 
 	@GetMapping("/uploadAjax")
