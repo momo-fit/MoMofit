@@ -24,7 +24,7 @@ public class GroupChatVO {
 	private String path;
 	private String temp;
 	
-	private List<GroupMemberVO> list;
+	private List<GroupMemberVO> list_group_member;
 	
 	private List<ChatNoticeVO> list_chat_notice;
 

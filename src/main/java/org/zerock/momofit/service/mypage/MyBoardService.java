@@ -15,6 +15,6 @@ public interface MyBoardService {
 	public abstract int getBoardCount(Criteria cri) throws ServiceException;
 	
 	//3. 마이페이지 내글 삭제
-	public abstract boolean removeArtice(int board_no) throws ServiceException;
+	public abstract boolean removeArticle(int board_no) throws ServiceException;
 	
 } // end interface

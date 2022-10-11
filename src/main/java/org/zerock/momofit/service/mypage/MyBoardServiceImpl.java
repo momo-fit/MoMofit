@@ -46,13 +46,11 @@ public class MyBoardServiceImpl implements MyBoardService {
 	public int getBoardCount(Criteria cri) throws ServiceException {
 		log.trace("getBoardCount({}) invoked.");
 		
-		try {
-			
-			return this.myboardMapper.getMyBoardCount(cri);
-			
+		try {		
+			return this.myboardMapper.getMyBoardCount(cri);		
 		} catch (Exception e) {
 			throw new ServiceException(e);
-		}
+		} // try-catch
 	} // getBoardCount
 
 	
@@ -60,15 +58,13 @@ public class MyBoardServiceImpl implements MyBoardService {
 	//3. "내 글" 삭제하기
 	//---------------------------------------------
 	@Override
-	public boolean removeArtice(int board_no) throws ServiceException {
-		
-		try {
-			
-			return this.myboardMapper.deleteMyboardArticle(board_no) == 1;
-			
+	public boolean removeArticle(int board_no) throws ServiceException {
+		log.trace("removeArticle() invoked.");
+		try {		
+			return this.myboardMapper.deleteMyboardArticle(board_no) == 1;		
 		} catch (Exception e) {
 			throw new ServiceException(e);
-		}
+		} // try-catch
 		
 	} // removeArticle
 

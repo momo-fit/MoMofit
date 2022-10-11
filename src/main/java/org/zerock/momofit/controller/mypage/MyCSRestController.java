@@ -20,21 +20,20 @@ import org.zerock.momofit.domain.mypage.MyQnaVO;
 import org.zerock.momofit.domain.mypage.MyReportVO;
 import org.zerock.momofit.domain.mypage.PageDTO;
 import org.zerock.momofit.domain.signIn.LoginVO;
-import org.zerock.momofit.domain.signUp.UserDTO;
 import org.zerock.momofit.exception.ControllerException;
 import org.zerock.momofit.service.mypage.MyCSService;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
-@AllArgsConstructor
+@RequiredArgsConstructor
 
 @RestController
 @RequestMapping("/mypage/cs/")
 public class MyCSRestController {
 
-	private MyCSService myCSService;
+	private final MyCSService myCSService;
 
 	// 1. QNA 글 리스트 조회
 	@GetMapping(
@@ -56,7 +55,8 @@ public class MyCSRestController {
 			// 세션객체로부터, 회원정보 얻기
 			LoginVO vo = (LoginVO) session.getAttribute(SharedScopeKeys.USER_KEY);
 			
-			int user_no = vo.getUser_no();	// 임시코드 : 1번 User NO조회
+//			int user_no = vo.getUser_no();	// 임시코드 : 1번 User NO조회
+			int user_no = 1;
 			//------------------------------------------------
 			
 			Criteria cri = new Criteria();

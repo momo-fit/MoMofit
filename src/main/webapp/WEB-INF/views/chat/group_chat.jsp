@@ -221,7 +221,7 @@
 
             groupChatService.getGroupInfo(group_no, function(data){
 
-                var listVO = data.list;         // 멤버정보
+                var listVO = data.list_group_member;         // 멤버정보
                 var noticeListVO = data.list_chat_notice;
 
                 var group_name = data.group_name;
@@ -249,8 +249,11 @@
                 console.log("그룹장 닉네임 : ", admin_user_nickname);
 
                 var group_img = data.group_img;
-                var path_img = data.path_img;
-                var temp = data.path;
+                var path_img = data.path;
+                var temp = data.temp;
+                console.log(temp, path_img, group_img);
+                var filePath = path_img + "/" + temp + "_" + group_img;
+
 
                 var groupNameStr = "";
 
@@ -260,7 +263,7 @@
 
                 // Group : 이미지
                 if(group_img){
-
+                    $(".group-info-img").html(`<img src="/display?fileName=\${filePath}">`);
                 } else {
                     $(".group-info-img").html(`<img src="/resources/chat/img/모임농구이미지.jpg">`);
                 }
@@ -465,6 +468,7 @@
             var currentTime = new Date();
             var formatTime = mypageUtilService.timeFormat(currentTime);
             var messageType = JSON.parse(event.body).type;
+            var imgPath = JSON.parse(event.body).filePath;
 
             var str = "";
             str += `<div class="chat-div">`;
@@ -492,7 +496,17 @@
                         str += `<div class="chat-left">`;
                     }
 
-                    str +=  `<div class="chat-content-1"><img src="/resources/chat/img/profile-7794504.png"></div>
+                    str +=  `<div class="chat-content-1">`
+                    
+                    if(imgPath){
+                        str += `<img src="/display?fileName=\${imgPath}">`
+                    } else {
+                        str += `<img src="/resources/chat/img/profile-7794504.png">`
+                    }
+                    
+
+                    str += `</div>
+                    
                             <div class="chat-content-2">
                                 <div class="chat-info font-12-400"><span class="chat-id">\${chat_user_nickname}</span><span class="chat-time">\${formatTime}</span></div>
                                 <div class="chat-text context-menu-one font-14-400">\${chat_text}</div>

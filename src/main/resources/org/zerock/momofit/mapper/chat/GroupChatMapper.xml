@@ -19,7 +19,7 @@
         
         
         <collection 
-        	property="list"
+        	property="list_group_member"
         	resultMap="GroupMemberVO">
         </collection>
         

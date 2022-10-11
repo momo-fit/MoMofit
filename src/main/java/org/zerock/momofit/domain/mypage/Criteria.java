@@ -1,9 +1,13 @@
 package org.zerock.momofit.domain.mypage;
 
-import lombok.Data;
-import lombok.extern.log4j.Log4j2;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Log4j2
+import lombok.Data;
+
+/*
+ * 게시판 페이징 처리 DTO 객체
+ * 
+ */
 @Data
 public class Criteria {
 

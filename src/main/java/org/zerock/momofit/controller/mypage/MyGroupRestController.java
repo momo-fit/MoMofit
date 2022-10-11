@@ -18,23 +18,22 @@ import org.zerock.momofit.domain.mypage.Criteria;
 import org.zerock.momofit.domain.mypage.MyGroupVO;
 import org.zerock.momofit.domain.mypage.PageDTO;
 import org.zerock.momofit.domain.signIn.LoginVO;
-import org.zerock.momofit.domain.signUp.UserDTO;
 import org.zerock.momofit.exception.ControllerException;
 import org.zerock.momofit.service.mypage.MyGroupService;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 
 @Log4j2
-@AllArgsConstructor
+@RequiredArgsConstructor
 
 @RestController
 @RequestMapping("/mypage/group/")
 public class MyGroupRestController {
 
 	
-	private MyGroupService myGroupService;
+	private final MyGroupService myGroupService;
 	
 	
 	@GetMapping(
@@ -82,12 +81,11 @@ public class MyGroupRestController {
 			result.put("voList", voList);
 			result.put("pageDTO", pageDTO);
 			log.info("result : {}, {}", result);
-
 			
 			return new ResponseEntity<>(result, HttpStatus.OK);
 			
 		} catch (Exception e) {
-			throw new ControllerException(e);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 		

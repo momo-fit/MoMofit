@@ -19,22 +19,21 @@ import org.zerock.momofit.domain.mypage.Criteria;
 import org.zerock.momofit.domain.mypage.MyCommentVO;
 import org.zerock.momofit.domain.mypage.PageDTO;
 import org.zerock.momofit.domain.signIn.LoginVO;
-import org.zerock.momofit.domain.signUp.UserDTO;
 import org.zerock.momofit.exception.ControllerException;
 import org.zerock.momofit.service.mypage.MyCommentService;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
-@AllArgsConstructor
+@RequiredArgsConstructor
 
 @RestController
 @RequestMapping("/mypage/comment/")
 public class MyCommentRestController {
 
 	
-	private MyCommentService myCommentService;
+	private final MyCommentService myCommentService;
 	
 	@GetMapping(
 			value="/categorys/{category}/pages/{page}",
@@ -85,7 +84,8 @@ public class MyCommentRestController {
 			return new ResponseEntity<>(result, HttpStatus.OK);
 			
 		} catch (Exception e) {
-			throw new ControllerException(e);
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		} // try-catch
 		
 	} // getMyPageCommentList

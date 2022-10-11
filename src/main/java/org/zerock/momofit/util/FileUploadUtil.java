@@ -10,6 +10,7 @@ import java.util.UUID;
 
 import org.springframework.web.multipart.MultipartFile;
 import org.zerock.momofit.common.SharedScopeKeys;
+import org.zerock.momofit.exception.FileUploadFailException;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -23,7 +24,7 @@ public class FileUploadUtil {
 	 * @param : MultipartFile
 	 * @return : Map (파일 저장 후, 원본파일명/UUID/폴더명) 
 	 */
-	public static Map<String, String> saveFile(MultipartFile file){
+	public static Map<String, String> saveFile(MultipartFile file) throws FileUploadFailException{
 		log.trace("saveFile() invoked.");
 		
 		Map<String, String> result = new HashMap<>();
@@ -52,8 +53,7 @@ public class FileUploadUtil {
 		try {
 			file.transferTo(saveFile);
 		} catch (IllegalStateException | IOException e) {
-			result.put(SharedScopeKeys.ERROR_MESSAGE, SharedScopeKeys.ERROR_FILE_UPLOAD);		
-			return result;
+			throw new FileUploadFailException(e); 
 		} // try-catch
 		
 		result.put(SharedScopeKeys.FILE_PATH, path);
