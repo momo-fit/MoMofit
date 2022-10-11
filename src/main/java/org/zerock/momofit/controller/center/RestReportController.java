@@ -9,13 +9,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -157,16 +160,21 @@ public class RestReportController {
 		
 	} // getUploadImg
 	
-	@PutMapping("/report-modifyPut")
-	public void putModifyReport(reportUpdateDTO dto, HttpServletResponse res) throws ControllerException {
+	@RequestMapping(
+			value = "/report-modifyPut",
+			consumes = "application/json",
+			produces = {
+					MediaType.APPLICATION_JSON_VALUE
+			})
+	public void putModifyReport( @RequestBody reportUpdateDTO dto, HttpServletResponse res) throws ControllerException {
 		
 		try {
 			
 			log.info("/t+ dto : {}" ,dto);
 			
-//			this.service.putUpdateReport(dto);
+			this.service.putUpdateReport(dto);
 
-//			res.sendRedirect("/center/report/list");
+			res.sendRedirect("/center/report/list");
 			
 		} catch (Exception e) {
 			throw new ControllerException(e);

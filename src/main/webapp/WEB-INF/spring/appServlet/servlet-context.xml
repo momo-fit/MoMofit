@@ -59,6 +59,12 @@
 			<mapping path="/center/report/*" />
 			<beans:ref bean="AuthInterceptor" />
 		</interceptor>
+		
+		<interceptor>
+			<mapping path="/board/pic/*" />
+			<beans:ref bean="AuthInterceptor" />
+		</interceptor>
+
 
 	</interceptors>
 

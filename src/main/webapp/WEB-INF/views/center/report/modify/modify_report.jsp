@@ -219,8 +219,8 @@
             $.ajax({
                 url:'/center/report/report-modifyPut',
                 method:'put',
-                data: param,
-                dataType: 'json',
+                data:JSON.stringify(param),
+                contentType: 'application/json',
                 success: ((data)=> {
                     alert("수정 완료");
                 }),

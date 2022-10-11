@@ -115,7 +115,7 @@
 
 
                         <div class="report">
-                            <a href="" class="link1 float_right font-14-700">신고</a><br>
+                            <a href="#" onClick="location.href='/center/report/list'" class="link1 float_right font-14-700">신고</a><br>
                                                     
                         </div>
                         
