@@ -83,9 +83,14 @@
 	</insert>
 
 	<insert id="insertSelectKey">
-		<selectKey keyProperty="group_no" order="BEFORE" resultType="Integer">
-			SELECT groups_seq.nextval 
-			FROM dual
+		<selectKey keyProperty="group_no" order="BEFORE"
+		resultType="int">
+			SELECT
+			    LAST_NUMBER
+			FROM
+			    USER_SEQUENCES
+			WHERE
+			    sequence_name = 'GROUPS_SEQ'
 		</selectKey>
 
 		insert into Groups ( 
@@ -105,7 +110,7 @@
 			member_count
 			)
 		values ( 
-			#{group_no}, 
+			groups_seq.nextval, 
 			#{user_no},
 			#{group_name}, 
 			#{sports}, 
@@ -160,6 +165,21 @@
 	<delete id="delete" parameterType="Integer">
 		DELETE 
 		FROM Groups 
+		WHERE group_no = #{group_no}
+	</delete>
+	
+	<insert id="joinGroup">
+		INSERT INTO group_member(group_member_no, group_no, user_no)
+		values(
+			group_member_seq.nextval,
+			#{group_no},
+			#{user_no}
+		)
+	</insert>
+
+	<delete id="deleteGroupMember">
+		DELETE 
+		FROM Group_member
 		WHERE group_no = #{group_no}
 	</delete>
 

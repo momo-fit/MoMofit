@@ -108,9 +108,9 @@
 
                             <span class="font-12-400" id="edit">
                                 &nbsp; 수정일- 
+
                             	<fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${group.edit}" />
                             </span>
-
 
                             <div class="space1"></div>
 
@@ -125,8 +125,7 @@
                             <!-- <a onclick="if ( confirm('삭제하시겠습니까?') == false ) return false;" 
                             href="/group/remove" ><span class="font-14-500"> 삭제 </span></a> -->
 
-                            <div class="space1"></div>
-                            <a href="/group/memberList"><span class="font-14-500"> 모임장 위임 </span></a>
+
 
                             
 
@@ -232,12 +231,12 @@
                                 // );
                                 
                                 // 2. 목록 TEST 
-                                replyService.getList({group_no:gnoValue, page:1}, function(list){
+                                //replyService.getList({group_no:gnoValue, page:1}, function(list){
                                     
-                                    for(var i = 0,  len = list.length||0; i < len; i++ ){
-                                    console.log(list[i]);
-                                    }
-                                });
+                                //    for(var i = 0,  len = list.length||0; i < len; i++ ){
+                                //    console.log(list[i]);
+                                //    }
+                                //});
                                 
                                 // 3. 삭제 TEST  
                                 // '60'번 댓글 삭제
@@ -325,29 +324,29 @@
                                     <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal"
                                         aria-hidden="true">&times;</button>
-                                    <h4 class="modal-title" id="myModalLabel">REPLY MODAL</h4>
+                                    <h4 class="modal-title" id="myModalLabel">댓글 작성</h4>
                                     </div>
                                     
                                     <div class="modal-body">
                                     <div class="form-group">
-                                        <label>Reply</label> 
+                                        <label>내용</label> 
                                         <input class="form-control" name='text' value='New Reply!!!!'>
                                     </div>      
                                     <div class="form-group">
-                                        <label>Replyer</label> 
+                                        <label>작성자</label> 
                                         <input class="form-control" name='writer' value='replyer'>
                                     </div>
                                     <div class="form-group">
-                                        <label>Reply Date</label> 
+                                        <label>작성일자</label> 
                                         <input class="form-control" name='group_comm_date' value='2022-10-07 13:13'>
                                     </div>
 
                                     </div>
                                 <div class="modal-footer">
-                                <button id='modalModBtn' type="button" class="btn btn-warning">Modify</button>
-                                <button id='modalRemoveBtn' type="button" class="btn btn-danger">Remove</button>
-                                <button id='modalRegisterBtn' type="button" class="btn btn-primary">Register</button>
-                                <button id='modalCloseBtn' type="button" class="btn btn-default">Close</button>
+                                <button id='modalModBtn' type="button" class="btn btn-warning">수정</button>
+                                <button id='modalRemoveBtn' type="button" class="btn btn-danger">삭제</button>
+                                <button id='modalRegisterBtn' type="button" class="btn btn-primary">등록</button>
+                                <button id='modalCloseBtn' type="button" class="btn btn-default">닫기</button>
                                 </div>          </div>
                                 <!-- /.modal-content -->
                                 </div>
@@ -420,10 +419,10 @@
                                 return;
                         }
                         for (var i = 0, len = list.length || 0; i < len; i++) {
-                        str +="<li class='left clearfix' data-group_comm_no='"+list[i].group_comm_no+"'>";
-                        str +="  <div><div class='header'><strong class='primary-font'>"+list[i].writer+"</strong>"; 
-                        str +="    <small class='pull-right text-muted'>"+replyService.displayTime(list[i].group_comm_date)+"</small></div>";
-                        str +="    <p>"+list[i].text+"</p></div></li>";
+	                        str +="<li class='left clearfix' data-group_comm_no='"+list[i].group_comm_no+"'>";
+	                        str +="  <div><div class='header'><strong class='primary-font'>"+list[i].writer+"</strong>"; 
+	                        str +="    <small class='pull-right text-muted'>"+replyService.displayTime(list[i].group_comm_date)+"</small></div>";
+	                        str +="    <p>"+list[i].text+"</p></div></li>";
                         }
                      
                         replyUL.append(str);
@@ -546,14 +545,14 @@
                     
                     <!-- 이전글 목록 다음글 -->
                     <div class="btn_row">
-                        <a href=""><button type="button" class="btn btn-primary btn-sm btn_color_blue">이전글</button></a>
+                        <!-- <a href=""><button type="button" class="btn btn-primary btn-sm btn_color_blue">이전글</button></a> -->
 
                         <!-- 페이지번호를 가지고 목록으로 넘어가야함 -->
                         <a href="/group/list?currPage=${cri.currPage}">
                             <button type="button" class="btn btn-secondary btn-sm" id="listBtn">목록</button>
                         </a>
 
-                        <a href=""><button type="button" class="btn btn-primary btn-sm btn_color_blue" >다음글</button></a>
+                        <!-- <a href=""><button type="button" class="btn btn-primary btn-sm btn_color_blue" >다음글</button></a> -->
                     </div>
             
                 </div>

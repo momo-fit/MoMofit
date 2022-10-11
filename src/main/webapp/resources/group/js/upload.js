@@ -46,8 +46,8 @@
 	
 
 	/* var, method related with attachFile */
-	let regex = new RegExp("(.*?)\.(jpg|png)$");
-	let maxSize = 1048576; //1MB	
+	let regex = new RegExp("(.*?)\.(jpg|png|jpeg|JPG)$");
+	let maxSize = 5 * 1024 * 1024; // 5MB
 	
 	function fileCheck(fileName, fileSize){
 

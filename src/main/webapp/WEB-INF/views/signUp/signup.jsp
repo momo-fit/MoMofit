@@ -253,8 +253,9 @@
     </div>
 
 
-    <!-- 팝업 open -->
-    <script src="/resources/signUp/js/mapPopup.js"></script>
+
+
+
     <!-- 체크박스 전체동의 자바스크립트 -->
     <script src="/resources/signUp/js/main_checkbox.js"></script>
     <!-- 이메일 선택 자바스크립트 -->

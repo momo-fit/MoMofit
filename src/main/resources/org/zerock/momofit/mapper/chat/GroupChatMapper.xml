@@ -1,0 +1,130 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.momofit.mapper.chat.GroupChatMapper">
+
+    <resultMap id="GroupChatVO" type="org.zerock.momofit.domain.chat.GroupChatVO">
+        <result column="group_no" property="group_no"/>
+        <result column="group_name" property="group_name"/>
+        <result column="sports" property="sports"/>
+        <result column="group_loc" property="group_loc"/>
+        <result column="member_max" property="member_max"/>
+        <result column="schedule" property="schedule"/>
+        <result column="info" property="info"/>
+        <result column="user_no" property="user_no"/>
+        <result column="group_img" property="group_img"/>
+        <result column="path" property="path"/>
+        <result column="temp" property="temp"/>
+        
+        
+        <collection 
+        	property="list"
+        	resultMap="GroupMemberVO">
+        </collection>
+        
+        <collection 
+        	property="list_chat_notice"
+        	resultMap="ChatNoticeVO">
+        </collection>
+        
+    </resultMap>
+
+    <resultMap id="GroupMemberVO" type="org.zerock.momofit.domain.chat.GroupMemberVO">
+    	<result column="group_no" property="group_no"/>
+        <result column="group_member_no" property="group_member_no"/>
+        <result column="group_user_no" property="group_user_no"/>
+        <result column="join_date" property="join_date"/>
+        <result column="nickname" property="nickname"/>
+    </resultMap>
+    
+    
+    <resultMap id="ChatNoticeVO" type="org.zerock.momofit.domain.chat.GroupChatDomain$ChatNoticeVO">
+    	<result column="chat_notice_no" property="chat_notice_no"/>
+        <result column="group_no" property="group_no"/>
+        <result column="chat_notice_context" property="chat_notice_context"/>
+        <result column="chat_notice_time" property="chat_notice_time"/>
+    </resultMap>
+    
+    <!-- 참여한, 그룹정보와 멤버들 구하기 -->
+    <select id="selectGroupInfoWithMembers" resultMap="GroupChatVO">
+		SELECT 
+		        /*+ index(t2 pk_group_member) index_desc(t4 pk_chat_notice) */
+		    t1.group_no,
+		    t1.group_name,
+		    t1.sports,
+		    t1.group_loc,
+		    t1.member_max,
+		    t1.schedule,
+		    t1.info,
+		    t1.user_no,
+		    t1.group_img,
+		    t1.path,
+		    t1.temp,
+		    t2.group_no,
+		    t2.group_member_no,
+		    t2.user_no AS group_user_no,
+		    t2.join_date,
+		    t3.nickname,
+		
+		    t4.chat_notice_no,
+		    t4.group_no,
+		    t4.chat_notice_context,
+		    t4.chat_notice_time
+		FROM groups t1
+		
+		INNER JOIN group_member t2
+		ON t1.group_no = t2.group_no
+		
+		INNER JOIN users t3
+		ON t2.user_no = t3.user_no
+		
+		LEFT OUTER JOIN chat_notice T4
+		ON t1.group_no = t4.group_no
+		
+		WHERE t1.group_no = #{group_no}
+    </select>
+
+    <!-- user_no로 나의 그룹 리스트 얻기 -->
+    <select id="selectMyGroupList" resultType="org.zerock.momofit.domain.chat.GroupChatVO">
+        SELECT /*+ LEADING(t1 t2) USE_NL(t2) index_desc(t1 pk_group_member) */
+            t2.group_no,
+            t2.group_name
+        FROM
+            group_member t1
+        INNER JOIN groups t2
+        ON t1.group_no = t2.group_no
+        WHERE t1.user_no = #{user_no}
+    </select>
+    
+    
+    <select id="selectMyChatNoticeList" resultType="org.zerock.momofit.domain.chat.GroupChatDomain$ChatNoticeVO">
+		SELECT /*+ index_desc(chat_notice) */
+			*
+		FROM
+			chat_notice
+		WHERE
+			group_no = #{group_no}
+    </select>
+    
+    <delete id="deleteMyChatNotice">
+    	DELETE FROM
+		    chat_notice
+		WHERE
+		    chat_notice_no = #{chat_notice_no}
+    </delete>
+
+    <insert id="insertMyChatNotice">
+        INSERT INTO chat_notice (chat_notice_no, group_no, chat_notice_context, chat_notice_time)
+
+        values (
+            chat_notice_seq.NEXTVAL,
+            #{vo.group_no},
+            #{vo.chat_notice_context},
+            current_date
+        )
+    </insert>
+    
+
+
+</mapper>

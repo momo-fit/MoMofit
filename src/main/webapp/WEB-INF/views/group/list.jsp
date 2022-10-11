@@ -175,6 +175,13 @@
                             </form>
 
                         </div>
+                        <div class="notice_board_bottom">
+                            <a href="/group/register?currPage=${pageMaker.cri.currPage}" class="board_write">
+
+                                <button><i class="fa-solid fa-pencil"> 모집하기</i></button>
+
+                            </a>
+                        </div> 
                         <hr class="hr-1"/>
 
                         <!-- 모임 외부 틀 -->
@@ -224,20 +231,10 @@
                         
                     
                         <!-- 하단 버튼 -->
-                        <div class="notice_board_bottom">
-                            <a href="" class="hot_button">
-                                <button><i class="fa-solid fa-heart"></i></button>
-                            </a>
-                        </div>
 
 
-                        <div class="notice_board_bottom">
-                            <a href="/group/register?currPage=${pageMaker.cri.currPage}" class="board_write">
 
-                                <button><i class="fa-solid fa-pencil"> 모집하기</i></button>
 
-                            </a>
-                        </div> 
 
                         <div id="paging-div">
                             <ul>

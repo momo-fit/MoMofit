@@ -17,58 +17,34 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class MyPageController {
 	
+	
+//	===========================
+	
 	// 1. mypage "내 글" 이동
 	@GetMapping("/board_list")
 	public void myboardList() {
-		log.trace("myboardList() invoked.");
-		
-	} // myboardList
-	
+	} // myboardList	
 	
 	// 2. mypage "내 댓글" 이동
 	@GetMapping("/comment_list")
 	public void commentList() {
-		
-	} // commentList
-	
+	} // commentList	
 	
 	// 3. mypage "내 문의/신고" 이동
 	@GetMapping("/csboard_list")
 	public void csboardList() {
-		
 	} // csboardList
 	
-	
+	// 4. mypage "내 그룹" 이동
 	@GetMapping("/my_group")
 	public void myGroupList() {
-		
 	} // myGroupList
 	
-	
-	@GetMapping("/check_pw")
-	public void check_pw() {
-		
-		
-	} // check_pw
-	
-	@PostMapping("/check_pw")
-	public String check_pw_post() {
-		
-		return "redirect: /mypage/info_modify";
-	} // check_pw_post
-	
-	
-	@GetMapping("/info_modify")
-	public void infoModify() {
-		
-		
-	} // infoModify
-	
-	
+	// 6. mypage "내 쪽지"
 	@GetMapping("/message_receive")
 	public void noteReceiveList() {
-		
 	} // noteReceiveList
+	
 	
 
 } // end class
