@@ -50,7 +50,7 @@
     <!-- 메인페이지 필수 CSS -->
     <link rel="stylesheet" href="/resources/main/css/main_section_card.css">
     <link rel="stylesheet" href="/resources/main/css/main_section_board.css">
-
+    <script>let loginNickname = '${__USER__.nickname}';</script>
 </head>
 
 <body>
@@ -71,30 +71,29 @@
 
                     <div class="board_name font-20-500">
                         <img src="/resources/center/report/img/cs.png" height="25px">
-                        신고
+                        
                     </div>
 
                     <div class="title font-28-400">
-                        신고합니다 글 제목 입니다 
+                        
                     </div>
                 
                     <div class="info"> 
                         <div class="info2">
-                            <span class="font-12-400"> 작성자 <b class="font-12-400">홍길동</b> </span>
+                            <span class="font-12-400"> 작성자 <b class="reportNickname font-12-400"></b> </span>
                             <div class="space1"></div>
-                            <span class="font-12-400"> 작성시간 <b class="font-12-400">2022.08.15 12:37</b> </span>
+                            <span class="font-12-400"> 작성시간 <b class="reportDate font-12-400"></b> </span>
                             <div class="space1"></div>
                         </div>
               
                         <div class="edit_delete">
-                            <a href="modify"><span class="font-12-400"> 수정 </span></a>
+                            <a href="" id="modifyLink"><span class="font-12-400"> 수정 </span></a>
 
                             <div class="space1"></div>
 
-                            <form action="remove" method="post">
-                                <button class="font-12-400" id="remove"> 삭제 </button>
-                            </form>
+                            <button class="font-12-400" id="remove"> 삭제 </button>
 
+                                
                         </div>
                     </div>
 
@@ -102,18 +101,13 @@
                     <div class="content_wrap">
     
                         <!-- 본문 이미지 -->
-                        <div>
-                            <img src="https://picsum.photos/id/684/600/400" alt="picsum img"> <br><br>
+                        <div id="repotImg">
+                            
                         </div>
                         
                         <!-- 본문 텍스트 -->
-                        <div class="font-14-400">
-                            글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 <br>
-                            글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 <br>
-                            글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 <br> <br>
-                            글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 <br>
-                            글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 <br>
-                            글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 글 내용이 들어갑니다 신고를 할 수 있습니다 <br> <br>
+                        <div class="font-14-400" id="repotContent">
+                           
                         </div>
 
                     </div>
@@ -132,7 +126,12 @@
     <!-- 메인화면 자바스크립트 -->
     <script src="/resources/main/js/main.js"></script>
 
+    <!-- 데이터 불러오기 -->
+    <script src="/resources/center/report/js/reportView.js"></script>
+
     <!-- 부트스트랩 자바스크립트 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
+
+

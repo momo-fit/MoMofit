@@ -34,32 +34,16 @@
         </div>
 
         <div class="wrap_find_nickname_search">
-            <form action="#">
                 <input type="text" name="" id="" class="find_nickname_search font-16-500" placeholder="닉네임">
                 <button type="button" class="font-16-500">검색</button>
-            </form>
         </div>
 
         <div class="wrap_find_nickname_content">
 
-            <form action="#">
+ 
 
-                <!-- 반복하여, 화면 출력  -->
-                <div class="find_nickname_content">
-                    <!-- value값에 닉네임 값일 불러와져아 한다. -->
-                    <!-- value값과 span태그에 들어가는 값은 똑같은 값으로 입력필요! -->
-                    <!-- id는 순차적으로 증가하도록 넣어야함!! -->
-                    <input type="radio" name="nickname" id="nickname1" value="헬짱">
-                    <label class="font-16-400" for="nickname1">헬짱</label>
-                </div>
+            
 
-                <!-- 더미데이터 -->
-                <div class="find_nickname_content">
-                    <input type="radio" name="nickname" id="nickname2" value="헬짱구">
-                    <label class="font-16-400" for="nickname2">헬짱구</label>
-                </div>
-
-            </form>
 
         </div>
 

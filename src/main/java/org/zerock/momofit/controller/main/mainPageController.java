@@ -71,15 +71,12 @@ public class mainPageController {
 			model.addAttribute("BestTipBoard", BestTipBoard);
 			model.addAttribute("BestPicBoard",BestPicBoard);
 			model.addAttribute("BestTradeBoard", BestTradeBoard);
-//			
+	
 			return "main/main";
 		}catch (Exception e) {
 			throw new ControllerException(e);
 		} // try-catch
 		
-		
-		
 	} // mainPage
-	
 	
 } // end class
