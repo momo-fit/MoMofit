@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.zerock.momofit.common.SharedScopeKeys;
@@ -88,6 +89,38 @@ public class MyGroupRestController {
 		
 		
 	} // getMyPageGroupList
+	
+
+	@PutMapping(
+			value="/groups/{group_no}/users/{user_no}",
+			produces = {
+					"application/text; charset=UTF-8"
+					}
+			)
+	public ResponseEntity<String> quitMyGroup(
+			@PathVariable("group_no") int group_no,
+			@PathVariable("user_no") int user_no
+			) throws ControllerException{
+		log.trace("quitMyGroup({},{}) invoked.", group_no, user_no);
+		
+		try {
+			
+			// Step.1 : Quit이 가능한지 유효성 검사
+			if(this.myGroupService.isQuitGroup(group_no, user_no)) {
+				return new ResponseEntity<>("모임장은 나가기가 불가 합니다.", HttpStatus.OK);
+			} // if : 유효성 검사
+			log.info("그룹을 나가겠습니다.");
+			
+			// Step.2 : 모임에서 나가기
+			return this.myGroupService.quitMyGroup(group_no, user_no)?
+					new ResponseEntity<>("모임에서 나갔습니다.", HttpStatus.OK) :
+						new ResponseEntity<>("나가기가 실패하였습니다.", HttpStatus.OK);
+			
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+	} // quitMyGroup
 
 	
 } // end class

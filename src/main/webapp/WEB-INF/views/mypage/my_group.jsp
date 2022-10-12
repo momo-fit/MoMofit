@@ -244,7 +244,7 @@
                                         <button class="mypage-group-func-btn mypage-blue-btn btn-group-chat" value="\${group_no}"> 
                                             <span class="font-14-500">채팅</span>
                                         </button>
-                                        <button class="mypage-group-func-btn mypage-gray-btn"> 
+                                        <button class="mypage-group-func-btn mypage-gray-btn btn-quit-chat" value="\${group_no}"> 
                                             <span class="font-14-500">나가기</span>
                                         </button></div>                      
                                     </div>
@@ -297,6 +297,8 @@
                     groupListBox.html(str);
 
                     
+
+                    // 채팅방 이동
                     $(".btn-group-chat").on('click', function(){
                             console.log("채팅 버튼이 클릭")
                             var value = $(this).val();
@@ -309,7 +311,27 @@
                             window.open(popupUrl, popupName, popupSize);
                     })
 
+                    // 채팅방 나가기
+                    $(".btn-quit-chat").on('click', function() {
+                        console.log("채팅 나가기 버튼이 클릭");
+                        
+                        var value = $(this).val();  // 모임 번호
 
+                        var deleteParam = {
+                            user_no : uno,
+                            group_no : value
+                        };
+
+                        mypageGroupService.outGroup(deleteParam, function(data){
+
+                            alert(data);
+                            var param = {
+                                page : page
+                            }
+
+                            showGroupList(param);
+                        }) 
+                    })
 
 
                     //---------------------

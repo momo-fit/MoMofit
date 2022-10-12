@@ -36,31 +36,36 @@ var mypageGroupService = (function () {
     } // getGroupList
 
 
-    // //--------------------------
-    // //2. 내가 참여한 그룹 나가기
-    // //--------------------------
-    // function outGroup(gno, callback, error){
+    //--------------------------
+    //2. 내가 참여한 그룹 나가기
+    //--------------------------
+    function outGroup(path, callback, error){
         
-    //     $.ajax({
-    //         type: 'delete',
-    //         url: '/mypage/group/groups/' + gno,
-    //         success : function(result){
-	// 			if(callback){
-    //                 callback(result);
-    //             }
-    //         },
+        var myuser_no = path.user_no;
+        var mygroup_no = path.group_no;
 
-    //         error : function (xhr, status, er){
-    //             if(error){
-    //                 error(er);
-    //             }
-    //         }
+        $.ajax({
+            type: 'put',
+            url: '/mypage/group/groups/' + mygroup_no + "/users/" + myuser_no,
 
-    //     });
-    // } // outGroup
+            success : function(result){
+				if(callback){
+                    callback(result);
+                }
+            },
+
+            error : function (xhr, status, er){
+                if(error){
+                    error(er);
+                }
+            }
+
+        });
+    } // outGroup
 
     return {
-        getGroupList : getGroupList
+        getGroupList : getGroupList,
+        outGroup : outGroup
     }
 
 })();
