@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -70,7 +71,7 @@ public class RestReportController {
 			
 		} catch (Exception e) {
 			throw new ControllerException(e);
-		}
+		} // try-catch
 		
 	} // getReportList
 	
@@ -127,6 +128,7 @@ public class RestReportController {
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		} // try-catch
+		
 	} // getUsersNickname
 	
 	@GetMapping("/report-uploadImg")
@@ -161,7 +163,7 @@ public class RestReportController {
 					consumes = "application/json",
 			         produces = {MediaType.TEXT_PLAIN_VALUE},
 			         method= RequestMethod.PUT)
-	public ResponseEntity<String> putModifyReport( @RequestBody reportUpdateDTO dto, HttpServletResponse res) throws ControllerException {
+	public ResponseEntity<String> putModifyReport( @RequestBody reportUpdateDTO dto) throws ControllerException {
 
 		try {
 			
@@ -171,7 +173,6 @@ public class RestReportController {
 			log.info("/t+ status : {}" ,status);
 
 			if(status) {
-//				res.sendRedirect("/center/report/list");
 				return new ResponseEntity<>("success", HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -182,9 +183,29 @@ public class RestReportController {
 			throw new ControllerException(e);
 		} // try-catch
 		
-		
-		
 	} // getUploadImg
 	
-
-}
+	@DeleteMapping(
+			value = "/report-delete", 
+			consumes = "application/json",
+	        produces = {MediaType.TEXT_PLAIN_VALUE} )
+	public ResponseEntity<String> deleteReport( @RequestBody Map<String, String>map) throws ControllerException {
+		try {
+			
+			log.info("/t+ report_no, temp, path : {}" ,map);
+			
+			boolean RemoveStatus = this.service.deleteReport(map);
+			
+			if(RemoveStatus) {
+				return new ResponseEntity<>("success", HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>("fail", HttpStatus.INTERNAL_SERVER_ERROR);		
+			}	
+	
+		} catch (Exception e) {
+			throw new ControllerException(e);
+		} // try-catch
+	
+	} // deleteReport
+	
+} // end class

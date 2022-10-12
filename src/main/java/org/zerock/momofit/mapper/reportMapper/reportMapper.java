@@ -38,4 +38,7 @@ public interface reportMapper {
 	// 업데이트
 	public abstract boolean updateReport(reportUpdateDTO dto) throws DAOException;
 	
+	// 삭제
+	public abstract boolean deleteReport(int report_no) throws DAOException;
+	
 }

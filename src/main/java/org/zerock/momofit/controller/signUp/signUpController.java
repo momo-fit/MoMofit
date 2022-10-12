@@ -71,7 +71,6 @@ public class signUpController {
 		} catch (Exception e) {
 			throw new ControllerException(e);
 		} // try-catch
-	
 
 	} // location
 	
@@ -90,6 +89,4 @@ public class signUpController {
 
 	} // nickNameCheck
 	
-
-		
 } // end class

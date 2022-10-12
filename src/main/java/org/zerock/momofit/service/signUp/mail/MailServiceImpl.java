@@ -87,7 +87,7 @@ public class MailServiceImpl implements MailService {
 			this.mapper.tempPwUpdate(id, Pass);
 		} catch (Exception e) {
 			throw new ServiceException(e);
-		}
+		} // try-catch
 		
 		email = email.replace(",", "@");
 

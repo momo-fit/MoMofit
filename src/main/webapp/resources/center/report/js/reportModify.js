@@ -39,19 +39,22 @@ $(() => {
         
 
         if(data.img_check == 1){
-            console.log("123");
             $('#img').show();
 
             let repotImg = $('#img');
             let img = '';
             
-            img += `<img id="uplodeImg" src=/display?fileName=${data.path}/${data.temp}>`;
+            img += `<img id="uplodeImg" src=/display?fileName=${data.path}/${data.temp}_${data.report_img_name}>`;
 
             repotImg.append(img);
         }
 
 
     }
+
+    $('.report_back').click(()=> {
+        location.href = "/center/report/view?report_no="+report_no;
+    })
 
     $('.report_submit').click(()=> {
 

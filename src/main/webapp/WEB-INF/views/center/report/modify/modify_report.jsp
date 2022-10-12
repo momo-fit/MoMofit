@@ -111,7 +111,7 @@
 																
                             </div>  
                             <!-- 돌아가기 버튼 -->
-                            <input type="button" class="report_back" value="취소" onclick="location='/center/report/view'">
+                            <input type="button" class="report_back" value="취소">
                             
                             <!-- 작성하기 버튼 -->
                             <input type="button" class="report_submit" value="수정">

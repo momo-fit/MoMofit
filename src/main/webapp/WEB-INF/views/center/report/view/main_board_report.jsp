@@ -91,9 +91,9 @@
 
                             <div class="space1"></div>
 
-                            <form action="remove" method="post">
-                                <button class="font-12-400" id="remove"> 삭제 </button>
-                            </form>
+                            <button class="font-12-400" id="remove"> 삭제 </button>
+
+                                
                         </div>
                     </div>
 

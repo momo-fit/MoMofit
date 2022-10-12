@@ -48,7 +48,7 @@ public class userSignUpServiceImpl implements userSignUpService {
 		String original = file.getOriginalFilename();
 		
 		UUID uuid = UUID.randomUUID();
-		String profile_temp = uuid +"_"+ file.getOriginalFilename();
+		String profile_temp = uuid.toString();
 		
 		File folder = new File(targetDir);
 		
@@ -59,7 +59,7 @@ public class userSignUpServiceImpl implements userSignUpService {
 		
 		try {	
 			if( original != "") {
-				String targetFile = targetDir +"/"+ profile_temp;
+				String targetFile = targetDir +"/"+ profile_temp+"_"+original;
 				file.transferTo( new File(targetFile));
 				
 				dto.setProfile_name(file.getOriginalFilename());

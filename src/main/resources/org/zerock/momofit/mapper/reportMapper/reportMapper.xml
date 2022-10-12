@@ -121,5 +121,10 @@
         WHERE REPORT_NO = #{report_no}
     </update>
 
+    <!-- DELETE -->
+    <delete id="deleteReport">
+        DELETE FROM REPORT
+        WHERE REPORT_NO = #{report_no}
+    </delete>
 
 </mapper>

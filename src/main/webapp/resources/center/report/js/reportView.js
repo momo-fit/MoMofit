@@ -3,6 +3,10 @@
 $(()=> {
     const urlParams = new URL(location.href).searchParams;
     const report_no = urlParams.get('report_no');
+    
+    let imgPath;
+    let imgTemp;
+    let report_img_name;
 
     $.ajax({
         method : 'get',
@@ -25,11 +29,14 @@ $(()=> {
             data : {'reportNo' : report_no},
             async: false,
             success : ((data)=> {
-
+				imgPath = data.path;
+                imgTemp = data.temp;
+                report_img_name = data.report_img_name
+	
                 let repotImg = $('#repotImg');
                 let img = '';
                 
-                img += `<img src=/display?fileName=${data.path}/${data.temp}>`;
+                img += `<img src=/display?fileName=${data.path}/${data.temp}_${data.report_img_name}>`;
 
                 repotImg.append(img);
             })
@@ -75,4 +82,33 @@ $(()=> {
 
     }   
 
+    $('#remove').click(()=> {
+
+        if(confirm("글을 삭제 하시겠습니까?")){
+
+            deleteParam = {
+                'imgPath' : imgPath,
+                'imgTemp' : imgTemp,
+                'report_no' : report_no
+            }
+    
+            $.ajax({
+                method: 'delete',
+                url: '/center/report/report-delete',
+                data:JSON.stringify(deleteParam),
+                contentType : "application/json; charset=utf-8",
+                async: false,
+                success: (()=> {
+                    alert("삭제되었습니다.");
+                    location.href = "/center/report/list";
+                }),
+                error:(() => {
+                    alert("삭제를 실패했습니다. 다시 시도해 주세요");
+                    location.href = "/center/report/list";
+                })
+            }) // ajax
+
+        } // if
+
+    }) // remove : click
 })

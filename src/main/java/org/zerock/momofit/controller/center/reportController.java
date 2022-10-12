@@ -37,16 +37,7 @@ public class reportController {
 		
 		
 		return "center/report/register/writing_report";
-	}
-	
-	@PostMapping("/register")
-	public String registerProcess() {
-		log.trace("reportBoardRegisterProcess() invoked.");
-		
-		return "redirect:/center/report/list";
-		
-	}
-	
+	}	
 	
 	@GetMapping("/usersearch")
 	public String userSearch() {

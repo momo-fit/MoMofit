@@ -4,6 +4,7 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,7 +88,7 @@ public class reportServiceImpl implements reportService {
 			
 			if(imgName != "") {
 				
-				String profile_temp = uuid + "_" +file.getOriginalFilename();	
+				String profile_temp = uuid.toString();	
 				File folder = new File(targetDir);
 				
 				// 해당폴더 없을시 생성
@@ -95,7 +96,7 @@ public class reportServiceImpl implements reportService {
 					folder.mkdirs();
 				} // if
 
-				String targetFile = targetDir +"/"+ profile_temp;
+				String targetFile = targetDir +"/"+ profile_temp+ "_" +file.getOriginalFilename();
 				log.info("targetFile: {}", targetFile);
 				file.transferTo( new File(targetFile));
 				
@@ -160,5 +161,32 @@ public class reportServiceImpl implements reportService {
 		} // try-catch
 		
 	} // putUpdateReport
+
+	@Override
+	public boolean deleteReport(Map<String, String> map) throws ServiceException {
+		log.trace("deleteReport({}) invoked.", map);
+			
+		
+		try {
+			String imgPath =  map.get("imgPath");
+			String imgTemp = map.get("imgTemp");
+			int report_no = Integer.parseInt(map.get("report_no"));
+			
+			boolean deleteRes = this.mapper.deleteReport(report_no);
+			
+			if(imgPath != "" && imgTemp != "" && deleteRes) {
+				String imgpath = SharedScopeKeysCommon.UPLOAD_PATH + imgPath + "/" + imgTemp;
+				
+				File file = new File(imgpath);
+				
+				file.delete();
+			} // if
+			
+			return deleteRes;
+
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
+	} // deleteReport
 
 } // end class
