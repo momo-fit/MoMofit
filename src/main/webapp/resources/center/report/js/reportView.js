@@ -1,3 +1,5 @@
+
+
 $(()=> {
     const urlParams = new URL(location.href).searchParams;
     const report_no = urlParams.get('report_no');
@@ -36,6 +38,10 @@ $(()=> {
     }
 
     function reportView(data) {
+       
+        
+        
+        console.log(loginNickname);
         let report_no = data.content.report_no;
 
         $('#modifyLink').attr('href', '/center/report/modify?report_no='+report_no);
@@ -58,9 +64,11 @@ $(()=> {
         reportDate.append(Date);
 
         if(data.content.img_check == 1){
-            
-
             imgLode(report_no);
+        }
+
+        if(loginNickname != nickname){
+            $('.edit_delete').hide();
         }
 
         repotContent.append(content);

@@ -50,7 +50,7 @@
     <!-- 메인페이지 필수 CSS -->
     <link rel="stylesheet" href="/resources/main/css/main_section_card.css">
     <link rel="stylesheet" href="/resources/main/css/main_section_board.css">
-
+    <script>let loginNickname = '${__USER__.nickname}';</script>
 </head>
 
 <body>
@@ -94,7 +94,6 @@
                             <form action="remove" method="post">
                                 <button class="font-12-400" id="remove"> 삭제 </button>
                             </form>
-
                         </div>
                     </div>
 
@@ -134,3 +133,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
+
+

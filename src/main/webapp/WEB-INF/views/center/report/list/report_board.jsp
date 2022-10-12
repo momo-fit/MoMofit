@@ -151,9 +151,6 @@
     <!-- 메인화면 자바스크립트 -->
     <script src="/resources/main/js/main.js"></script>
 
-    <!-- 처리상태 -->
-    <script src="/resources/center/report/js/status.js"></script>
-
     <!-- 글 불러오기 -->
     <script src="/resources/center/report/js/reportList.js"></script>
 
