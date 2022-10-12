@@ -30,11 +30,11 @@
     </div>
 </header>
 <script>
-    let result = '${__USER__.nickname}';
-    if(result != null && result.length > 0){
+    let resultLogin = '${__USER__.nickname}';
+    if(resultLogin != null && resultLogin.length > 0){
         $('#login').css('display', 'none');
         $('#space1').css('display', 'none');
-        $('#signup').text(result);
+        $('#signup').text(resultLogin);
         $('#signup').attr('href', '');
     } else {
         $('#signout').css('display', 'none');

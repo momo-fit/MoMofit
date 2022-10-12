@@ -14,6 +14,7 @@ public interface LoginService {
 	// 자동 로그인 확인
 	public abstract boolean modifyUserRememberMe(String id, String rememberme, Timestamp rememberage) throws ServiceException;
 	
+	// 자동 로그인 쿠키 검색
 	public abstract LoginVO seleteRememberMeCookie(String rememberMeCookie) throws ServiceException;
 	
 }
