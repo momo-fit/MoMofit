@@ -131,6 +131,35 @@ section {
 
 
 /* 검색 */
+
+.search_area>select {
+    width: 200px;
+    height: 32px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 15px;
+    outline: none;
+    padding-left: 10px;
+    background-color: rgb(249, 247, 247);
+    
+    margin-bottom: 10px;
+    float: left;
+}
+
+.search_area>input {
+    width: 200px;
+    height: 32px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 15px;
+    outline: none;
+    padding-left: 10px;
+    background-color: rgb(249, 247, 247);
+    margin-left: 20px;
+    margin-bottom: 10px;
+    float: left;
+}
+
 .search {
     float: left;
     margin-left: 14px;
@@ -155,7 +184,8 @@ section {
     border-radius: 5px;
 }
 
-.search>button {
+.search_btn {
+    float: left;
     background-color: white;
     border: none;
     color: rgb(20 167 255);
@@ -271,6 +301,10 @@ section {
 
 .mb-currPage a {
     color: white;
+}
+
+#key1, #key2, #key3 {
+	display : none;
 }
 
 

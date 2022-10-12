@@ -124,7 +124,5 @@
             current_date
         )
     </insert>
-    
-
 
 </mapper>

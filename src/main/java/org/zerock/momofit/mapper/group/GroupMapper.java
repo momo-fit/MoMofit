@@ -6,14 +6,13 @@ import org.apache.ibatis.annotations.Param;
 import org.zerock.momofit.domain.group.Criteria;
 import org.zerock.momofit.domain.group.GroupDTO;
 import org.zerock.momofit.domain.group.GroupVO;
+import org.zerock.momofit.domain.group.ReplyDTO;
 import org.zerock.momofit.exception.DAOException;
 
 
 public interface GroupMapper {
 
-	// 1. 게시판 테이블의 전체목록 조회하기
-
-//	@Select("select * from GROUPS where GROUP_NO > 0")
+	// 1. 게시판 테이블의 전체목록 조회
 	public abstract List<GroupVO> getList() throws DAOException;
 	
 	// 1-2. 페이징 처리된 전체목록 조회

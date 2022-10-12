@@ -55,8 +55,8 @@ public class MyCSRestController {
 			// 세션객체로부터, 회원정보 얻기
 			LoginVO vo = (LoginVO) session.getAttribute(SharedScopeKeys.USER_KEY);
 			
-//			int user_no = vo.getUser_no();	// 임시코드 : 1번 User NO조회
-			int user_no = 1;
+			int user_no = vo.getUser_no();
+//			int user_no = 1;
 			//------------------------------------------------
 			
 			Criteria cri = new Criteria();
@@ -123,13 +123,18 @@ public class MyCSRestController {
 			)
 	public ResponseEntity<Map<String, Object>> getMyPageReportList(
 			@PathVariable("result") int result,
-			@PathVariable("page") int page
+			@PathVariable("page") int page,
+			HttpSession session
 			) throws ControllerException{
 		log.trace("getMyPageReportList({}, {}, {}) invoked.", result, page);
 	
 		try {
-			// Step.1 : 유저정보 획득
-			int user_no = 1;
+			//Step.1 : Session으로부터 유저 정보 획득하여 Criteria에 저장
+			//------------------------------------------------
+			// 세션객체로부터, 회원정보 얻기
+			LoginVO vo = (LoginVO) session.getAttribute(SharedScopeKeys.USER_KEY);
+			int user_no = vo.getUser_no();
+			//-----------------------------------------------
 			
 			Criteria cri = new Criteria();
 			

@@ -52,10 +52,8 @@ public class MyGroupRestController {
 			//Step.1 : Session으로부터 유저 정보 획득하여 Criteria에 저장
 			//------------------------------------------------
 			// 세션객체로부터, 회원정보 얻기
-			LoginVO vo = (LoginVO) session.getAttribute(SharedScopeKeys.USER_KEY);
-			
+			LoginVO vo = (LoginVO) session.getAttribute(SharedScopeKeys.USER_KEY);		
 			int user_no = vo.getUser_no();
-			log.info("\t+ user_no : {}", user_no);
 			//------------------------------------------------
 			
 			Criteria cri = new Criteria();

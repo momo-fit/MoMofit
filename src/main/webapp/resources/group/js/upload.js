@@ -26,7 +26,7 @@
         formData.append("uploadFile", fileObj);
 
         $.ajax({
-			url: '/uploadAjaxAction',     // url : 서버로 요청을 보낼 url
+			url: '/group/uploadAjaxAction',     // url : 서버로 요청을 보낼 url
 	        processData : false,                // processData : 서버로 전송할 데이터를 queryStirng 형태로 변환할지 여부
 	        contentType : false,                // contentType : 서버로 전송되는 데이터의 content-type
 	        data : formData,                    // data : 서버로 전송할 데이터
@@ -46,8 +46,8 @@
 	
 
 	/* var, method related with attachFile */
-	let regex = new RegExp("(.*?)\.(jpg|png)$");
-	let maxSize = 1048576; //1MB	
+	let regex = new RegExp("(.*?)\.(jpg|png|jpeg|JPG)$");
+	let maxSize = 5 * 1024 * 1024; // 5MB
 	
 	function fileCheck(fileName, fileSize){
 
@@ -108,7 +108,7 @@
 		let targetDiv = $("#result_card");
 		
 		$.ajax({
-			url: '/deleteFile',
+			url: '/group/deleteFile',
 			data : {fileName : targetFile},
 			dataType : 'text',
 			type : 'POST',
