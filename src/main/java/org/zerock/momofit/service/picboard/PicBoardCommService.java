@@ -17,16 +17,18 @@ public interface PicBoardCommService {
 
 
 	// 1. 댓글 조회하기
-	public abstract List<PicBoardCommVO> readCommList(@Param("board_no")int board_no) throws ServiceException;
+	public PicBoardCommDTO getComm(Integer comm_no);
+	//public abstract List<PicBoardCommVO> readCommList(@Param("board_no")int board_no) throws ServiceException;
 	
 	// 2. 댓글 작성하기
-	public abstract boolean registerComm(PicBoardCommDTO dto) throws ServiceException;
+	public Integer registerComm(PicBoardCommDTO Commdto); 
 	
 	// 3. 댓글 삭제하기
-	public abstract Integer removeComm(int comm_no) throws ServiceException;
+	public Integer removeComm(Integer comm_no);
 	
 	// 4. 댓글 수정하기
-	public abstract Integer modifyComm(PicBoardCommDTO dto) throws ServiceException;
+	public Integer modifyComm(PicBoardCommDTO dto);
 	
-	
+	// 5. 해당 게시글에 있는 전체 댓글 조회
+	public abstract List<PicBoardCommDTO> getCommList(@Param("board_no")Integer board_no,@Param("cri") Criteria cri);
  }

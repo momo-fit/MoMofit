@@ -127,7 +127,7 @@
 	                        <input type="hidden" name="board_like" value=0>
 	                        <input type="hidden" name="hits" value=0>
 	                        <input type="hidden" name="img_check" value=0>
-	                        <input type="hidden" name="user_no" value=1>
+	                        <input type="hidden" name="user_no" value="1">
 
                        
                         </form>

@@ -54,6 +54,10 @@
 </head>
 
 <body>
+
+	<script>
+	var qna_no = '<c:out value="${QnaBoard.qna_no}"/>'
+	</script>
     <div class="page">
 
         <!-- header -->
@@ -75,23 +79,26 @@
                     </div>
 
                     <div class="title font-28-400">
-                        문의합니다 글 제목 입니다 
+                        <c:out value="${QnaBoard.title}"/> 
                     </div>
                 
                     <div class="info"> 
                         <div class="info2">
-                            <span class="font-12-400"> 작성자 <b class="font-12-400">홍길동</b> </span>
+                            <span class="font-12-400"> 작성자 <b class="font-12-400"><c:out value="${QnaBoard.user_no}"/></b> </span>
                             <div class="space1"></div>
-                            <span class="font-12-400"> 조회수 <b class="font-12-400">1</b> </span>
-                            <div class="space1"></div>
-                            <span class="font-12-400"> 작성시간 <b class="font-12-400">2022.08.15 12:37</b> </span>
+                            <span class="font-12-400"> 작성시간 <b class="font-12-400"><fmt:formatDate pattern="yyyy/MM/dd" value="${QnaBoard.qna_date}"></fmt:formatDate></b> </span>
                             <div class="space1"></div>
                         </div>
               
                         <div class="edit_delete">
-                            <a href="#" onClick="location.href='/center/qna/modify'"><span class="font-12-400"> 수정 </span></a>
+                            <a class="btn" onClick="location.href='/center/qna/modify?qna_no=${QnaBoard.qna_no}&currPage=${cri.currPage}'"><span class="font-12-400"> 수정 </span></a>
                             <div class="space1"></div>
-                            <a href="#" onClick="location.href='/center/qna/list'"><span class="font-12-400"> 삭제 </span></a>
+                            
+                            <form action="/center/qna/remove?qna_no=${QnaBoard.qna_no}" method="post" style="display: inline;">
+                        	    <input type="hidden" id="board_no" name="board_no" value='<c:out value="${PicBoard.board_no}"/>'>
+								<input type="hidden" id="currPage" name="currPage" value='<c:out value="${cri.currPage}"/>'>
+                                <button style="border: none; background: none;"><span class="font-12-400"> 삭제 </span></button>
+                            </form>
                         </div>
                     </div>
 
@@ -100,17 +107,12 @@
                         
                         <!-- 본문 이미지 -->
                         <div>
-                            <img src="https://picsum.photos/id/684/600/400" alt="picsum img"> <br><br>
+                            <br><br>
                         </div>
                         
                         <!-- 본문 텍스트 -->
                         <div class="font-14-400">
-                            글 내용이 들어갑니다 문의를 할 수 있습니다 글 내용이 들어갑니다 문의를 할 수 있습니다 글 내용이 들어갑니다 문의를 할 수 있습니다 글 내용이 들어갑니다 문의를 할 수 있습니다 글 내용이 들어갑니다 문의를 할 수 있습니다 <br>
-                            글 내용이 들어갑니다 문의를 할 수 있습니다 글 내용이 들어갑니다 문의를 할 수 있습니다 글 내용이 들어갑니다 문의를 할 수 있습니다 글 내용이 들어갑니다 문의를 할 수 있습니다 글 내용이 들어갑니다 문의를 할 수 있습니다 <br>
-                            글 내용이 들어갑니다 문의를 할 수 있습니다 글 내용이 들어갑니다 문의를 할 수 있습니다 글 내용이 들어갑니다 문의를 할 수 있습니다 글 내용이 들어갑니다 문의를 할 수 있습니다 글 내용이 들어갑니다 문의를 할 수 있습니다 <br> <br>
-                            글 내용이 들어갑니다 문의를 할 수 있습니다 글 내용이 들어갑니다 문의를 할 수 있습니다 글 내용이 들어갑니다 문의를 할 수 있습니다 글 내용이 들어갑니다 문의를 할 수 있습니다 글 내용이 들어갑니다 문의를 할 수 있습니다 <br>
-                            글 내용이 들어갑니다 문의를 할 수 있습니다 글 내용이 들어갑니다 문의를 할 수 있습니다 글 내용이 들어갑니다 문의를 할 수 있습니다 글 내용이 들어갑니다 문의를 할 수 있습니다 글 내용이 들어갑니다 문의를 할 수 있습니다 <br>
-                            글 내용이 들어갑니다 문의를 할 수 있습니다 글 내용이 들어갑니다 문의를 할 수 있습니다 글 내용이 들어갑니다 문의를 할 수 있습니다 글 내용이 들어갑니다 문의를 할 수 있습니다 글 내용이 들어갑니다 문의를 할 수 있습니다 <br> <br>
+                      		<c:out value="${QnaBoard.text}"/> <br> <br>
                         </div>
 
 
@@ -154,7 +156,7 @@
                                 <span>02:28</span>
                                 <span onclick="clickFunc()" class="link1 cursor_pointer"> 답글달기</span>
                                 <span class="edit_delete">
-                                    <button type="button" class="cursor_pointer font-12-400 comment_modify_btn"> 수정 </button>
+                                    <a class="btn" onClick="location.href='/center/qna/modify?qna_no=${QnaBoard.qna_no}&currPage=${cri.currPage}'"><span class="font-12-400"> 수정 </a>
                                     <div class="space1"></div>
                                     <a href=""><span class="font-12-400"> 삭제 </span></a>
                                 </span>

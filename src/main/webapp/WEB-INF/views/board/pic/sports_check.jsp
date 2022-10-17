@@ -80,22 +80,17 @@
 
                         <!-- 검색부분// keyword(검색어)를 말함-->
                         <div class="sports_check_header">
-                        
-                            <form name="PicBoard_SearchForm" action="list" method="POST" class="search" autocomplete="off">    
-                      			<input tye="text" placeholder="제목" name="keyword">
-                                <button type="submit" ><i class="fa-solid fa-magnifying-glass"></i></button>
-                                
-
-                                </select>
-                                
-                                
-                                
-                                <input type="hidden" name="pageNum" value="1"> 
-                                <!-- 화면에 보여질 페이지 넘버가 필요함  -->
-
-                                <input type="hidden" name="amount" value="5">
-                                <!-- 화면에 보여질 게시글 수가 필요함  -->
-                            </form>
+                        <form action="/board/pic/list" class="PicBoard_SearchForm search" method="get" autocomplete="off" >
+ 	                       <div class="search_area">   
+                     			<input type="text" placeholder="제목" name="keyword" value="${PageMaker.cri.keyword}">
+                                <button type="submit" class="search_btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                           </div>
+                        </form>
+                         <form action="/board/pic/list" class="search" method="get" > 
+							<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+							<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+							<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
+                         </form>
                         </div>
 
                         <hr class="hr-1"/>
@@ -181,6 +176,8 @@
  
 	<!-- 업로드 된 이미지 리스트 대표이미지로 뜨게하기 -->
 	 <script src="/resources/board/pic/js/list_image_file.js"></script>
+	 <script src="/resources/board/pic/js/search.js"></script>
+	 
 
     <!-- 부트스트랩 자바스크립트 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
