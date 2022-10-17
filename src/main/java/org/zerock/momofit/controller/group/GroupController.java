@@ -1,19 +1,5 @@
 package org.zerock.momofit.controller.group;
 
-<<<<<<< HEAD
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.zerock.momofit.service.GroupService;
-=======
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -39,7 +25,6 @@ import org.zerock.momofit.domain.group.GroupVO;
 import org.zerock.momofit.domain.group.PageDTO;
 import org.zerock.momofit.exception.ControllerException;
 import org.zerock.momofit.service.group.GroupService;
->>>>>>> 0567b26ccd3b6e5a4d3bfdddcaeffd2c0db99852
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -54,18 +39,6 @@ public class GroupController {
 	private GroupService service;
 	
 	
-<<<<<<< HEAD
-	// 1. 전체목록 조회하기
-	
-	@GetMapping("/list")
-	public void list(Model model) {
-		log.trace("list() invoked.");
-		
-		model.addAttribute("list", service.getList());
-		
-//		return "/group/list";
-		
-=======
 //	// 1. 전체목록 조회하기
 //	
 //	@GetMapping("/list")
@@ -95,30 +68,10 @@ public class GroupController {
 		} catch(Exception e) {
 			throw new ControllerException(e);
 		} // try-catch
->>>>>>> 0567b26ccd3b6e5a4d3bfdddcaeffd2c0db99852
 	} // list
 	
 	
 	// 2-1. 모임 작성 (입력 화면)
-<<<<<<< HEAD
-	@GetMapping("/register")
-	public String write() {
-		log.trace("write({}) invoked.");
-		
-		return "/group/register";
-		
-	} // write
-	
-	// 2-2. 모임 등록
-	@PostMapping("/register")
-	public String register() {
-		log.trace("register({}) invoked.");
-		
-		return "redirect:/group/list";
-		
-	} // register
-	
-=======
 
 	@GetMapping("/register")
 	public void write(@ModelAttribute("cri") Criteria cri, Model model) throws ControllerException {
@@ -164,17 +117,10 @@ public class GroupController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
     }
 	
->>>>>>> 0567b26ccd3b6e5a4d3bfdddcaeffd2c0db99852
 	
 	// 3. 모임 상세보기
 	
 	@GetMapping("/detail")
-<<<<<<< HEAD
-	public String detail() {
-		log.trace("detail() invoked.");
-		
-		return "/group/detail";
-=======
 	public void detail(
 			// @RequestParam : 매개변수와 전송파라미터의 이름과 달라도 얻고싶을 때 사용
 			// @ModelAttribute : 정말 model에 담겼는지 불확실하다면 사용
@@ -192,18 +138,11 @@ public class GroupController {
 			} catch(Exception e) {
 				throw new ControllerException(e);
 			}
->>>>>>> 0567b26ccd3b6e5a4d3bfdddcaeffd2c0db99852
 	}
 	
 	// 4-1. 모임 수정 (입력 화면)
 	
 	@GetMapping("/modify")
-<<<<<<< HEAD
-	public String modify() {
-		log.trace("modify() invoked.");
-		
-		return "/group/modify";
-=======
 	public void modify(@RequestParam("group_no") Integer group_no, @ModelAttribute("cri") Criteria cri, Model model) 
 			throws ControllerException {
 		log.trace("modify() invoked.");
@@ -215,29 +154,11 @@ public class GroupController {
 			throw new ControllerException(e);
 		}
 
->>>>>>> 0567b26ccd3b6e5a4d3bfdddcaeffd2c0db99852
 	} // modify
 	
 	// 4-2. 모임 수정
 	
 	@PostMapping("/modify")
-<<<<<<< HEAD
-	public String update() {
-		log.trace("modify() invoked.");
-		
-		return "redirect:/group/detail";
-	} // update
-	
-	// 5. 모임 삭제
-	
-	@PostMapping("/remove")
-	public String remove() {
-		log.trace("remove() invoked.");
-		
-		return "redirect:/group/list";
-	} // remove
-
-=======
 	public String update(GroupDTO dto, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) 
 			throws ControllerException {
 		log.trace("modify() invoked.");
@@ -281,7 +202,6 @@ public class GroupController {
 	} // remove
 
 	
->>>>>>> 0567b26ccd3b6e5a4d3bfdddcaeffd2c0db99852
 	// 6-1. 모임참가자 목록 (입력 화면)
 	@GetMapping("/memberList")
 	public String memberList() {
@@ -298,33 +218,7 @@ public class GroupController {
 		return "redirect:/group/detail";
 	} // delegate
 	
-<<<<<<< HEAD
-	// 7. 모임채팅
-	@GetMapping("/chatting")
-	public String chatting() {
-		log.trace("chatting() invoked.");
-		
-		return "/group/chat";
-	}
-	
-	
-	
-	
-	
-	
-	
-	@RequestMapping(value = "/favicon.ico", method = RequestMethod.GET)	
-	public void favicon( HttpServletRequest request, HttpServletResponse reponse ) {
-		try {
-			reponse.sendRedirect("/resources/favicon.ico");		
-		} catch (IOException e) {
-			e.printStackTrace();
-			}	
-		}
-		
-=======
 
 	
->>>>>>> 0567b26ccd3b6e5a4d3bfdddcaeffd2c0db99852
 
 } // class
