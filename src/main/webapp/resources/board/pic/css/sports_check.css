@@ -76,7 +76,7 @@ section {
     margin-bottom: 20px;
 }
 
-.search>input {
+.search_area>input {
     float: left;
     width: 200px;
     height: 30px;
@@ -94,7 +94,7 @@ section {
     border-radius: 5px;
 }
 
-.search>button {
+.search_area>button {
     background-color: white;
     border: none;
     color: rgb(20 167 255);

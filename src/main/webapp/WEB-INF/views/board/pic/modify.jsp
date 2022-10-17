@@ -105,7 +105,7 @@
 
                                 <!-- 3. 제목 -->
                                 <br>제목&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input type="text" class="writing_title" name="title" value="${PicBoard.title}" required>
+                                <input type="text" class="writing_title" value="${PicBoard.title}" required>
                                 <br><br>
 
                                 <!-- 4. 첨부파일 -->
@@ -128,7 +128,7 @@
                             </div>
 
                         <!-- 수정하기/취소하기 버튼 -->
-                        <input type="button" class="cancel_button" id="cancel_button" value="취소" onClick="location='/board/pic/view?board_no=${PicBoard.board_no}&currPage=${cri.currPage}'"'"></input>
+                        <input type="button" class="cancel_button" id="cancel_button" value="취소" onClick="location='/board/pic/view?board_no=${PicBoard.board_no}&currPage=${cri.currPage}'"></input>
                         <input type="submit" class="writing_submit" id="modify_button" value="수정"></input>
                    
                         </form>

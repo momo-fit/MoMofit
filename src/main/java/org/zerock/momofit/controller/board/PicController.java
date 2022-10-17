@@ -2,6 +2,8 @@ package org.zerock.momofit.controller.board;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,12 +12,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.momofit.common.SharedScopeKeys;
 import org.zerock.momofit.domain.picboard.Criteria;
 import org.zerock.momofit.domain.picboard.PageDTO;
-import org.zerock.momofit.domain.picboard.PicBoardCommVO;
 import org.zerock.momofit.domain.picboard.PicBoardDTO;
 import org.zerock.momofit.domain.picboard.PicBoardVO;
 import org.zerock.momofit.domain.picboard.board_imgDTO;
+import org.zerock.momofit.domain.signIn.LoginVO;
 import org.zerock.momofit.exception.ControllerException;
 import org.zerock.momofit.service.picboard.PicBoardCommService;
 import org.zerock.momofit.service.picboard.PicBoardService;
@@ -34,6 +37,7 @@ public class PicController {
 	@Setter(onMethod_= {@Autowired})
 	private PicBoardService PicBoardservice;
 	private PicBoardCommService PicBoardCommservice;
+	HttpSession session;
 
 	
 
@@ -42,22 +46,20 @@ public class PicController {
 //			Integer board_no,
 			PicBoardDTO dto,board_imgDTO imageDto,
 			@ModelAttribute("cri")Criteria cri,
-			Model model) 
+			Model model,HttpSession session) 
 					throws ControllerException {
 		log.trace("view({},{}) invoke",dto,cri);
 		
 		try {
 //			PicBoardDTO dto= new PicBoardDTO();
 //			dto.setBoard_no(board_no);
+			LoginVO Loginvo=(LoginVO) session.getAttribute(SharedScopeKeys.USER_KEY);
 			PicBoardVO vo=this.PicBoardservice.get(dto);
 			 
 	         log.info("\t+vo:{}", vo);
 	        
 	          model.addAttribute("PicBoard", vo);  //여기까지는 상세조회에 대한 코드
-	          
-	          List<PicBoardCommVO> commList = this.PicBoardCommservice.readCommList(dto.getBoard_no());//댓글조회
-	          
-	          model.addAttribute("commList",commList);
+
 	          
 	          return "/board/pic/main_board_pic";
 			}catch(Exception e) {
@@ -72,11 +74,12 @@ public class PicController {
 //			Integer board_no,
 			PicBoardDTO dto,
 			@ModelAttribute("cri")Criteria cri,
-			Model model) 
+			Model model,HttpSession session) 
 					throws ControllerException {
 		log.trace("view({},{}) invoke",dto,cri);
 		
 		try {
+			
 //			PicBoardDTO dto= new PicBoardDTO();
 //			dto.setBoard_no(board_no);
 			
@@ -87,7 +90,7 @@ public class PicController {
 	         
 			 return "/board/pic/modify";
 		}catch(Exception e) {
-			throw   new ControllerException(e);
+			throw new ControllerException(e);
 		}
 		
 		
@@ -95,7 +98,8 @@ public class PicController {
 
 	
 	@PostMapping("/modify")
-	public String modify(PicBoardDTO dto,@ModelAttribute("cri")Criteria cri,RedirectAttributes rttrs)throws ControllerException  {
+	public String modify(PicBoardDTO dto,@ModelAttribute("cri")Criteria cri,RedirectAttributes rttrs,HttpSession session)
+			throws ControllerException  {
 		log.trace("modify invoke");
 		
 		try {
@@ -119,10 +123,11 @@ public class PicController {
 	}//작성화면
 		
 	@PostMapping("/register")
-	public String register(PicBoardDTO dto,RedirectAttributes rttrs)throws ControllerException {
+	public String register(PicBoardDTO dto,RedirectAttributes rttrs,HttpSession session)throws ControllerException {
 		log.trace("register invoke");
 		
 		try {
+			LoginVO Loginvo=(LoginVO) session.getAttribute(SharedScopeKeys.USER_KEY);
 			boolean isRegister=this.PicBoardservice.register(dto);
 			log.info("\t+isRegister",isRegister);
 			
@@ -138,7 +143,7 @@ public class PicController {
 	
 	
 	@PostMapping("/remove")
-	public String remove(PicBoardDTO dto,@ModelAttribute("cri")Criteria cri,RedirectAttributes rttrs) throws ControllerException {
+	public String remove(PicBoardDTO dto,@ModelAttribute("cri")Criteria cri,RedirectAttributes rttrs,HttpSession session) throws ControllerException {
 		
 		try {
 			boolean isRemove=this.PicBoardservice.remove(dto);
@@ -155,7 +160,7 @@ public class PicController {
 	}//remove삭제	
 	
 	@GetMapping("/list")
-	public String listPerPage(Model model,Criteria cri) throws ControllerException {
+	public String listPerPage(Model model,Criteria cri,HttpSession session) throws ControllerException {
 		log.trace("listPerPage() invoke");
 		try {
 			List<PicBoardVO> list = this.PicBoardservice.getListWithPaging(cri);

@@ -30,7 +30,7 @@ public interface PicBoardMapper {
 	public abstract Integer update(PicBoardDTO dto)throws DAOException;
 	
 	// 5. 기존 게시글 삭제하기
-	public abstract Integer delete(Integer BOARD_NO) throws DAOException;
+	public abstract Integer delete(Integer qna_no) throws DAOException;
 	
 	// 6. 총 게시물의 갯수를 반환
 	public abstract Integer getTotalCount(Criteria cri) throws DAOException;//검색기능구현할때 페이지를 알아야해서 매개변수에 cri추가해줌
@@ -42,6 +42,6 @@ public interface PicBoardMapper {
 	public abstract Integer insert_img(board_imgDTO dto) throws DAOException;
 	
 	// 9. 해당 게시물의 업로드 된 파일 조회하기 
-	public abstract List<board_imgDTO> imageList(int board_no) throws DAOException;
+	public abstract List<board_imgDTO> imageList(int qna_no) throws DAOException;
 
 }

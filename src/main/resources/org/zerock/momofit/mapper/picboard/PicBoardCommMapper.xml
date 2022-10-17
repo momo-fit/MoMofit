@@ -6,55 +6,50 @@
 
 <mapper namespace="org.zerock.momofit.mapper.picboard.PicBoardCommMapper">
 
-      <!-- 조회하기 (댓글) -->
-	 <select id="read_comm" resultType="org.zerock.momofit.domain.picboard.PicBoardCommVO">
-        SELECT 
-        	/*+ INDEX_DESC(COMM)*/ 
-            comm_no,board_no,text,comm_date,edit,user_no
-        FROM COMM
-        WHERE board_no = #{board_no}
-    
-   	 </select>
 
-	 <!-- 작성하기 (댓글) -->
-	 <insert id="writeComm">
+   	   	<!-- 조회(댓글) -->
+  	<select id="readComm" resultType="org.zerock.momofit.domain.picboard.PicBoardCommDTO">
+  	
+		SELECT /*+ index_desc(comm) */ 
+		   * 
+		FROM comm
+		WHERE comm_no = #{comm_no}
+  
+  	</select>
+   	 
+   	 
+  	 	 <!-- 작성하기 (댓글) -->
+	 <insert id="insertComm">
 	  	INSERT INTO COMM(comm_no,board_no,text,parent_no,user_no)
 	  	VALUES(COMM_SEQ.nextval,#{board_no},#{text},#{parent_no},#{user_no})
 	 
 	 </insert>
 	 
-	 <!-- 삭제하기 (댓글) -->
+	 	 <!-- 삭제하기 (댓글) -->
 	 <delete id="deleteComm">
-	 	DELETE FROM COMM WHERE comm_no=#{comm_no}
+	 	DELETE FROM COMM 
+	 	WHERE comm_no=#{comm_no}
 	 </delete>
-	 
-	  <!-- 수정하기 (댓글) -->
+   	 
+   	 	  <!-- 수정하기 (댓글) -->
 	  <update id="updateComm">
 	  UPDATE COMM
 	  SET text= #{text},edit=current_date
 	  
-	  WHERE board_no=#{board_no}
+	  WHERE comm_no=#{comm_no}
 	  </update>
-	 
+	  
+	  
 
-
+      <!-- 조회하기 (댓글/페이징) -->
+	 <select id="readCommList" resultType="org.zerock.momofit.domain.picboard.PicBoardCommDTO">
+		SELECT /*+ index_desc(comm) */ 
+		   comm_no,board_no,text,comm_date,edit,parent_no,user_no 
+        FROM COMM
+        WHERE board_no = #{board_no}
     
-
-
-
-    
-
-    
-
-
-    
-
-    
-
-    
-
-
-    
+   	 </select>
+   	 
   
     
 </mapper> 
