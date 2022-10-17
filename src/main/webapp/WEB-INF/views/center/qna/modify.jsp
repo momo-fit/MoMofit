@@ -51,9 +51,10 @@
                         <hr>
                         <!-- 게시글 작성 내용부분 -->
 
-                        <form class="writing_form" 
-                            action="#" method="post">
-
+                        <form class="modifyForm" 
+                            action="modify" method="POST">
+						<input type="hidden" id="qna_no" name="qna_no" value='<c:out value="${QnaBoard.qna_no}"/>'>
+						<input type="hidden" id="currPage" name="currPage" value='<c:out value="${cri.currPage}"/>'>
                             <div class="writing_content">
 
                                 <!-- 1. 게시판 선택 -->
@@ -83,7 +84,7 @@
 
                                 <!-- 3. 제목 -->
                                 <br>제목&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input type="text" class="writing_title" required>
+                                <input type="text" class="writing_title" name="title" value="${QnaBoard.title}" required>
                                 <br><br>
 
                                 <!-- 4. 첨부파일 -->
@@ -101,12 +102,12 @@
 
                                 <!-- 5. 내용 -->
                                 내용<br>
-                                <textarea class="textarea_content" required></textarea>
+                                <textarea class="textarea_content" name="text" required>${QnaBoard.text}</textarea>
 
                             </div>
 
 	                        <!-- 수정하기/취소하기 버튼 -->
-                        <input type="button" class="cancel_button" value="취소" onClick="location='/center/qna/list'"></input>
+                        <input type="button" class="cancel_button" value="취소" onClick="location='/cneter/qna/view?qna_no=${QnaBoard.qna_no}&currPage=${cri.currPage}'"></input>
 	                        <input type="submit" class="writing_submit" value="수정"></input>
 
                         </form>

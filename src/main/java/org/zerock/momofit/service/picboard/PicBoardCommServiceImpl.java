@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.zerock.momofit.domain.picboard.Criteria;
 import org.zerock.momofit.domain.picboard.PicBoardCommDTO;
 import org.zerock.momofit.domain.picboard.PicBoardCommVO;
 import org.zerock.momofit.exception.DAOException;
@@ -25,50 +26,54 @@ public class PicBoardCommServiceImpl implements PicBoardCommService {
 	private PicBoardCommMapper PicBoardCommMapper;
 	
 
-
-
 	@Override
-	public List<PicBoardCommVO> readCommList(@Param("board_no")int board_no) throws ServiceException {
+	public PicBoardCommDTO getComm(Integer comm_no) {
+
+			return this.PicBoardCommMapper.readComm(comm_no);
+
+	}//댓글 조회 
 		
-		try {
-			return PicBoardCommMapper.read_comm(board_no);
-		} catch (DAOException e) {
-			throw new ServiceException(e);
-		}
-	}//댓글 조회하기 
-
-
 	@Override
-	public boolean registerComm(PicBoardCommDTO dto) throws ServiceException {
+	public Integer registerComm(PicBoardCommDTO dto){
 	
-		try {
-			return this.PicBoardCommMapper.writeComm(dto)==1;
-		} catch (DAOException e) {
-			throw new ServiceException(e);
-		}
+		
+			return this.PicBoardCommMapper.insertComm(dto);
+
 	}//댓글 작성하기 
 
-
 	@Override
-	public Integer removeComm(int comm_no) throws ServiceException {
-		
-		try {
+	public Integer removeComm(Integer comm_no){
+
 			return this.PicBoardCommMapper.deleteComm(comm_no);
-		} catch (DAOException e) {
-			throw new ServiceException(e);
-		}
-	}//댓글 삭제하기 
 
+	}//댓글 삭제하기
+	
 
 	@Override
-	public Integer modifyComm(PicBoardCommDTO dto) throws ServiceException {
-		
-		try {
+	public Integer modifyComm(PicBoardCommDTO dto){
+
 			return this.PicBoardCommMapper.updateComm(dto);
-		} catch (DAOException e) {
-			throw new ServiceException(e);
-		}
-	}//댓글 수정하기
+
+	}//댓글 수정하기 
+
+	@Override
+	public List<PicBoardCommDTO> getCommList(Integer board_no, Criteria cri){
+
+			return this.PicBoardCommMapper.readCommList(board_no, cri);
+
+	}//게시글에 대한 댓글 조회 
+	
+	
+
+
+
+
+	
+
+
+
+	
+	
 	
 	
 	

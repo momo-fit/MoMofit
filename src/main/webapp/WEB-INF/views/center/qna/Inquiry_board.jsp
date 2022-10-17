@@ -46,26 +46,28 @@
     <link rel="stylesheet" href="/resources/include/css/main_footer.css">
     <!-- CSS : main 미디어 태그 -->
     <link rel="stylesheet" href="/resources/common/css/main_mediatag.css">
+    <!-- CSS : 페이징 처리 설정 -->
+    <link rel="stylesheet" href="/resources/center/qna/css/pagination.css">
 
 
 
 
 
-	<script>        
-	$(function(){
-	    console.clear();
-	
-	    $('#picWritingBtn').on('click',function(){
-	        location.href="/center/qna/register";
-	    });
-	
-	});//글쓰기 버튼 누르면 작성화면으로 이동하기
-	</script>
+
 
 
 </head>
 
 <body>
+
+    <script>
+	    var result="${param.result}";
+    	if(result != null && result.length>0){
+    		alert(result);
+    	}//글 작성,수정,삭제 결과가 참일시, Alert창이 띄워진다.
+        
+    </script>
+
     <div class="page">
 
         <!-- header -->
@@ -128,7 +130,7 @@
                                         <c:forEach var="QnaBoardList" items="${QnaBoardList}" > 
                                             <tr class="contnet">
                                                 <td><div><c:out value="${QnaBoardList.qna_no}"/></div></td>
-                                                <td><div><a onClick="location.href='/center/qna/view'" class="aTile"><c:out value="${QnaBoardList.title}"/></a><div class="inquery_status"><p class="font-12-400">처리중</p></div></div></td>
+                                                <td><div><a onClick="location.href='/center/qna/view?qna_no=${QnaBoardList.qna_no}&currPage=${pageMaker.cri.currPage}'" class="aTile"><c:out value="${QnaBoardList.title}"/></a><div class="inquery_status"><p class="font-12-400">처리중</p></div></div></td>
                                                 <td><div><c:out value="${QnaBoardList.user_no}"/></div></td>
                                                 <td><div><fmt:formatDate pattern="yyyy/MM/dd" value="${QnaBoardList.qna_date}"></fmt:formatDate></div></td>
                                                 
@@ -152,9 +154,28 @@
                                 </a>
                             </div>
 
+
+							<!-- 페이징 처리 하기  -->
+                            <div id="pagination">
+                                <ul>
+                                    <c:if test="${pageMaker.prev}">
+                                    <li class="prev"><a href="/center/qna/list?currPage=${pageMaker.startPage - 1}">Prev</a></li>
+                                    </c:if>
+                
+                					<!--pageNum은 변수명이고 시작과 끝페이지의 값 반복하게하기   -->
+				                    <c:forEach var="pageNum" begin="${pageMaker.startPage}" end="${pageMaker.endPage}" >
+				                        <li class="${pageMaker.cri.currPage==pageNum?'currPage':''}">
+				                        <a href="/center/qna/list?currPage=${pageNum}">${pageNum}</a></li>
+				                    </c:forEach>
+                                    
+                                    <c:if test="${pageMaker.next}">
+                                    <li class="next"><a href="/center/qna/list?currPage=${pageMaker.endPage + 1}">Next</a></li>
+                                    </c:if>
+                                </ul>
+                            </div>	
                             <div class="inquiry_board_bottom">
                                 <!--<a href="" class="board_write"> -->
-                                    <button type="button" id="picWritingBtn" class="board_write"><i class="fa-solid fa-pencil">글쓰기</i></button>
+                                    <button type="button" id="picWritingBtn" class="board_write" onClick="location.href='/center/qna/register?currPage=${pageMaker.cri.currPage}'" ><i class="fa-solid fa-pencil">글쓰기</i></button>
 
                                 <!--</a>-->
                             </div>                           

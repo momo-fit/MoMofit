@@ -138,30 +138,30 @@
                         </div>
                         
                         <!-- 댓글창 -->
+                        <script>
+                        	let bnoValue = "${PicBoard.board_no}";
+                        	let comm_no="${commDto.comm_no}";
+                        	let InputUser =  "${PicBoard.user_no}";  // 작성자
+                        </script>
+                        
                         <div class="comment_wrap">
                             <span class="font-14-700">댓글</span> <br><br>
     
                             
                             <!-- 댓글작성버튼누르면 실행되게 form에 연결 -->
-                            <form action="" method="" class="comment font-14-400">
+                            <!--  <form action="" method="" class="comment font-14-400"> -->
                             
                             <!-- 댓글작성컨트롤러에 쿼리스트링으로 board_no값을 받아오게했으니, 넘겨주게하기 (사용자에게는 안보이게) -->
                             <input type="hidden" name="board_no" value="${commDto.board_no}">
                             <input type="hidden" name="parent_no" value="${commDto.parent_no}">
 
-								<!-- 댓글1 -->
-								<c:forEach var="commList" items="${commList}">
-                                <span class="font-16-500"><c:out value="${commList.user_no}"/></span>
-                                <input type="text" class="comment_input_text" name="" id="" value=<c:out value="${commList.text}"/> disabled>
-                                <span><fmt:formatDate pattern="yyyy/MM/dd" value="${commList.comm_date}"/></span>
-                                <span onclick="clickFunc()" class="link1 cursor_pointer"> 답글달기</span>
-                                <span class="edit_delete">
-                                    <button type="button" class="cursor_pointer font-12-400 comment_modify_btn"> 수정 </button>
-                                    <div class="space1"></div>
-                                    <a href=""><span class="font-12-400"> 삭제 </span></a>
-                                </span>
-                                 </c:forEach>  
-                            </form>
+                             <!-- 댓글을 담을 빈 div -->
+                             <div class="card-body">
+                             	<ul style="padding:0" class="chat">
+                             	</ul>
+                             </div>
+                                 
+                            <!--</form>-->
 
                             <!-- 대댓글 작성창 -->  
                             <form action="">
@@ -174,7 +174,8 @@
                                 </div>  
                             </form>                          
                                 
-                            <!-- 댓글2 -->
+                            <!-- 
+                                댓글2
                             <div class="comment font-14-400">
                                 <span class="font-16-500">닉네임2</span>
                                 <span>댓글내용입니다2</span>
@@ -187,7 +188,7 @@
                                 </span>
                             </div>
     
-                            <!-- 댓글3 -->
+                            
                             <div class="comment font-14-400">
                                 <span class="font-16-500">닉네임3</span>
                                 <span>댓글내용입니다3</span>
@@ -200,7 +201,7 @@
                                 </span>
                             </div>
     
-                            <!-- 댓글4 -->
+                            
                             <div class="comment font-14-400">
                                 <span class="font-16-500">닉네임4</span>
                                 <span>댓글내용입니다4</span>
@@ -211,18 +212,20 @@
                                     <div class="space1"></div>
                                     <a href=""><span class="font-12-400"> 삭제 </span></a>
                                 </span>
-                            </div>
+                            </div> 
+                        -->
     
                             <br>
                         </div>
 
                         <!-- 댓글 작성창 -->
-                        <form action="/board/pic/registerComm" method="POST"">
+                        <form action="">
                             <div id="comment_write" class="card">
+                            	<!-- 댓글 작성창  -->
                                 <div class="card-body">
-                                    <textarea class="form-control" name="" row="1" style="width: 90%;" placeholder="여기에 댓글을 입력하세요"
-                                    onfocus="this.placeholder=''" onblur="this.placeholder='여기에 댓글을 입력하세요'"></textarea>
-                                    <button type="submit" class="btn btn-primary btn_color_blue float_right">작성</button>
+                                    <input class="form-control" id="comm_write" name="comm_write" row="1" style="width: 90%;" placeholder="여기에 댓글을 입력하세요"
+                                    onfocus="this.placeholder=''" onblur="this.placeholder='여기에 댓글을 입력하세요'" value="">
+                                    <button id="commSubmitBtn" class="btn btn-primary btn_color_blue float_right">작성</button>
                                 </div>
                             </div>                             
                         </form>
@@ -230,7 +233,7 @@
                         <br>
                         
                     </div> <!-- 댓글마무리 -->
-                    
+
                     <!-- 이전글 목록 다음글 -->
                     <div class="btn_row">
                         <button type="button" class="btn btn-primary btn-sm btn_color_blue" >이전글</button>
@@ -251,11 +254,14 @@
     <!-- 메인화면 섹션 자바스크립트` -->
     <!--<script src="/resources/common/js/main_section.js"></script>-->
 	
-	<!-- 상세 조회 페이지 자바스크립트 -->
+	<!-- 상세 조회 페이지 자바스크립트(대댓글+파일업로드) -->
 	<script src="/resources/board/pic/js/main_board_pic.js"></script>
 
     <!-- 메인화면 자바스크립트 -->
     <script src="/resources/include/js/main_header.js"></script>
+    
+    <!-- 댓글작성 자바스크립트 -->
+	<script src="/resources/board/pic/js/comm.js"></script>
 
     <!-- 부트스트랩 자바스크립트 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
