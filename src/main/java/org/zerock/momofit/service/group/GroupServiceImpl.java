@@ -1,11 +1,8 @@
 package org.zerock.momofit.service.group;
 
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -145,5 +142,24 @@ public class GroupServiceImpl implements GroupService  {
 		}
 	} // getTotal
 
+	
+	// 7. 모임 참가
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+    public boolean participate(Integer group_no, Integer user_no) throws ServiceException {
+
+        try {
+            
+            // group_no과 amount값 주기
+            this.mapper.updateGroupMember(group_no, +1);
+            
+            return mapper.joinGroup(group_no, user_no) ==1 ; 
+            
+            
+        } catch (Exception e) {
+            throw new ServiceException(e);
+        }
+          
+    }
 	
 } // end class

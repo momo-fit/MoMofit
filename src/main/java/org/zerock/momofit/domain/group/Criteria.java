@@ -1,7 +1,5 @@
 package org.zerock.momofit.domain.group;
 
-import org.springframework.web.util.UriComponentsBuilder;
-
 import lombok.Data;
 import lombok.extern.log4j.Log4j2;
 

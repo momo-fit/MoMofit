@@ -1,6 +1,5 @@
 package org.zerock.momofit.service.group;
 
-import java.text.ParseException;
 import java.util.List;
 
 import org.zerock.momofit.domain.group.Criteria;
@@ -37,5 +36,9 @@ public interface GroupService {
 	
 	// 6. 총 게시글 개수 조회
 	public abstract int getTotal() throws ServiceException;
+	
+	// 7. 모임 참가
+	public abstract boolean participate(Integer group_no, Integer user_no) throws ServiceException;
+	
 	
 }
