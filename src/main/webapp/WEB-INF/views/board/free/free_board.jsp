@@ -116,7 +116,7 @@
                                                 <tr class="contnet">
                                                     <td><div>${freeboard.board_no}</div></td>
                                                     <td onClick="location.href='/board/free/view?board_no=${freeboard.board_no}&currPage=${pageMaker.cri.currPage}'" style="cursor:pointer;"><div>${freeboard.title}</div></td>
-                                                    <td class="context-menu-one btn btn-neutral"><div>${freeboard.user_no}</div></td>
+                                                    <td class="context-menu-one btn btn-neutral"><div>${freeboard.nickname}</div></td>
                                                     <td><div><fmt:formatDate pattern="yyyy-MM-dd" value="${freeboard.board_date}" /></div></td>
                                                     <td><div>${freeboard.board_like}</div></td>
                                                 </tr>

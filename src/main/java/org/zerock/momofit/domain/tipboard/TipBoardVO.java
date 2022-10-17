@@ -19,4 +19,6 @@ public class TipBoardVO {
 	private Integer category_no;
 	private Integer subject_no;
 	
+	private String nickname;
+	
 } // end class
