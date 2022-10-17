@@ -130,12 +130,12 @@ public class GroupServiceImpl implements GroupService  {
 
 	// 6. 총 게시글 개수 조회	
 	@Override
-	public int getTotal() throws ServiceException {
+	public int getTotal(Criteria cri) throws ServiceException {
 		log.trace("getTotal() invoked.");
 		
 		try {
 			
-			return this.mapper.getTotalCount();
+			return this.mapper.getTotalCount(cri);
 			
 		} catch (Exception e) {
 			throw new ServiceException(e);

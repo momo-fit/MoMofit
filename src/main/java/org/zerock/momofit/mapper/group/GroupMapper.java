@@ -38,7 +38,7 @@ public interface GroupMapper {
 	public abstract int update(GroupDTO dto) throws DAOException;		// 삭제/수정 여부 -> 0 or 1
 
 	// 6. 총 게시물의 개수 반환
-	public abstract int getTotalCount() throws DAOException;
+	public abstract int getTotalCount(Criteria cri) throws DAOException;
 	
 	// 7. 그룹멤버에 등록
 	public abstract int joinGroup(@Param("group_no") int group_no, @Param("user_no") int user_no) throws DAOException;
