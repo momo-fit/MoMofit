@@ -77,25 +77,30 @@
                         <!-- 게시글 작성 내용부분 -->
 
                         <form class="writing_form" 
-                            action="modify" method="post">
+                            action="/board/trade/modify" method="POST">
+
+                            <input type="hidden" name="board_no" value="${TradeBoard.board_no}">
+                            <input type="hidden" name="currPage" value="${cri.currPage}">
+                            <input type="hidden" name="user_no" value="${TradeBoard.user_no}">
 
                             <div class="writing_content">
-
+                                
                                 <!-- 1. 게시판 선택 -->
                                 게시판&nbsp;
                                 <select id="select_board" disabled required>
                                     <option value="">선택</option>
-                                    <option selected value="자유게시판">자유게시판</option>
+                                    <option value="자유게시판">자유게시판</option>
                                     <option value="운동팁">운동팁</option>
                                     <option value="운동인증">운동인증</option>
-                                    <option value="중고거래">중고거래</option>
+                                    <option selected value="중고거래">중고거래</option>
                                     <option value="문의">문의</option>
                                 </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <br>
+                                
 
                                 <!-- 2. 제목 -->
                                 <br>제목&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input type="text" class="writing_title" required>
+                                <input type="text" name="title" class="writing_title" value="${TradeBoard.title}">
                                 <br><br>
 
                                 <!-- 3. 첨부파일 -->
@@ -113,7 +118,7 @@
 
                                 <!-- 4. 내용 -->
                                 내용<br>
-                                <textarea class="textarea_content" required>안녕하세요</textarea>
+                                <textarea class="textarea_content" name="text" >${TradeBoard.text}</textarea>
 
                             </div>
 

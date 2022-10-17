@@ -60,9 +60,10 @@
             console.clear();
 
             $('#listBtn').on('click', function () {
-                // [ GET /board/register ] Request
-                location.href = "/board/trade/list";
+                // [ GET /board/list ] Request
+                location.href = "/board/trade/list?currPage=${cri.currPage}";
             }); // .onclick
+
 
         }); // .jq
     </script>
@@ -81,6 +82,8 @@
 
             <div class="section_wrap">
                 <div class="view">
+                    <input type="hidden" name="board_no" value="${TradeBoard.board_no}">
+                    <input type="hidden" name="currPage" value="${cri.currPage}">
 
                     <div class="board_name font-20-500">
                         <img src="/resources/board/trade/img/trade.png" height="20px">
@@ -88,27 +91,27 @@
                     </div>
 
                     <div class="title font-28-400">
-                        중고거래합니다 글 제목 입니다 
+                        <input type="text" name="title" value="${TradeBoard.title}" maxlength="50" style="border: 0; outline: none;" readonly>
                     </div>
                 
                     <div class="info"> 
                         <div class="info2">
-                            <span class="font-12-400"> 작성자 <b class="font-12-400">홍길동</b> </span>
+                            <span class="font-12-400">작성자 <b class="font-12-400"><input type="text" name="user_no" size="1"  value="${TradeBoard.user_no}" style="border: 0; outline: none;" readonly></b> </span>
                             <div class="space1"></div>
-                            <span class="font-12-400"> 조회수 <b class="font-12-400">1</b> </span>
+                            <span class="font-12-400">조회수 <b class="font-12-400"><input type="text" name="hits" size="1"  value="${TradeBoard.hits}" style="border: 0; outline: none;" readonly></b> </span>
                             <div class="space1"></div>
-                            <span class="font-12-400"> 작성시간 <b class="font-12-400">2022.08.15 12:37</b> </span>
+                            <span class="font-12-400">작성시간 <b class="font-12-400"><input type="text" name="board_date" size="10"  value="${TradeBoard.board_date}" style="border: 0; outline: none;" readonly></b></span>
                             <div class="space1"></div>
                         </div>
               
                         <div class="edit_delete">
-                            <a href="modify"><span class="font-12-400"> 수정 </span></a>
+                            <a href="modify?board_no=${TradeBoard.board_no}&currPage=${cri.currPage}"><span class="font-12-400"> 수정 </span></a>
                            
                             <div class="space1"></div>
-
-                            <form action="remove"  method="POST" style="display: inline;">
-                                <button style="border: none; background: none;"><span class="font-12-400"> 삭제 </span></button>
-                            </form>
+	
+                        <form action="remove?board_no=${TradeBoard.board_no}" method="POST" style="display: inline;">
+                            <button style="border: none; background: none;"><span class="font-12-400"> 삭제 </span></button>
+                        </form>
                         </div>
                     </div>
 
@@ -122,12 +125,7 @@
                         
                         <!-- 본문 텍스트 -->
                         <div class="font-14-400">
-                            글 내용이 들어갑니다 중고거래를 할 수 있습니다 글 내용이 들어갑니다 중고거래를 할 수 있습니다 글 내용이 들어갑니다 중고거래를 할 수 있습니다 글 내용이 들어갑니다 중고거래를 할 수 있습니다 글 내용이 들어갑니다 중고거래를 할 수 있습니다 <br>
-                            글 내용이 들어갑니다 중고거래를 할 수 있습니다 글 내용이 들어갑니다 중고거래를 할 수 있습니다 글 내용이 들어갑니다 중고거래를 할 수 있습니다 글 내용이 들어갑니다 중고거래를 할 수 있습니다 글 내용이 들어갑니다 중고거래를 할 수 있습니다 <br>
-                            글 내용이 들어갑니다 중고거래를 할 수 있습니다 글 내용이 들어갑니다 중고거래를 할 수 있습니다 글 내용이 들어갑니다 중고거래를 할 수 있습니다 글 내용이 들어갑니다 중고거래를 할 수 있습니다 글 내용이 들어갑니다 중고거래를 할 수 있습니다 <br> <br>
-                            글 내용이 들어갑니다 중고거래를 할 수 있습니다 글 내용이 들어갑니다 중고거래를 할 수 있습니다 글 내용이 들어갑니다 중고거래를 할 수 있습니다 글 내용이 들어갑니다 중고거래를 할 수 있습니다 글 내용이 들어갑니다 중고거래를 할 수 있습니다 <br>
-                            글 내용이 들어갑니다 중고거래를 할 수 있습니다 글 내용이 들어갑니다 중고거래를 할 수 있습니다 글 내용이 들어갑니다 중고거래를 할 수 있습니다 글 내용이 들어갑니다 중고거래를 할 수 있습니다 글 내용이 들어갑니다 중고거래를 할 수 있습니다 <br>
-                            글 내용이 들어갑니다 중고거래를 할 수 있습니다 글 내용이 들어갑니다 중고거래를 할 수 있습니다 글 내용이 들어갑니다 중고거래를 할 수 있습니다 글 내용이 들어갑니다 중고거래를 할 수 있습니다 글 내용이 들어갑니다 중고거래를 할 수 있습니다 <br> <br>
+                             <textarea name="text" cols="78" rows="20" style="border: none;" readonly>${TradeBoard.text}</textarea>
                         </div>
 
                         <!-- 좋아요 -->

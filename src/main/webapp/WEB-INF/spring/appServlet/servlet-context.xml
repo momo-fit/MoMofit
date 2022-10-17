@@ -39,6 +39,7 @@
 	<beans:bean id="LogoutInterceptor" class="org.zerock.momofit.interceptor.login.LogoutInterceptor"/>
 	<beans:bean id="AuthInterceptor" class="org.zerock.momofit.interceptor.login.AuthInterceptor"/>
 	
+<<<<<<< HEAD
 	<interceptors>
 		<interceptor>
 			<mapping path="/signin" />
@@ -72,6 +73,10 @@
 	<view-controller path="/signout" view-name="/main/main" status-code="200"/>
 		
 	<context:component-scan base-package="org.zerock.momofit.listener" />
+=======
+	<view-controller path="/board/trade/writing" view-name="/board/trade/writing" status-code="200" />
+	
+>>>>>>> e79836058fd0efddc246d1d2696294df1630a331
 	<context:component-scan base-package="org.zerock.momofit.controller" />
 	<context:component-scan base-package="org.zerock.momofit.config"/>
 	<context:component-scan base-package="org.zerock.momofit.repository"/>
