@@ -50,7 +50,10 @@
     <!-- 메인페이지 필수 CSS -->
     <link rel="stylesheet" href="/resources/main/css/main_section_card.css">
     <link rel="stylesheet" href="/resources/main/css/main_section_board.css">
-    <script>let loginNickname = '${__USER__.nickname}';</script>
+    <script>
+        let loginNickname = '${__USER__.nickname}';
+        let loginUserId = '${__USER__.id}';
+    </script>
 </head>
 
 <body>
@@ -110,6 +113,29 @@
                            
                         </div>
 
+                        <!-- 댓글창 -->
+                        <div class="comment_wrap">
+                            <span class="font-14-700">댓글</span> <br><br>
+    
+                            <div class="comment_out">
+                                <!-- 댓글 표시 구역 -->
+                            </div>
+    
+                            <br>
+
+                            <!-- 댓글 작성창 -->
+
+                            <div id="comment_write" class="card">
+                                <div class="card-body">
+                                    <textarea class="form-control" row="1" style="width: 90%;" placeholder="여기에 댓글을 입력하세요"
+                                    onfocus="this.placeholder=''" onblur="this.placeholder='여기에 댓글을 입력하세요'"></textarea>
+                                    <button type="button" class="btn btn-primary btn_color_blue float_right">작성</button>
+                                </div>
+                            </div>                             
+
+                                
+                            <br>
+                        </div>
                     </div>
                 </div>
             </div>

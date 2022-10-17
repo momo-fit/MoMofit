@@ -68,10 +68,9 @@
                         <div class="report_board_header">
                             <form action="#" method="get" class="search">
                                 
-                                <input type="search" placeholder="제목">
-                                <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                                <input type="search" id="searchVal" placeholder="제목">
+                                <button id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
                                 
-                            
                             </form>
                         </div>
 

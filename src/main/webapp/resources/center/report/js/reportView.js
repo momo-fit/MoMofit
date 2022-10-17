@@ -15,10 +15,25 @@ $(()=> {
         data : {'reportNum' : report_no},
         async: false,
         success : ((data)=> {
-            console.log(data);
             reportView(data);
         })
     })
+
+    $.ajax({
+        method:'get',
+        url : '/report/comm/comm-list',
+        dataType: 'json',
+        data : {'report_no' : report_no},
+        async: false,
+        success : ((data)=> {
+
+            if(data != ''){
+                reportCommView(data);
+            }
+           
+        })
+    })
+
 
     function imgLode() {
 
@@ -45,10 +60,9 @@ $(()=> {
     }
 
     function reportView(data) {
-       
-        
-        
+
         console.log(loginNickname);
+
         let report_no = data.content.report_no;
 
         $('#modifyLink').attr('href', '/center/report/modify?report_no='+report_no);
@@ -78,9 +92,12 @@ $(()=> {
             $('.edit_delete').hide();
         }
 
+        
+
         repotContent.append(content);
 
     }   
+
 
     $('#remove').click(()=> {
 
@@ -111,4 +128,90 @@ $(()=> {
         } // if
 
     }) // remove : click
+
+    // =========== 댓글 ==================
+    // 댓글 표시
+    function reportCommView(data) {
+
+        let str = '';
+
+        $.each(data, ((i) => {
+
+            str+=
+            `<div class="comment font-14-400">
+                <span class="font-16-500">운영자</span>
+                <input type="text" class="comment_input_text" name="" id="" value="${data[i].text}" disabled>
+                <span>${data[i].report_comm_date}</span>
+                <span></span>
+                <span class="edit_delete_comm">
+                    <button type="button" class="cursor_pointer font-12-400 comment_modify_btn"> 수정 </button>
+                    <div class="space1"></div>
+                    <a href=""><span class="remove1 font-12-400"> 삭제 </span></a>
+                </span>
+            </div>`
+            
+
+        }))
+        
+        $('.comment_out').append(str);
+
+        // 해당 문지열이 있으면 ture
+        // -> admin이 아닐시 수정 삭제 숨김
+        if(!loginNickname.includes('admin')){
+            $('.edit_delete_comm').hide();
+        }
+
+    }
+
+    $('.btn-primary').click(()=> {
+
+        let commText = $('.form-control').val();
+        let commId = loginUserId;
+        let commReportNo = report_no;
+        
+        console.log(commText);
+
+
+
+
+    })
+
+
+    $(".comment_modify_btn").on({
+        "click": function () {
+
+            // 부모창 선택
+            let selectForm = $(this).parent().parent();
+            console.log(selectForm);
+
+            // input:text창 선택
+            let selectText = $(this).parent().parent().children("input");
+            console.log(selectText);
+
+            console.log(selectText.is(":disabled"));
+
+            // 만약 text창이, 비활성화되어 있을 때, 수정
+            if(selectText.is(":disabled")){
+                
+                selectText.attr("disabled", false)
+                .css({
+                    border: "1px solid rgb(20 167 255)",
+                    bowShadow: "0px 0px 5px 1px rgb(20 167 255)"
+                });
+
+            } else {
+                $(".comment_content").attr("disabled", true)
+
+                .css({
+                    border: "none",
+                    bowShadow: "none"
+                });
+                
+                
+                selectForm.submit();
+            }
+        }
+    })
 })
+
+

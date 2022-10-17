@@ -1,10 +1,19 @@
 $(() => {
     
-    function listSelect(page) {
+    // 기본 페이지 
+    var page = 1;
+    var keyword;
+
+    listSelect(page, keyword);
+    
+    function listSelect(page, keyword) {
         $.ajax({
             url:'/center/report/report-list',
             method:'get',
-            data: {'page':page},
+            data: {
+                'page':page,
+                'keyword' : keyword
+            },
             dataType: 'json',
             async: false,
             success : ((data)=> {
@@ -19,12 +28,11 @@ $(() => {
         })
     }
 
+    $('#searchBtn').click(()=> {
+        keyword = $('#searchVal').val();
 
-    // 기본 페이지 
-    var page = 1;
-
-    listSelect(page);
-
+        listSelect(page, keyword);
+    })
 
     function view(data, page) {
 

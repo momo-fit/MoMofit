@@ -12,10 +12,6 @@
             <!-- 로그인 시, 나와야 될 항목  -->
             <a href="/signout" id="signout" class="link1 font-12-400">로그아웃</a>
             <div class="space"></div>
-            <div class="box_message">
-                <a href="/mypage/message_receive" class="link1 font-12-400">쪽지</a>
-            </div>
-            <div class="space"></div>
             <a href="/mypage/my_group" class="link1 font-12-400">마이페이지</a>
         </div>
     </div>
@@ -100,12 +96,18 @@
 
         <div class="nav_box_search">
             <!-- 메인화면 모임 검색 -->
-            <form action="">
+            <form action="/group/list" method="get" class="searchFormHeader">
                 <div class="search_box">
-                    <input type="text" name="" id="" class="search_text" placeholder="모임을 검색하세요.">
-                    <label for="search_submit" class="label_search_submit"><img src="/resources/include/img/button_search1.png" width="26"></label>
                     <input type="submit" id="search_submit">
+                    <input type="hidden" name="type" value="" >
+                    <input type="hidden" name="keyword" value="" >
+                    <input type="hidden" name="pageNum" value="" >
+
+                    <input type="text" name="" id="search_value" class="search_text" placeholder="모임을 검색하세요.">
+                    <label for="search_submit" class="label_search_submit"><img src="/resources/include/img/button_search1.png" width="26"></label>
+                    
                 </div>
+                
             </form>
         </div>
     </div>
