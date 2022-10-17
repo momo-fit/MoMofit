@@ -17,17 +17,12 @@ section {
 
 }
 
-<<<<<<< HEAD
-.best_inner {
-    width: 1050px;
-=======
 .linear-gradient{
     background: linear-gradient(to top, rgba(255, 179, 0, 0.419) 50%, transparent 50%);
 }
 
 .best_inner {
     width: 1150px;
->>>>>>> 0567b26ccd3b6e5a4d3bfdddcaeffd2c0db99852
     height: 243px;
 
     display: flex;
@@ -36,11 +31,7 @@ section {
 }
 
 .best_outter {
-<<<<<<< HEAD
-    max-width: 1050px;
-=======
     max-width: 1150px;
->>>>>>> 0567b26ccd3b6e5a4d3bfdddcaeffd2c0db99852
     margin-left: 50px;
     display: flex;
     align-content: center;
@@ -69,22 +60,12 @@ section {
 }
 
 .best_group{
-<<<<<<< HEAD
-    width: 1050px;
-=======
     width: 1150px;
->>>>>>> 0567b26ccd3b6e5a4d3bfdddcaeffd2c0db99852
 }
 
 
 /* 모임목록 */
-<<<<<<< HEAD
-=======
 
-
-	
-	
->>>>>>> 0567b26ccd3b6e5a4d3bfdddcaeffd2c0db99852
 .groups {
     margin-top: 100px;
     margin-left: 40px;
@@ -95,12 +76,6 @@ section {
     width: 250px;
     height: 230px;
     box-shadow: 1px 1px 5px -1px gray;
-<<<<<<< HEAD
-    margin: 7px 7px 0px 4px;
-
-    border-radius: 7px 7px 7px 7px;
-    overflow: hidden;
-=======
     /* margin: 7px 7px 0px 4px; */
     margin: 10px;
 
@@ -108,7 +83,6 @@ section {
     overflow: hidden;
 
     color:#32305b;
->>>>>>> 0567b26ccd3b6e5a4d3bfdddcaeffd2c0db99852
 }
 
 .group_box_inner {
@@ -132,13 +106,8 @@ section {
     display: flex;
     flex-wrap: wrap;
     /* align-content: space-around; */
-<<<<<<< HEAD
-    justify-content: center;
-    width: 1050px;
-=======
     /* justify-content: center; */
     width: 1150px;
->>>>>>> 0567b26ccd3b6e5a4d3bfdddcaeffd2c0db99852
     /* height: 1800px; */
 }
 
@@ -151,11 +120,7 @@ section {
 }
 
 .hr-1 {
-<<<<<<< HEAD
-    width: 1050px;
-=======
     width: 1080px;
->>>>>>> 0567b26ccd3b6e5a4d3bfdddcaeffd2c0db99852
     border: solid 1px black;
 
     display: block;
@@ -163,8 +128,6 @@ section {
 
 
 /* 검색 */
-<<<<<<< HEAD
-=======
 
 .search_area>select {
     width: 200px;
@@ -194,7 +157,6 @@ section {
     float: left;
 }
 
->>>>>>> 0567b26ccd3b6e5a4d3bfdddcaeffd2c0db99852
 .search {
     float: left;
     margin-left: 14px;
@@ -219,12 +181,8 @@ section {
     border-radius: 5px;
 }
 
-<<<<<<< HEAD
-.search>button {
-=======
 .search_btn {
     float: left;
->>>>>>> 0567b26ccd3b6e5a4d3bfdddcaeffd2c0db99852
     background-color: white;
     border: none;
     color: rgb(20 167 255);
@@ -275,22 +233,13 @@ section {
 }
 
 .board_write>button{
-<<<<<<< HEAD
-=======
     
->>>>>>> 0567b26ccd3b6e5a4d3bfdddcaeffd2c0db99852
     background-color: white;
     border: none;
     width: 130px;
     float: right;
     margin-right: 30px;
     font-size: 22px;
-<<<<<<< HEAD
-    margin-top: 10px;
-
-    
-}
-=======
     margin-top: 10px; 
 }
 
@@ -356,4 +305,3 @@ section {
 }
 
 
->>>>>>> 0567b26ccd3b6e5a4d3bfdddcaeffd2c0db99852
