@@ -23,6 +23,15 @@ section {
 
 .title {
     margin: 10px;
+<<<<<<< HEAD
+    border-top: 2px solid black;
+    padding-top: 10px;
+}
+
+/* 게시글 정보 라인 */
+.info{
+    border-bottom: 2px solid black;
+=======
     border-top: 2px solid rgba(128, 128, 128, 0.845);
     padding-top: 10px;
 }
@@ -40,6 +49,7 @@ section {
 /* 게시글 정보 라인 */
 .info{
     border-bottom: 2px solid rgba(128, 128, 128, 0.845);
+>>>>>>> 0567b26ccd3b6e5a4d3bfdddcaeffd2c0db99852
     margin: 10px;
     padding-bottom: 10px;
     display: flex;
@@ -54,6 +64,12 @@ section {
     display: inline;
 }
 
+<<<<<<< HEAD
+/* 게시글 수정 삭제 */
+.edit_delete a{
+    text-decoration: none;
+    color: black;
+=======
 
 /* 삭제 버튼 */
 #del {
@@ -87,6 +103,7 @@ section {
 
 .edit_delete a:hover:before {
     width: 100%;
+>>>>>>> 0567b26ccd3b6e5a4d3bfdddcaeffd2c0db99852
 }
 
 
@@ -99,7 +116,11 @@ section {
 
 .btn_row{
     display: flex;
+<<<<<<< HEAD
+    justify-content: space-between;
+=======
 	justify-content: center;
+>>>>>>> 0567b26ccd3b6e5a4d3bfdddcaeffd2c0db99852
 }
 
 .btn_color_blue{
@@ -154,6 +175,8 @@ section {
     /* border: 1px solid black; */
 }
 
+<<<<<<< HEAD
+=======
 /* 참가 버튼 */
 .joinBtn {
 	/* 글자 */
@@ -170,6 +193,7 @@ section {
     width: 110px;
 }
 
+>>>>>>> 0567b26ccd3b6e5a4d3bfdddcaeffd2c0db99852
 /* 본문 flex로 위치 조정 */
 .content_wrap_1{
     display: flex;
@@ -185,8 +209,11 @@ section {
 
 /*  본문 메인이미지 파트 */
 .content_img{
+<<<<<<< HEAD
+=======
 	width: 100%;
     height: 400px;
+>>>>>>> 0567b26ccd3b6e5a4d3bfdddcaeffd2c0db99852
     padding-bottom: 10px;
 }
 
@@ -209,6 +236,8 @@ section {
 
 }
 
+<<<<<<< HEAD
+=======
 #text_info {
     font-family: 'Sunflower', sans-serif;
     font-size: 20px;
@@ -219,6 +248,7 @@ section {
     background: linear-gradient(to top, yellow 50%, transparent 50%);
 }
 
+>>>>>>> 0567b26ccd3b6e5a4d3bfdddcaeffd2c0db99852
 
 /* 프로필 사진에 어떤 크기의 사진을 넣어도 동일한 모양으로 유지하기 위한 설정 */
 .side_profile_1_person {
@@ -299,7 +329,10 @@ section {
     /* background-color: #f5f5f5; */
 }
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 0567b26ccd3b6e5a4d3bfdddcaeffd2c0db99852
 /* 답글 수정하기에 대한 CSS */
 
 /* 수정하기 버튼 */
@@ -316,6 +349,8 @@ section {
 
 .comment_input_text:focus {
     outline: none;
+<<<<<<< HEAD
+=======
 }
 
 /* 댓글 */
@@ -362,4 +397,5 @@ section {
 
     /* margin-bottom:0px; */
     width: 80px;
+>>>>>>> 0567b26ccd3b6e5a4d3bfdddcaeffd2c0db99852
 }

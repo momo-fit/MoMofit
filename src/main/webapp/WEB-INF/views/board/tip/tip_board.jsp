@@ -160,7 +160,7 @@
                                                 <tr class="contnet">
                                                     <td><div>${tipboard.board_no}</div></td>
                                                     <td><div><a href="/board/tip/view?board_no=${tipboard.board_no}&currPage=${pageMaker.cri.currPage}" class="aTile">${tipboard.title}</a></div></td>
-                                                    <td class="context-menu-one btn btn-neutral"><div>${tipboard.user_no}</div></td>
+                                                    <td class="context-menu-one btn btn-neutral"><div>${tipboard.nickname}</div></td>
                                                     <td><div><fmt:formatDate pattern="yyyy-MM-dd" value="${tipboard.board_date}" /></div></td>
                                                     <td><div>${tipboard.board_like}</div></td>
                                                 </tr>

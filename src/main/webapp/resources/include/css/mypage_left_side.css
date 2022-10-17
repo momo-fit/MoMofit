@@ -89,7 +89,11 @@ section {
     border-radius: 100px;
     overflow: hidden;
 
+<<<<<<< HEAD
+    /* border: 5px solid red; */
+=======
     border: 1px solid rgba(109, 106, 106, 0.664);
+>>>>>>> 0567b26ccd3b6e5a4d3bfdddcaeffd2c0db99852
 
     margin-top: 10px;   
 }
@@ -302,9 +306,12 @@ section {
     font-weight: 700 !important;
 
     background-color: #e7527f !important;
+<<<<<<< HEAD
+=======
 }
 
 
 .wrap_side_profil_certify {
     width: 100%;
+>>>>>>> 0567b26ccd3b6e5a4d3bfdddcaeffd2c0db99852
 }
