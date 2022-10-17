@@ -9,7 +9,19 @@
         <!-- NESTED LOOP JOIN(중첩 루프 조인)을 이용한 Oracle Hint-->
         <!-- Driving Table : board / Driven Table : category    -->
 		SELECT /*+ LEADING(t1) USE_NL(t2) index_desc(t1 pk_board) */
-		    *
+		    t1.board_no,
+		    t1.title,
+		    t1.text,
+		    t1.board_like,
+		    t1.hits,
+		    t1.board_date,
+		    t1.edit,
+		    t1.img_check,
+		    t1.user_no,
+		    t1.category_no,
+		    t1.subject_no,
+		    t2.category_name,
+		    (SELECT count(comm_no) FROM comm t3 WHERE t1.board_no = t3.board_no) comm_cnt
 		FROM 
             board t1
 		INNER JOIN category t2
@@ -54,6 +66,16 @@
     <!-- 마이페이지-내글 : 내가 쓴 게시글 "삭제" -->
     <delete id="deleteMyboardArticle">
         DELETE FROM board WHERE board_no = #{board_no}
+    </delete>
+    
+    <select id="selectBoardImgList" resultType="org.zerock.momofit.domain.mypage.BoardImgVO">
+        SELECT board_img_name, temp, path
+        FROM board_img
+        WHERE board_no = #{board_no}
+    </select>
+    
+    <delete id="deleteBoardImg">
+    	DELETE FROM board_img WHERE board_no = #{board_no}
     </delete>
 
 

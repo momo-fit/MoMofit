@@ -3,6 +3,7 @@ package org.zerock.momofit.mapper.mypage;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.zerock.momofit.domain.mypage.BoardImgVO;
 import org.zerock.momofit.domain.mypage.Criteria;
 import org.zerock.momofit.domain.mypage.MyBoardVO;
 import org.zerock.momofit.exception.DAOException;
@@ -19,5 +20,11 @@ public interface MyBoardMapper {
 	
 	// 3. 내가 쓴글 삭제하기
 	public abstract int deleteMyboardArticle(@Param("board_no") int board_no) throws DAOException;
+	
+	// 4. 파일정보 불러오기
+	public abstract List<BoardImgVO> selectBoardImgList(@Param("board_no") int board_no) throws DAOException;
+	
+	// 5. 파일 삭제하기
+	public abstract int deleteBoardImg(@Param("board_no") int board_no) throws DAOException;
 	
 } // end interface

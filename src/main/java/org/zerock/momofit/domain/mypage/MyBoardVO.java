@@ -23,5 +23,8 @@ public class MyBoardVO {
 	
 	// 카테고리 Table
 	private String category_name;
+	
+	// 댓글 개수
+	private Integer comm_cnt;
 
 } // end class

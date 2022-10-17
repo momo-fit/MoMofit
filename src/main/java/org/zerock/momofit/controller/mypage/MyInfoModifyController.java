@@ -21,17 +21,17 @@ import org.zerock.momofit.exception.ControllerException;
 import org.zerock.momofit.service.mypage.MyInfoModifyService;
 import org.zerock.momofit.util.RSAEncryptionUtil;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
-@AllArgsConstructor
+@RequiredArgsConstructor
 
 @RequestMapping("/mypage/")
 @Controller
 public class MyInfoModifyController {
 	
-	private MyInfoModifyService myInfoModifyService;
+	private final MyInfoModifyService myInfoModifyService;
 	
 	// 1. mypage "패스워드 체크"
 	// Server측 RSA 공개키-개인키 생성
@@ -141,12 +141,12 @@ public class MyInfoModifyController {
 				
 				String base64PublicKey = RSAEncryptionUtil.base64EncoderToString(publicKey);
 				
-				session.setAttribute(SharedScopeKeys.PUBLIC_KEY, base64PublicKey);
+				model.addAttribute(SharedScopeKeys.PUBLIC_KEY, base64PublicKey);
 				session.setAttribute(SharedScopeKeys.PRIVATE_KEY, privateKey);
 				
 				return "/mypage/info_modify";
 			} else {		
-				return "redirect: /mypage/check_pw";
+				return "redirect:/mypage/check_pw";
 			} // if-else
 		} catch (Exception e) {
 			throw new ControllerException(e);

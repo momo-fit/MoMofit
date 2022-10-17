@@ -10,33 +10,33 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 import org.zerock.momofit.common.SharedScopeKeys;
-import org.zerock.momofit.domain.chat.GroupChatDomain.ChatDTO;
+import org.zerock.momofit.domain.chat.GroupChatDomain.ChatVO;
 import org.zerock.momofit.domain.chat.GroupChatDomain.ConnectionUser;
 import org.zerock.momofit.domain.signIn.LoginVO;
 import org.zerock.momofit.repository.StompRepository;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 
 @Log4j2
-@AllArgsConstructor
+@RequiredArgsConstructor
 
 @Controller
 public class StompController {
 	
-	private StompRepository stompRepository;
+	private final StompRepository stompRepository;
 	
 
 	
 	@MessageMapping("/{room}")
 	@SendTo("/topic/{room}")
-	public ChatDTO sendMessage(
+	public ChatVO sendMessage(
 			@DestinationVariable long room,
-			ChatDTO dto,
+			ChatVO vo,
 			SimpMessageHeaderAccessor headerAccessor
 			) throws Exception {
-		log.trace("sendMessage({}, {}) invoked.", room ,dto);
+		log.trace("sendMessage({}, {}) invoked.", room ,vo);
 
 		// Interceptor에서 HttpSession객체를 WebSocketSession에 저장한 Session 획득
 		HttpSession session = (HttpSession) headerAccessor.getSessionAttributes().get("session");
@@ -48,7 +48,7 @@ public class StompController {
 		log.info("\t+ session : {}", session);
 		log.info("\t+ sessionId : {}", sessionId);
 
-		// (코드수정필요) SessionScope에서 UserVO 객체 획득
+		// SessionScope에서 LoginVO 객체 획득
 		LoginVO userVO = (LoginVO) session.getAttribute(SharedScopeKeys.USER_KEY);
 		log.info("\t+ udto : {}", userVO);	 	
 
@@ -73,12 +73,19 @@ public class StompController {
 		
 		connectionUsers.put(sessionId, user);
 		
-		// subcribe한 Client에게 전송할 ChatDTO 생성
-		dto.setNickname(userVO.getNickname());
-		dto.setUser_no(userVO.getUser_no());
-		dto.setConnectionUsers(connectionUsers);	// targetRoom에 속해 있는, User객체		
+		// subcribe한 Client에게 전송할 ChatVO객체
+		
+		// 파일경로 (폴더명/임시파일명_원본파일명)
+		if(userVO.getProfile_name() != null && !userVO.getProfile_name().isBlank()) {
+			String filePath = userVO.getProfile_path() + "/" + userVO.getProfile_temp() + "_" + userVO.getProfile_name();
+			vo.setFilePath(filePath);
+		} // if : Profile 이미지 유무 확인
 
-		return dto;
+		vo.setNickname(userVO.getNickname());
+		vo.setUser_no(userVO.getUser_no());
+		vo.setConnectionUsers(connectionUsers);	// targetRoom에 속해 있는, User객체		
+
+		return vo;
 		
 	} // sendMessage
 	

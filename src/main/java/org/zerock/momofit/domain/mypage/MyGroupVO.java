@@ -37,6 +37,6 @@ public class MyGroupVO {
 	private Integer member_count;	// 참여한 맴버 수
 	
 	// 내가 참여한 Group에 대한 Group_member index
-	private Integer group_member_no;
+//	private Integer group_member_no;
 	
 } // end class
