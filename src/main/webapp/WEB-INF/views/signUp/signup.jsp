@@ -176,7 +176,7 @@
                                 <tr class="font-14-400">
                                     <th>지역</th>
                                     <td><input type="text" class="form-control" id="loc" name="user_loc" placeholder="지역"></td>
-                                    <td><button type="button" class="btn btn-primary3">지역검색</button></td>
+                                    <td><button type="button" class="btn btn-primary3" id="btn-primary3">지역검색</button></td>
                                 </tr>
 
                                 <tr class="font-14-400">
@@ -262,7 +262,10 @@
     <script src="/resources/signUp/js/main_check.js"></script>
     <!-- 이메일 선택 자바스크립트 -->
     <script src="/resources/signUp/js/fileUplode.js"></script>
-
+	<!-- 팝업 -->
+    <script src="/resources/signUp/js/mapPopup.js"></script>
+	
+	
     <!-- 부트스트랩 자바스크립트 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
