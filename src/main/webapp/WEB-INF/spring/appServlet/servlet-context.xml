@@ -56,11 +56,29 @@
 		</interceptor>
 		
 		<interceptor>
-			<mapping path="/board/pic/*" />
+			<mapping path="/center/report/*" />
 			<beans:ref bean="AuthInterceptor" />
 		</interceptor>
 		
+		<interceptor>
+			<mapping path="/group/detail/*" />
+			<beans:ref bean="AuthInterceptor" />
+		</interceptor>
 
+		<interceptor>
+			<mapping path="/board/pic/*" />
+			<beans:ref bean="AuthInterceptor" />
+		</interceptor>
+
+		<interceptor>
+			<mapping path="/group/register/*" />
+			<beans:ref bean="AuthInterceptor" />
+		</interceptor>
+
+		<interceptor>
+			<mapping path="group/modify/*" />
+			<beans:ref bean="AuthInterceptor" />
+		</interceptor>
 
 	</interceptors>
 

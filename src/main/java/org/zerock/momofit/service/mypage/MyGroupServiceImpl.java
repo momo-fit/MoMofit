@@ -3,6 +3,7 @@ package org.zerock.momofit.service.mypage;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.zerock.momofit.domain.mypage.Criteria;
 import org.zerock.momofit.domain.mypage.MyGroupVO;
 import org.zerock.momofit.exception.ServiceException;
@@ -48,6 +49,39 @@ public class MyGroupServiceImpl implements MyGroupService {
 		}
 	} // getGroupCount
 
+	// 모임나가기
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public boolean quitMyGroup(int group_no, int user_no) throws ServiceException {
+		log.trace("quitMyGroup() invoked.");
+		
+		try {
+			
+			this.myGroupMapper.updateGroupMemberCnt(group_no, -1);
+			
+			return this.myGroupMapper.quitGroup(group_no, user_no) == 1;
+			
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		}
+
+	} // getGroupCount
+
+	// 모임장 번호와 요청한 유저번호가 동일한지 판단
+	@Override
+	public boolean isQuitGroup(int group_no, int user_no) throws ServiceException {
+		log.trace("isQuitGroup() invoked.");
+
+		try {
+			
+			int group_admin_no = this.myGroupMapper.getGroupAdminNo(group_no);
+			
+			return user_no == group_admin_no;
 	
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
+
+	} // isQuitGroup
 	
-} // interface
+} // end class

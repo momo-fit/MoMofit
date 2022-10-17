@@ -36,7 +36,7 @@ public class StompMessageInterceptor implements ChannelInterceptor {
 		
 		// Step.2 : Destination에서 구독하고 있는 "채팅방" 획득
 		String room = "";
-		if(!"".equals(destination) && destination != null) {
+		if(destination != null && !destination.isBlank()) {
         	// 구독한 room 획득
             room =  destination.replaceAll("[^0-9]", "");
             log.info("\t+ room : {}", room);

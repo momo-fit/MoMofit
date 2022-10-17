@@ -58,7 +58,7 @@ public class WebSocketEventListener {
         
         // Step.3 : 유저가 구독한 Room에 메시지 전달
         // - 해당유저가 DisConnect
-        GroupChatDomain.ChatDTO dto = GroupChatDomain.ChatDTO.builder()
+        GroupChatDomain.ChatVO dto = GroupChatDomain.ChatVO.builder()
         		.user_no(user_no)
         		.nickname(nickname)
         		.type(2)

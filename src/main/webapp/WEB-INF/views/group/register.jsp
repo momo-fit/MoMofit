@@ -93,7 +93,7 @@
                             <input type="hidden" name="member_count" value="1">
                             
                             <!-- 임시유저번호  -->
-                            <input type="hidden" name="user_no" value="2">
+                            <input type="hidden" name="user_no" value="${sessionScope.__USER__.user_no}">
                             <!-- 좋아요 수 -->
                             <!-- <input type="hidden" name="group_like" value="30"> -->
 
@@ -184,7 +184,7 @@
                             <!-- 1페이지로 돌아갈 페이징 값 전송 -->
                             <input type='hidden' name="currPage" value='1'>
 
-                                <input type="submit" class="make_group_submit" >
+                                <input type="submit" class="make_group_submit" value="생성">
                                 <button type="button" class="make_group_cancel" >취소</button>
     
     

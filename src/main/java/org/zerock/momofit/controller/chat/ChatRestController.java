@@ -15,17 +15,17 @@ import org.zerock.momofit.domain.chat.GroupChatVO;
 import org.zerock.momofit.exception.ControllerException;
 import org.zerock.momofit.service.chat.GroupChatService;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Log4j2
 
 @RestController
 @RequestMapping("/chat/")
 public class ChatRestController {
 
-	private GroupChatService groupChatService;
+	private final GroupChatService groupChatService;
 	
 	
 	// 1. Group정보와 Group에 속한 멤버 정보 획득
@@ -47,7 +47,7 @@ public class ChatRestController {
 			return new ResponseEntity<>(vo, HttpStatus.OK);
 			
 		} catch (Exception e) {
-			throw new ControllerException(e);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);	// 500번 CODE
 		} // try-catch
 		
 	} // getGroupInfoWithMembers
@@ -73,12 +73,12 @@ public class ChatRestController {
 			return new ResponseEntity<>(result ? String.valueOf(group_notice_no) : "", HttpStatus.OK);
 			
 		} catch (Exception e) {
-			throw new ControllerException(e);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);	// 500번 CODE
 		}
 		
 	} // removeChatNotice
 	
-	// 3. 채팅 등록
+	// 3. 채팅 공지사항 등록
 	@PostMapping(
 			value ="/insert",
 			consumes = "application/json",
@@ -97,13 +97,10 @@ public class ChatRestController {
 					: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);	// 500번 CODE
 			
 		} catch (Exception e) {
-			throw new ControllerException(e);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);	// 500번 CODE
 		}
 		
 
 	} // createChatNotice
-	
-	
-	
-	
+
 } // end class

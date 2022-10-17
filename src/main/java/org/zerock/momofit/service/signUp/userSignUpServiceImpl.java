@@ -42,12 +42,13 @@ public class userSignUpServiceImpl implements userSignUpService {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		
 		String today = sdf.format(date);
+
 		String targetDir = SharedScopeKeys.UPLOAD_PATH + today;
 		
 		String original = file.getOriginalFilename();
 		
 		UUID uuid = UUID.randomUUID();
-		String profile_temp = uuid + file.getOriginalFilename();
+		String profile_temp = uuid.toString();
 		
 		File folder = new File(targetDir);
 		
@@ -58,11 +59,11 @@ public class userSignUpServiceImpl implements userSignUpService {
 		
 		try {	
 			if( original != "") {
-				String targetFile = targetDir +"/"+ profile_temp;
+				String targetFile = targetDir +"/"+ profile_temp+"_"+original;
 				file.transferTo( new File(targetFile));
 				
 				dto.setProfile_name(file.getOriginalFilename());
-				dto.setProfile_path(targetDir);
+				dto.setProfile_path(today);
 				dto.setProfile_temp(profile_temp);			
 			}
 			return this.signUpMapper.UserInsert(dto) == 1;

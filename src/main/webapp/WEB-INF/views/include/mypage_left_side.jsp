@@ -34,22 +34,39 @@
             
             <!-- 사이드프로필-주소 -->
             <div class="wrap_side_profil_address">
-                <div class="box_check_btn">
-                    <img src="/resources/include/img/checked_btn.png">
-                </div>
-                <div class="side_profil_address font-16-500"><c:out value="${sessionScope.__USER__.user_loc}"/></div>
+                <c:choose>
+                    <c:when test="${not empty sessionScope.__USER__.user_loc}">
+                        <div class="box_check_btn">
+                            <img src="/resources/include/img/checked_btn.png">
+                        </div>
+                        <div class="side_profil_address font-16-500"><c:out value="${sessionScope.__USER__.user_loc}"/></div>
+                    </c:when>
+
+                    <c:otherwise>
+                        <div class="wrap_side_profil_certify">
+                            <button class="btn_certify"><a href="/mypage/check_pw" class="font-16-500">주소 인증</a></button>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
             </div>
             
-            <div class="wrap_side_profil_certify">
-                <button class="btn_certify"><a href="#" class="font-16-500">인증하기</a></button>
-            </div>
+
 
             <!-- 사이드프로필-취미 -->
             <div class="wrap_side_profil_hobby">
                 <ul>
-                    <li class="font-14-500"><c:out value="${sessionScope.__USER__.sports1}"/></li>
-                    <li class="font-14-500"><c:out value="${sessionScope.__USER__.sports2}"/></li>
-                    <li class="font-14-500"><c:out value="${sessionScope.__USER__.sports3}"/></li>
+                    <c:choose>
+                        <c:when test="${not empty sessionScope.__USER__.sports1}">
+                            <li class="font-14-500"><c:out value="${sessionScope.__USER__.sports1}"/></li>
+                            <li class="font-14-500"><c:out value="${sessionScope.__USER__.sports2}"/></li>
+                            <li class="font-14-500"><c:out value="${sessionScope.__USER__.sports3}"/></li>
+                        </c:when>
+
+                        <c:otherwise>
+                            <li class="font-14-500">취미를 등록해주세요.</li>
+                        </c:otherwise>
+                    </c:choose>
+
                 </ul>
             </div>
             <!-- 사이드프로필-한줄소개 -->
@@ -58,7 +75,15 @@
                 <form action="#">
                     <label for="btn_edit_comment"><img src="/resources/include/img/edit_btn_comment.png"><span class="font-16-500">한줄소개</span></label>
                     <button type="button" id="btn_edit_comment"></button>
-                    <textarea name="" rows="1" disabled class="side_profil_comment font-14-400"><c:out value="${sessionScope.__USER__.profile_info}"/></textarea>
+                    <c:choose>
+                        <c:when test="${not empty sessionScope.__USER__.profile_info}">
+                            <textarea name="" rows="1" disabled class="side_profil_comment font-14-400"><c:out value="${sessionScope.__USER__.profile_info}"/></textarea>
+                        </c:when>
+
+                        <c:otherwise>
+                            <span class="font-14-400">한줄 소개를 등록해주세요.</span>
+                        </c:otherwise>
+                    </c:choose>
                 </form>
             </div>
         </div>
@@ -73,12 +98,6 @@
 
         <li class="manu_btn">
             <a href="/mypage/check_pw" class="link1 font-16-500">&nbsp;기본정보수정
-                <span class="space-2">>&nbsp;</span>
-            </a>
-        </li>
-
-        <li class="manu_btn">
-            <a href="/mypage/message_receive" class="link1 font-16-500">&nbsp;쪽지
                 <span class="space-2">>&nbsp;</span>
             </a>
         </li>

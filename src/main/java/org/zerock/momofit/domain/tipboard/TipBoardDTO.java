@@ -16,4 +16,6 @@ public class TipBoardDTO {
 	private Integer category_no;
 	private Integer subject_no;
 	
+	private String nickname;
+	
 } // end class

@@ -15,4 +15,10 @@ public interface MyGroupService {
 	// 2. 마이페이지 "모임 개수" 조회
 	public abstract int getGroupCount(int user_no) throws ServiceException;
 	
+	// 3. 모임 나가기
+	public abstract boolean quitMyGroup(int group_no, int user_no) throws ServiceException;
+	
+	// 4. 모임 유효성 검사
+	public abstract boolean isQuitGroup(int group_no, int user_no) throws ServiceException;
+	
 } // interface

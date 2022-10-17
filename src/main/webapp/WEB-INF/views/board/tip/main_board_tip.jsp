@@ -81,7 +81,7 @@
                 
                     <div class="info"> 
                         <div class="info2">
-                            <span class="font-12-400"> 작성자 <b class="font-12-400">${tipboard.user_no}</b> </span>
+                            <span class="font-12-400"> 작성자 <b class="font-12-400">${tipboard.nickname}</b> </span>
                             <div class="space1"></div>
                             <span class="font-12-400"> 조회수 <b class="font-12-400">${tipboard.hits}</b> </span>
                             <div class="space1"></div>

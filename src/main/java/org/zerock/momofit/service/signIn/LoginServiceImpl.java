@@ -48,7 +48,7 @@ public class LoginServiceImpl implements LoginService{
 			
 		} catch (DAOException e) {
 			throw new ServiceException(e);
-		}
+		} // try-catch
 		
 		
 	} // userLoginService
@@ -61,7 +61,7 @@ public class LoginServiceImpl implements LoginService{
 			return this.mapper.updateRememberMe(id, rememberme, rememberage) == 1;
 		}catch (Exception e) {
 			throw new ServiceException(e);
-		}
+		} // try-catch
 		
 	} // modifyUserRememberMe
 
@@ -72,7 +72,7 @@ public class LoginServiceImpl implements LoginService{
 			return this.mapper.selectRememberMeCookie(rememberMeCookie);
 		}catch (Exception e) {
 			throw new ServiceException(e);
-		}
+		} // try-catch
 
 	} // seleteRememberMeCookie
 

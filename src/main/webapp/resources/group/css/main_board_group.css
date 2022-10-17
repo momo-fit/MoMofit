@@ -23,7 +23,7 @@ section {
 
 .title {
     margin: 10px;
-    border-top: 2px solid black;
+    border-top: 2px solid rgba(128, 128, 128, 0.845);
     padding-top: 10px;
 }
 
@@ -39,7 +39,7 @@ section {
 
 /* 게시글 정보 라인 */
 .info{
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid rgba(128, 128, 128, 0.845);
     margin: 10px;
     padding-bottom: 10px;
     display: flex;
@@ -99,7 +99,7 @@ section {
 
 .btn_row{
     display: flex;
-    justify-content: space-between;
+	justify-content: center;
 }
 
 .btn_color_blue{
@@ -140,8 +140,8 @@ section {
 /* 좋아요 */
 .like_div{
     text-align: center;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .like_btn{
@@ -154,10 +154,27 @@ section {
     /* border: 1px solid black; */
 }
 
+/* 참가 버튼 */
+.joinBtn {
+	/* 글자 */
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+    /* 박스 */
+    background-color: #ff1466e3;
+    border: none; 
+    border-radius: 6px;
+    line-height: 40px;
+
+    margin-bottom:20px;
+    width: 110px;
+}
+
 /* 본문 flex로 위치 조정 */
 .content_wrap_1{
     display: flex;
     flex-direction: row;
+    height: 500px;
 }
 
 .content_wrap_2{
@@ -205,17 +222,16 @@ section {
 
 
 /* 프로필 사진에 어떤 크기의 사진을 넣어도 동일한 모양으로 유지하기 위한 설정 */
-.side_profile_1_person {
+.profile_1_person {
     width: 170px;
     height: 170px;
-    margin-top: 10%;
     margin-left: 20%;
     overflow: hidden;
     position: relative;
     
 }
 
-.side_profile_1_person > img {
+.profile_1_person > img {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -232,10 +248,9 @@ section {
 
 
 /* 닉네임 */
-.side_profile_nickname {
+.nickname {
+    background: linear-gradient(to top, rgba(255, 162, 0, 0.437) 60%, transparent 50%);
     
-    font-size: 20px;
-    font-weight: bold;   
 }
 
 /* 성별 */
@@ -246,9 +261,8 @@ section {
 }
 
 /* 지역 */
-.side_profile_1_loc {
-    font-size: 18px;
-    font-weight: bold;  
+.side_profil_address {
+    margin-bottom: 15px;
 }
 
 /* 지역 인증 */
@@ -259,16 +273,17 @@ section {
 }
 
 /* 관심운동 */
-.side_profile_1_sports {
-    text-align: left;
-    margin-left: 25%;
+.profile_1_sports {
+    text-align: center;
+   
 }
 /* 관심운동 리스트에 대한 설정 */
 .side_profile_1_sports > ul> li {
-    list-style-type: square;
+    list-style-type:none;
     font-size: 15px;
-    /* font-weight: bold;  */
-
+}
+.profile_1_sports > ul  {
+	padding: 0px;
 }
 
 /* 한줄소개 */
@@ -299,4 +314,50 @@ section {
 
 .comment_input_text:focus {
     outline: none;
+}
+
+/* 댓글 */
+.chat {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.chat li {
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px dotted #999999;
+}
+.chat li.left .chat-body {
+  margin-left: 60px;
+}
+.chat li.right .chat-body {
+  margin-right: 60px;
+}
+.chat li .chat-body p {
+  margin: 0;
+}
+.panel .slidedown .glyphicon,
+.chat .glyphicon {
+  margin-right: 5px;
+}
+.chat-panel .panel-body {
+  height: 350px;
+  overflow-y: scroll;
+}
+
+#addReplyBtn {
+	float: right;
+
+	/* 글자 */
+    font-size: 14px;
+    color: white;
+    font-weight: bold;
+    /* 박스 */
+    background-color: #0d6efd;
+    border: none; 
+    border-radius: 6px;
+    line-height: 36px;
+
+    /* margin-bottom:0px; */
+    width: 80px;
 }

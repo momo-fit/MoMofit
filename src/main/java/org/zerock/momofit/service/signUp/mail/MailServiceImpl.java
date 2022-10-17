@@ -10,7 +10,6 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.zerock.momofit.exception.DAOException;
 import org.zerock.momofit.exception.ServiceException;
 import org.zerock.momofit.mapper.findMapper.findMappers;
 
@@ -88,7 +87,7 @@ public class MailServiceImpl implements MailService {
 			this.mapper.tempPwUpdate(id, Pass);
 		} catch (Exception e) {
 			throw new ServiceException(e);
-		}
+		} // try-catch
 		
 		email = email.replace(",", "@");
 

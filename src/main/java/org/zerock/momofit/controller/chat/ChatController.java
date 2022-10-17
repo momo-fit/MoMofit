@@ -13,22 +13,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.zerock.momofit.common.SharedScopeKeys;
 import org.zerock.momofit.domain.chat.GroupChatVO;
 import org.zerock.momofit.domain.signIn.LoginVO;
-import org.zerock.momofit.domain.signUp.UserDTO;
 import org.zerock.momofit.exception.ControllerException;
 import org.zerock.momofit.service.chat.GroupChatService;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 
 @Log4j2
-@AllArgsConstructor
+@RequiredArgsConstructor
 
 @RequestMapping("/group/")
 @Controller
 public class ChatController {
 	
-	private GroupChatService groupChatService;
+	private final GroupChatService groupChatService;
 	
 	@GetMapping("/chat")
 	public String get(
@@ -44,7 +43,7 @@ public class ChatController {
 			// 세션객체로부터, 회원정보 얻기
 			LoginVO vo = (LoginVO) session.getAttribute(SharedScopeKeys.USER_KEY);
 			
-			int user_no = vo.getUser_no();	// 임시코드 : 1번 User NO조회
+			int user_no = vo.getUser_no();
 			//------------------------------------------------
 			
 			List<GroupChatVO> list = new ArrayList<>();

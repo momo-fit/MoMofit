@@ -29,7 +29,20 @@
 	
 	<!-- 3. 기존 게시글 상세조회 하기 (READ) -->
 	<select id="select" resultType="org.zerock.momofit.domain.freeboard.FreeBoardVO" >
-        SELECT * FROM board WHERE board_no = #{board_no}
+        SELECT
+        board_no,
+        title,
+        text,
+        board_like,
+        hits,
+        board_date,
+        edit,
+        img_check,
+        user_no,
+        category_no,
+        subject_no,
+        (SELECT NICKNAME FROM USERS WHERE USERS.USER_NO = BOARD.USER_NO) AS NICKNAME 
+        FROM board WHERE board_no = #{board_no}
     </select>    
     
     <!-- 4. 기존 게시글 수정하기 (UPDATE) -->
@@ -60,7 +73,19 @@
         resultType="org.zerock.momofit.domain.freeboard.FreeBoardVO">
 
         <!-- OFFSET/FETCH 절이 적용된 DQL 문장 생성 -->
-        SELECT/*+ index_desc(board) */ *
+        SELECT/*+ index_desc(board) */
+        board_no,
+        title,
+        text,
+        board_like,
+        hits,
+        board_date,
+        edit,
+        img_check,
+        user_no,
+        category_no,
+        subject_no,
+        (SELECT NICKNAME FROM USERS WHERE USERS.USER_NO = BOARD.USER_NO) AS NICKNAME
         FROM board
         WHERE CATEGORY_NO = 1
         OFFSET ( #{currPage} - 1 ) * #{amount} ROWS

@@ -93,7 +93,7 @@
                                 String userGender = loginUserVO.getGender();
 
                                 String userEmail= loginUserVO.getEmail();
-                                String[] emailSplit = userEmail.split("@");
+                                String[] emailSplit = userEmail.split(",");
 
                                 String emailID = emailSplit[0];
                                 String emailDomain = emailSplit[1];
