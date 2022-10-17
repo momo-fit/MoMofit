@@ -100,8 +100,8 @@
                 <div class="search_box">
                     <input type="submit" id="search_submit">
                     <input type="hidden" name="type" value="" >
-                    <input type="hidden" name="keyword" value="" >
-                    <input type="hidden" name="pageNum" value="" >
+                    <input type="hidden" name="keyword" id="keywordHeader" value="" >
+                    <input type="hidden" name="pageNum" id="pageNumHeader" value="" >
 
                     <input type="text" name="" id="search_value" class="search_text" placeholder="모임을 검색하세요.">
                     <label for="search_submit" class="label_search_submit"><img src="/resources/include/img/button_search1.png" width="26"></label>
