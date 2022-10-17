@@ -235,7 +235,7 @@
                             <ul>
                                 <c:if test="${pageMaker.prev}">
                                     <li class="mb-prev font-16-700">
-                                        <a href="/group/list?currPage=${pageMaker.startPage - 1}"><</a>
+                                        <a href="/group/list?currPage=${pageMaker.startPage - 1}<c:if test="${not empty param.type}">&type=${param.type}&keyword=${param.keyword}</c:if>"><</a>
                                     </li>
                                 </c:if> 
                             
@@ -243,13 +243,13 @@
                                     <li class="${pageMaker.cri.currPage == pageNum 
                                                     ? 'mb-currPage mb-currPage-step font-16-700' 
                                                     : 'mb-currPage-step font-16-700'}">
-                                        <a href="/group/list?currPage=${pageNum}">${pageNum}</a>
+                                                    <a href="/group/list?currPage=${pageNum}<c:if test="${not empty param.type}">&type=${param.type}&keyword=${param.keyword}</c:if>">${pageNum}</a>
                                     </li>
                                 </c:forEach>
                             
                                 <c:if test="${pageMaker.next}">
                                     <li class="mb-next font-16-900">
-                                        <a href="/group/list?currPage=${pageMaker.endPage + 1}">></a>
+                                        <a href="/group/list?currPage=${pageMaker.endPage + 1}<c:if test="${not empty param.type}">&type=${param.type}&keyword=${param.keyword}</c:if>">></a>
                                     </li>
                                 </c:if>
                             </ul>

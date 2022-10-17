@@ -59,7 +59,7 @@ public class GroupController {
 			
 			model.addAttribute("list", list);	
 			
-			PageDTO pageDTO = new PageDTO(cri, this.service.getTotal());
+			PageDTO pageDTO = new PageDTO(cri, this.service.getTotal(cri));
 			model.addAttribute("pageMaker", pageDTO);
 			
 			// 상단 BEST글 
