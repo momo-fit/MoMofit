@@ -14,8 +14,7 @@ var mypageBoardService = (function () {
 
         var page = param.page;
         var category = param.category;
-        var keyword = filter.keyword;  
-        var type = filter.type;
+        
 
         $.ajax({
             url: "/mypage/board/categorys/" + category + "/pages/" + page,

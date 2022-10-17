@@ -19,7 +19,7 @@
         
         
         <collection 
-        	property="list"
+        	property="list_group_member"
         	resultMap="GroupMemberVO">
         </collection>
         
@@ -124,7 +124,5 @@
             current_date
         )
     </insert>
-    
-
 
 </mapper>

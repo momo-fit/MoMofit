@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
@@ -22,18 +23,18 @@ import org.zerock.momofit.domain.signIn.LoginVO;
 import org.zerock.momofit.exception.ControllerException;
 import org.zerock.momofit.service.mypage.MyBoardService;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
-@AllArgsConstructor
+@RequiredArgsConstructor
 
 @RestController
 @RequestMapping("/mypage/board/")
 public class MyBoardRestController {
 
 	
-	private MyBoardService myboardService;
+	private final MyBoardService myboardService;
 	
 	
 	// 1. myPage 내글 조회하기
@@ -47,10 +48,11 @@ public class MyBoardRestController {
 			@PathVariable("category") int category,
 			@PathVariable("page") int page,
 			Criteria cri,
-			HttpSession session
+			HttpSession session,
+			HttpServletRequest request
 			) throws ControllerException {
 		log.trace("getMyPageBoardList({},{}, {}) invoked.",category, page, cri);
-		
+			
 		try {			
 			
 			//Step.1 : Session으로부터 유저 정보 획득하여 Criteria에 저장
@@ -58,6 +60,7 @@ public class MyBoardRestController {
 			// 세션객체로부터, 회원정보 얻기
 			LoginVO vo = (LoginVO) session.getAttribute(SharedScopeKeys.USER_KEY);
 			
+
 			int user_no = vo.getUser_no();	// 임시코드 : 1번 User NO조회
 			//------------------------------------------------
 			cri.setUser_no(user_no);
@@ -85,7 +88,7 @@ public class MyBoardRestController {
 			return new ResponseEntity<>(result, HttpStatus.OK);
 			
 		} catch (Exception e) {
-			throw new ControllerException(e);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 	} // getMypageBoardList
@@ -102,13 +105,13 @@ public class MyBoardRestController {
 		
 		try {
 			
-			boolean result = this.myboardService.removeArtice(board_no);
+			boolean result = this.myboardService.removeArticle(board_no);
 			
 			
 			return new ResponseEntity<>(result ? String.valueOf(board_no) : "", HttpStatus.OK);
 			
 		} catch (Exception e) {
-			throw new ControllerException(e);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		} // try-catch
 		
 	} // remove

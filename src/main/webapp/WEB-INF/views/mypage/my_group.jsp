@@ -83,39 +83,11 @@
                         <!-- 각 페이지 제목 -->
                         <div class="mypage-content-title font-24-700">나의 모임</div>
                         <div class="mypage-border"></div><br>
-                        <!-- 진행중인 모임 버튼 -->
-                        <!-- <button class="mypage-group-btn mypage-blue-btn" onClick="change_ing();"> 
-                            <span>진행중인 모임</span>
-                        </button> -->
-                        <!-- 종료된 모임 버튼 -->
-                        <!-- <button class="mypage-group-btn" onClick="change_end();"> 
-                            <span>종료된 모임</span>
-                        </button>	 -->
-    
-                        <!-- 진행중인 모임 박스 -->
+
                         <div class="mypage-group-box">
 
 
-                            <!-- 종료된 모임 박스 -->
-                            <!-- <div class="mypage-group-end font-14-200">
-                                <img src="/resources/mypage/img/sport.png" class="mypage-group-end-photo"/>
-                                <div class="mypage-group-info">
-                                    <img src="/resources/mypage/img/crown.png" class="mypage-crown-photo"/>
-                                    <img src="/resources/mypage/img/closed.png" class="mypage-closed-photo"/>
-                                    <p class="mypage-group-p font-20-700">종료된 모임입니다!!!</p>
-                                    <p class="mypage-group-p">서울시 강남구 20시</p>
-                                    <p class="mypage-group-p">4/10 참가중</p>
-                                </div>
-                                <div class="mypage-group-func-wrapper">
-                                    <div><img src="/resources/mypage/img/edit.png" class="mypage-group-edit-photo mypage-hidden-class"/></div>
-                                    <button class="mypage-group-func-btn mypage-blue-btn mypage-hidden-class" onClick="change_end();"> 
-                                        <span>채팅</span>
-                                    </button>
-                                    <button class="mypage-group-func-btn mypage-gray-btn mypage-hidden-class" onClick="change_end();"> 
-                                        <span>나가기</span>
-                                    </button>              
-                                </div>
-                            </div>    -->
+
                         </div>
                         
                         <div class="board-paging-div">
@@ -148,7 +120,7 @@
     <!-- 부트스트랩 자바스크립트 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-    <!-- 임시 유저정보를 Session에 저장 -->
+    <!-- 유저정보를 Session에 저장 -->
     <%@ page import = "org.zerock.momofit.domain.signIn.*" %>
 
 
@@ -212,12 +184,13 @@
 
                         var path = listVO[i].path;
                         var temp = listVO[i].temp;
+                        var group_img = listVO[i].group_img;
 
-                        // 실제 저장 된 파일까지의 경로
-                        var filePath = 'C://temp/' + path + '/temp'
+						var filePath = path + "/" + temp + "_" + group_img;
+ 
 
                         // 내가 참여한 그룹에 대해서의 나의 번호
-                        var group_member_no = listVO[i].group_member_no;
+                        // var group_member_no = listVO[i].group_member_no;
 
                         var format_schedule = mypageUtilService.timeFormat(schedule);
 
@@ -229,7 +202,7 @@
                                     if(!path || !temp){
                                         str += `<img src="/resources/mypage/img/sport.png" class="mypage-group-ing-photo"/>`
                                     } else {
-                                        str += `<img src="\${filePath}" class="mypage-group-ing-photo"/>`
+                                        str += `<img src="/display?fileName=\${filePath}" class="mypage-group-ing-photo"/>`
                                     }
                                     
 
@@ -245,7 +218,16 @@
                                         
                         str +=         `<!-- 모임 정보 -->
                                         <p class="mypage-group-p font-20-700"><a href="/group/detail?group_no=\${group_no}">\${group_name}</a></p>
-                                        <p class="mypage-group-p">\${group_loc} \${format_schedule}</p>
+                                        <p class="mypage-group-p">`
+
+                                        if(group_loc){
+                                            str += `\${group_loc}`
+                                        } else {
+                                            str += `미정_`
+                                        }
+
+                        str +=         `\${format_schedule}
+                                        </p>
                                         <button class="mypage-group-p">\${member_count}/\${member_max} 참가중</button>
                                     </div>
                                     <!-- 채팅, 나가기, 수정 이미지 -->
@@ -262,7 +244,7 @@
                                         <button class="mypage-group-func-btn mypage-blue-btn btn-group-chat" value="\${group_no}"> 
                                             <span class="font-14-500">채팅</span>
                                         </button>
-                                        <button class="mypage-group-func-btn mypage-gray-btn"> 
+                                        <button class="mypage-group-func-btn mypage-gray-btn btn-quit-chat" value="\${group_no}"> 
                                             <span class="font-14-500">나가기</span>
                                         </button></div>                      
                                     </div>
@@ -315,6 +297,8 @@
                     groupListBox.html(str);
 
                     
+
+                    // 채팅방 이동
                     $(".btn-group-chat").on('click', function(){
                             console.log("채팅 버튼이 클릭")
                             var value = $(this).val();
@@ -327,7 +311,27 @@
                             window.open(popupUrl, popupName, popupSize);
                     })
 
+                    // 채팅방 나가기
+                    $(".btn-quit-chat").on('click', function() {
+                        console.log("채팅 나가기 버튼이 클릭");
+                        
+                        var value = $(this).val();  // 모임 번호
 
+                        var deleteParam = {
+                            user_no : uno,
+                            group_no : value
+                        };
+
+                        mypageGroupService.outGroup(deleteParam, function(data){
+
+                            alert(data);
+                            var param = {
+                                page : page
+                            }
+
+                            showGroupList(param);
+                        }) 
+                    })
 
 
                     //---------------------

@@ -45,5 +45,25 @@
             user_no = #{user_no}
     </select>
 
+	<!-- 그룹 장 번호 얻어오기 -->
+	<select id="getGroupAdminNo" resultType="int">
+		SELECT user_no
+		FROM groups
+		WHERE group_no = #{group_no}
+	</select>
+    
+    <!-- 그룹의 멤버 -1 하기 -->
+    <update id="updateGroupMemberCnt">
+	    UPDATE groups
+		SET member_count = member_count + #{amount}
+		WHERE group_no = #{group_no}
+    </update>
 
+	<!-- group_member 테이블에서 삭제 -->
+	<delete id="quitGroup">
+		DELETE FROM group_member
+		WHERE user_no = #{user_no}
+		AND group_no = #{group_no}
+	</delete>
+    
 </mapper>
