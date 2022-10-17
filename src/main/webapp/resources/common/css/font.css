@@ -259,6 +259,12 @@
             font-weight: 900;
             font-size: 16px;
         }
+        
+        .font-16-800 {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 800;
+            font-size: 16px;
+        }
 
         .font-16-700 {
             font-family: 'Noto Sans KR', sans-serif;

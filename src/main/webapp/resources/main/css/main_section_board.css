@@ -1,3 +1,23 @@
+
+.group_box_text {
+    /* width: 10px; */
+    height: 45px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    line-height: 35px;
+
+}
+
+.group_box_loc{
+    height: 20px;
+
+}
+
+.group_box > a {
+    text-decoration: none;
+    color: black;
+}
+
 .wrap_main_board {
     margin-top: 100px;
 
@@ -33,10 +53,6 @@
     padding: 20px;
 }
 
-
-
-
-
 .mypage-content-title {
     text-align: left;
     margin-left: 30px;
@@ -57,8 +73,6 @@
 		border-bottom: 1px solid rgb(180, 180, 180);
 		height: 35px;
 }
-
-
 
 .main_board_tbody tr {
     border-bottom: 1px dotted rgb(180, 180, 180);

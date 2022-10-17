@@ -14,23 +14,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class FileController {
-	
+
 	@GetMapping("/display")
 	public ResponseEntity<byte[]> getImage(String fileName){
-		File file = new File("c:\\project\\uploadFile\\" + fileName);
-		
+		File file = new File("c://project/uploadFile/" + fileName);
+
 		ResponseEntity<byte[]> result = null;
-		
-		try {			
+
+		try {
+
 			HttpHeaders header = new HttpHeaders();
-			
+
 			header.add("Content-type", Files.probeContentType(file.toPath()));
-			
-			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);			
+
+			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
+
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 

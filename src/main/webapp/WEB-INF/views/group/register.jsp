@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>모임 개설하기</title>
     
-        <!-- 부트스트랩 CSS -->
+    <!-- 부트스트랩 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
@@ -20,6 +20,10 @@
     <script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+    
+    <!-- sweetalert2  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 
     <!-- 구글 폰트 적용 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -53,39 +57,59 @@
         <%@ include file = "/WEB-INF/views/include/header.jsp" %>
 
             <!-- 메인 컨텐츠부 -->
-         <section>
+        <section>
 
             <div class="section_wrap">
                 <div class="s_box_board">
-            
+                    
                         <div class="make_group">
                             <div class="make_group_head"><br>모임개설</div>
-                            <hr>
+                            <hr> 
     
-                            <form class="make_group_form" 
-                                action="http://localhost:8080/group/register" method="post">
-    
+                            <form class="make_group_form"
+                                action="/group/register" method="post">
+                                
                             <!-- 폼 왼쪽 배치 (모임 이미지&첨부) -->
-                            <div class="make_group_left">
-                                <img src="/resources/group/img/basket.jpg" width="300px"><br><br>
-                                <input type="file" id="input_file">
-                                <label class="input_file_button" for="input_file">
-                                    파일찾기
-                                </label>
-                            </div>
                             
+                            <div class="make_group_left">
+                                
+                                <div class="form_section">                               	
+                                    <div class="form_section_content">
+                                        <input type="file" id="input_file" name="uploadFile" style="height:30px;">
+
+                                        <div id="uploadResult">
+                                        
+                                            
+                                        </div>
+                                                                                    
+
+                                        <label class="input_file_button" for="input_file">
+                                            이미지 찾기
+                                        </label>
+                    			    </div>                                   
+                                </div>
+                            </div>
+
+                            <input type="hidden" name="member_count" value="1">
+                            
+                            <!-- 임시유저번호  -->
+                            <input type="hidden" name="user_no" value="2">
+                            <!-- 좋아요 수 -->
+                            <!-- <input type="hidden" name="group_like" value="30"> -->
+
                             <!-- 폼 오른쪽 배치 (모임이미지 제외한 폼) -->
                             <div class="make_group_right">
     
                             <!-- 모임명 -->
-                            &nbsp;&nbsp;모임명&nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type="text" class="make_group_name" autofocus="1" required>
+                            
+                            <label for="group_name">&nbsp;&nbsp;모임명&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                            <input type="text" class="make_group_name" autofocus="1" name="group_name" required>
                             <br><br>
                             <br>
                             <!-- 운동종목 -->
                                 <div class="make_group_sport">
                                     운동 종목&nbsp;&nbsp;
-                                    <select id="select_group_sport" required>
+                                    <select id="select_group_sport" name="sports" required>
                                         <option value="">운동을 선택하세요</option>
                                         <option value="헬스/크로스핏">헬스/크로스핏</option>
                                         <option value="요가/필라테스">요가/필라테스</option>
@@ -106,54 +130,62 @@
                                 <!-- 모집 성별 -->
                                 <div class="make_group_gender">
                                     모집 성별&nbsp;&nbsp;
-                                    <select class="select_group_gender" required>
+                                    <select class="select_group_gender" name="gender" required>
                                         <option value="">성별</option>
-                                        <option value="1">남성</option>
-                                        <option value="2">여성</option>
-                                        <option value="3">상관없음</option>
+                                        <option value="남성">남성</option>
+                                        <option value="여성">여성</option>
+                                        <option value="상관없음">상관없음</option>
                                     </select>
                                 </div><br><br>
     
                                 <!-- 지역 required -->
+                                <!-- <input type="hidden" name="group_loc" id="loc" > -->
                                 <div class="make_group_address">
                                     &nbsp;&nbsp;&nbsp;&nbsp;지역&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <select name="addressRegion" id="addressRegion" required></select>
-                                    <select name="addressDo" id="addressDo" required></select>
-                                    <select name="addressSiGunGu" id="addressSiGunGu" ></select>
+                                    <select name="group_loc" id="addressDo" required></select>
+                                    <select name="group_loc" id="addressSiGunGu" required></select>
+                                    
                                 </div><br><br>
                                 <!-- 최대인원 required  -->
                                 <div class="make_group_num">
                                     최대 인원&nbsp;&nbsp;
-                                    <input type="number" min="2" required>
+                                    <input type="number" min="2" name="member_max" required>
                                 </div><br><br>
     
                                 <!-- 일정(선택)-->
-                                <div class="make_group_schedule">
+                                <div class="make_group_schedule" >
                                     &nbsp;&nbsp;&nbsp;&nbsp;일정&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input type="date">
-                                    <input type="time">
+                                    <input type="datetime-local" name="schedule" id="currentDatetime">
+                                
+                                    
+                                    <!-- <input type="date" name="schedule">
+                                    <input type="time" name="schedule"> -->
     
                                 </div><br><br>
     
                                 <!-- 해시태그(선택) / 첫번째칸에는 운동종목 자동입력 -->
                                 <div class="make_group_hash">
                                     해시태그&nbsp;&nbsp;
-                                    #<input type="text" id="input_hash1" placeholder="최대8자">
-                                    #<input type="text" id="input_hash2" placeholder="최대8자">
-                                    #<input type="text" id="input_hash3" placeholder="최대8자">
+                                    #<input type="text" id="input_hash1" placeholder="최대8자" name="hashtag1">
+                                    #<input type="text" id="input_hash2" placeholder="최대8자" name="hashtag2">
+                                    #<input type="text" id="input_hash3" placeholder="최대8자" name="hashtag3">
                             
                                 </div><br><br>
     
                                 <!-- 모임소개 required -->
                                 <div class="make_group_intro">
                                     모임 소개&nbsp;&nbsp;<br>
-                                    <textarea name="group_intro" cols="30" rows="5" required></textarea>
+                                    <textarea cols="30" rows="5" name="info" required></textarea>
                                 </div>
     
     
                                 <!-- 생성하기 -->
-                                
-                                <input type="submit" class="make_group_submit" value="생성하기"></input>
+                            <!-- 1페이지로 돌아갈 페이징 값 전송 -->
+                            <input type='hidden' name="currPage" value='1'>
+
+                                <input type="submit" class="make_group_submit" value="생성">
+                                <button type="button" class="make_group_cancel" >취소</button>
     
     
                                 
@@ -171,9 +203,10 @@
         <!-- 모임화면 자바스크립트 -->
         <script src="/resources/group/js/group_open_location.js"></script>
         <script src="/resources/group/js/group_open_select.js"></script>
+        <script src="/resources/group/js/upload.js"></script>
     
     	<script src="/resources/include/js/main_header.js"></script>
-    	
+    	   	
     
         <!-- 부트스트랩 자바스크립트 -->
        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

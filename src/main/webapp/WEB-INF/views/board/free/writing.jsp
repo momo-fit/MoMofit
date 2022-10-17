@@ -110,7 +110,11 @@
                                         <!-- 여기에 미리보기 생성 -->
                                     </div>
                                 </span>
+<<<<<<< HEAD
                                 <br>
+=======
+                                <br><br>
+>>>>>>> 0567b26ccd3b6e5a4d3bfdddcaeffd2c0db99852
 
                                 <!-- 4. 내용 -->
                                 내용<br>
@@ -170,7 +174,11 @@
 		    } // for
             
             $.ajax({
+<<<<<<< HEAD
                 url: '/uploadAjaxAction', // FreeUploadController의 uploadAjaxAction으로 보냄
+=======
+                url: '/freeBoard/uploadAjaxAction', // UploadController의 uploadAjaxAction으로 보냄
+>>>>>>> 0567b26ccd3b6e5a4d3bfdddcaeffd2c0db99852
                 processData : false,
                 contentType : false,
                 data : formData,
@@ -240,7 +248,7 @@
 		let targetDiv = $("#result_card");
 		
 		$.ajax({
-			url: '/deleteFile',
+			url: '/freeBoard/deleteFile',
 			data : {fileName : targetFile},
 			dataType : 'text',
 			type : 'POST',

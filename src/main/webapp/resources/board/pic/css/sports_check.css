@@ -135,3 +135,7 @@ section {
 a{
 	cursor:pointer;
 }
+
+.title_position{
+	margin-top:23px;
+}

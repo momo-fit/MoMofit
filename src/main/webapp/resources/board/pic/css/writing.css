@@ -108,6 +108,22 @@ textarea:focus{
 
 /* 파일첨부 */
 
+/* .filebox label {
+    display: inline-block;
+    padding: .5em .75em;
+    color: #fff;
+    font-size: 16px;
+    line-height: normal;
+    vertical-align: middle;
+    background-color: #fdfdfd;
+    cursor: pointer;
+    /* border: 1px solid #ebebeb; */
+    /* background-color: #14A7FF;;
+    /* border-bottom-color: #e2e2e2; */
+    /* border-radius: .25em;
+ } */ 
+
+ 
 .filebox label {
     display: inline-block;
     padding: .5em .75em;
@@ -121,7 +137,7 @@ textarea:focus{
     background-color: #14A7FF;;
     /* border-bottom-color: #e2e2e2; */
     border-radius: .25em;
-}
+ }
 
   .filebox input[type="file"] {  /* 파일 필드 숨기기 */
     position: absolute;
@@ -155,7 +171,7 @@ textarea:focus{
 .textarea_content {
     resize : none;
     width:950px;
-    height: 500px;
+    height: 450px;
     font-size: 16px;
     /* border: 0; */
     border-radius: 5px;

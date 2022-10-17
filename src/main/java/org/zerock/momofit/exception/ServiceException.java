@@ -5,10 +5,12 @@ public class ServiceException extends Exception {
 
 	public ServiceException(String message) {
 		super(message);
-	} // constructor
-	
-	public ServiceException (Exception e) {
-		super(e);
-	} // constructor
 
-}
+	}
+
+	public ServiceException(Exception e) {
+		super(e);
+	}
+
+} // end class
+

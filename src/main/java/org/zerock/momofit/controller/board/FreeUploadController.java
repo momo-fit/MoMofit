@@ -24,8 +24,9 @@ import lombok.extern.log4j.Log4j2;
 import net.coobird.thumbnailator.Thumbnails;
 
 @Log4j2
-//@RequestMapping
+
 @Controller
+@RequestMapping("/freeBoard")
 public class FreeUploadController {
 		
 	@GetMapping("/uploadAjax")
@@ -114,7 +115,7 @@ public class FreeUploadController {
 		
 	} // uploadAjaxPost
 	
-	// 이미지 파일 삭제
+	/* 이미지 파일 삭제 */
 	@PostMapping("/deleteFile")
 	public ResponseEntity<String> deleteFile(String fileName){
 		log.info("deleteFile() invoked.");
@@ -122,11 +123,11 @@ public class FreeUploadController {
 		File file = null;
 		
 		try {
-			// 썸네일 파일 삭제
-			file = new File("c:\\project\\uploadFile\\" + URLDecoder.decode(fileName, "UTF-8"));			
+			/* 썸네일 파일 삭제 */
+			file = new File("c:\\upload\\" + URLDecoder.decode(fileName, "UTF-8"));			
 			file.delete();
 			
-			// 원본 파일 삭제
+			/* 원본 파일 삭제 */
 			String originFileName = file.getAbsolutePath().replace("s_", "");			
 			log.info("originFileName : " + originFileName);			
 			file = new File(originFileName);			
