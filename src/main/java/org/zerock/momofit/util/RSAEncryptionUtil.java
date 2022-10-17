@@ -62,12 +62,14 @@ public class RSAEncryptionUtil {
 		// Bas64기반 바이트 배열로
 		// 
 		byte[] byteEncrypted = Base64.getDecoder().decode(encrypted.getBytes());
+		log.info("\t+ byteEncrypted : {}", byteEncrypted);
 		
 		// Cipher 초기화 -> (복호화 모드 / PrivateKey 이용)
 		cipher.init(Cipher.DECRYPT_MODE, privateKey);
 		
 		// PrivateKey를 이용한 복호화 작업
 		byte[] byteDecrypted = cipher.doFinal(byteEncrypted);
+		log.info("\t+ byteDecrypted : {}", byteDecrypted);
 		
 		// byte배열 -> String변환
 		String decrypted = new String(byteDecrypted, "UTF-8");
@@ -83,7 +85,8 @@ public class RSAEncryptionUtil {
 	 * @Param (key) : RSA Key
 	 * @Return : Base64기반 인코딩 된 문자열
 	 */
-	public static String base64EncoderToString(Key key) {
+	public static String base64EncoderToString(Key key) throws Exception {
+		log.trace("base64EncoderToString");
 		
 		return Base64.getEncoder().encodeToString(key.getEncoded());
 

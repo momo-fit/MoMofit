@@ -12,6 +12,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
 
+
     <!-- 구글 폰트 적용 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,19 +51,21 @@
                         <hr>
                         <!-- 게시글 작성 내용부분 -->
 
-                        <form action="modify" method="POST" class="writing_form">
+                        <form action="#" method="#" class="writing_form" name="reportForm">
+                            <input type="hidden" name="_method" value="PUT"/>
 
                             <div class="writing_content">
 
                                 <!-- 1. 신고유형 선택 -->
                                 유형&nbsp;&nbsp;&nbsp;&nbsp;
-                                <select id="select_report" disabled>
+                                <!-- <select id="select_report" disabled>
                                     <option value="">선택</option>
                                     <option value="욕설,비방,차별,혐오">욕설,비방,차별,혐오</option>
                                     <option value="광고글">광고글</option>
                                     <option value="음란">음란</option>
                                     <option value="기타">기타</option>
-                                </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+                                <input type="text" id="select_report" class="type" value="" disabled>
                                 
                                 <!-- 2-2. (문의 선택시) 공개/비공개 선택 -->
                                 <span id="access">
@@ -78,32 +81,40 @@
                                 <!-- 4. 첨부파일 -->
                                 첨부&nbsp;&nbsp;&nbsp;
                                 <span class="filebox">
-                                    <input class="upload_name" value="" placeholder="" disabled>
-
-                                    <label class="input_file_button" for="input_file">
+                                    <!-- <input class="upload_name" value="" placeholder="" disabled> -->
+                                    <input type="text" id="select_report" class="file" value="" disabled>
+                                    <!-- <label class="input_file_button" for="input_file">
                                         파일찾기
                                     </label>
 
-                                    <input type="file" id="input_file" class="upload-hidden" accept='image/jpg,image/png,image/jpeg,image/gif' disabled>
+                                    <input type="file" id="input_file" class="upload-hidden" accept='image/jpg,image/png,image/jpeg,image/gif' disabled> -->
                                 </span>
-                                <br>
+                                <br><br>
 
                                 <!-- 5. 대상 -->
                                 대상&nbsp;&nbsp;&nbsp;
-                                <input type="text" class="username" placeholder="닉네임" disabled>
-                                <input type="button" class="username_search" value="검색" disabled></input>
+                                <!-- <input type="text" class="username" placeholder="닉네임" disabled> -->
+                                <input type="text" id="select_report" class="target" value="" disabled>
+                                <!-- <input type="button" class="username_search" value="검색" disabled></input> -->
                                 <br><br>
+                                
+                                <!-- 미리보기 -->
+
+                                <div id="img">
+
+                                </div>
+                                
 
                                 <!-- 6. 내용 -->
                                 내용<br>
-                                <textarea class="report_textarea_content" required>제재 부탁드립니다...</textarea>
+                                <textarea class="report_textarea_content" required></textarea>
 																
                             </div>  
                             <!-- 돌아가기 버튼 -->
-                            <input type="button" class="report_back" value="취소" onclick="location='/center/report/view'">
+                            <input type="button" class="report_back" value="취소">
                             
                             <!-- 작성하기 버튼 -->
-                            <input type="submit" class="report_submit" value="수정">
+                            <input type="button" class="report_submit" value="수정">
 
 							
                         </form>
@@ -124,10 +135,11 @@
 
     <!-- 메인화면 자바스크립트 -->
     <script src="/resources/main/js/main.js"></script>
-    <script src="/resources/center/report/js/writing.js"></script>
     <script src="/resources/center/report/js/userSearch.js"></script>
+    <script src="/resources/center/report/js/reportModify.js"></script>
 
     <!-- 부트스트랩 자바스크립트 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
+

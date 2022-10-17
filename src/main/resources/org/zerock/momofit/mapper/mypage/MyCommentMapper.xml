@@ -8,7 +8,8 @@
         id="getMyCommentListWithPaging" 
         resultType="org.zerock.momofit.domain.mypage.MyCommentVO">
 
-		SELECT /*+ LEADING(t1) USE_NL(t3) index_desc(t1 pk_comm) */
+		SELECT 
+		/*+ LEADING(t1) USE_NL(t3 t2) index_desc(t1 pk_comm) */
 		    t1.comm_no,
 		    t1.board_no,
 		    t1.text,
@@ -71,6 +72,5 @@
     <delete id="deleteMyCommentReply">
         DELETE FROM comm WHERE comm_no = #{comm_no}
     </delete>
-    
 
 </mapper>

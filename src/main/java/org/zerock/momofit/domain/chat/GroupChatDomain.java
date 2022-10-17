@@ -30,7 +30,7 @@ public class GroupChatDomain {
 	@NoArgsConstructor
 	@AllArgsConstructor
 	@Builder
-	public static class ChatDTO {
+	public static class ChatVO {
 		
 		private Integer user_no;
 		
@@ -38,14 +38,16 @@ public class GroupChatDomain {
 		
 		private String message;
 		
+		private String filePath;
+		
 		// Message Type
-		// 0 : ENTER, 1 : MESSAGE, 2 : QUIT
+		// 0 : ENTER, 1 : MESSAGE, 2 : QUIT, 3 : Register Notice
 		private Integer type;
 		
 		// 현재 채팅방에 접속하고 있는 User정보
 		private Map<String, ConnectionUser> connectionUsers; 
 		
-
+		
 	} // InnerClass - ChatDTO
 	
 	

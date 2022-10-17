@@ -86,6 +86,4 @@ public class GroupChatServiceImpl implements GroupChatService {
 		
 	} // insertMyChatNotice
 
-
-	
 } // end class

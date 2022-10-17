@@ -3,6 +3,12 @@ package org.zerock.momofit.domain.mypage;
 import lombok.Getter;
 import lombok.ToString;
 
+
+/*
+ * 게시판 페이징 처리용 DTO 객체
+ * -. 화면에 전달되는 용도
+ */
+
 @ToString
 @Getter
 public class PageDTO {

@@ -158,7 +158,7 @@
         
         $(function() {
             
-        	// 현재 페이지와 게시판 카테고리를 저장하기위한, 변수 선언
+        	// 현재 페이지와 게시판 카테고리를 저장하기위한, 변수 선언(초기화)
             var page = 1;
             var category = 0;
             
@@ -176,8 +176,7 @@
             }
 
             // myPage - 내 글 목록 조회 (1번 Page)
-            showBoardList(param, filter);
-            
+            showBoardList(param, filter);          
 
             // myage - 내 글 목록 출력함수
             function showBoardList(param, filter){
@@ -200,7 +199,7 @@
                         var hits = listVO[i].hits;
                         var board_date = listVO[i].board_date;
                         var category_name = listVO[i].category_name;
-                        
+                        var comm_cnt = listVO[i].comm_cnt;
 
                         var format_board_date = mypageUtilService.timeFormat(board_date);   
                         
@@ -211,9 +210,11 @@
                                 <td class="mp-selected">\${category_name}</td>
                                 <td class="mypage-table-title mp-title">
                                     <div>
-                                        <div class="mypage-title-content mp-title-content"><a href="#" class="mypage-link">\${title}</a></div>
-                                        <div class="mypage-comm-cnt">50</div>
-                                    </div>
+                                        <div class="mypage-title-content mp-title-content"><a href="#" class="mypage-link">\${title}</a></div>`
+                        
+                        if(comm_cnt > 0) str += `<div class="mypage-comm-cnt">\${comm_cnt}</div>`
+
+                        str +=    `</div>
                                 </td>
                                 <td class="mp-date">\${format_board_date}</td>
                                 <td class="mp-like">\${board_like}</td>
@@ -241,14 +242,13 @@
                     var pagingli = "";
 
                     if(prev){
-                        pagingli += `<li class="mb-prev font-16-700"><</li>`;
+                        pagingli += `<li class="mb-prev font-16-700" onclick="clickPrev()"><</li>`;
                     }
 
                     for(var step = startPage; step <= endPage; step++){
                         if(startPage == 0){
                             break;
                         }
-
                         if(currPage == step){
                             pagingli +=  `<li class="mb-currPage mb-currPage-step font-16-700">\${step}</li>`
                         } else {
@@ -330,11 +330,11 @@
                         showBoardList(param, filter);
                     })
 
-
                 })
 
-
             } // showBoardList
+
+
 
             //---------------------
             // 게시판 카테고리 선택

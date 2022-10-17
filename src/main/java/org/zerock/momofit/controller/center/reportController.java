@@ -37,16 +37,7 @@ public class reportController {
 		
 		
 		return "center/report/register/writing_report";
-	}
-	
-	@PostMapping("/register")
-	public String registerProcess() {
-		log.trace("reportBoardRegisterProcess() invoked.");
-		
-		return "redirect:/center/report/list";
-		
-	}
-	
+	}	
 	
 	@GetMapping("/usersearch")
 	public String userSearch() {
@@ -63,24 +54,6 @@ public class reportController {
 		
 		
 		return "center/report/modify/modify_report";
-	}
-	
-	@PostMapping("/modify")
-	public String modifyProcess() {
-		log.trace("reportBoardModifyProcess() invoked.");
-		
-		
-		return "redirect:/center/report/list";
-	}
-	
-	
-	@PostMapping("/remove")
-	public String remove() {
-		log.trace("reportBoardRemove() invoked.");
-		
-		
-		return "redirect:/center/report/list";
-	}
-	
+	}	
 	
 } // end class

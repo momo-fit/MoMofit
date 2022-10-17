@@ -48,7 +48,8 @@ public class UploadController {
 //	------------------------------------------------------------------------------------------------------------	
 	@PostMapping(value="/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<GroupDTO> uploadAjaxAction (MultipartFile uploadFile) throws Exception {
-
+		log.info("\t+ uploadFile.fileName : {}", uploadFile.getOriginalFilename());
+		
 		log.info("upload ajax post ...");
 
 		/* 이미지 파일 체크 */

@@ -29,9 +29,8 @@ public class mailCheckController {
 			return mailService.mailSend(email);
 		} catch (Exception e) {
 			throw new ControllerException(e);
-		}
-		
-				
+		} // try-catch
+	
 	} // mailCheck
 	
 
