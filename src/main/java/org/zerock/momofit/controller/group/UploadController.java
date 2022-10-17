@@ -20,18 +20,19 @@ import org.springframework.web.multipart.MultipartFile;
 import org.zerock.momofit.domain.group.GroupDTO;
 import org.zerock.momofit.mapper.group.GroupMapper;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.coobird.thumbnailator.Thumbnails;
 
-
+@AllArgsConstructor
 @Log4j2
+
 @RequestMapping("/group/")
 @Controller
 public class UploadController {
-
-	@Autowired
-	private GroupMapper mapper;
-
+	
+	private final GroupMapper mapper;
+	
 //	------------------------------------------------------------------------------------------------------------
 
 	/* 이미지 정보 반환 */

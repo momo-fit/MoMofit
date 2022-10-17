@@ -97,6 +97,8 @@ public class ReplyController {
     public ResponseEntity<String> modify(@RequestBody ReplyDTO rdto,
                                          @PathVariable("group_comm_no") Integer group_comm_no) {
         rdto.setGroup_comm_no(group_comm_no);
+        log.info("test" + rdto.getGroup_comm_no());
+        
         
         log.info("댓글번호: " + group_comm_no);
         log.info("modify: " + rdto);

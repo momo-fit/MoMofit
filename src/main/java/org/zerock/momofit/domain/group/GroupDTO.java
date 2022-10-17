@@ -13,8 +13,6 @@ public class GroupDTO {
 	private String gender;
 	private String group_loc;
 	private Integer member_max;
-	
-//	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")	
 	private Date schedule;
 	
 	private Integer user_no;	// 유저번호 FK
@@ -31,6 +29,17 @@ public class GroupDTO {
 	private String path;		// 경로
 	// 멤버수
 	private Integer member_count;
+	
+	// 유저정보 JOIN
+	private String nickname;
+	private String profile_name;
+	private String profile_temp;
+	private String profile_path;
+	private String user_loc;
+	private String profile_info;
+	private String sports1;
+	private String sports2;
+	private String sports3;
 
 }
 

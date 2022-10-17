@@ -1,4 +1,54 @@
-/* 로그인 */
+/* 체크 전 (사이드바 접힌 상태) */
+input[id="side_profile_icon"] {display: none;}
+
+input[id="side_profile_icon"] + label {
+    display:block;  position: fixed;
+    margin: 0; width:60px; height: 50px;
+    /* 기본 위치 : 맨 오른쪽 가운데 위치하게 */
+    right: 0; top: calc(50% - 25px); 
+    opacity: 70%;
+    transition: all .35s;
+    cursor: pointer;
+    z-index: 10;
+}
+
+
+/* 체크 후 (사이드바 열린 상태) */
+input[id="side_profile_icon"]:checked + label {
+    z-index: 10;
+    /* 체크됐을 때 버튼도 같이 움직이게 */
+    right: 300px;
+    opacity: 100%;
+}
+
+div[class="side_profile_2"] {
+    width:300px; height: 100%; background: #fff;
+    position: fixed; top:0; right: -300px; z-index: 10;
+    transition: all .35s;
+    text-align: center;
+}
+
+input[id="side_profile_icon"]:checked + label + div {
+    right:0;
+    box-shadow: -5px 0px 8px 3px rgb(0 0 0 / 10%);
+    z-index: 10;
+}
+
+/* 상단 글귀 */
+.side_profile_2_info > p {
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+
+/* 상단 글귀 + 이미지 */
+.side_profile_2_info {
+    width: 250px;
+    margin-top: 100px;
+    margin-left: 25px;
+}
+
+/* 로그인 폼 */
 .login_box {
             
     display: inline-block;
@@ -14,13 +64,11 @@
     /* 박스 테두리 효과 */
     border: none; /* 테두리 없애 */
     border-radius: 8px; /* 모서리 둥글게 */
-    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);    /* 그림자 */
 
     box-sizing: border-box;
-    margin-top:150px;
-    margin-left: 50px;
-    width: 500px;
-    height: 450px;
+
+    width: 90%;
+    height: 40%;
 }
 
 .form_name {
@@ -31,8 +79,8 @@
 input[id="login_id"] {
     font-size: 17px;
     /* 박스 크기 조절 */
-    width:80%;
-    height:50px;
+    width:90%;
+    height:40px;
     /* 테두리 */
     border:1px solid rgb(217, 216, 216);
     border-radius:4px;
@@ -54,8 +102,8 @@ input[id=login_id]:focus{
 input[id="login_pw"] {
     font-size: 17px;
     /* 박스 크기 조절 */
-    width:80%;
-    height:50px;
+    width:90%;
+    height:40px;
     /* 테두리 */
     border:1px solid rgb(217, 216, 216);
     border-radius:4px;
@@ -76,19 +124,19 @@ input[id=login_pw]:focus{
 
 .button_login {
     /* 글자 */
-    font-size: 20px;
+    font-size: 18px;
     color: white;
     font-weight: bold;
     /* 박스 */
     background-color: #5759f8;
     border: none; 
     border-radius: 6px;
-    line-height: 48px;
+    line-height: 40px;
     /* 위치 */
     margin-left:0px;
     margin-top: 8px;
     /* margin-bottom:0px; */
-    width: 380px;
+    width: 90%;
 }
 /* 마우스 갖다대면 색 진해짐 */
 .button_login:hover {
@@ -97,24 +145,24 @@ input[id=login_pw]:focus{
 
 .checkbox_autologin {
     text-align: left;
-    margin-left: 30px;
+    margin-left: 15px;
 }
 
 .button_join {
     /* 글자 */
-    font-size: 20px;
+    font-size: 18px;
     color: white;
     font-weight: bold;
     /* 박스 */
     background-color:  #717171;
     border: none; 
     border-radius: 6px;
-    line-height: 48px;
+    line-height: 40px;
     /* 위치 */
     margin-left:0px;
     margin-top: 8px;
     margin-bottom:15px;
-    width: 380px;
+    width: 90%;
 }
 /* 마우스 갖다대면 색 진해짐 */
 .button_join:hover {

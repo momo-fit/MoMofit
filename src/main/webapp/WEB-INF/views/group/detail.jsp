@@ -100,7 +100,7 @@
                 
                     <div class="info"> 
                         <div class="info2">
-                            <span class="font-12-400"> 작성자 <b class="font-12-400"><c:out value="${group.user_no}"/></b> </span>
+                            <span class="font-12-400"> 작성자 <b class="font-12-600"><c:out value="${group.nickname}"/></span>
                             <!-- <div class="space1"></div>
                             <span class="font-12-400"> 조회수 <b class="font-12-400">1</b> </span> -->
                             <div class="space1"></div>
@@ -162,10 +162,95 @@
                             
 
                             <!-- 모임장 파트 -->
-                            <div class="content_group_leader font-14-400">
+                            <div class="content_group_leader ">
 
-                                <div class="font-20-700"> 모임장 </div>
-                                <div class="side_profile_1_person">
+                                <div class="font-20-700" style="margin-right:15px">모임장</div>
+
+                                <div class="side_profil">
+                                    <!-- 사이드프로필-이미지 -->
+                                    <div class="wrap_side_profil_img">
+                                        <div class="side_profil_img_box">
+                                            <!-- 여기에 이미지삽입 -->
+                                            <div class="profile_1_person">                                    
+                                                <c:choose>
+                                                    <c:when test="${group.profile_name == null}">
+                                                        <img src="/resources/mypage/img/profile.png">
+                                                    </c:when>
+                        
+                                                    <c:otherwise>
+                                                        <img src="/display?fileName=${group.profile_path}/${group.profile_temp}_${group.profile_name}">
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!-- 사이드프로필-닉네임 -->
+                                    <div class="wrap_side_profil_nickname">
+                                        <span class="nickname font-18-700"><c:out value="${group.nickname}"/></span>
+                                            
+                                    </div>
+                                    
+                                    <!-- 사이드프로필-주소 -->
+                                    <div class="wrap_side_profil_address">
+                                        
+                                        <div class="side_profil_address font-16-500">
+                                            <c:out value="${group.user_loc}"/>
+                                            
+										<c:if test="${group.user_loc != null}">                                          
+									        <span class="side_profile_loc_check">
+									            <img src="/resources/include/img/check_grin.png" width="15px">
+									        </span>
+								        </c:if>
+								        
+                                        </div>
+
+                                    </div>
+                                    
+                        
+                                    <!-- 사이드프로필-취미 -->
+                                    <div class="profile_1_sports">
+                                        <ul>
+                                            <li class="font-14-500"><c:out value="${group.sports1}"/></li>
+                                            <li class="font-14-500"><c:out value="${group.sports2}"/></li>
+                                            <li class="font-14-500"><c:out value="${group.sports3}"/></li>
+                                        </ul>
+                                    </div>
+                                    <!-- 사이드프로필-한줄소개 -->
+                                    <div class="wrap_side_profil_comment font-16-600">
+                                        
+                                        <c:out value="${group.profile_info}"/>
+                                        
+                                    </div>
+                                </div>
+
+                                <!-- 좋아요 -->
+
+                                <div class="like_div">
+                                    <img src="/resources/group/img/like.png" height="30" class="like_btn">
+                                    <span id="like_cnt" class="font-14-700">0</span>
+                                </div>
+
+                                <!-- 참가하기 -->
+                                
+                                <form action="/group/participate" method="post">
+                                    <input type="hidden" name="group_no" value="${group.group_no}">
+                                    <input type="hidden" name="member_count" value="${group.member_count}">
+                                    <input type="hidden" name="user_no" value="${sessionScope.__USER__.user_no}">
+
+                                    <button type="submit" class="joinBtn" >참가하기</button>
+
+                                </form>
+                                
+
+
+                                    
+
+                                
+                                    
+
+
+                                <!-- <div class="side_profile_1_person">
                                     
                                     <img src="/resources/include/img/side_sample.jpg">
                                 </div>
@@ -173,8 +258,6 @@
                                 <div class="side_profile_1_text">
                                     <span class="side_profile_nickname">작성자</span>
                                     <img src="/resources/group/img/female-2404482.png" width="20px" alt="">
-                                    <!-- <img src="./img/male-272547.png" width="20px"alt=""> -->
-                                    <!-- <span class="side_profile_gender">여</span> -->
                                 </div><br>
                     
                                 <div class="side_profile_1_loc">
@@ -197,7 +280,7 @@
                                     <span id="like_cnt" class="font-14-700">0</span>
                                 </div>
 
-                                <a href="/group/chat"><button type="button" class="joinBtn">참가하기</button></a>                    
+                                <a href="/group/chat"><button type="button" class="joinBtn">참가하기</button></a>                     -->
                             </div>
                         </div>
 

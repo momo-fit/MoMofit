@@ -43,6 +43,9 @@ public interface GroupMapper {
 	// 7. 그룹멤버에 등록
 	public abstract int joinGroup(@Param("group_no") int group_no, @Param("user_no") int user_no) throws DAOException;
 	
+    // 7-1 참가자 증가
+    public abstract void updateGroupMember(@Param("group_no") Integer group_no, @Param("amount") Integer amount);
+	
 	// 8. 그룹 삭제 시, 그룹멤버 삭제(그룹 자체를 삭제)
 	public abstract int deleteGroupMember(@Param("group_no") int group_no) throws DAOException;
 
