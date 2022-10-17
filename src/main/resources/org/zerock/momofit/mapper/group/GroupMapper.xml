@@ -45,13 +45,14 @@
 		SELECT /*+ index_desc(groups) */ 
 			*
 		FROM GROUPS
-		where
+		<!-- where -->
 		<!-- 키워드가 입력되었다면 검색조건 발동 -->
-
+		WHERE
 		<if test="keyword != null">
         	<include refid="criteria"></include> 
         </if>
-    	group_no >  (#{currPage} -1) * #{amount}
+    	<!-- group_no >  (#{currPage} -1) * #{amount} -->
+    	group_no > 0
     	
 		OFFSET (#{currPage} -1 ) * #{amount} ROWS
 		FETCH NEXT #{amount} ROWS ONLY
@@ -62,10 +63,11 @@
 	<select id="getTotalCount" resultType="int">
 		SELECT /*+ index(groups) */ count(group_no)
 		FROM groups
+		WHERE
 		<if test="keyword != null">
             <include refid="criteria"></include>
         </if>    
-		
+		group_no > 0
 	</select>
 
 	<!-- Best글 -->
