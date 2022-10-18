@@ -216,8 +216,10 @@ public class GroupController {
 	@PostMapping("/participate")
 	public String participate(RedirectAttributes rttr, 
 	        @RequestParam("group_no") Integer group_no, 
+	        @RequestParam("referURI") String referURI,
 	        HttpSession session) throws ControllerException { 
 		log.trace("participate() invoked.");
+		log.info("\t+ referURI : {}", referURI);
 		
 		try {        
 		    
@@ -229,18 +231,37 @@ public class GroupController {
             int user_no = vo.getUser_no();
             log.info("\t+ user_no : {}", user_no);
             //------------------------------------------------
-            GroupDTO gdto = new GroupDTO();
-
-            gdto.setUser_no(user_no);	    
+            
+            int result = this.service.validJoinGroup(group_no, user_no);
+            log.info("\t+ 모임 result : {}", result);
+            
+            String resultString = "모임에 참여할 수 없습니다.";
+            
+            // 유효성 검사
+            // case 1 : 인원수 제한으로 인한 참여불가
+            // case 2 : 이미 참여 된 방으로 참여불가
+            switch(result) {
+            
+            	case 1 : 
+            		rttr.addFlashAttribute("resultJoin", resultString+"(풀방)");
+            		return "redirect:/group/detail?" + referURI;
+            		
+            
+            	case 2 : 
+            		rttr.addFlashAttribute("resultJoin", resultString+"(이미 참여가 된 방)");
+            		return "redirect:/group/detail?" + referURI;
+            		
+            	default :
+            		GroupDTO gdto = new GroupDTO(); 
+		            gdto.setUser_no(user_no);	        
+				    service.participate(group_no, user_no);
 		    
-		    service.participate(group_no, user_no);
-    
-            return "redirect:/mypage/my_group";
+		            return "redirect:/mypage/my_group";
+            } // switch
 
 		} catch(Exception e) {
 		    throw new ControllerException(e);
 		}
-		
 		
 	} // participate
 	

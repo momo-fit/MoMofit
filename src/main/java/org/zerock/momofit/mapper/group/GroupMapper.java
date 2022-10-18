@@ -48,5 +48,9 @@ public interface GroupMapper {
 	
 	// 8. 그룹 삭제 시, 그룹멤버 삭제(그룹 자체를 삭제)
 	public abstract int deleteGroupMember(@Param("group_no") int group_no) throws DAOException;
+	
+	// 9. 유효성 검사 : 그룹에 참여하고 있는 지 확인
+	public abstract Integer isParticipateGroup(@Param("group_no") int group_no, @Param("user_no") int user_no) throws DAOException;
+	
 
 }
