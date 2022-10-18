@@ -137,16 +137,35 @@
 
 	<!-- 게시글 조회(R) -->
 	<select id="read" resultType="org.zerock.momofit.domain.group.GroupDTO">
-		SELECT * 
-		FROM Groups 
-		WHERE group_no = #{group_no}
+		SELECT 			
+			g.group_no, 
+			g.user_no,
+			g.group_name, 
+			g.sports, 
+			g.gender,
+			g.group_loc, 
+			g.member_max, 
+			g.schedule, 
+			g.group_date, 
+			g.info, 
+			g.hashtag1, hashtag2, hashtag3,
+			g.group_like,
+			g.group_img, temp, path,
+			g.member_count,
+			u.nickname, u.profile_name, u.profile_temp, u.profile_path, 
+			u.user_loc, u.profile_info, u.sports1, u.sports2, u.sports3
+			
+			FROM Groups g LEFT OUTER JOIN Users u
+			on g.user_no = u.user_no
+			WHERE group_no = #{group_no}
 	</select>
+	
 	
 	<!-- 댓글등록 -->
   	<insert id="enrollReply">
   	
   		INSERT
-  		INTO GROUP_COMM(group_comm_no, group_no, text, parent_no, user_no) 
+  		INTO GROUP_COMM(group_comm_no, group_no, text, parent_no, user_no ) 
   		values(groups_comm_seq.nextval, #{group_no}, #{text}, #{parent_no}, #{user_no})
   	
   	</insert>
@@ -182,5 +201,11 @@
 		FROM Group_member
 		WHERE group_no = #{group_no}
 	</delete>
+
+	<update id="updateGroupMember">
+		UPDATE groups
+		SET member_count = member_count + #{amount}
+		WHERE group_no = #{group_no}
+	</update>
 
 </mapper>

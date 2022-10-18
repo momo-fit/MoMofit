@@ -1,12 +1,11 @@
 package org.zerock.momofit.controller.group;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -19,10 +18,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.momofit.common.SharedScopeKeys;
 import org.zerock.momofit.domain.group.Criteria;
 import org.zerock.momofit.domain.group.GroupDTO;
 import org.zerock.momofit.domain.group.GroupVO;
 import org.zerock.momofit.domain.group.PageDTO;
+import org.zerock.momofit.domain.signIn.LoginVO;
 import org.zerock.momofit.exception.ControllerException;
 import org.zerock.momofit.service.group.GroupService;
 
@@ -36,8 +37,7 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/group/")
 public class GroupController {
 	
-	private GroupService service;
-	
+	private GroupService service;      // 생성자 주입
 	
 //	// 1. 전체목록 조회하기
 //	
@@ -83,11 +83,22 @@ public class GroupController {
 	
 	// 2-2. 모임 등록
 	@PostMapping("/register")
-	public String register(GroupDTO dto, RedirectAttributes rttr, Criteria cri, 
+	public String register(GroupDTO dto, RedirectAttributes rttr, Criteria cri, HttpSession session,
 							String sightingDateString ) throws ControllerException {
 		
 		try {
-				
+		    
+		    // Session으로부터 유저 정보 획득하여 저장
+            // ------------------------------------------------
+            // 세션객체로부터, 회원정보 얻기
+            LoginVO vo = (LoginVO) session.getAttribute(SharedScopeKeys.USER_KEY);
+            
+            int user_no = vo.getUser_no();
+            log.info("\t+ user_no : {}", user_no);
+            //------------------------------------------------
+            GroupDTO gdto = new GroupDTO();
+            gdto.setUser_no(user_no);
+            
 			boolean isRegister = service.register(dto);
 						
 			rttr.addFlashAttribute("result", (isRegister)? "SUCCESS("+ dto.getGroup_no()+")" : "FAILURE");
@@ -125,16 +136,15 @@ public class GroupController {
 			// @RequestParam : 매개변수와 전송파라미터의 이름과 달라도 얻고싶을 때 사용
 			// @ModelAttribute : 정말 model에 담겼는지 불확실하다면 사용
 			
-			@RequestParam("group_no") Integer group_no, @ModelAttribute("cri") Criteria cri, Model model
-			) throws ControllerException {
+			@RequestParam("group_no") Integer group_no, @ModelAttribute("cri") Criteria cri, Model model) 
+			        throws ControllerException {
 		
 			log.trace("detail({}, {}) invoked.", group_no, cri);
 			
 			try {	
-				GroupDTO dto = new GroupDTO();
-				
+	            
 				model.addAttribute("group", service.detail(group_no));
-				
+
 			} catch(Exception e) {
 				throw new ControllerException(e);
 			}
@@ -202,23 +212,38 @@ public class GroupController {
 	} // remove
 
 	
-	// 6-1. 모임참가자 목록 (입력 화면)
-	@GetMapping("/memberList")
-	public String memberList() {
-		log.trace("memberList() invoked.");
+	// 6. 모임참가
+	@PostMapping("/participate")
+	public String participate(RedirectAttributes rttr, 
+	        @RequestParam("group_no") Integer group_no, 
+	        HttpSession session) throws ControllerException { 
+		log.trace("participate() invoked.");
 		
-		return "/group/memberList";
-	} // delegate
-	
-	// 6-2. 모임장 위임
-	@PostMapping("/delegate")
-	public String delegate() {
-		log.trace("delegate() invoked.");
-		
-		return "redirect:/group/detail";
-	} // delegate
-	
+		try {        
+		    
+	        // Session으로부터 유저 정보 획득하여 저장
+            // ------------------------------------------------
+            // 세션객체로부터, 회원정보 얻기
+            LoginVO vo = (LoginVO) session.getAttribute(SharedScopeKeys.USER_KEY);
+            
+            int user_no = vo.getUser_no();
+            log.info("\t+ user_no : {}", user_no);
+            //------------------------------------------------
+            GroupDTO gdto = new GroupDTO();
 
+            gdto.setUser_no(user_no);	    
+		    
+		    service.participate(group_no, user_no);
+    
+            return "redirect:/mypage/my_group";
+
+		} catch(Exception e) {
+		    throw new ControllerException(e);
+		}
+		
+		
+	} // participate
+	
 	
 
 } // class
