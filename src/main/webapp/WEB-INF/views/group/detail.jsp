@@ -55,6 +55,13 @@
     <link rel="stylesheet" href="/resources/main/css/main_section_card.css">
     <link rel="stylesheet" href="/resources/main/css/main_section_board.css">
     
+    <script>
+        let resultJoin = '${resultJoin}';
+        if(resultJoin != null && resultJoin.length > 0){
+            alert(resultJoin);
+        };
+    </script>
+
 </head>
 
 <body>
@@ -237,6 +244,7 @@
                                     <input type="hidden" name="group_no" value="${group.group_no}">
                                     <input type="hidden" name="member_count" value="${group.member_count}">
                                     <input type="hidden" name="user_no" value="${sessionScope.__USER__.user_no}">
+                                    <input type="hidden" name="referURI" value="${pageContext.request.queryString}">
 
                                     <button type="submit" class="joinBtn" >참가하기</button>
 

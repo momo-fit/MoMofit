@@ -82,7 +82,7 @@ public class GroupMapperTests {
 	
 	// ** 검색 test **
 	
-//	@Disabled
+	@Disabled
 	@Test
 	@Order(1)
 	public void testSearch() throws DAOException  {
@@ -135,6 +135,7 @@ public class GroupMapperTests {
 	}
 	
 	/*이미지 정보 반환*/
+	@Disabled
 	@Test
 	public void getAttachListTests() {
 		log.trace("getAttachListTests() invoked.");
@@ -178,6 +179,19 @@ public class GroupMapperTests {
 		log.info("UPDATE COUNT: " + count);
 
 	}
+	
+//	@Disabled
+	@Test
+	public void testIsParticipate() throws Exception {
+		
+		int user_no = 1;
+		int group_no = 10;
+		
+		Integer result = this.mapper.isParticipateGroup(group_no, user_no);
+		log.info("result : {}", result);
+		
+		
+	} // testIs
 	
 		
 }
