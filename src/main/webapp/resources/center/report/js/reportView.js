@@ -149,7 +149,7 @@ $(()=> {
                 <span class="edit_delete_comm">
                     <button type="button" class="cursor_pointer font-12-400 comment_modify_btn"> 수정 </button>
                     <div class="space1"></div>
-                    <a href=""><span class="remove1 font-12-400"> 삭제 </span></a>
+                    <button type="button" class="remove1 font-12-400"> 삭제 </span>
                 </span>
                 
             </div>`
@@ -178,13 +178,13 @@ $(()=> {
             method: 'post',
             url: '/report/comm/comm-register',
             dataType: 'json',
+            async: false,
             data:{
                 'report_no':commReportNo,
                 'text':commText, 
                 'adminId':commId, 
             },
             success:(()=> {
-                alert("성공");
                 location.href ='/center/report/view/?report_no='+report_no;
             })
 
@@ -244,6 +244,7 @@ $(()=> {
                     url: '/report/comm/comm-modify',
                     contentType:'application/json; charset=utf-8',
                     data:JSON.stringify(modifyParam),
+                    async: false,
                     success:(()=> {
                         alert("성공");
                         location.href ='/center/report/view/?report_no='+report_no;
@@ -251,9 +252,33 @@ $(()=> {
                 })
             }
 
+ 
+
 
         }
     })
+
+    $('.remove1').on( "click", function () {
+        let report_comm_noTag = $(this).parent().parent().children(".report_comm_no");
+        let report_comm_no = report_comm_noTag.val();
+
+        if(confirm("댓글을 삭제 하시겠습니까?")){
+            $.ajax({
+                method:'delete',
+                url: '/report/comm/comm-remove',
+                contentType:'application/json; charset=utf-8',
+                data:JSON.stringify(report_comm_no),
+                async: false,
+                success: (() => {
+                    alert("삭제되었습니다");
+                    location.href ='/center/report/view/?report_no='+report_no;
+                })
+            }) // ajax
+
+        } // if
+        
+    }) // remove1:click
+
 })
 
 

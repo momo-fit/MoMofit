@@ -18,4 +18,7 @@ public interface reportCommService {
 	// modify comment 
 	public boolean modifyComm(reportCommDTO dto) throws ServiceException;
 	
+	// remove comment 
+	public boolean removeComm(int report_comm_no) throws ServiceException;
+	
 } // end interface

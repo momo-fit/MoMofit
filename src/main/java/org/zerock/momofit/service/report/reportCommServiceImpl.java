@@ -3,7 +3,6 @@ package org.zerock.momofit.service.report;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.zerock.momofit.domain.report.comment.reportCommDTO;
 import org.zerock.momofit.domain.report.comment.reportCommVO;
@@ -40,7 +39,17 @@ public class reportCommServiceImpl implements reportCommService {
 		log.trace("registerComm() invoked.");
 		
 		try {
-			return this.mapper.insertComm(dto);
+			boolean insertRes = this.mapper.insertComm(dto);
+			
+			if(insertRes) {
+				int report_no = dto.getReport_no();
+				int res_num = 1;
+				
+				return this.mapper.updateStatus(res_num, report_no);
+			} else {
+				return insertRes;
+			} // else-if
+			
 		} catch (Exception e) {
 			throw new ServiceException(e);
 		} // try-catch
@@ -59,5 +68,16 @@ public class reportCommServiceImpl implements reportCommService {
 		
 	} // modifyComm
 
+	@Override
+	public boolean removeComm(int report_comm_no) throws ServiceException {
+		log.trace("modifyComm() invoked.");
+		
+		try {
+			return this.mapper.deleteComm(report_comm_no);
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
+		
+	} // removeComm
 
 } // end class

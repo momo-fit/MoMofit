@@ -26,6 +26,13 @@
         )
     </insert>
 
+    <update id="updateStatus">
+        UPDATE REPORT
+        SET 
+            REPORT_RESULT = #{res_num}
+        WHERE REPORT_NO = #{report_no}
+    </update>
+
     <update id="updateComm">
         UPDATE REPORT_COMM
         SET 
@@ -33,5 +40,10 @@
             EDIT = CURRENT_DATE
         WHERE REPORT_COMM_NO = #{report_comm_no}
     </update>
+
+    <delete id="deleteComm">
+        DELETE FROM REPORT_COMM 
+        WHERE REPORT_COMM_NO = #{report_comm_no}
+    </delete>
 
 </mapper>

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -33,10 +34,12 @@ public class RestReportCommController {
 	private reportCommService service;
 	
 	@GetMapping("/comm-list")
-	public List<reportCommVO> getComm(int report_no) throws ControllerException {
+	public ResponseEntity<List<reportCommVO>> getComm(int report_no) throws ControllerException {
 		
 		try {
-			return this.service.getCommList(report_no);
+			List<reportCommVO> vo = this.service.getCommList(report_no);
+			
+			return new ResponseEntity<>(vo, HttpStatus.OK);
 		}catch (Exception e) {
 			throw new ControllerException(e);
 		} // try-catch
@@ -47,7 +50,7 @@ public class RestReportCommController {
 	public boolean registerComm(reportCommDTO dto) throws ControllerException {
 		
 		try {
-			return this.service.registerComm(dto);
+			 return this.service.registerComm(dto);
 		}catch (Exception e) {
 			throw new ControllerException(e);
 		} // try-catch
@@ -70,7 +73,26 @@ public class RestReportCommController {
 		}catch (Exception e) {
 			throw new ControllerException(e);
 		} // try-catch
-	}
+	} // modifyComm
+	
+	@DeleteMapping(value =  "/comm-remove")
+	public ResponseEntity<String> removeComm(@RequestBody int report_comm_no) throws ControllerException {
+		log.info("report_comm_no : {}", report_comm_no);
+		
+		try {
+			boolean removeStatus = this.service.removeComm(report_comm_no);
+			
+			if(removeStatus) {
+				return new ResponseEntity<>("success", HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>("fail", HttpStatus.INTERNAL_SERVER_ERROR);		
+			} // if-else
+			
+		}catch (Exception e) {
+			throw new ControllerException(e);
+		} // try-catch
+		
+	} // removeComm
 	
 	
 	
