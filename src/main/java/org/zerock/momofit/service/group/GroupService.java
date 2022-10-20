@@ -40,5 +40,9 @@ public interface GroupService {
 	// 7. 모임 참가
 	public abstract boolean participate(Integer group_no, Integer user_no) throws ServiceException;
 	
+	// 8. 인원수 제한 체크
+	public abstract int validJoinGroup(Integer group_no, Integer user_no) throws ServiceException;
+
+	
 	
 }

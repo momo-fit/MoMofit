@@ -161,5 +161,33 @@ public class GroupServiceImpl implements GroupService  {
         }
           
     }
+
+	// 8. 유효성 검사 (모임 참가를 위한 유효성 검사)
+	// 0 : OK (참여) / 1 : 인원수 제한 / 2: 이미 참가한 방
+	@Override
+	public int validJoinGroup(Integer group_no, Integer user_no) throws ServiceException {
+		log.trace("validJoinGroup({}, {}) invoked.", group_no, user_no);
+		
+		try {
+			GroupDTO dto = this.mapper.read(group_no);
+			
+			Integer memberMax = dto.getMember_max();
+			Integer memberCnt = dto.getMember_count();
+			
+			// 1. 인원수 제한이 있는지 체크
+			if(memberMax - memberCnt <= 0) return 1;
+			
+			// 2. 이미 참가하고 있는 방인지 체크
+			if(this.mapper.isParticipateGroup(group_no, user_no) != null) return 2;
+			
+			// 1,2이 모두 만족하였을 때, 참여해도 됨!
+			return 0;
+		} catch (Exception e) {
+			throw new ServiceException(e);
+		} // try-catch
+
+	} // validJoinGroup
+
+
 	
 } // end class
