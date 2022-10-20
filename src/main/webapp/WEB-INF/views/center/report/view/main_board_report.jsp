@@ -132,7 +132,6 @@
                                     <button type="button" class="btn btn-primary btn_color_blue float_right">작성</button>
                                 </div>
                             </div>                             
-
                                 
                             <br>
                         </div>

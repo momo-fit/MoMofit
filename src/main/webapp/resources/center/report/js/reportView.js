@@ -8,6 +8,10 @@ $(()=> {
     let imgTemp;
     let report_img_name;
 
+    if(!loginNickname.includes('admin')){
+        $('#comment_write').hide();
+    }
+
     $.ajax({
         method : 'get',
         url : '/center/report//report-view',
@@ -88,11 +92,9 @@ $(()=> {
             imgLode(report_no);
         }
 
-        if(loginNickname != nickname){
+        if(loginNickname != nickname && !loginUserId.includes('admin')){
             $('.edit_delete').hide();
         }
-
-        
 
         repotContent.append(content);
 
@@ -136,11 +138,12 @@ $(()=> {
         let str = '';
 
         $.each(data, ((i) => {
-
+            
             str+=
             `<div class="comment font-14-400">
                 <span class="font-16-500">운영자</span>
                 <input type="text" class="comment_input_text" name="" id="" value="${data[i].text}" disabled>
+                <input type="text" class="report_comm_no" style="display: none;" value="${data[i].report_comm_no}"></input>
                 <span>${data[i].report_comm_date}</span>
                 <span></span>
                 <span class="edit_delete_comm">
@@ -148,6 +151,7 @@ $(()=> {
                     <div class="space1"></div>
                     <a href=""><span class="remove1 font-12-400"> 삭제 </span></a>
                 </span>
+                
             </div>`
             
 
@@ -169,25 +173,33 @@ $(()=> {
         let commId = loginUserId;
         let commReportNo = report_no;
         
-        console.log(commText);
+
+        $.ajax({
+            method: 'post',
+            url: '/report/comm/comm-register',
+            dataType: 'json',
+            data:{
+                'report_no':commReportNo,
+                'text':commText, 
+                'adminId':commId, 
+            },
+            success:(()=> {
+                alert("성공");
+                location.href ='/center/report/view/?report_no='+report_no;
+            })
 
 
-
+        })
 
     })
-
 
     $(".comment_modify_btn").on({
         "click": function () {
 
-            // 부모창 선택
-            let selectForm = $(this).parent().parent();
-            console.log(selectForm);
-
             // input:text창 선택
             let selectText = $(this).parent().parent().children("input");
-            console.log(selectText);
-
+            let report_comm_no = $(this).parent().parent().children(".report_comm_no");
+            
             console.log(selectText.is(":disabled"));
 
             // 만약 text창이, 비활성화되어 있을 때, 수정
@@ -199,6 +211,13 @@ $(()=> {
                     bowShadow: "0px 0px 5px 1px rgb(20 167 255)"
                 });
 
+                $('.comment_input_text').keydown((key) => {
+                    
+                    if(key.keyCode == 13){
+                        modifyAjax();
+                    }
+                })
+
             } else {
                 $(".comment_content").attr("disabled", true)
 
@@ -206,10 +225,33 @@ $(()=> {
                     border: "none",
                     bowShadow: "none"
                 });
-                
-                
-                selectForm.submit();
+  
+                modifyAjax();                
             }
+
+            function modifyAjax() {
+                // 댓글, 댓글번호 가져오기
+                let textVal = selectText.val()
+                let report_comm_noVal = report_comm_no.val()
+
+                modifyParam = {
+                    'text':textVal, 
+                    'report_comm_no':report_comm_noVal
+                }
+
+                $.ajax({
+                    method: 'put',
+                    url: '/report/comm/comm-modify',
+                    contentType:'application/json; charset=utf-8',
+                    data:JSON.stringify(modifyParam),
+                    success:(()=> {
+                        alert("성공");
+                        location.href ='/center/report/view/?report_no='+report_no;
+                    })
+                })
+            }
+
+
         }
     })
 })

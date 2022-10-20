@@ -8,7 +8,8 @@
         SELECT /*+ index_desc(REPORT_COMM) */
             REPORT_NO,
             TEXT,
-            REPORT_COMM_DATE
+            REPORT_COMM_DATE,
+            REPORT_COMM_NO
         FROM REPORT_COMM
         WHERE REPORT_NO = #{report_no}
     </select>
@@ -19,10 +20,18 @@
         VALUES(
             REPORT_COMM_SEQ.nextval,
             #{report_no},
-            #{text}',
+            #{text},
             CURRENT_DATE,
             #{adminId}
         )
     </insert>
+
+    <update id="updateComm">
+        UPDATE REPORT_COMM
+        SET 
+            TEXT = #{text},
+            EDIT = CURRENT_DATE
+        WHERE REPORT_COMM_NO = #{report_comm_no}
+    </update>
 
 </mapper>

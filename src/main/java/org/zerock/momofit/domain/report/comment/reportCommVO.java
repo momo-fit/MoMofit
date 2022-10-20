@@ -14,6 +14,8 @@ public class reportCommVO {
 
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date report_comm_date;
+	
+	private Integer report_comm_no;
 
 
 }
