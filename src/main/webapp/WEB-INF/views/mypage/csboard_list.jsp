@@ -244,7 +244,7 @@
                                     }
 
                         str +=         `<td class="mypage-table-title-qna mc-title">
-                                        <div class="mypage-title-content"><a href="#" class="mypage-link">\${title}</a></div>
+                                        <div class="mypage-title-content"><a href="../center/qna/view?qna_no=\${qna_no}" class="mypage-link">\${title}</a></div>
                                     </td>
                                     <td>\${format_qna_date}</td>
                                 </tr>`
@@ -456,7 +456,7 @@
                                     }
 
                         str +=         `<td class="mypage-table-title-qna mc-title">
-                                        <div class="mypage-title-content"><a href="#" class="mypage-link">\${title}</a></div>
+                                        <div class="mypage-title-content"><a href="../center/report/view/?report_no=\${report_no}" class="mypage-link">\${title}</a></div>
                                     </td>
                                     <td>\${format_report_date}</td>
                                 </tr>`
