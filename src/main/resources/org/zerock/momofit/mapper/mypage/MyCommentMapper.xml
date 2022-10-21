@@ -17,6 +17,7 @@
 		    t1.edit,
 		    t1.parent_no,
 		    t1.user_no,
+		    t2.category_no,
 		    t2.title,
 		    t3.category_name
 		FROM 
