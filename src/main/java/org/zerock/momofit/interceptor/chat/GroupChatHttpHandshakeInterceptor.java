@@ -33,12 +33,6 @@ public class GroupChatHttpHandshakeInterceptor implements HandshakeInterceptor {
 			// Server로 전송오는 Request속에서 HttpServletReqeust을 받고, 그 속에서 다시 HttpSession객체를 얻는다.  
 			HttpSession session = servletRequest.getServletRequest().getSession();
 			log.info("\t+ session : {}", session);
-			
-			// Login시, Session Scope에 저장한 UserDTO 객체를 얻는다. 
-			// --> 임의로 Session에 집어넣었기 때문에, 실제로 코드 변경 필요 : UserVO를 획득해야함....
-			UserDTO dto = (UserDTO) session.getAttribute("userDTO");
-			
-			log.info("UserDTO : {}", dto);
 
 			// WebSocketSession에 앞서 저장한 HttpSession 객체를 저장
 			attributes.put("session", session);
