@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.zerock.momofit.domain.report.comment.reportCommDTO;
 import org.zerock.momofit.domain.report.comment.reportCommVO;
 import org.zerock.momofit.exception.ServiceException;
@@ -34,6 +35,7 @@ public class reportCommServiceImpl implements reportCommService {
 	
 	} // getCommList
 
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public boolean registerComm(reportCommDTO dto) throws ServiceException {
 		log.trace("registerComm() invoked.");
