@@ -9,7 +9,7 @@
   <settings>
 	
     <!-- Null 입력 가능 -->
-      <setting name="jdbcTypeForNull" value="NULL" /> 
+    <setting name="jdbcTypeForNull" value="NULL" /> 
 
   </settings> 
   

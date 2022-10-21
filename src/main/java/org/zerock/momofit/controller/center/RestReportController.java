@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -47,12 +48,16 @@ public class RestReportController {
 	private reportService service;
 	
 	@GetMapping("/report-list")
-	public ResponseEntity<Map<String, Object>> getReportList( int page) throws ControllerException {
+	public ResponseEntity<Map<String, Object>> getReportList(@Param("page")int page, @Param("keyword")String keyword) throws ControllerException {
 		log.info("getReportList({})", page);
 		
 		Criteria cri = new Criteria();
 		
 		try {
+			
+			if(keyword != "" && keyword != null) {
+				cri.setKeyword(keyword);
+			}
 			
 			cri.setCurrPage(page);
 			

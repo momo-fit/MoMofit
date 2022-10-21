@@ -13,7 +13,7 @@ $(function(){
 $(function(){
     jQuery('#select_board').change(function() {
         var state = jQuery('#select_board option:selected').val();
-        if ( state == '중고거래' ) {
+        if ( state == '4' ) {
             jQuery('#select_transaction').show();
         } else {
             jQuery('#select_transaction').hide();

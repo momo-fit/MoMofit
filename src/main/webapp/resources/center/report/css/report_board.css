@@ -73,19 +73,35 @@ section {
 }
 
 /* 처리상태 */
-.inquery_status{
+.inquery_status0{
     display: inline-block;
     margin-left: 20px;
 
     line-height: 17px;
 
     text-align: center;
-    background-color: beige;
+    background: gray;
     color: aliceblue;
     border-radius: 10px;
     height: 20px;
     width: 55px;
 }
+.inquery_status1{
+    display: inline-block;
+    margin-left: 20px;
+
+    line-height: 17px;
+
+    text-align: center;
+    background: rgb(20 167 255);
+    color: aliceblue;
+    border-radius: 10px;
+    height: 20px;
+    width: 55px;
+}
+
+
+
 
 /* ============================= */
 .hr-1 {
