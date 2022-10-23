@@ -198,6 +198,7 @@
                         var user_no = listVO[i].user_no;    // 댓글 쓴 이 (나)
 
                         var title = listVO[i].title;        // 댓글이 달린 글 제목
+                        var category_no = listVO[i].category_no;
                         var category_name = listVO[i].category_name;    // 게시판 카테고리
 
                         var format_comment_date = mypageUtilService.timeFormat(comm_date);
@@ -208,9 +209,10 @@
                             <td class="mypage-checkbox mc-checkbox"><input type="checkbox" name="comment-check" class="comment-check" value="\${comm_no}"></td>
                             <td class="mc-selected">\${category_name}</td>
                             <td class="mypage-table-title mc-title">
-                                <div class="mp-b-comm-wrap">
-                                    <div class="mypage-title-content mp-title-content mc-title-content">게시글 제목 : \${title}</div>
-                                    <div class="mp-comm"><i class="fa-solid fa-arrow-right"></i>&nbsp;\${text}</div>
+                                <div class="mp-b-comm-wrap">`
+                        str +=     selectBoardLink(category_no, board_no, title);
+
+                        str +=     `<div class="mp-comm"><i class="fa-solid fa-arrow-right"></i>&nbsp;\${text}</div>
                                 </div>
                             </td>
                             <td class="mc-date">\${format_comment_date}</td>
@@ -421,6 +423,20 @@
                 showCommentList(param, filter);
 
             })
+
+            function selectBoardLink(param_categoryNo, param_boardNo, param_title){
+                switch(param_categoryNo){
+                    // 자유게시판
+                    case 1 : return `<a href="../board/free/view?board_no=\${param_boardNo}" class="mypage-title-content mp-title-content mc-title-content">게시글 제목 : \${param_title}</a>`;
+                    // 운동Tip
+                    case 2 : return `<a href="../board/tip/view?board_no=\${param_boardNo}"  class="mypage-title-content mp-title-content mc-title-content">게시글 제목 : \${param_title}</a>`;
+                    // 운동인증
+                    case 3 : return `<a href="../board/pic/view?board_no=\${param_boardNo}"  class="mypage-title-content mp-title-content mc-title-content">게시글 제목 : \${param_title}</a>`;
+                    // 중고거래
+                    case 4 : return `<a href="../board/trade/view?board_no=\${param_boardNo}"  class="mypage-title-content mp-title-content mc-title-content">게시글 제목 : \${param_title}</a>`;
+                }
+
+            } // selectBoardLink
 
 
         }) // entry-Point

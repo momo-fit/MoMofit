@@ -252,7 +252,7 @@ public class GroupController {
             		return "redirect:/group/detail?" + referURI;
             		
             	default :
-            		GroupDTO gdto = new GroupDTO(); 
+            		GroupDTO gdto = new GroupDTO();
 		            gdto.setUser_no(user_no);	        
 				    service.participate(group_no, user_no);
 		    
