@@ -9,7 +9,6 @@
         resultType="org.zerock.momofit.domain.mypage.MyCommentVO">
 
 		SELECT 
-		/*+ LEADING(t1) USE_NL(t3 t2) index_desc(t1 pk_comm) */
 		    t1.comm_no,
 		    t1.board_no,
 		    t1.text,
@@ -41,6 +40,8 @@
 		<if test="cri.keyword != '' and cri.type == 0">
             AND REGEXP_LIKE(t1.text, #{cri.keyword}, 'i')
         </if>
+        
+        ORDER BY t1.comm_no DESC
 
         OFFSET (#{cri.currPage}-1) * #{cri.amount} ROWS
         FETCH NEXT #{cri.amount} ROWS ONLY
