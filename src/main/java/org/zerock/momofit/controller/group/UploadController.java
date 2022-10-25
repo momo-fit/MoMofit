@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+import org.zerock.momofit.common.SharedScopeKeys;
 import org.zerock.momofit.domain.group.GroupDTO;
 import org.zerock.momofit.mapper.group.GroupMapper;
 
@@ -70,8 +71,6 @@ public class UploadController {
 
 		}
 
-		String uploadFolder = "c://project/uploadFile/";
-
 		// 날짜 폴더 경로
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
@@ -82,7 +81,7 @@ public class UploadController {
 //		String datePath = str.replace("-", File.separator);
 
 		/* 폴더 생성 -> 폴더가 없을 때만 생성하도록 if문 사용 */
-		File uploadPath = new File(uploadFolder, str);
+		File uploadPath = new File(SharedScopeKeys.UPLOAD_PATH, str);
 
 		if(uploadPath.exists() == false) {
 			uploadPath.mkdirs();
@@ -147,7 +146,7 @@ public class UploadController {
 		try {
 
 			/* 썸네일 파일 삭제 */
-			file = new File("c://project/uploadFile/" + URLDecoder.decode(fileName, "UTF-8"));
+			file = new File(SharedScopeKeys.UPLOAD_PATH + URLDecoder.decode(fileName, "UTF-8"));
 
 			file.delete();
 

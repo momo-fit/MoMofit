@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.zerock.momofit.common.SharedScopeKeys;
 
 
 @Controller
@@ -17,7 +18,7 @@ public class FileController {
 
 	@GetMapping("/display")
 	public ResponseEntity<byte[]> getImage(String fileName){
-		File file = new File("c://project/uploadFile/" + fileName);
+		File file = new File(SharedScopeKeys.UPLOAD_PATH + fileName);
 
 		ResponseEntity<byte[]> result = null;
 

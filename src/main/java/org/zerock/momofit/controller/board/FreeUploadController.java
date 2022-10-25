@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+import org.zerock.momofit.common.SharedScopeKeys;
 import org.zerock.momofit.domain.freeboard.AttachImageVO;
 
 import lombok.extern.log4j.Log4j2;
@@ -59,14 +60,12 @@ public class FreeUploadController {
 			
 		} // for
 		
-		String uploadFolder = "C:\\project/uploadFile";
-		
 		// 해당 날짜로 폴더 구조 만들기		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		Date date = new Date();
 		String datePath = sdf.format(date);		
 		
-		File uploadPath = new File(uploadFolder, datePath);
+		File uploadPath = new File(SharedScopeKeys.UPLOAD_PATH, datePath);
 		
 		if(uploadPath.exists() == false) {
 			uploadPath.mkdirs();
@@ -124,7 +123,7 @@ public class FreeUploadController {
 		
 		try {
 			/* 썸네일 파일 삭제 */
-			file = new File("c:\\upload\\" + URLDecoder.decode(fileName, "UTF-8"));			
+			file = new File(SharedScopeKeys.UPLOAD_PATH + URLDecoder.decode(fileName, "UTF-8"));			
 			file.delete();
 			
 			/* 원본 파일 삭제 */
