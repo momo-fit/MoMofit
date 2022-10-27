@@ -38,7 +38,7 @@
 	<beans:bean id="LoginInterceptor" class="org.zerock.momofit.interceptor.login.LoginInterceptor"/>
 	<beans:bean id="LogoutInterceptor" class="org.zerock.momofit.interceptor.login.LogoutInterceptor"/>
 	<beans:bean id="AuthInterceptor" class="org.zerock.momofit.interceptor.login.AuthInterceptor"/>
-	
+
 	<interceptors>
 		<interceptor>
 			<mapping path="/signin" />
@@ -51,32 +51,37 @@
 		</interceptor>
 
 		<interceptor>
-			<mapping path="/mypage/*" />
+			<mapping path="/mypage/**" />
 			<beans:ref bean="AuthInterceptor" />
 		</interceptor>
 		
 		<interceptor>
-			<mapping path="/center/report/*" />
+			<mapping path="/center/**" />
 			<beans:ref bean="AuthInterceptor" />
 		</interceptor>
 		
 		<interceptor>
-			<mapping path="/group/detail/*" />
+			<mapping path="/group/detail/**" />
 			<beans:ref bean="AuthInterceptor" />
 		</interceptor>
 
 		<interceptor>
-			<mapping path="/board/pic/*" />
+			<mapping path="/board/pic/**" />
 			<beans:ref bean="AuthInterceptor" />
 		</interceptor>
 
 		<interceptor>
-			<mapping path="/group/register/*" />
+			<mapping path="/group/register/**" />
 			<beans:ref bean="AuthInterceptor" />
 		</interceptor>
 
 		<interceptor>
-			<mapping path="group/modify/*" />
+			<mapping path="group/modify/**" />
+			<beans:ref bean="AuthInterceptor" />
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/board/*/register/**" />
 			<beans:ref bean="AuthInterceptor" />
 		</interceptor>
 
@@ -84,6 +89,7 @@
 
 	<!-- 화면을 표시하는 용도 -->
 	<view-controller path="/signout" view-name="/main/main" status-code="200"/>
+	<view-controller path="/board/trade/writing" view-name="/board/trade/writing" status-code="200" />
 		
 	<context:component-scan base-package="org.zerock.momofit.listener" />
 	<context:component-scan base-package="org.zerock.momofit.controller" />

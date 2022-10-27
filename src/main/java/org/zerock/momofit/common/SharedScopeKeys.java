@@ -9,6 +9,7 @@ public final class SharedScopeKeys {
 	public static final String REFERER_URL = "__REFERER__";
 	
 	// 파일경로
+	public static final String UPLOAD_PATH_KEY = "__UPLOAD_PATH__";
 	public static final String UPLOAD_PATH = "C://project/uploadFile/";
 	
 	// 파일경로, 원본파일명, 임시파일명

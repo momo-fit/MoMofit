@@ -186,6 +186,7 @@ textarea:focus{
     width: 150px;
 }
 
+
 /* 목록으로 버튼 */
 .list_btn {
     /* 글자 */
@@ -198,12 +199,11 @@ textarea:focus{
     border-radius: 5px;
     line-height: 48px;
     /* 위치 */
-    margin-top: 30px;  
+    margin-top: 30px;
     margin-right: 20px;
     /* margin-bottom:0px; */
     width: 150px;
 }
-
 
 
 /* ------------------------- */
@@ -284,4 +284,3 @@ textarea:focus{
         /* margin-bottom:0px; */
         width: 150px;
 }
-

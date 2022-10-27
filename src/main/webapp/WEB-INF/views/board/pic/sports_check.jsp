@@ -87,9 +87,9 @@
                            </div>
                         </form>
                          <form action="/board/pic/list" class="search" method="get" > 
-							<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+							<input type="hidden" name="pageNum_s" value="${pageMaker.cri.pageNum }">
 							<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
-							<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
+							<input type="hidden" name="keyword_s" value="${pageMaker.cri.keyword }">
                          </form>
                         </div>
 

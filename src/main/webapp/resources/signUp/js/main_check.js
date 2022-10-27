@@ -78,8 +78,11 @@ const failIdMessage = '이미 사용중인 ID 입니다.';
 $('#idBtn').click(()=> {
     const id = $('#id').val();
     const idResult = $('#idResult');
-    
-    if(id == '') {
+    const subString = 'admin';
+
+    if(id.includes(subString)){
+        alert("사용할수 없는 아이디 입니다.");
+    } else if(id == '') {
         alert('아이디를 입력 해주세요.');
     } else {
         $.ajax ({
@@ -100,6 +103,9 @@ $('#idBtn').click(()=> {
         })// ajax
 	} // if
 
+    
+    
+    
 }) 
 
 const successNickMessage = '사용 가능한 닉네임 입니다.';
@@ -108,9 +114,11 @@ const failNickMessage = '이미 사용중인 닉네임 입니다.';
 $('#nickBtn').click(()=> {
     const nickname = $('#nick_name').val();
     const nickNameResult = $('#nickNameResult');
+    const subString = 'admin';
 
-    
-    if(nickname == '') {
+    if(nickname.includes(subString)){
+        alert("사용할수 없는 닉네임 입니다.");
+    } else if(nickname == '') {
         alert('닉네임을 입력 해주세요.');
     } else {
         $.ajax ({
@@ -130,6 +138,8 @@ $('#nickBtn').click(()=> {
             error: ((data) => alert('인증을 할수 없습니다.'))
         })// ajax
 	} // if
+    
+    
 
 }) 
 

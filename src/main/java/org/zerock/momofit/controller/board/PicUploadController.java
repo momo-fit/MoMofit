@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+import org.zerock.momofit.common.SharedScopeKeys;
 import org.zerock.momofit.domain.picboard.board_imgDTO;
 import org.zerock.momofit.exception.DAOException;
 import org.zerock.momofit.exception.ServiceException;
@@ -67,15 +68,12 @@ public class PicUploadController {
 			}
 		}
 		
-		String UPLOAD_PATH="C:\\project\\uploadFile";
-		
-		
 		SimpleDateFormat sdf= new SimpleDateFormat("yyyyMMdd"); //저장되는경로를 날짜별로 폴더생성해주기위해 SimpleDateFormat를 사용.. 초기화해준다.
 		Date date= new Date(); //오늘의 날짜데이터를 얻기위해서 Date클래스타입의 변수를 선언 및 초기화 해줍니다.
 		String datePath= sdf.format(date); //오늘의 날짜 데이터 값을 가지고 있는 date변수를 yyyy-MM-dd형식의 문자열로 변환하기위해 SimpleDateFormat의 format메소드를 호출합니다.
 		
 		/*폴더 생성******* */
-		File uploadPath = new File(UPLOAD_PATH, datePath);
+		File uploadPath = new File(SharedScopeKeys.UPLOAD_PATH, datePath);
 		
 			if(uploadPath.exists()==false) { //폴더가 이미 존재하는 상황에, 중복으로 생성되는걸 방지함 
 				uploadPath.mkdirs(); //여러개의 폴더 생성 
@@ -147,7 +145,7 @@ public class PicUploadController {
 		try {
 			
 			/* **썸네일 파일 삭제** */
-			file = new File("c://project/uploadFile/" + URLDecoder.decode(fileName, "UTF-8"));
+			file = new File(SharedScopeKeys.UPLOAD_PATH + URLDecoder.decode(fileName, "UTF-8"));
 			
 			file.delete();
 			

@@ -205,11 +205,13 @@
         
         var user_no_set = new Set();
 
-
         $(function () {
 
             showGroupInfo(group_no, 0);
-
+            //------------------------------------------------
+            // 채팅서버 연결
+            //------------------------------------------------
+            connectStomp(); 
         }) // Entry-Point
 
 
@@ -295,22 +297,17 @@
 
                     $(".group-member").append(`<span class="font-12-500">\${nickname}</span>`);
 
-                    if(group_user_no == user_no){
-                        groupMembersStr += 
+                    groupMembersStr += 
                         `<div class="group-member-row">
                             <div class="font-12-500 connecting-ninkname">\${nickname}</div>
                             <input type="hidden" class="group_user_no" value="\${group_user_no}">    
                             <div class="connecting-span"></div>
                         </div>`
-                    } else {
-                        groupMembersStr += 
-                        `<div class="group-member-row">
-                            <div class="font-12-500 connecting-ninkname">\${nickname}</div>
-                            <input type="hidden" class="group_user_no" value="\${group_user_no}">    
-                            <div class="connecting-span"></div>
-                        </div>`
-                    }
 
+
+                    if(group_user_no == user_no){
+                        validChat = true;
+                    }         
                 } // for
 
                 var groupMembersBox = $(".group-member-list");
@@ -415,16 +412,13 @@
 
 
 
-        //------------------------------------------------
-        // 채팅서버 연결
-        //------------------------------------------------
-        connectStomp();
+
 
         function connectStomp(){
         
             // endPoint : 접속URL
             var sock = new SockJS("/myGroupStomp");
-
+            console.log("Socket 연결합니다.")
             // Stomp에게 서로 연결 된 Pipe을 알려준다.
             var client = Stomp.over(sock);
             

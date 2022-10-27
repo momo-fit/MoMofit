@@ -20,7 +20,7 @@
         FROM REPORT a
 
         <if test="keyword != null">
-        	<!-- <include refid="criteria"></include>  -->
+        	WHERE title LIKE '%'||#{keyword}||'%'
         </if>
 
         OFFSET (#{currPage} -1 ) * #{amount} ROWS

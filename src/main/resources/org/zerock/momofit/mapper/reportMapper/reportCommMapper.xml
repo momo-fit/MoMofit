@@ -1,0 +1,49 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.momofit.mapper.reportMapper.reportCommMapper">
+
+    <select id="selectCommView"  resultType="org.zerock.momofit.domain.report.comment.reportCommVO">
+        SELECT /*+ index_desc(REPORT_COMM) */
+            REPORT_NO,
+            TEXT,
+            REPORT_COMM_DATE,
+            REPORT_COMM_NO
+        FROM REPORT_COMM
+        WHERE REPORT_NO = #{report_no}
+    </select>
+
+    <insert id="insertComm">
+        INSERT INTO REPORT_COMM (REPORT_COMM_NO, REPORT_NO, 
+        TEXT, REPORT_COMM_DATE, ADMIN_ID) 
+        VALUES(
+            REPORT_COMM_SEQ.nextval,
+            #{report_no},
+            #{text},
+            CURRENT_DATE,
+            #{adminId}
+        )
+    </insert>
+
+    <update id="updateStatus">
+        UPDATE REPORT
+        SET 
+            REPORT_RESULT = #{res_num}
+        WHERE REPORT_NO = #{report_no}
+    </update>
+
+    <update id="updateComm">
+        UPDATE REPORT_COMM
+        SET 
+            TEXT = #{text},
+            EDIT = CURRENT_DATE
+        WHERE REPORT_COMM_NO = #{report_comm_no}
+    </update>
+
+    <delete id="deleteComm">
+        DELETE FROM REPORT_COMM 
+        WHERE REPORT_COMM_NO = #{report_comm_no}
+    </delete>
+
+</mapper>

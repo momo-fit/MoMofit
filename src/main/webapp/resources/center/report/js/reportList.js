@@ -1,10 +1,19 @@
 $(() => {
     
-    function listSelect(page) {
+    // 기본 페이지 
+    var page = 1;
+    var keyword;
+
+    listSelect(page, keyword);
+    
+    function listSelect(page, keyword) {
         $.ajax({
             url:'/center/report/report-list',
             method:'get',
-            data: {'page':page},
+            data: {
+                'page':page,
+                'keyword' : keyword
+            },
             dataType: 'json',
             async: false,
             success : ((data)=> {
@@ -19,12 +28,11 @@ $(() => {
         })
     }
 
+    $('#searchBtn').click(()=> {
+        keyword = $('#searchVal').val();
 
-    // 기본 페이지 
-    var page = 1;
-
-    listSelect(page);
-
+        listSelect(page, keyword);
+    })
 
     function view(data, page) {
 
@@ -34,30 +42,37 @@ $(() => {
         let str = '';
 
         $.each(list , ((i)=> {
+
+                if(true){
+
+                };
+
                 str +=
                 `<tr class="contnet">
                     <td><div>${list[i].report_no}</div></td>
-                    <td><div><a href='/center/report/view/?report_no=${list[i].report_no}' class='aTile'>${list[i].title}</a>
-                        <div class='inquery_status'>
-                            <t class='font-12-400' id='sta'>${list[i].report_result}</t>
-                        </div>
-                    </td>
+                    <td><div><a href='/center/report/view/?report_no=${list[i].report_no}' class='aTile'>${list[i].title}</a>`;
+
+                    if(list[i].report_result == 0) {
+                        str +=
+                        `<div class='inquery_status${list[i].report_result}'>
+                            <t class='font-12-400'>처리중</t>
+                        </div>`
+                    } else {
+                        str +=
+                        `<div class='inquery_status${list[i].report_result}'>
+                            <t class='font-12-400'>처리완료</t>
+                        </div>`
+                    }
+                    
+                str+=
+                    `</td>
                     <td><div>${list[i].nickname}</div></td>
                     <td><div>${list[i].report_date}</div></td>
                 </tr>`;
-
+		
         }))
-        $('.table_body').html(str);
-
         
-
-        if($('.inquery_status>t').text() != 0 ){
-            $('.inquery_status>t').text('처리중');
-            $('.inquery_status').css("background","gray");
-        } else {
-            $('.inquery_status>t').text('처리완료');
-            $('.inquery_status').css("background","rgb(20 167 255)");
-        }
+        $('.table_body').html(str);
 
         // 페이징
         let pageination = $('#report-paging-div ul');

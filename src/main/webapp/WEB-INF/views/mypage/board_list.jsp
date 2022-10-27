@@ -200,6 +200,7 @@
                         var board_date = listVO[i].board_date;
                         var category_name = listVO[i].category_name;
                         var comm_cnt = listVO[i].comm_cnt;
+                        var category_no = listVO[i].category_no;
 
                         var format_board_date = mypageUtilService.timeFormat(board_date);   
                         
@@ -210,7 +211,11 @@
                                 <td class="mp-selected">\${category_name}</td>
                                 <td class="mypage-table-title mp-title">
                                     <div>
-                                        <div class="mypage-title-content mp-title-content"><a href="#" class="mypage-link">\${title}</a></div>`
+                                        <div class="mypage-title-content mp-title-content">`
+
+                        str +=           selectBoardLink(category_no, board_no, title); 
+                                        
+                        str +=           `</div>`
                         
                         if(comm_cnt > 0) str += `<div class="mypage-comm-cnt">\${comm_cnt}</div>`
 
@@ -422,6 +427,20 @@
                 showBoardList(param, filter);
 
             })
+
+            function selectBoardLink(param_categoryNo, param_boardNo, param_title){
+                switch(param_categoryNo){
+                    // 자유게시판
+                    case 1 : return `<a href="../board/free/view?board_no=\${param_boardNo}" class="mypage-link">\${param_title}</a>`;
+                    // 운동Tip
+                    case 2 : return `<a href="../board/tip/view?board_no=\${param_boardNo}" class="mypage-link">\${param_title}</a>`;
+                    // 운동인증
+                    case 3 : return `<a href="../board/pic/view?board_no=\${param_boardNo}" class="mypage-link">\${param_title}</a>`;
+                    // 중고거래
+                    case 4 : return `<a href="../board/trade/view?board_no=\${param_boardNo}" class="mypage-link">\${param_title}</a>`;
+                }
+
+            } // selectBoardLink
 
         }) // entry-Point
 

@@ -48,8 +48,9 @@ public class signInController {
 		log.trace("signinProcess() invoked.");
 		
 		try {
-			LoginVO vo = this.service.userLoginService(dto);	
 			
+			LoginVO vo = this.service.userLoginService(dto);	
+
 			if(vo != null) {
 				// 성공 -> Session Scope model add
 				model.addAttribute(SharedScopeKeys.LOGIN_KEY, vo);
