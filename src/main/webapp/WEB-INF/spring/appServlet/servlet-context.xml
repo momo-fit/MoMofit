@@ -84,11 +84,6 @@
 			<mapping path="/board/*/register/**" />
 			<beans:ref bean="AuthInterceptor" />
 		</interceptor>
-		
-		<interceptor>
-			<mapping path="/center/qna/*" />
-			<beans:ref bean="AuthInterceptor" />
-		</interceptor>
 
 	</interceptors>
 
