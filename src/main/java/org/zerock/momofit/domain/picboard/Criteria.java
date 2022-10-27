@@ -35,7 +35,7 @@ public class Criteria {
 		builder.queryParam("amount", this.amount);
 		builder.queryParam("pagesPerPage", this.pagesPerPage);
 		builder.queryParam("searchType", this.type);
-		builder.queryParam("keyword", this.keyword);
+		builder.queryParam("keyword_s", this.keyword);
 		
 		log.info("\t+ pagingUri: " + builder.toUriString());
 		

@@ -36,7 +36,7 @@ public class PicBoardCommServiceImpl implements PicBoardCommService {
 	@Override
 	public Integer registerComm(PicBoardCommDTO dto){
 	
-		
+			log.info("*** Service dto : ", dto);
 			return this.PicBoardCommMapper.insertComm(dto);
 
 	}//댓글 작성하기 

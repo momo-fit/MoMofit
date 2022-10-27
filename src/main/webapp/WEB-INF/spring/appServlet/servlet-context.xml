@@ -79,6 +79,11 @@
 			<mapping path="group/modify/*" />
 			<beans:ref bean="AuthInterceptor" />
 		</interceptor>
+		
+		<interceptor>
+			<mapping path="/center/qna/*" />
+			<beans:ref bean="AuthInterceptor" />
+		</interceptor>
 
 	</interceptors>
 

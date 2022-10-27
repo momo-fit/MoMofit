@@ -103,10 +103,10 @@
                         <input type="button" class="cancel_button" value="취소" onClick="location='/center/qna/list'"></input>
 	                    <input type="submit" class="writing_submit" value="작성"></input>
 							
-							<!-- 임의의 값 넣어주기 (안넣으면 NULL값 떠서 게시글작성이 안됨 ) -->
+					
 						<input type="hidden" name="img_check" value=0>
-                        <input type="hidden" name="qna_result" value=1>
-                        <input type="hidden" name="user_no" value=1>
+                        <input type="hidden" name="qna_result" value=0>
+                        <input type="hidden" name="user_no" value="${sessionScope.__USER__.user_no}">
                         </form>
                         
                     </div>

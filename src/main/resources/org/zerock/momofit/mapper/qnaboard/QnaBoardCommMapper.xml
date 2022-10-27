@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.momofit.mapper.qnaboard.QnaBoardCommMapper">
+
+   	 
+   	 
+  	 	 <!-- 작성하기 (댓글) -->
+	 <insert id="insertComm">
+	  	INSERT INTO QNA_COMM(qna_comm_no,qna_no,text,user_no)
+	  	VALUES(QNA_COMM_SEQ.nextval,#{qna_no},#{text},#{user_no})
+	 	
+	 </insert>
+	 
+	 	 <!-- 삭제하기 (댓글) -->
+	 <delete id="deleteComm">
+	 	DELETE FROM QNA_COMM 
+	 	WHERE qna_comm_no=#{qna_comm_no}
+	 </delete>
+   	 
+   	 	  <!-- 수정하기 (댓글) -->
+	  <update id="updateComm">
+	  UPDATE QNA_COMM
+	  SET text= #{text},edit=current_date
+	  
+	  WHERE qna_comm_no=#{qna_comm_no}
+	  </update>
+	  
+	  
+
+      <!-- 조회하기 (댓글/페이징) -->
+	 <select id="readCommList" resultType="org.zerock.momofit.domain.qnaboard.QnaBoardCommDTO">
+		SELECT 
+		   qna_comm_no,
+		   qna_no,
+		   text,
+		   qna_comm_date,
+		   edit,
+		   admin_id,
+		   user_no,
+		   (SELECT NICKNAME FROM USERS WHERE USERS.USER_NO = qna_comm.user_no) AS NICKNAME 
+        FROM QNA_COMM
+        WHERE qna_no = #{qna_no}
+    
+   	 </select>
+   	 
+  
+    
+</mapper> 

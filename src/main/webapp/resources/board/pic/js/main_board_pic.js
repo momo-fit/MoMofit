@@ -21,8 +21,8 @@ $(function () {
 		let str = "";
 		let obj = arr[0];	
 		
-		let fileCallPath = encodeURIComponent(obj.path + "/s_" + obj.temp + "_" + obj.board_img_name);
-		str += "<div id='result_card'";
+		let fileCallPath = encodeURIComponent(obj.path + "/" + obj.temp + "_" + obj.board_img_name);
+		str += "<div id='result_card_main'";
 		str += "data-path='" + obj.path + "' data-uuid='" + obj.temp + "' data-filename='" + obj.board_img_name + "'";
 		str += ">";
 		str += "<img src='/display?fileName=" + fileCallPath +"'>";

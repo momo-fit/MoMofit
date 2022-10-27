@@ -45,7 +45,7 @@
     <link rel="stylesheet" href="/resources/include/css/main_footer.css">
 
     <!-- CSS : main_board_freeboard -->
-    <link rel="stylesheet" href="/resources/board/free/css/main_board_freeboard.css">
+    <link rel="stylesheet" href="/resources/board/pic/css/main_board_pic.css">
 
     <!-- 메인페이지 필수 CSS -->
     <link rel="stylesheet" href="/resources/common/css/main_section_card.css">
@@ -71,6 +71,7 @@
         <!-- 메인 컨텐츠부 -->
         <section>
 
+
             <div class="section_wrap">
                 <div class="view">
 
@@ -85,7 +86,7 @@
                 
                     <div class="info"> 
                           <div class="info2">
-                            <span class="font-12-400"> 작성자 <b class="font-12-400"><c:out value="${PicBoard.user_no}"/></b> </span>
+                            <span class="font-12-400"> 작성자 <b class="font-12-400"><c:out value="${PicBoard.nickname}"/></b> </span>
                             <div class="space1"></div>
                             <span class="font-12-400"> 조회수 <b class="font-12-400"><c:out value="${PicBoard.hits}"/></b> </span>
                             <div class="space1"></div>
@@ -97,12 +98,13 @@
                             <a class="btn" onClick="location.href='/board/pic/modify?board_no=${PicBoard.board_no}&currPage=${cri.currPage}'"><span class="font-12-400">수정 </span></a>
                             
                             <div class="space1"></div>
-
+							
                             <form action="/board/pic/remove?board_no=${PicBoard.board_no}" method="post" style="display: inline;">
                         	    <input type="hidden" id="board_no" name="board_no" value='<c:out value="${PicBoard.board_no}"/>'>
 								<input type="hidden" id="currPage" name="currPage" value='<c:out value="${cri.currPage}"/>'>
                                 <button style="border: none; background: none;"><span class="font-12-400"> 삭제 </span></button>
                             </form>
+                            
                         </div>
                     </div>
 
@@ -139,21 +141,14 @@
                         
                         <!-- 댓글창 -->
                         <script>
-                        	let bnoValue = "${PicBoard.board_no}";
-                        	let comm_no="${commDto.comm_no}";
-                        	let InputUser =  "${PicBoard.user_no}";  // 작성자
+                        	let boardNo = "${PicBoard.board_no}";
+                        	let commId = "${sessionScope.__USER__.user_no}";  // 작성자
                         </script>
+                        
                         
                         <div class="comment_wrap">
                             <span class="font-14-700">댓글</span> <br><br>
-    
-                            
-                            <!-- 댓글작성버튼누르면 실행되게 form에 연결 -->
-                            <!--  <form action="" method="" class="comment font-14-400"> -->
-                            
-                            <!-- 댓글작성컨트롤러에 쿼리스트링으로 board_no값을 받아오게했으니, 넘겨주게하기 (사용자에게는 안보이게) -->
-                            <input type="hidden" name="board_no" value="${commDto.board_no}">
-                            <input type="hidden" name="parent_no" value="${commDto.parent_no}">
+
 
                              <!-- 댓글을 담을 빈 div -->
                              <div class="card-body">
@@ -161,7 +156,7 @@
                              	</ul>
                              </div>
                                  
-                            <!--</form>-->
+                            
 
                             <!-- 대댓글 작성창 -->  
                             <form action="">
@@ -173,62 +168,19 @@
                                     </div>
                                 </div>  
                             </form>                          
-                                
-                            <!-- 
-                                댓글2
-                            <div class="comment font-14-400">
-                                <span class="font-16-500">닉네임2</span>
-                                <span>댓글내용입니다2</span>
-                                <span>02:28</span>
-                                <span onclick="clickFunc()" class="link1 cursor_pointer"> 답글달기</span>
-                                <span class="edit_delete">
-                                    <span class="cursor_pointer font-12-400"> 수정 </span>
-                                    <div class="space1"></div>
-                                    <a href=""><span class="font-12-400"> 삭제 </span></a>
-                                </span>
-                            </div>
-    
-                            
-                            <div class="comment font-14-400">
-                                <span class="font-16-500">닉네임3</span>
-                                <span>댓글내용입니다3</span>
-                                <span>02:28</span>
-                                <span onclick="clickFunc()" class="link1 cursor_pointer"> 답글달기</span>
-                                <span class="edit_delete">
-                                    <span class="cursor_pointer font-12-400"> 수정 </span>
-                                    <div class="space1"></div>
-                                    <a href=""><span class="font-12-400"> 삭제 </span></a>
-                                </span>
-                            </div>
-    
-                            
-                            <div class="comment font-14-400">
-                                <span class="font-16-500">닉네임4</span>
-                                <span>댓글내용입니다4</span>
-                                <span>02:28</span>
-                                <span onclick="clickFunc()" class="link1 cursor_pointer"> 답글달기</span>
-                                <span class="edit_delete">
-                                    <span class="cursor_pointer font-12-400"> 수정 </span>
-                                    <div class="space1"></div>
-                                    <a href=""><span class="font-12-400"> 삭제 </span></a>
-                                </span>
-                            </div> 
-                        -->
     
                             <br>
                         </div>
 
                         <!-- 댓글 작성창 -->
-                        <form action="">
-                            <div id="comment_write" class="card">
-                            	<!-- 댓글 작성창  -->
-                                <div class="card-body">
-                                    <input class="form-control" id="comm_write" name="comm_write" row="1" style="width: 90%;" placeholder="여기에 댓글을 입력하세요"
-                                    onfocus="this.placeholder=''" onblur="this.placeholder='여기에 댓글을 입력하세요'" value="">
-                                    <button id="commSubmitBtn" class="btn btn-primary btn_color_blue float_right">작성</button>
-                                </div>
-                            </div>                             
-                        </form>
+                         <div id="comment_write" class="card">
+                         <!-- 댓글 작성창  -->
+                             <div class="card-body">
+                                 <textarea class="form-control" id="comm_write" name="comm_write" row="1" style="width: 90%;" placeholder="여기에 댓글을 입력하세요"
+                                 onfocus="this.placeholder=''" onblur="this.placeholder='여기에 댓글을 입력하세요'" value=""></textarea>
+                              	 <button id="commSubmitBtn" class="btn btn-primary btn_color_blue float_right">작성</button>
+                             </div>
+                         </div>                             
                             
                         <br>
                         

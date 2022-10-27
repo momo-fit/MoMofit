@@ -14,4 +14,6 @@ public class QnaBoardDTO {
 	private Integer img_check;
 	private Integer qna_result;
 	private Integer user_no;
+	
+	private String nickname; //유저테이블에 있는 닉네임
 }
