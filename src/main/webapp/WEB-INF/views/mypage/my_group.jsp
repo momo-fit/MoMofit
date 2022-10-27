@@ -226,7 +226,7 @@
                                             str += `미정_`
                                         }
 
-                        str +=         `\${format_schedule}
+                        str +=         ` \${format_schedule}
                                         </p>
                                         <button class="mypage-group-p">\${member_count}/\${member_max} 참가중</button>
                                     </div>

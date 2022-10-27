@@ -10,7 +10,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.zerock.momofit.common.SharedScopeKeysCommon;
+import org.zerock.momofit.common.SharedScopeKeys;
 import org.zerock.momofit.domain.report.Criteria;
 import org.zerock.momofit.domain.report.reportDTO;
 import org.zerock.momofit.domain.report.reportFindUsersVO;
@@ -80,7 +80,7 @@ public class reportServiceImpl implements reportService {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 			
 			String today = sdf.format(date);
-			String targetDir = SharedScopeKeysCommon.UPLOAD_PATH+today;
+			String targetDir = SharedScopeKeys.UPLOAD_PATH+today;
 			
 			String imgName = file.getOriginalFilename();
 			
@@ -175,7 +175,7 @@ public class reportServiceImpl implements reportService {
 			boolean deleteRes = this.mapper.deleteReport(report_no);
 			
 			if(imgPath != "" && imgTemp != "" && deleteRes) {
-				String imgpath = SharedScopeKeysCommon.UPLOAD_PATH + imgPath + "/" + imgTemp;
+				String imgpath = SharedScopeKeys.UPLOAD_PATH + imgPath + "/" + imgTemp;
 				
 				File file = new File(imgpath);
 				

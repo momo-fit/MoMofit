@@ -47,9 +47,9 @@
     
     <link rel="stylesheet" href="/resources/board/trade/css/writing.css">
 
-    <!-- 메인페이지 필수 CSS -->
+    <!-- 메인페이지 필수 CSS
     <link rel="stylesheet" href="/resources/common/css/main_section_card.css">
-    <link rel="stylesheet" href="/resources/common/css/main_section_board.css">
+    <link rel="stylesheet" href="/resources/common/css/main_section_board.css"> -->
         
 
 </head>
@@ -58,8 +58,7 @@
     <div class="page">
 
         <!-- header -->
-        <%@ include file = "/WEB-INF/views/include/header.jsp" %>   
-        
+        <%@ include file = "/WEB-INF/views/include/header.jsp"%>
         <!-- 사이드 프로필 -->
         <%@ include file = "/WEB-INF/views/include/sideLogin.jsp" %>
 
@@ -69,34 +68,46 @@
 
             <div class="section_wrap">
                 <div class="s_box_board">
+                	
                     <div class="writing">
                         <div class="writing_head"><br>게시글 작성</div>
                         <hr>
                         <!-- 게시글 작성 내용부분 -->
 
-                        <form class="writing_form" 
-                            action="register" method="post">
+                        <form action="register" method="POST">
 
                             <div class="writing_content">
 
                                 <!-- 1. 게시판 선택 -->
                                 게시판&nbsp;
-                                <select id="select_board" required>
+                                <select id="select_board" name="category_no" required>
                                     <option value="">선택</option>
-                                    <option value="자유게시판">자유게시판</option>
-                                    <option value="운동팁">운동팁</option>
-                                    <option value="운동인증">운동인증</option>
-                                    <option value="중고거래">중고거래</option>
-                                    <option value="문의">문의</option>
+                                    <option value="1">자유게시판</option>
+                                    <option value="2">운동팁</option>
+                                    <option value="3">운동인증</option>
+                                    <option value="4">중고거래</option>                               
                                 </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <br>
 
-                                <!-- 2. 제목 -->
+                                <!-- 2-1. (중고거래 선택시) 팝니다/삽니다/나눔 선택 -->
+                                <select id="select_transaction" name="subject_no">
+                                    <option value="">선택</option>
+                                    <option value="1">삽니다</option>
+                                    <option value="2">팝니다</option>
+                                    <option value="3">나눔</option>
+                                </select>
+                                
+                                <!-- 2-2. (문의 선택시) 공개/비공개 선택 -->
+                                <span id="access">
+                                    <input type="radio" name="access" value="1"> 공개
+                                    <input type="radio" name="access" value="2" checked> 비공개
+                                </span><br>
+
+                                <!-- 3. 제목 -->
                                 <br>제목&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input type="text" class="writing_title" required>
+                                <input type="text" name="title" class="writing_title" required>
                                 <br><br>
 
-                                <!-- 3. 첨부파일 -->
+                                <!-- 4. 첨부파일 -->
                                 첨부&nbsp;&nbsp;&nbsp;
                                 <span class="filebox">
                                     <input class="upload_name" value="첨부파일" placeholder="첨부 이미지">
@@ -109,16 +120,20 @@
                                 </span>
                                 <br><br>
 
-                                <!-- 4. 내용 -->
+                                <!-- 5. 내용 -->
                                 내용<br>
-                                <textarea class="textarea_content" required>안녕하세요</textarea>
+                                <textarea class="textarea_content" name="text" required></textarea>
 
                             </div>
 
-                        <input type="button" class="list_btn" value="취소" onclick="location='/board/trade/list'" >
+                        <!-- 작성하기/취소하기 버튼 -->
+                        <input type="button" class="list_btn" value="취소" onClick="location='/board/trade/list'"></input>
+                        <input type="submit" class="writing_submit" value="작성"></input>
 
-                        <!-- 작성하기 버튼 -->
-                        <input type="submit" class="writing_submit" value="작성" >
+                        <input type="hidden" name="board_like" value="0">
+                        <input type="hidden" name="hits" value="0">
+                        <input type="hidden" name="img_check" value="0">
+                        <input type="hidden" name="user_no" value="1">
 
                         </form>
                         
@@ -136,8 +151,7 @@
 
     <!-- 메인화면 자바스크립트 -->
     <script src="/resources/include/js/main_header.js"></script>
-    
-    <script src="/resources/board/tip/js/writing.js"></script>
+    <script src="/resources/board/trade/js/writing.js"></script>
 
     <!-- 부트스트랩 자바스크립트 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

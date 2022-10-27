@@ -17,5 +17,5 @@ public class reportListVO {
 	private Date report_date;
 	
 	private String nickname;
-	
+
 }

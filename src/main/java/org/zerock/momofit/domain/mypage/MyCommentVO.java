@@ -16,6 +16,7 @@ public class MyCommentVO {
 	private Integer user_no;		// 유저번호 - 댓글 쓴 이(FK)
 
 	// Board Table Join
+	private Integer category_no;	// 게시판 Category_no
 	private String title;			// 게시글내용
 	
 	// Category Table Join

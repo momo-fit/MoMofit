@@ -13,7 +13,7 @@ public class Criteria {
 	
 	private int currPage = 1;			// 현재 표시할 페이지번호
 	private int amount = 15;			// 한 페이지당 보여줄 레코드 건수
-	private int pagesPerPage = 3;		// 한 페이지당 보여줄 페이지목록의 길이	
+	private int pagesPerPage = 5;		// 한 페이지당 보여줄 페이지목록의 길이	
 	
 	private String type;				// 검색유형
 	private String keyword;				// 검색어
