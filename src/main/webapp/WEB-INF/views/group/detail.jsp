@@ -108,16 +108,14 @@
                     <div class="info"> 
                         <div class="info2">
                             <span class="font-12-400"> 작성자 <b class="font-12-600"><c:out value="${group.nickname}"/></span>
-                            <!-- <div class="space1"></div>
-                            <span class="font-12-400"> 조회수 <b class="font-12-400">1</b> </span> -->
                             <div class="space1"></div>
                             <span class="font-12-400">작성일- <fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${group.group_date}" /></span>
 
-                            <span class="font-12-400" id="edit">
+                            <!-- <span class="font-12-400" id="edit">
                                 &nbsp; 수정일- 
 
                             	<fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${group.edit}" />
-                            </span>
+                            </span> -->
 
                             <div class="space1"></div>
 
