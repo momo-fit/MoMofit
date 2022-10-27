@@ -108,16 +108,14 @@
                     <div class="info"> 
                         <div class="info2">
                             <span class="font-12-400"> 작성자 <b class="font-12-600"><c:out value="${group.nickname}"/></span>
-                            <!-- <div class="space1"></div>
-                            <span class="font-12-400"> 조회수 <b class="font-12-400">1</b> </span> -->
                             <div class="space1"></div>
                             <span class="font-12-400">작성일- <fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${group.group_date}" /></span>
 
-                            <span class="font-12-400" id="edit">
+                            <!-- <span class="font-12-400" id="edit">
                                 &nbsp; 수정일- 
 
                             	<fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${group.edit}" />
-                            </span>
+                            </span> -->
 
                             <div class="space1"></div>
 
@@ -147,7 +145,6 @@
 
                                 <!-- 본문 이미지 -->
                                 <div class="content_img">
-
                                     <c:if test="${group.group_img != null}">
                                         <img class="group_box_img" src="/display?fileName=${group.path}/${group.temp}_${group.group_img}">
                                     </c:if>
@@ -155,7 +152,6 @@
                                     <c:if test="${group.group_img == null}">
                                         <img class="group_box_img" src="/resources/group/img/basket.jpg">
                                     </c:if>
-
                                 </div>
 
                                 <!-- 소개글 -->
@@ -166,7 +162,6 @@
                                 </div>
 
                             </div>
-                            
 
                             <!-- 모임장 파트 -->
                             <div class="content_group_leader ">
@@ -194,8 +189,7 @@
                                     </div>
                                     <!-- 사이드프로필-닉네임 -->
                                     <div class="wrap_side_profil_nickname">
-                                        <span class="nickname font-18-700"><c:out value="${group.nickname}"/></span>
-                                            
+                                        <span class="nickname font-18-700"><c:out value="${group.nickname}"/></span>                                            
                                     </div>
                                     
                                     <!-- 사이드프로필-주소 -->
@@ -205,16 +199,15 @@
                                             <c:out value="${group.user_loc}"/>
                                             
 										<c:if test="${group.user_loc != null}">                                          
-									        <span class="side_profile_loc_check">
-									            <img src="/resources/include/img/check_grin.png" width="15px">
-									        </span>
-								        </c:if>
-								        
+                                            <span class="side_profile_loc_check">
+                                                <img src="/resources/include/img/check_grin.png" width="15px">
+                                            </span>
+                                        </c:if>
+                                    
                                         </div>
 
                                     </div>
-                                    
-                        
+
                                     <!-- 사이드프로필-취미 -->
                                     <div class="profile_1_sports">
                                         <ul>
@@ -224,7 +217,7 @@
                                         </ul>
                                     </div>
                                     <!-- 사이드프로필-한줄소개 -->
-                                    <div class="wrap_side_profil_comment font-16-600">
+                                    <div class="wrap_side_profil_comment font-16-700">
                                         
                                         <c:out value="${group.profile_info}"/>
                                         
@@ -232,14 +225,12 @@
                                 </div>
 
                                 <!-- 좋아요 -->
-
                                 <div class="like_div">
                                     <img src="/resources/group/img/like.png" height="30" class="like_btn">
                                     <span id="like_cnt" class="font-14-700">0</span>
                                 </div>
 
-                                <!-- 참가하기 -->
-                                
+                                <!-- 참가하기 -->                                
                                 <form action="/group/participate" method="post">
                                     <input type="hidden" name="group_no" value="${group.group_no}">
                                     <input type="hidden" name="member_count" value="${group.member_count}">
@@ -249,55 +240,14 @@
                                     <button type="submit" class="joinBtn" >참가하기</button>
 
                                 </form>
-                                
 
-
-                                    
-
-                                
-                                    
-
-
-                                <!-- <div class="side_profile_1_person">
-                                    
-                                    <img src="/resources/include/img/side_sample.jpg">
-                                </div>
-                    
-                                <div class="side_profile_1_text">
-                                    <span class="side_profile_nickname">작성자</span>
-                                    <img src="/resources/group/img/female-2404482.png" width="20px" alt="">
-                                </div><br>
-                    
-                                <div class="side_profile_1_loc">
-                                    서울시 강남구 <br>
-                                    <span class="side_profile_loc_check">지역인증완료
-                                        <img src="/resources/group/img/checkbox.png" width="15px">
-                                    </span>
-                                </div><br>
-                    
-                                <div class="side_profile_1_sports">
-                                    <ul>
-                                        <li>헬&nbsp;스</li>
-                                        <li>등&nbsp;산</li>
-                                        <li>농&nbsp;구</li>
-                                    </ul>
-                                </div>
-
-                                <div class="like_div">
-                                    <img src="/resources/group/img/like.png" height="30" class="like_btn">
-                                    <span id="like_cnt" class="font-14-700">0</span>
-                                </div>
-
-                                <a href="/group/chat"><button type="button" class="joinBtn">참가하기</button></a>                     -->
                             </div>
                         </div>
 
 
                         <!-- 신고하기 -->
-                        <div class="report">
-                            <a href="" 
-                            onclick="window.open(this.href, '_blank', 'width=800, height=600'); return false;"
-                            class="link1 float_right font-14-700">신고</a><br>                                                    
+                        <div class="report"> 
+                            <a href="/center/report/register" class="link1 float_right font-14-700">신고</a><br>                                                    
                         </div>
 
                         <!-- 댓글 START   -->
@@ -354,35 +304,33 @@
                                 //  
                                 // });  
                             
-                            	
                                 //  5. 특정 댓글 조회 TEST
                                 // replyService.get(22, function(data){
                                 //     console.log(data);
                                 // });
 
                         </script>                        
-
-                        
+            
                         <!-- 댓글창 -->
                         <div class="comment_wrap">
 
                             <div class='row'>
 
                                 <div class="col-lg-12">
-                              
-                                  <!-- /.panel -->
-                                  <div class="panel panel-default">
+                            
+                                <!-- /.panel -->
+                                <div class="panel panel-default">
 
                                     <div class="panel-heading font-16-500">
-                                      <i class="fa fa-comments fa-fw"></i> 댓글
-                                      <button id='addReplyBtn'>댓글 작성</button>
+                                    <i class="fa fa-comments fa-fw"></i> 댓글
+                                    <button id='addReplyBtn'>댓글 작성</button>
                                     </div>      
                                     <br>
                                     
                                     <!-- /.panel-heading -->
                                     <div class="panel-body">        
                                     
-                                      <ul class="chat">
+                                    <ul class="chat">
                                         <!-- <li class="left clearfix" data-group_comm_no="12">
                                             <div>
                                                 <div class="header">
@@ -393,101 +341,62 @@
                                             </div>
                                         </li> -->
                                         <!-- end reply -->
-                                      </ul>
-                                      <!-- ./ end ul -->
+                                    </ul>
+                                    <!-- ./ end ul -->
                                     </div>
                                     <!-- /.panel .chat-panel -->
-                              
-                                  <div class="panel-footer"></div>
-                              
-                              
-                                      </div>
+                            
+                                <div class="panel-footer"></div>
+                            
+                            
+                                    </div>
                                 </div>
                                 <!-- ./ end row -->
-                              </div>
+                            </div>
 
-
-                                <!-- Modal -->
-                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-                                aria-labelledby="myModalLabel" aria-hidden="true">
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                            aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal"
-                                        aria-hidden="true">&times;</button>
-                                    <h4 class="modal-title" id="myModalLabel">댓글 작성</h4>
-                                    </div>
-                                    
-                                    <div class="modal-body">
-                                    <div class="form-group">
-                                        <label>내용</label> 
-                                        <input class="form-control" name='text' value='New Reply!!!!'>
-                                    </div>      
-                                    <div class="form-group">
-                                        <label>작성자</label> 
-                                        <input class="form-control" name='writer' value='replyer'>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>작성일자</label> 
-                                        <input class="form-control" name='group_comm_date' value='2022-10-07 13:13'>
-                                    </div>
-
-                                    </div>
-                                <div class="modal-footer">
-                                <button id='modalModBtn' type="button" class="btn btn-warning">수정</button>
-                                <button id='modalRemoveBtn' type="button" class="btn btn-danger">삭제</button>
-                                <button id='modalRegisterBtn' type="button" class="btn btn-primary">등록</button>
-                                <button id='modalCloseBtn' type="button" class="btn btn-default">닫기</button>
-                                </div>          </div>
-                                <!-- /.modal-content -->
-                                </div>
-                                <!-- /.modal-dialog -->
-                                </div>
-                                <!-- /.modal -->
-
-
-                            <!-- 댓글1 -->
-                            <!-- <form action="" class="comment font-14-400">
-                                <span class="font-16-500">닉네임1</span>
-                                <input type="text" class="comment_input_text" name="" id="" value="댓글내용입니다1" disabled>
-                                <span>02:28</span>
-                                <span onclick="clickFunc()" class="link1 cursor_pointer"> 답글달기</span>
-                                <span class="edit_delete">
-                                    <button type="button" class="cursor_pointer font-12-400 comment_modify_btn"> 수정 </button>
-                                    <div class="space1"></div>
-                                    <a href=""><span class="font-12-400"> 삭제 </span></a>
-                                </span>
-                            </form> -->
-
-                            <!-- 대댓글 작성창 -->  
-                            <!-- <form action="">
-                                <div id="recomment_write" class="card">
-                                    <div class="card-body">
-                                        <textarea class="form-control" row="1" style="width: 90%;" placeholder="여기에 댓글을 입력하세요"
-                                        onfocus="this.placeholder=''" onblur="this.placeholder='여기에 댓글을 입력하세요'"></textarea>
-                                        <button type="submit" class="btn btn-primary btn_color_blue float_right">작성</button>
-                                    </div>
-                                </div>  
-                            </form>                           -->
-                                
-
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="myModalLabel">댓글 작성</h4>
+                                        </div>
+                                        
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label>내용</label> 
+                                                <input class="form-control" name='text' value='New Reply!!!!'>
+                                            </div>      
+                                            <div class="form-group">
+                                                <label>작성자</label> 
+                                                <input type="text" class="form-control" name='writer' value="${sessionScope.__USER__.nickname}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>작성일자</label> 
+                                                <input class="form-control" name='group_comm_date' value='2022-10-07 13:13'>
+                                            </div>
     
+                                        </div>
+                                        
+                                        <div class="modal-footer">
+                                            <button id='modalModBtn' type="button" class="btn btn-warning">수정</button>
+                                            <button id='modalRemoveBtn' type="button" class="btn btn-danger">삭제</button>
+                                            <button id='modalRegisterBtn' type="button" class="btn btn-primary">등록</button>
+                                            <button id='modalCloseBtn' type="button" class="btn btn-default">닫기</button>
+                                        </div>          
+                                    </div>
+                            <!-- /.modal-content -->
+                                </div>
+                            <!-- /.modal-dialog -->
+                            </div>
+                            <!-- /.modal -->
+
                             <br>
                         </div>
-
-                        <!-- 댓글 작성창 -->
-                        <!-- <form action="">
-                            <div id="comment_write" class="card">
-                                <div class="card-body">
-                                    <textarea class="form-control" row="1" style="width: 90%;" placeholder="여기에 댓글을 입력하세요"
-                                    onfocus="this.placeholder=''" onblur="this.placeholder='여기에 댓글을 입력하세요'"></textarea>
-                                    <button type="submit" class="btn btn-primary btn_color_blue float_right">작성</button>
-                                </div>
-                            </div>                             
-                        </form>
-                            
-                        <br> -->
-                        
+                    
                     </div>
 
                     <script>
@@ -509,14 +418,14 @@
                             
                                 return;
                         }
-                        for (var i = 0, len = list.length || 0; i < len; i++) {
-	                        str +="<li class='left clearfix' data-group_comm_no='"+list[i].group_comm_no+"'>";
-	                        str +="  <div><div class='header'><strong class='primary-font'>"+list[i].writer+"</strong>"; 
-	                        str +="    <small class='pull-right text-muted'>"+replyService.displayTime(list[i].group_comm_date)+"</small></div>";
-	                        str +="    <p>"+list[i].text+"</p></div></li>";
-                        }
+                            for (var i = 0, len = list.length || 0; i < len; i++) {
+                                str +="<li class='left clearfix' data-group_comm_no='"+list[i].group_comm_no+"'>";
+                                str +="  <div><div class='header'><strong class='primary-font'>"+list[i].writer+"</strong>"; 
+                                str +="    <small class='pull-right text-muted'>"+replyService.displayTime(list[i].group_comm_date)+"</small></div>";
+                                str +="    <p>"+list[i].text+"</p></div></li>";
+                            }
                      
-                        replyUL.append(str);
+                            replyUL.append(str);
                             
                         
                         });//end function
@@ -605,8 +514,7 @@
                                 
                             alert(result);
                             modal.modal("hide");
-                            showList(1);
-                            
+                            showList(1);                            
                         });
                         
                     });
@@ -619,19 +527,10 @@
                                 
                             alert(result);
                             modal.modal("hide");
-                            showList(1);
-                            
-                        });
-                        
-                    });
-
-
-                        
+                            showList(1);                            
+                        });   
+                    });    
                 })
-
-
-
-
                 </script>
                     
                     <!-- 이전글 목록 다음글 -->
@@ -651,9 +550,9 @@
 
         </section>
 
-        <!-- 하단 Footer -->
-        <%@ include file = "/WEB-INF/views/include/footer.jsp" %>
     </div>
+            <!-- 하단 Footer -->
+        <%@ include file = "/WEB-INF/views/include/footer.jsp" %>
 
     <!-- 모임보기 자바스크립트 -->
     <script src="/resources/group/js/main_board_group.js"></script>

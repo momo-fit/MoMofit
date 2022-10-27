@@ -345,6 +345,10 @@ section {
   overflow-y: scroll;
 }
 
+.chat li:hover {
+    background-color:aliceblue;
+}
+
 #addReplyBtn {
 	float: right;
 
