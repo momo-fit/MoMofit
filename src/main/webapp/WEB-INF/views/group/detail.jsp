@@ -82,7 +82,8 @@
                     <div class="font-16-500">
                         <div class="board_name">
                             
-                            &#128692;모임보기
+                            &#128692;<c:out value="${group.sports}"/>
+
                             <form action="/group/remove" method="post">
 
                                 <input type='hidden' name='group_no' value='<c:out value="${group.group_no}"/>' readonly="readonly">
@@ -228,6 +229,10 @@
                                 <div class="like_div">
                                     <img src="/resources/group/img/like.png" height="30" class="like_btn">
                                     <span id="like_cnt" class="font-14-700">0</span>
+                                </div>
+
+                                <div class="font-14-500">
+                                    인원수 : <c:out value="${group.member_count}"/> / <c:out value="${group.member_max}"/>
                                 </div>
 
                                 <!-- 참가하기 -->                                
