@@ -24,7 +24,7 @@
     <!-- CSS : main 전체 페이지 설정 -->
     <link rel="stylesheet" href="/resources/common/css/main_page.css">
 
-    <link rel="stylesheet" href="/resources/board/pic/css/writing.css">
+    <link rel="stylesheet" href="/resources/board/pic/css/modify.css">
     <!-- <link rel="stylesheet" href="css/모임개설2.css"> -->
     
     <!-- CSS : main_footer 설정 -->
@@ -105,7 +105,7 @@
 
                                 <!-- 3. 제목 -->
                                 <br>제목&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input type="text" class="writing_title" value="${PicBoard.title}" required>
+                                <input type="text" class="writing_title" name="title" value="${PicBoard.title}" required>
                                 <br><br>
 
                                 <!-- 4. 첨부파일 -->
@@ -118,6 +118,12 @@
                                     </label>
 
                                     <input type="file" id="input_file" class="upload-hidden" accept='image/jpg,image/png,image/jpeg,image/gif' >
+                               
+                               	    <!-- 첨부된 파일 이미지가  이 안에 이미지 미리보기로 보인다.-->
+                                    <div id="uploadResult">
+
+									</div>
+
                                 </span>
                                 <br><br>
 
@@ -148,7 +154,7 @@
 
     <!-- 메인화면 자바스크립트 -->
     <script src="/resources/include/js/main_header.js"></script>
-    <script src="/resources/board/pic/js/writing.js"></script>
+    <script src="/resources/board/pic/js/modify.js"></script>
 
     <!-- 부트스트랩 자바스크립트 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

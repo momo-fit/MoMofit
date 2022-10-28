@@ -129,8 +129,8 @@ section {
 
 /* 답글 수정하기에 대한 CSS */
 
-/* 수정하기 버튼 */
-.comment_modify_btn {
+/* 댓글 수정 삭제하기 버튼 */
+.comment_btn {
     border: none;
     background-color: white;
 }
@@ -145,14 +145,11 @@ section {
     outline: none;
 }
 /*업로드된파일뜨게 */
-#result_card img{
-	max-width: 100%;
-    height: auto;
-    display: block;
-    padding: 5px;
-    margin-top: 10px;
-    margin: auto;	
+
+
+#result_card {
+	position: relative;
+	margin: 10px 5px;
+	float:left;
 }
-
-
 

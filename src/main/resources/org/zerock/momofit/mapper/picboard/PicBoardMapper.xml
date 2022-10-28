@@ -16,28 +16,29 @@
         id="selectListWithPaging" 
         resultType="org.zerock.momofit.domain.picboard.PicBoardVO">
 
-       	SELECT /*+ LEADING(t1 t2) USE_NL(t2) INDEX_DESC(t1)*/ 
-       		t1.board_no,
-        	t1.title,
-        	t1.text,
-        	t1.board_like,
-        	t1.hits,
-        	t1.board_date,
-        	t1.edit,
-        	t1.img_check,
-        	t1.user_no,
-        	t1.category_no,
-        	t1.subject_no,
-        	t2.img_no,
-        	t2.board_no,
-        	t2.board_img_name,
-        	t2.temp,
-        	t2.path
+          SELECT
+           t1.board_no,
+           t1.title,
+           t1.text,
+           t1.board_like,
+           t1.hits,
+           t1.board_date,
+           t1.edit,
+           t1.img_check,
+           t1.user_no,
+           t1.category_no,
+           t1.subject_no,
+           t2.img_no,
+           t2.board_no,
+           t2.board_img_name,
+           t2.temp,
+           t2.path
         FROM 
-        	board t1
-       	FULL OUTER JOIN board_img t2
-       	ON t1.board_no = t2.board_no
-        WHERE CATEGORY_NO=3 AND t1.title like '%'||#{keyword}||'%' 
+           board t1
+          FULL OUTER JOIN board_img t2
+          ON t1.board_no = t2.board_no
+        WHERE CATEGORY_NO=3 AND t1.title like '%'||#{keyword}||'%'
+        ORDER BY t1.board_no DESC 
         OFFSET (#{currPage}-1)*#{amount} ROWS
         FETCH NEXT #{amount} ROWS ONLY
 
@@ -80,7 +81,8 @@
             img_check,
             user_no,
             category_no,
-            subject_no
+            subject_no,
+            (SELECT NICKNAME FROM USERS WHERE USERS.USER_NO = BOARD.USER_NO) AS NICKNAME 
         FROM
                 board 
         WHERE 

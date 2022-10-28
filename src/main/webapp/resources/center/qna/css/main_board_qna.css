@@ -48,6 +48,15 @@ section {
     color: black;
 }
 
+/* 게시글 정보 라인 */
+.info{
+    border-bottom: 2px solid black;
+    margin: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
 .space1 {
     background-color: rgb(217,217,217);
     margin: 0 9px;
@@ -106,8 +115,8 @@ section {
 
 /* 답글 수정하기에 대한 CSS */
 
-/* 수정하기 버튼 */
-.comment_modify_btn {
+/* 댓글 수정 삭제하기 버튼 */
+.comment_btn {
     border: none;
     background-color: white;
 }
