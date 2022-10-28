@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.zerock.momofit.aws.AwsS3FileUploadService;
 import org.zerock.momofit.common.SharedScopeKeys;
 import org.zerock.momofit.domain.signUp.UserDTO;
 import org.zerock.momofit.exception.ServiceException;
@@ -27,6 +28,9 @@ public class userSignUpServiceImpl implements userSignUpService {
 	@Setter(onMethod_ = {@Autowired})
 	private signUpMapper signUpMapper;
 	
+	@Setter(onMethod_ = {@Autowired})
+	private AwsS3FileUploadService s3Service;
+	
 	@Override
 	public boolean UserSignUp(UserDTO dto, MultipartFile file) throws ServiceException {
 		log.trace("UserSignUp() invoked.");		
@@ -43,26 +47,29 @@ public class userSignUpServiceImpl implements userSignUpService {
 		
 		String today = sdf.format(date);
 
-		String targetDir = SharedScopeKeys.UPLOAD_PATH + today;
+//		String targetDir = SharedScopeKeys.UPLOAD_PATH + today;
 		
 		String original = file.getOriginalFilename();
 		
 		UUID uuid = UUID.randomUUID();
 		String profile_temp = uuid.toString();
 		
-		File folder = new File(targetDir);
-		
-		// 해당폴더 없을시 생성
-		if(!folder.isDirectory()) {
-			folder.mkdirs();
-		} // if
+//		File folder = new File(targetDir);
+//		
+//		// 해당폴더 없을시 생성
+//		if(!folder.isDirectory()) {
+//			folder.mkdirs();
+//		} // if
 		
 		try {	
 			if( original != "") {
-				String targetFile = targetDir +"/"+ profile_temp+"_"+original;
-				file.transferTo( new File(targetFile));
+//				String targetFile = targetDir +"/"+ profile_temp+"_"+original;
+//				file.transferTo( new File(targetFile));
 				
-				dto.setProfile_name(file.getOriginalFilename());
+				//-- AWS S3 FileUpload
+				this.s3Service.uploadObject(file, today, profile_temp + "_" + original);
+				
+				dto.setProfile_name(original);
 				dto.setProfile_path(today);
 				dto.setProfile_temp(profile_temp);			
 			}

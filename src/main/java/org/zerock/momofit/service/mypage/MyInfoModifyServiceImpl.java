@@ -1,10 +1,12 @@
 package org.zerock.momofit.service.mypage;
 
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.zerock.momofit.aws.AwsS3FileUploadService;
 import org.zerock.momofit.common.SharedScopeKeys;
 import org.zerock.momofit.domain.signIn.LoginVO;
 import org.zerock.momofit.domain.signUp.UserDTO;
@@ -12,17 +14,19 @@ import org.zerock.momofit.exception.ServiceException;
 import org.zerock.momofit.mapper.mypage.MyInfoModifyMapper;
 import org.zerock.momofit.util.FileUploadUtil;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 
 @Log4j2
-@AllArgsConstructor
+@RequiredArgsConstructor
 
 @Service
 public class MyInfoModifyServiceImpl implements MyInfoModifyService {
 	
-	private MyInfoModifyMapper myInfoModifyMapper;
+	private final MyInfoModifyMapper myInfoModifyMapper;
+	
+	private final AwsS3FileUploadService awsS3FileUploadService;
 	
 	/*
 	 * 1. 패스워드 유효성 검사
@@ -83,20 +87,24 @@ public class MyInfoModifyServiceImpl implements MyInfoModifyService {
 			if(file != null && !file.isEmpty()) {
 				saveFileInfo = FileUploadUtil.saveFile(file);
 				
-				dto.setProfile_name(saveFileInfo.get(SharedScopeKeys.FILE_NAME));
-				dto.setProfile_path(saveFileInfo.get(SharedScopeKeys.FILE_PATH));
-				dto.setProfile_temp(saveFileInfo.get(SharedScopeKeys.FILE_TEMP));
+				String path = this.awsS3FileUploadService.getPathInfo();
+				String originName = file.getOriginalFilename();
+				String temp = UUID.randomUUID().toString();
+				
+				this.awsS3FileUploadService.uploadObject(file, path, temp +"_"+ originName);
+				
+				dto.setProfile_name(originName);
+				dto.setProfile_path(path);
+				dto.setProfile_temp(temp);
 				
 				// 업데이트 실행
 				int updateResult = this.myInfoModifyMapper.updateUserInfo(dto);
 				
 				
 				if(updateResult == 1) {		// update success -> delete old upload file
-					FileUploadUtil.deleteFile(vo.getProfile_path(), vo.getProfile_name(), vo.getProfile_temp());
+					this.awsS3FileUploadService.deleteObject(vo.getProfile_path() + "/" + vo.getProfile_temp() + "_" + vo.getProfile_name());
 				} else {	// update fail -> delete upload file
-					FileUploadUtil.deleteFile(saveFileInfo.get(SharedScopeKeys.FILE_PATH), 
-							saveFileInfo.get(SharedScopeKeys.FILE_NAME), 
-							saveFileInfo.get(SharedScopeKeys.FILE_TEMP));
+					this.awsS3FileUploadService.deleteObject(path+"/"+temp+"_"+originName);
 				} // if-else
 	
 				return updateResult == 1;				
@@ -109,7 +117,7 @@ public class MyInfoModifyServiceImpl implements MyInfoModifyService {
 			// Default 이미지 시, 기본 물리적 이미지 삭제 / 단 DB 업데이트는 성공해야함
 			if(dto.getProfile_name() == null || dto.getProfile_name().isBlank() && updateResult == 1) {
 				log.info("default Img selected. And Delete File....");
-				FileUploadUtil.deleteFile(vo.getProfile_path(), vo.getProfile_name(), vo.getProfile_temp());
+				this.awsS3FileUploadService.deleteObject(vo.getProfile_path() + "/" + vo.getProfile_temp() + "_" + vo.getProfile_name());
 			}
 			 
 			return updateResult == 1;

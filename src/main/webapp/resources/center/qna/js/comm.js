@@ -2,21 +2,22 @@
 console.log("comm Module......");
 
 
-let commService = (function() {
+let qnacommService = (function() {
 
     /*등록처리*/
-    function add(comm, callback, error) {
+    function add(qna_comm, callback, error) {
         console.log("add comm.......");
 		
         // 추가
         $.ajax({
             type: 'post',
-            url: '/board/pic/comm/create',
-            data: JSON.stringify(comm),
+            url: '/center/qna/comm/create',
+            data: JSON.stringify(qna_comm),
             contentType:"application/json; charset=utf-8",
             success: function(result, status, xhr) {
                 if (callback) {
                     callback(result);
+                    $('input[name=qna_result]').attr('value',1);
                 }
             },
             error: function(xhr, status, er) {
@@ -33,11 +34,11 @@ let commService = (function() {
 	function getList(param, callback, error) {
 		console.log("param : ", param);
 		
-		let board_no = param.board_no;  //글 번호
+		let qna_no = param.qna_no;  //글 번호
 		let page = param.page || 1;
 		
 		//JSON 형태가 필요하므로 URL 호출 시 확장자를 '.json' 으로 요청
-		$.getJSON("/board/pic/comm/pages/" + board_no + "/" + page, 
+		$.getJSON("/center/qna/comm/pages/" + qna_no + "/" + page, 
 
 			function(data) {
 				if (callback) {
@@ -69,14 +70,14 @@ let commService = (function() {
 
 	}
 	
-	function update(comm, callback, error) {
+	function update(qna_comm, callback, error) {
 
 		// console.log("comm_no: " + comm.comm_no);
 
 		$.ajax({
 			type : 'put',
-			url : '/board/pic/comm/' + comm.comm_no,
-			data : JSON.stringify(comm),
+			url : '/center/qna/comm/' + qna_comm.qna_comm_no,
+			data : JSON.stringify(qna_comm),
 			contentType : "application/json; charset=utf-8",
 			success : function(result, status, xhr) {
 				if (callback) {
@@ -92,10 +93,10 @@ let commService = (function() {
 	}//function update
 	
 	
-	function remove(comm_no, callback, error) {
+	function remove(qna_comm_no, callback, error) {
 		$.ajax({
 			type: 'delete',
-			url: '/board/pic/comm/' + comm_no,
+			url: '/center/qna/comm/' + qna_comm_no,
 			success: function(deleteResult, status, xhr) {
 				if (callback) {
 					callback(deleteResult);
@@ -135,8 +136,8 @@ $(document).ready(function() {
 
 
 	// 수정용 화면
-	function showList(page, commNo) {
-		commService.getList({board_no:boardNo, page:page||1, commNo:commNo}, function(list){
+	function showList(page, qnacommNo) {
+		qnacommService.getList({qna_no:qnaNo, page:page||1, qnacommNo:qnacommNo}, function(list){
 			let str="";
 
 			if (list == null || list.length == 0) {
@@ -146,36 +147,36 @@ $(document).ready(function() {
 			for (let i = 0, len = list.length||0; i < len; i++) {
 				console.log("i : ", i);
 				// 매개변수로 들어온 commNo(댓글번호)와 일치하면 textarea(내용)만 수정할 수 있게 뜨는 화면 
-				if (commNo == list[i].comm_no){
-					console.log("if list[i].comm_no : ", list[i].comm_no);
+				if (qnacommNo == list[i].qna_comm_no){
+					console.log("if list[i].qna_comm_no : ", list[i].qna_comm_no);
 					str+="<div class='comment font-14-400'>"
 					str+="	<span class='font-16-500'>"+list[i].nickname+"</span>"
 					str+="	<input id='modified_comm_text' value='"+list[i].text+"'/>"
-					str+="	<span>"+commService.displayTime(list[i].comm_date)+"</span>"
+					str+="	<span>"+qnacommService.displayTime(list[i].qna_comm_date)+"</span>"
 					str+="	<span onclick='clickFunc()' class='link1 cursor_pointer'> 답글달기</span>"
 					str+="	<span class='edit_delete'>"
-					str+="		<input type='hidden' id='comm_number' value='"+list[i].comm_no+"'/>"
+					str+="		<input type='hidden' id='comm_number' value='"+list[i].qna_comm_no+"'/>"
 					str+="  	<button type='button' name='comment_modifyDone_btn' class='cursor_pointer font-12-400 comment_btn'> 작성 </button>"
 					str+="    	<div class='space1'></div>"
 					str+="    	<button type='button' name='comment_delete_btn' class='cursor_pointer font-12-400 comment_btn'> 삭제 </button>"
 					str+="	</span>"
 					str+="</div>"			
 				} else {
-					console.log("else list[i].comm_no : ", list[i].comm_no);
+					console.log("else list[i].qna_comm_no : ", list[i].qna_comm_no);
 					str+="<div class='comment font-14-400'>"
 					str+="	<span class='font-16-500'>"+list[i].nickname+"</span>"
 					str+="	<span>"+list[i].text+"</span>"
-					str+="	<span>"+commService.displayTime(list[i].comm_date)+"</span>"
+					str+="	<span>"+qnacommService.displayTime(list[i].qna_comm_date)+"</span>"
 					str+="	<span onclick='clickFunc()' class='link1 cursor_pointer'> 답글달기</span>"
 					str+="	<span class='edit_delete'>"
-					str+="  	<button type='button' name='comment_modify_btn' value='"+list[i].comm_no+"' class='cursor_pointer font-12-400 comment_btn'> 수정 </button>"
+					str+="  	<button type='button' name='comment_modify_btn' value='"+list[i].qna_comm_no+"' class='cursor_pointer font-12-400 comment_btn'> 수정 </button>"
 					str+="    	<div class='space1'></div>"
-					str+="    	<button type='button' name='comment_delete_btn' value='"+list[i].comm_no+"' class='cursor_pointer font-12-400 comment_btn'> 삭제 </button>"
+					str+="    	<button type='button' name='comment_delete_btn' value='"+list[i].qna_comm_no+"' class='cursor_pointer font-12-400 comment_btn'> 삭제 </button>"
 					str+="	</span>"
 					str+="</div>"
 					
-					let commNo = $("button[name=comment_modify_btn]").val();
-					console.log("else commNo : ", commNo);
+					let qnacommNo = $("button[name=comment_modify_btn]").val();
+					console.log("else qnacommNo : ", qnacommNo);
 				}
 
 	
@@ -187,9 +188,9 @@ $(document).ready(function() {
 					
 						$('button[name="comment_modify_btn"]').on("click",function(e){
 						console.log("수정 버튼 클릭!");
-						let commNo = $(this).val();
-						console.log("commNo : ", commNo);
-						showList(1, commNo);  //﻿commNo와 일치하는 댓글라인만 내용 바꿀 수 있게 목록 갱신
+						let qnacommNo = $(this).val();
+						console.log("qnacommNo : ", qnacommNo);
+						showList(1, qnacommNo);  //﻿commNo와 일치하는 댓글라인만 내용 바꿀 수 있게 목록 갱신
 				
 					}); //댓글 수정 끝 
 					
@@ -197,14 +198,14 @@ $(document).ready(function() {
 					
 						$('button[name="comment_modifyDone_btn"]').on("click",function(e){
 						console.log("수정 버튼 클릭!");
-						let commNo=$("#comm_number");
+						let qnacommNo=$("#comm_number");
 						let modified_comm_text = $("#modified_comm_text");
-						let comm = {
-							"comm_no": commNo.val(), 
+						let qna_comm = {
+							"qna_comm_no": qnacommNo.val(), 
 							"text": modified_comm_text.val()
 						};
 				
-						commService.update(comm, function(result) {
+						qnacommService.update(qna_comm, function(result) {
 							alert(result);
 							showList(1, 0);  //﻿댓글 목록을 갱신
 						});
@@ -214,8 +215,8 @@ $(document).ready(function() {
 					//commUL.on("click", 'button[name="comment_delete_btn"]', function(e){
 						$('button[name="comment_delete_btn"]').on("click",function(e){
 						console.log("삭제 버튼 클릭!");
-						let commNo = $(this).val();
-						commService.remove(commNo, function(result) {
+						let qnacommNo = $(this).val();
+						qnacommService.remove(qnacommNo, function(result) {
 							alert(result);
 							showList(1, 0);
 						});
@@ -227,15 +228,14 @@ $(document).ready(function() {
 			
 			/* 댓글 작성하기 버튼 클릭 시 댓글 등록 */
 			$("#commSubmitBtn").on("click", function(e){
-				let comm = {
+				let qna_comm = {
 						"text": InputComm.val(),
-						"board_no": boardNo,
-						"parent_no": 0,
+						"qna_no":qnaNo,
 						"user_no": commId
 				};
 				
 				// 댓글 등록 요청
-				commService.add(comm, function(result){	
+				qnacommService.add(qna_comm, function(result){	
 					$(".form-control").val('');
 					showList(1, 0);
 				}); // 댓글 등록 요청 끝

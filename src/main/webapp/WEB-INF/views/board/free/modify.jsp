@@ -108,6 +108,7 @@
                                     </label>
 
                                     <input type="file" id="input_file" class="upload-hidden" accept='image/jpg,image/png,image/jpeg,image/gif' >
+
                                 </span>
                                 <br><br>
 

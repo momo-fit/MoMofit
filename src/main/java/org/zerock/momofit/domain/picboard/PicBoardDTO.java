@@ -43,6 +43,8 @@ public class PicBoardDTO {
 	//말머리(중고거래만쓰긴함)
 	private Integer subject_no;
 	
+	private String nickname;
+	
 	// --------- board_img 테이블 데이터 --------
 	private Integer img_no;//이미지 파일 번호
 	

@@ -130,8 +130,18 @@
                                         <c:forEach var="QnaBoardList" items="${QnaBoardList}" > 
                                             <tr class="contnet">
                                                 <td><div><c:out value="${QnaBoardList.qna_no}"/></div></td>
-                                                <td><div><a onClick="location.href='/center/qna/view?qna_no=${QnaBoardList.qna_no}&currPage=${pageMaker.cri.currPage}'" class="aTile"><c:out value="${QnaBoardList.title}"/></a><div class="inquery_status"><p class="font-12-400">처리중</p></div></div></td>
-                                                <td><div><c:out value="${QnaBoardList.user_no}"/></div></td>
+                                                <td>
+                                                	<div>
+                                                		<a onClick="location.href='/center/qna/view?qna_no=${QnaBoardList.qna_no}&currPage=${pageMaker.cri.currPage}'" class="aTile">
+                                                			<c:out value="${QnaBoardList.title}"/>
+                                                		</a>
+                                                		<input id="statusNum" type="hidden" value="${QnaBoardList.qna_result}" onchange="commEvent(this)" />
+                                                		<div class="inquery_status">
+                                                			<p class="font-12-400 inquery_comm">처리중</p>
+                                                		</div>
+                                                	</div>
+                                                </td>
+                                                <td><div><c:out value="${QnaBoardList.nickname}"/></div></td>
                                                 <td><div><fmt:formatDate pattern="yyyy/MM/dd" value="${QnaBoardList.qna_date}"></fmt:formatDate></div></td>
                                                 
                                             </tr>

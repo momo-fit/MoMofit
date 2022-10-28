@@ -17,4 +17,6 @@ public class PicBoardCommVO {
 	private Date edit;
 	private Integer parent_no;
 	private Integer user_no;
+	
+	private String nickname; //유저테이블에 있는 닉네임
 }
