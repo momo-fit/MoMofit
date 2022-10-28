@@ -141,7 +141,7 @@ section {
 .like_div{
     text-align: center;
     padding-top: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
 }
 
 .like_btn{
@@ -165,7 +165,7 @@ section {
     border: none; 
     border-radius: 6px;
     line-height: 40px;
-
+	margin-top:10px;
     margin-bottom:20px;
     width: 110px;
 }
