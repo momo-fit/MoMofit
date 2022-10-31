@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="org.zerock.momofit.mapper.qnaboard.QnaBoardMapper">
+	
+	<!-- 페이징처리가 가능한 목록 조회  -->
+	<select id="SelectList" resultType="org.zerock.momofit.domain.qnaboard.QnaBoardVO">
+		SELECT /*+ index_desc(qna)*/
+			qna_no,
+			title,
+			text,
+			qna_date,
+			edit,
+			img_check,
+			qna_result,
+			user_no,
+			(SELECT NICKNAME FROM USERS WHERE USERS.USER_NO = qna.USER_NO) AS NICKNAME
+        FROM 
+        	qna
+        OFFSET (#{currPage}-1)*#{amount} ROWS
+        FETCH NEXT #{amount} ROWS ONLY
+    
+	</select>
+	
+	 <!-- 작성하기 -->
+    <insert id="insert">
+        INSERT INTO QNA(qna_no,title, text, img_check,qna_result, user_no)
+        VALUES(QNA_SEQ.nextval,#{title}, #{text},#{img_check}, #{qna_result},#{user_no} )
+    </insert>
+    
+     <insert id="insertSelectKey">
+    	<selectKey keyProperty="qna_no" order="BEFORE" resultType="int">
+            
+            
+            SELECT
+            	LAST_NUMBER
+            FROM
+            	USER_SEQUENCES
+            WHERE
+            	sequence_name = 'QNA_SEQ'
+        </selectKey>
+
+        INSERT INTO QNA(qna_no,title, text, img_check,qna_result, user_no)
+        VALUES( QNA_SEQ.nextval,#{title}, #{text},#{img_check}, #{qna_result},#{user_no}  )
+    
+    </insert>
+    
+     <!-- 상세조회하기 -->
+    <select id="select" resultType="org.zerock.momofit.domain.qnaboard.QnaBoardVO">
+        SELECT
+			qna_no,	
+			title,
+			text,
+			qna_date,
+			edit,
+			img_check,
+			qna_result,
+			user_no,
+			(SELECT NICKNAME FROM USERS WHERE USERS.USER_NO = qna.USER_NO) AS NICKNAME
+        FROM
+                qna 
+        WHERE 
+            qna_no=#{qna_no}
+    </select>
+    
+    
+   
+    <!-- 수정하기 -->
+    <update id="update">
+        UPDATE qna
+        SET
+            title=#{title},
+            text=#{text},
+            edit=current_date
+        WHERE
+            qna_no=#{qna_no}
+    </update>
+
+    <!-- 삭제하기 -->
+    <delete id="delete">
+
+        DELETE FROM qna WHERE qna_no=#{qna_no}
+        
+    </delete>
+
+    <!-- 총 게시글의 갯수를 반환  -->
+    <select 
+    id="getTotalCount"
+    resultType="int">
+
+    SELECT /*+ index(qna) */ count(qna_no)
+    FROM qna
+ 
+    </select>
+
+
+
+
+
+
+</mapper>

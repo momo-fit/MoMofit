@@ -52,6 +52,14 @@
 
         }); // .jq
     </script>
+    
+    <script>
+        var result = "${param.result}";
+        
+        if(result != null && result.length > 0) {
+            alert(result);
+        } // if
+    </script>
 
 </head>
 
@@ -83,8 +91,8 @@
 
                                 <select name="deal_ico" class="ico_select">
                                     <option value="none">선택</option>
-                                    <option value="1">판매</option>
-                                    <option value="2">구매</option>
+                                    <option value="1">삽니다</option>
+                                    <option value="2">팝니다</option>
                                     <option value="3">나눔</option>
                                 </select>
                                 
@@ -104,153 +112,18 @@
                             <!-- 내부 틀 -->
                             <div class="deals_check_inner">
                                 
-                                <!-- 글 : 한개만 a태그 -->
-                                <a href="/board/trade/view" class="deal_aTag">
-                                    <div class="deal_check_box">
-                                        <div class="deal_check_inner"><img class="deal_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                        <span class="font-12-300"id="deal_ico" type="text"></span>
-                                        <p class="font-14-500" id="deal_title" >Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                                    </div>
-                                </a>
-
-                                <div class="deal_check_box">
+                                <c:forEach var="TradeBoardlist" items="${list}">
+                                    <!-- 글 : 한개만 a태그 -->
+                                    <a href="/board/trade/view?board_no=${TradeBoardlist.board_no}&currPage=${pageMaker.cri.currPage}" class="deal_aTag">
+                                        <div class="deal_check_box">
+                                            <div class="deal_check_inner"><img class="deal_check_img" src="https://picsum.photos/id/684/220/130"></div>
+                                            <span class="font-12-300"id="deal_ico" type="text"></span>
+                                            <p class="font-16-500" style="margin-top: 20px;"><c:out value="${TradeBoardlist.title}"/></p>
+                                        </div>
+                                    </a>
+                                </c:forEach>
+                               
                                     
-                                    <div class="deal_check_inner"><img class="deal_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <span class="font-12-300" id="deal_ico" type="text"></span>
-                                    <p class="font-14-500" id="deal_title">Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                                    
-                                </div>
-                                <div class="deal_check_box">
-                                    <div class="deal_check_inner"><img class="deal_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <span class="font-12-300" id="deal_ico" type="text"></span>
-                                    <p class="font-14-500" id="deal_title">Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                                </div>
-                                <div class="deal_check_box">
-                                    <div class="deal_check_inner"><img class="deal_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <span class="font-12-300" id="deal_ico" type="text"></span>
-                                    <p class="font-14-500" id="deal_title">Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                                </div>
-                                <div class="deal_check_box">
-                                    <div class="deal_check_inner"><img class="deal_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <span class="font-12-300" id="deal_ico" type="text"></span>
-                                    <p class="font-14-500" id="deal_title">Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                                </div>
-                                <div class="deal_check_box">
-                                    <div class="deal_check_inner"><img class="deal_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <span class="font-12-300" id="deal_ico" type="text"></span>
-                                    <p class="font-14-500" id="deal_title">Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                                </div>
-                                <div class="deal_check_box">
-                                    <div class="deal_check_inner"><img class="deal_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <span class="font-12-300" id="deal_ico" type="text"></span>
-                                    <p class="font-14-500" id="deal_title">Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                                </div>
-                                <div class="deal_check_box">
-                                    <div class="deal_check_inner"><img class="deal_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <span class="font-12-300" id="deal_ico" type="text"></span>
-                                    <p class="font-14-500" id="deal_title">Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                                </div>
-                                <div class="deal_check_box">
-                                    <div class="deal_check_inner"><img class="deal_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <span class="font-12-300" id="deal_ico" type="text"></span>
-                                    <p class="font-14-500" id="deal_title">Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                                </div>
-                                <div class="deal_check_box">
-                                    <div class="deal_check_inner"><img class="deal_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <span class="font-12-300" id="deal_ico" type="text"></span>
-                                    <p class="font-14-500" id="deal_title">Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                                </div>
-                                <div class="deal_check_box">
-                                    <div class="deal_check_inner"><img class="deal_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <span class="font-12-300" id="deal_ico" type="text"></span>
-                                    <p class="font-14-500" id="deal_title">Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                                </div>
-                                <div class="deal_check_box">
-                                    <div class="deal_check_inner"><img class="deal_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <span class="font-12-300" id="deal_ico" type="text"></span>
-                                    <p class="font-14-500" id="deal_title">Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                                </div>
-                                <div class="deal_check_box">
-                                    <div class="deal_check_inner"><img class="deal_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <span class="font-12-300" id="deal_ico" type="text"></span>
-                                    <p class="font-14-500" id="deal_title">Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                                </div>
-                                <div class="deal_check_box">
-                                    <div class="deal_check_inner"><img class="deal_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <span class="font-12-300" id="deal_ico" type="text"></span>
-                                    <p class="font-14-500" id="deal_title">Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                                </div>
-                                <div class="deal_check_box">
-                                    <div class="deal_check_inner"><img class="deal_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <span class="font-12-300" id="deal_ico" type="text"></span>
-                                    <p class="font-14-500" id="deal_title">Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                                </div>
-                                <div class="deal_check_box">
-                                    <div class="deal_check_inner"><img class="deal_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <span class="font-12-300" id="deal_ico" type="text"></span>
-                                    <p class="font-14-500" id="deal_title">Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                                </div>
-                                <div class="deal_check_box">
-                                    <div class="deal_check_inner"><img class="deal_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <span class="font-12-300" id="deal_ico" type="text"></span>
-                                    <p class="font-14-500" id="deal_title">Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                                </div>
-                                <div class="deal_check_box">
-                                    <div class="deal_check_inner"><img class="deal_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <span class="font-12-300" id="deal_ico" type="text"></span>
-                                    <p class="font-14-500" id="deal_title">Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                                </div>
-                                <div class="deal_check_box">
-                                    <div class="deal_check_inner"><img class="deal_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <span class="font-12-300" id="deal_ico" type="text"></span>
-                                    <p class="font-14-500" id="deal_title">Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                                </div>
-                                <div class="deal_check_box">
-                                    <div class="deal_check_inner"><img class="deal_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <span class="font-12-300" id="deal_ico" type="text"></span>
-                                    <p class="font-14-500" id="deal_title">Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                                </div>
-                                <div class="deal_check_box">
-                                    <div class="deal_check_inner"><img class="deal_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <span class="font-12-300" id="deal_ico" type="text"></span>
-                                    <p class="font-14-500" id="deal_title">Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                                </div>
-                                <div class="deal_check_box">
-                                    <div class="deal_check_inner"><img class="deal_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <span class="font-12-300" id="deal_ico" type="text"></span>
-                                    <p class="font-14-500" id="deal_title">Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                                </div>
-                                <div class="deal_check_box">
-                                    <div class="deal_check_inner"><img class="deal_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <span class="font-12-300" id="deal_ico" type="text"></span>
-                                    <p class="font-14-500" id="deal_title">Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                                </div>
-                                <div class="deal_check_box">
-                                    <div class="deal_check_inner"><img class="deal_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <span class="font-12-300" id="deal_ico" type="text"></span>
-                                    <p class="font-14-500" id="deal_title">Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                                </div>
-                                <div class="deal_check_box">
-                                    <div class="deal_check_inner"><img class="deal_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <span class="font-12-300" id="deal_ico" type="text"></span>
-                                    <p class="font-14-500" id="deal_title">Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                                </div>
-                                <div class="deal_check_box">
-                                    <div class="deal_check_inner"><img class="deal_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <span class="font-12-300" id="deal_ico" type="text"></span>
-                                    <p class="font-14-500" id="deal_title">Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                                </div>
-                                <div class="deal_check_box">
-                                    <div class="deal_check_inner"><img class="deal_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <span class="font-12-300" id="deal_ico" type="text"></span>
-                                    <p class="font-14-500" id="deal_title">Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                                </div>
-                                <div class="deal_check_box">
-                                    <div class="deal_check_inner"><img class="deal_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <span class="font-12-300" id="deal_ico" type="text"></span>
-                                    <p class="font-14-500" id="deal_title">Lorem, ipsum dolor sit amet consectetur adipisicing.</p>
-                                </div>
-
                             </div>
 
                             <!-- 구분선 -->
@@ -272,6 +145,23 @@
                         </div>
                     </div>
 
+                    <div id="pagination">
+                        <ul>
+                            <c:if test="${pageMaker.prev}">
+                                <li class="prev"><a href="/board/trade/list?currPage=${pageMaker.startPage - 1}">Prev</a></li>
+                            </c:if>
+            
+                            <c:forEach var="pageNum" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+                                <li class="${pageMaker.cri.currPage == pageNum ? 'currPage' : ''}">
+                                    <a href="/board/trade/list?currPage=${pageNum}">${pageNum}</a>
+                                </li>
+                            </c:forEach>
+            
+                            <c:if test="${pageMaker.next}">
+                                <li class="next"><a href="/board/trade/list?currPage=${pageMaker.endPage + 1}">Next</a></li>
+                            </c:if>
+                        </ul>
+                    </div>
 
 
                 </div>

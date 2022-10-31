@@ -75,25 +75,27 @@
                         <!-- 게시글 작성 내용부분 -->
 
                         <form class="writing_form" 
-                            action="modify" method="post">
+                            action="/board/free/modify" method="post">
 
                             <div class="writing_content">
 
+                                <input type="hidden" name="board_no" value="${freeboard.board_no}">
+                				<input type="hidden" name="currPage" value="${cri.currPage}">
+
                                 <!-- 1. 게시판 선택 -->
                                 게시판&nbsp;
-                                <select id="select_board" disabled required>
+                                <select id="select_board" name="category_no" required>
                                     <option value="">선택</option>
-                                    <option selected value="자유게시판">자유게시판</option>
-                                    <option value="운동팁">운동팁</option>
-                                    <option value="운동인증">운동인증</option>
-                                    <option value="중고거래">중고거래</option>
-                                    <option value="문의">문의</option>
+                                    <option selected value="1">자유게시판</option>
+                                    <option value="2">운동팁</option>
+                                    <option value="3">운동인증</option>
+                                    <option value="4">중고거래</option>
                                 </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <br>
 
                                 <!-- 2. 제목 -->
                                 <br>제목&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input type="text" class="writing_title" required>
+                                <input type="text" class="writing_title" name="title" value="${freeboard.title}" required>
                                 <br><br>
 
                                 <!-- 3. 첨부파일 -->
@@ -106,12 +108,18 @@
                                     </label>
 
                                     <input type="file" id="input_file" class="upload-hidden" accept='image/jpg,image/png,image/jpeg,image/gif' >
+
                                 </span>
                                 <br><br>
 
                                 <!-- 4. 내용 -->
                                 내용<br>
-                                <textarea class="textarea_content" required>안녕하세요</textarea>
+                                <textarea class="textarea_content" name="text" required>${freeboard.text}</textarea>
+
+                                <input type="hidden" name="board_like" value="${freeboard.board_like}">
+                                <input type="hidden" name="hits" value="${freeboard.hits}">
+                                <input type="hidden" name="img_check" value="${freeboard.img_check}">
+                                <input type="hidden" name="user_no" value="${freeboard.user_no}">
 
                             </div>
                             

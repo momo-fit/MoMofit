@@ -6,3 +6,14 @@ function selectAll(selectAll)  {
 		checkbox.checked = selectAll.checked;
 	})
 }
+
+$(function () {
+
+	
+	$(".bs-text").keypress(function(e){
+		if(e.keyCode==13)
+		$(".bs-btn").click();
+	});
+
+})
+

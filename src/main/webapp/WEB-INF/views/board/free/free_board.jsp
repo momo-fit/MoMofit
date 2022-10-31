@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -55,8 +54,6 @@
     
     <!-- CSS : content 전체 설정 -->
    	<link rel="stylesheet" href="/resources/board/free/css/free_board.css">  
-	
-
 
 </head>
 
@@ -89,7 +86,6 @@
                                 <input type="search" placeholder="제목">
                                 <button><i class="fa-solid fa-magnifying-glass"></i></button>
                                 
-                            
                             </form>
                         </div>
 
@@ -102,11 +98,8 @@
                             <!-- 내부 틀 -->
                             
                             <div>
-                                <div class="free_board_inner">
-                                    
+                                <div class="free_board_inner">                                    
                                     <table id="free_board_table" style="height: 100%;">
-                                        
-                                        
                                         <thead class="board_table">
                                             <tr class="free_board_menu">
                                                 <th class="menu_num"><text class="font-16-500">번호</text></th>
@@ -117,28 +110,39 @@
                                             </tr>
                                         </thead>
 
-                                        <!-- 20개 -->
                                         <tbody>
-                                            <tr class="contnet">
-                                                <td><div>1</div></td>
-                                                <td onClick="location.href='/board/free/view'" style="cursor:pointer;"><div>테스트 제목</div></td>
-                                                <td class="context-menu-one btn btn-neutral"><div>닉네임</div></td>
-                                                <td><div>2022.08.19</div></td>
-                                                <td><div>77</div></td>
-                                            </tr>
-                                            <tr class="contnet">
-                                                <td><div>1</div></td>
-                                                <td onClick="location.href='/board/free/view'" style="cursor:pointer;"><div>테스트 제목</div></td>
-                                                <td class="context-menu-one btn btn-neutral"><div>닉네임</div></td>
-                                                <td><div>2022.08.19</div></td>
-                                                <td><div>77</div></td>
-                                            </tr>
-                                                                                        
+                                            <c:forEach var="freeboard" items="${list}">
+
+                                                <tr class="contnet">
+                                                    <td><div>${freeboard.board_no}</div></td>
+                                                    <td onClick="location.href='/board/free/view?board_no=${freeboard.board_no}&currPage=${pageMaker.cri.currPage}'" style="cursor:pointer;"><div>${freeboard.title}</div></td>
+                                                    <td class="context-menu-one btn btn-neutral"><div>${freeboard.nickname}</div></td>
+                                                    <td><div><fmt:formatDate pattern="yyyy-MM-dd" value="${freeboard.board_date}" /></div></td>
+                                                    <td><div>${freeboard.board_like}</div></td>
+                                                </tr>
+
+                                            </c:forEach>
                                         </tbody>
-                                    
                                     </table>
-                                </div>
-                                
+
+                                    <div id="pagination">
+                                        <ul>
+                                            <c:if test="${pageMaker.prev}">
+                                                <li class="prev"><a href="/board/free/list?currPage=${pageMaker.startPage - 1}">Prev</a></li>
+                                            </c:if>
+                            
+                                            <c:forEach var="pageNum" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+                                                <li class="${pageMaker.cri.currPage == pageNum ? 'currPage' : ''}">
+                                                    <a href="/board/free/list?currPage=${pageNum}">${pageNum}</a>
+                                                </li>
+                                            </c:forEach>
+                            
+                                            <c:if test="${pageMaker.next}">
+                                                <li class="next"><a href="/board/free/list?currPage=${pageMaker.endPage + 1}">Next</a></li>
+                                            </c:if>
+                                        </ul>
+                                    </div>
+                                </div>                                
                             </div>
                             <!-- 구분선 -->
                             <hr class="hr-1"/>
@@ -151,34 +155,47 @@
                             </div>
 
                             <div class="free_board_bottom">
-                                <a href="/board/free/register" class="board_write" >
+                                <a href="/board/free/register?&currPage=${pageMaker.cri.currPage}" class="board_write" >
                                     <button><i class="fa-solid fa-pencil"> 글쓰기</i></button>
                                 </a>
-                            </div>                           
-
+                            </div>   
                         </div>
                     </div>
-
                 </div>
             </div>
-
-            
-
         </section>
 
         <!-- 하단 Footer -->
         <%@ include file = "/WEB-INF/views/include/footer.jsp" %>
     </div>
 
+    <!-- controller (register) - addAttribute -->
+    <!-- <script>
+        var result = "${param.result}";
+
+        if(result != null && result.length > 0 ) {
+            alert(result);
+        } // if
+    </script> -->
+
+    <!-- controller (register) - addFlashAttribute -->
+    <script>
+        $(document).ready(function(){
+
+            let result = '<c:out value="${result}"/>';
+
+            if(result != null && result.length > 0 ) {
+                alert(result);
+            } // if
+
+        });
+    </script>
 
     <!-- 메인화면 자바스크립트 -->
-    <script src="/resources/include/js/main_header.js"></script>
+    <script src="/resources/include/js/main_header.js"></script>    
     
-    
-
     <!-- contextmenu js -->
     <script src="/resources/board/free/js/contextMenu.js"></script>
-
 
     <!-- 부트스트랩 자바스크립트 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

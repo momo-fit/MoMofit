@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.momofit.mapper.signInMapper.signInMapper">
+
+    <select id="selectUserPass" resultType="String">
+        SELECT 
+            pass
+        FROM USERS 
+            WHERE id = #{id}
+    </select>
+
+    <select id="selectUser" resultType="org.zerock.momofit.domain.signIn.LoginVO">
+        SELECT 
+            user_no, id, nickname, email, user_name, birth, tel, gender, user_loc,   
+            profile_name, profile_temp, profile_path, profile_info, sports1, sports2, sports3
+        FROM USERS 
+            WHERE id = #{id}
+    </select>
+
+    <update id="updateRememberMe">
+        UPDATE users
+        SET 
+            rememberme = #{rememberme},
+            rememberage = #{rememberage}
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectRememberMeCookie" resultType="org.zerock.momofit.domain.signIn.LoginVO">
+        SELECT 
+            user_no, id, nickname, email, user_name, birth, tel, gender, user_loc,   
+            profile_name, profile_temp, profile_path, profile_info, sports1, sports2, sports3
+        FROM USERS 
+            WHERE rememberme = #{rememberme}
+            AND rememberage > current_date
+    </select>
+
+
+</mapper>

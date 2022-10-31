@@ -45,6 +45,17 @@ section {
     color: black;
 }
 
+.edit_delete_comm{
+    text-decoration: none;
+    color: black;
+    display: flex;
+}
+
+.edit_delete_comm>a {
+    text-decoration: none;
+    color: black;
+}
+
 .space1 {
     background-color: rgb(217,217,217);
     margin: 0 9px;
@@ -64,4 +75,69 @@ section {
 #remove{
 	border: none;
     background: none;
+}
+
+#repotContent{
+    min-width: 1050px;
+    min-height: 200px;
+
+    max-height: 1000px;
+}
+
+/* 댓글 */
+
+.float_right{
+    display: inline;
+    float: right;
+}
+
+.comment_wrap{
+    border-top: 1px solid gray;
+    padding-top: 10px;
+}
+
+.comment{
+    border-bottom: 1px solid gray;
+    display: grid;
+    grid-template-columns: 150px 1fr 100px 100px 80px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.report{
+    padding-bottom: 10px;
+}
+
+#recomment_write{
+    display: none;
+    height: 132px;
+}
+
+.cursor_pointer{
+    cursor: pointer;
+}
+
+.remove1{
+	line-height: 22px;
+    border: none;
+    background: none;
+}
+
+
+/* 답글 수정하기에 대한 CSS */
+
+/* 수정하기 버튼 */
+.comment_modify_btn {
+    border: none;
+    background-color: white;
+}
+
+/* 답글 TEXT창 */
+.comment_input_text {
+    background-color: white;
+    border: none;
+}
+
+.comment_input_text:focus {
+    outline: none;
 }

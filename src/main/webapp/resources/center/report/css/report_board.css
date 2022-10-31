@@ -73,19 +73,35 @@ section {
 }
 
 /* 처리상태 */
-.inquery_status{
+.inquery_status0{
     display: inline-block;
     margin-left: 20px;
 
     line-height: 17px;
 
     text-align: center;
-    background-color: beige;
+    background: gray;
     color: aliceblue;
     border-radius: 10px;
     height: 20px;
     width: 55px;
 }
+.inquery_status1{
+    display: inline-block;
+    margin-left: 20px;
+
+    line-height: 17px;
+
+    text-align: center;
+    background: rgb(20 167 255);
+    color: aliceblue;
+    border-radius: 10px;
+    height: 20px;
+    width: 55px;
+}
+
+
+
 
 /* ============================= */
 .hr-1 {
@@ -154,7 +170,51 @@ section {
     margin-right: -16px;
     font-size: 22px;
     margin-top: 10px;
+}
 
+ /* 페이징 */
+#report-paging-div {
+    margin-top: 10px;
+}
+
+#report-paging-div ul {
+    display: flex;
+    justify-content: center;
     
 }
 
+.mb-currPage-step {
+    padding : 10px, 10px;
+    text-align: center;
+    background-color: rgb(240, 240, 240);
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 18px;
+    cursor: pointer;
+
+    margin-left: 2px;
+
+}
+
+.mb-next, .mb-prev {
+    margin-left: 15px;
+    padding : 10px, 10px;
+    text-align: center;
+    background-color: rgb(240, 240, 240);
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+
+    border-radius: 18px;
+    cursor: pointer;
+}
+
+.mb-currPage {
+    background-color: #2E4361;
+    
+}
+
+.mb-currPage  {
+    color: white;
+}

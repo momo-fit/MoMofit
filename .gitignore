@@ -6,6 +6,7 @@
 .springBeans
 
 /target
+/src/test
 
 ### Eclipse ###
 .metadata
@@ -19,6 +20,10 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+
+**/**.properties
+**/*.properties
+*.properties
 
 # External tool builders
 .externalToolBuilders/

@@ -143,3 +143,67 @@ section {
     
 }
 
+/* Pagination  */
+#pagination ul {            
+    display: flex;
+    justify-content: center;
+}
+
+#pagination ul li {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding : 10px, 10px;
+    text-align: center;
+    background-color: rgb(240, 240, 240);            
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 18px;
+    cursor: pointer;
+}
+
+#pagination ul li a{
+    text-decoration: none;            
+}
+
+#pagination ul li.prev {
+    margin-right: 15px;
+    padding : 10px, 10px;
+    text-align: center;
+    background-color: rgb(240, 240, 240);
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 18px;
+    color: rgb(20 167 255);
+    cursor: pointer;
+}
+
+#pagination ul li.next {
+    margin-left: 15px;
+    padding : 10px, 10px;
+    text-align: center;
+    background-color: rgb(240, 240, 240);
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 18px;
+    color: rgb(20 167 255);
+    cursor: pointer;
+}
+
+.currPage {
+    padding : 10px, 10px;
+    text-align: center;
+    background-color: rgb(20 167 255) !important;
+    color: white !important;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 18px;
+    cursor: pointer;
+}
+
+.currPage a{
+    color: white !important;
+}

@@ -39,28 +39,6 @@ input[id="side_profile_icon"]:checked + label + div {
     z-index: 10;
 }
 
-
-/* input[id="side_profile_icon"] + label span {
-    display:block; position: absolute; 
-    width:100%; height: 5px; 
-    border-radius: 30px; background: #000;
-    transition: all .35s;
-} */
-
-/* input[id="side_profile_icon"] + label span:nth-child(1) {top:0;}
-input[id="side_profile_icon"] + label span:nth-child(2) {top:50%; transform: translateY(-50%);}
-input[id="side_profile_icon"] + label span:nth-child(3) {bottom:0;} */
-/* input[id="side_profile_icon"]:checked + label span {background: #fff;}
-input[id="side_profile_icon"]:checked + label span:nth-child(1) {
-    top:50%; transform: translateY(-50%); rotate: (45deg);
-}
-input[id="side_profile_icon"]:checked + label span:nth-child(2) { opacity: 0;}
-input[id="side_profile_icon"]:checked + label span:nth-child(3) {
-    bottom:50%; transform: translateY(50%); rotate: (-45deg);
-} */
-
-
-
 /* 우측 상단 알림벨 */
 .side_profile_1_bell {
 
@@ -74,8 +52,8 @@ input[id="side_profile_icon"]:checked + label span:nth-child(3) {
 .side_profile_1_person {
     width: 170px;
     height: 170px;
-    margin-top: 10%;
-    margin-left: 20%;
+    margin-top: 40%;
+    margin-left: 22%;
     overflow: hidden;
     position: relative;
     
@@ -94,26 +72,15 @@ input[id="side_profile_icon"]:checked + label span:nth-child(3) {
 
 .side_profile_1_text {
     margin-top: 10px;
+    margin-left: 10px;
 }
 
 /* 닉네임 */
 .side_profile_nickname {
-    
-    font-size: 20px;
-    font-weight: bold;   
+	background: linear-gradient(to top, rgba(255, 162, 0, 0.437) 60%, transparent 50%);
 }
-
-/* 성별 */
-.side_profile_gender {
-    color: rgb(0, 213, 255);
-    font-size: 18px;
-    font-weight: bold;  
-}
-
 /* 지역 */
 .side_profile_1_loc {
-    font-size: 18px;
-    font-weight: bold;  
 }
 
 /* 지역 인증 */
@@ -125,15 +92,18 @@ input[id="side_profile_icon"]:checked + label span:nth-child(3) {
 
 /* 관심운동 */
 .side_profile_1_sports {
-    text-align: left;
-    margin-left: 25%;
+    text-align: center;
 }
 /* 관심운동 리스트에 대한 설정 */
 .side_profile_1_sports > ul> li {
-    list-style-type: square;
+    list-style-type: none;
     font-size: 15px;
-    /* font-weight: bold;  */
+    font-weight: bold; 
 
+}
+
+.side_profile_1_sports > ul  {
+	padding: 0px;
 }
 
 /* 한줄소개 */
@@ -149,7 +119,7 @@ input[id="side_profile_icon"]:checked + label span:nth-child(3) {
 }
 
 
-/* 쪽지 버튼 */
+/* 나의모임 버튼 */
 .side_profile_1_mess {
     /* 글자 */
     font-size: 15px;
@@ -171,8 +141,8 @@ input[id="side_profile_icon"]:checked + label span:nth-child(3) {
     background-color:#fb0314c3;
 }
 
-/* 채팅 버튼 */
-.side_profile_1_chat {
+/* 정보수정 버튼 */
+.side_profile_1_edit{
     /* 글자 */
     font-size: 15px;
     color: white;
@@ -187,7 +157,7 @@ input[id="side_profile_icon"]:checked + label span:nth-child(3) {
     margin-left:20px;
     margin-top: 8px;
 }
-.side_profile_1_chat:hover {
+.side_profile_1_edit:hover {
     background-color:#f6b103;
 }
 

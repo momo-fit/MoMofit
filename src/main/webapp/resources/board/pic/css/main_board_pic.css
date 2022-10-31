@@ -50,6 +50,10 @@ section {
     color: black;
 }
 
+.modifyBtn:hover{
+    text-decoration: none;
+}
+
 .space1 {
     background-color: rgb(217,217,217);
     margin: 0 9px;
@@ -125,8 +129,8 @@ section {
 
 /* 답글 수정하기에 대한 CSS */
 
-/* 수정하기 버튼 */
-.comment_modify_btn {
+/* 댓글 수정 삭제하기 버튼 */
+.comment_btn {
     border: none;
     background-color: white;
 }
@@ -140,3 +144,12 @@ section {
 .comment_input_text:focus {
     outline: none;
 }
+/*업로드된파일뜨게 */
+
+
+#result_card {
+	position: relative;
+	margin: 10px 5px;
+	float:left;
+}
+

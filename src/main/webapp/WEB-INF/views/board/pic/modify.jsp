@@ -24,7 +24,7 @@
     <!-- CSS : main 전체 페이지 설정 -->
     <link rel="stylesheet" href="/resources/common/css/main_page.css">
 
-    <link rel="stylesheet" href="/resources/board/pic/css/writing.css">
+    <link rel="stylesheet" href="/resources/board/pic/css/modify.css">
     <!-- <link rel="stylesheet" href="css/모임개설2.css"> -->
     
     <!-- CSS : main_footer 설정 -->
@@ -35,6 +35,24 @@
 </head>
 
 <body>
+	<script type="text/javascript">
+	
+    let form = $("#infoForm");        // 페이지 이동 form(리스트 페이지 이동, 조회 페이지 이동)
+	let mForm= ${"#modifyForm"}; // 페이지 데이터 수정 form
+    
+    /* 수정 하기 버튼 */
+    $("#modify_button").on("click", function(e){
+        form.attr("action", "/board/pic/modify");
+        
+    });
+    
+    /* 취소 버튼 */
+    $("#cancel_botton").on("click", function(e){
+        form.attr("action", "/board/pic/view");
+        form.submit();
+    });    
+	
+	</script>
     <div class="page">
 
         <!-- header -->
@@ -54,19 +72,21 @@
                         <hr>
                         <!-- 게시글 작성 내용부분 -->
 
-                        <form action="#" method="POST">
+                        <form id="modifyForm" action="modify" method="POST">
+                        <input type="hidden" id="board_no" name="board_no" value='<c:out value="${PicBoard.board_no}"/>'>
+						<input type="hidden" id="currPage" name="currPage" value='<c:out value="${cri.currPage}"/>'>	
 
                             <div class="writing_content">
 
                                 <!-- 1. 게시판 선택 -->
                                 게시판&nbsp;
-                                <select id="select_board" disabled required>
+                                <select id="select_board" name="category_no" disabled required>
                                     <option value="">선택</option>
-                                    <option value="자유게시판">자유게시판</option>
-                                    <option value="운동팁">운동팁</option>
-                                    <option value="운동인증" selected>운동인증</option>
-                                    <option value="중고거래">중고거래</option>
-                                    <option value="문의">문의</option>
+                                    <option value="1">자유게시판</option>
+                                    <option value="2">운동팁</option>
+                                    <option value="3" selected>운동인증 </option>
+                                    <option value="4">중고거래</option>
+                                    
                                 </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                                 <!-- 2-1. (중고거래 선택시) 팝니다/삽니다/나눔 선택 -->
@@ -77,7 +97,7 @@
                                     <option value="나눔">나눔</option>
                                 </select>
                                 
-                                <!-- 2-2. (문의 선택시) 공개/비공개 선택 -->
+                                 <!-- 2-2. (문의 선택시) 공개/비공개 선택 -->
                                 <span id="access">
                                     <input type="radio" name="access" value="1"> 공개
                                     <input type="radio" name="access" value="2" checked> 비공개
@@ -85,7 +105,7 @@
 
                                 <!-- 3. 제목 -->
                                 <br>제목&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input type="text" class="writing_title" required>
+                                <input type="text" class="writing_title" name="title" value="${PicBoard.title}" required>
                                 <br><br>
 
                                 <!-- 4. 첨부파일 -->
@@ -98,21 +118,27 @@
                                     </label>
 
                                     <input type="file" id="input_file" class="upload-hidden" accept='image/jpg,image/png,image/jpeg,image/gif' >
+                               
+                               	    <!-- 첨부된 파일 이미지가  이 안에 이미지 미리보기로 보인다.-->
+                                    <div id="uploadResult">
+
+									</div>
+
                                 </span>
                                 <br><br>
 
                                 <!-- 5. 내용 -->
                                 내용<br>
-                                <textarea class="textarea_content" required></textarea>
+                                <textarea class="textarea_content" name="text" required>${PicBoard.text}</textarea>
 
                             </div>
 
                         <!-- 수정하기/취소하기 버튼 -->
-                        <input type="button" class="cancel_button" value="취소" onClick="location='/board/pic/list'"></input>
-                        <input type="submit" class="writing_submit" value="수정"></input>
-                        
-
+                        <input type="button" class="cancel_button" id="cancel_button" value="취소" onClick="location='/board/pic/view?board_no=${PicBoard.board_no}&currPage=${cri.currPage}'"></input>
+                        <input type="submit" class="writing_submit" id="modify_button" value="수정"></input>
+                   
                         </form>
+
                         
                     </div>
                     
@@ -128,7 +154,7 @@
 
     <!-- 메인화면 자바스크립트 -->
     <script src="/resources/include/js/main_header.js"></script>
-    <script src="/resources/board/pic/js/writing.js"></script>
+    <script src="/resources/board/pic/js/modify.js"></script>
 
     <!-- 부트스트랩 자바스크립트 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

@@ -42,12 +42,24 @@
     <link rel="stylesheet" href="/resources/include/css/main_footer.css">
      <!-- CSS : side_profile 설정 -->
     <link rel="stylesheet" href="/resources/include/css/side_profile.css">
-
-        
+     <!-- CSS : 페이징 처리 설정 -->
+    <link rel="stylesheet" href="/resources/board/pic/css/pagination.css">
+  
+     
 
 </head>
 
 <body>
+	<script src="/resources/board/pic/js/list_image_file.js"></script>
+	
+    <script>
+	    var result="${param.result}";
+    	if(result != null && result.length>0){
+    		alert(result);
+    	}//글 작성,수정,삭제 결과가 참일시, Alert창이 띄워진다.
+        
+    </script>
+    
     <div class="page">        
         <!-- header -->
         <%@ include file = "/WEB-INF/views/include/header.jsp" %>
@@ -66,12 +78,19 @@
                             <h3 class="font-28-700">운동인증</h3>
                         </div>
 
-                        <!-- 검색부분 -->
+                        <!-- 검색부분// keyword(검색어)를 말함-->
                         <div class="sports_check_header">
-                            <form action="#" method="get" class="search">
-                                <input type="search" placeholder="제목">
-                                <button><i class="fa-solid fa-magnifying-glass"></i></button>
-                            </form>
+                        <form action="/board/pic/list" class="PicBoard_SearchForm search" method="get" autocomplete="off" >
+ 	                       <div class="search_area">   
+                     			<input type="text" placeholder="제목" name="keyword" value="${PageMaker.cri.keyword}">
+                                <button type="submit" class="search_btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                           </div>
+                        </form>
+                         <form action="/board/pic/list" class="search" method="get" > 
+							<input type="hidden" name="pageNum_s" value="${pageMaker.cri.pageNum }">
+							<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+							<input type="hidden" name="keyword_s" value="${pageMaker.cri.keyword }">
+                         </form>
                         </div>
 
                         <hr class="hr-1"/>
@@ -80,115 +99,28 @@
                         <div class="check_outter">
                             <!-- 내부 틀 -->
                             <div class="check_inner">
-                                
-                                <!-- 글 : 한개만 a태그 -->
-                                <a onClick="location.href='/board/pic/view'" class="group_aTag">
-                                    <div class="sport_check">
-                                        <div class="sport_check_inner"><img class="sport_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                        <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                            Architecto, nesciunt?</p>
-                                    </div>
-                                </a>
+                                <!-- 글 : 한개만 a태그/리스트목록  -->
 
-                                <div class="sport_check">
-                                    <div class="sport_check_inner"><img class="sport_check_img" src="https://picsum.photos/id/684/520/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="sport_check">
-                                    <div class="sport_check_inner"><img class="sport_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="sport_check">
-                                    <div class="sport_check_inner"><img class="sport_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="sport_check">
-                                    <div class="sport_check_inner"><img class="sport_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="sport_check">
-                                    <div class="sport_check_inner"><img class="sport_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="sport_check">
-                                    <div class="sport_check_inner"><img class="sport_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="sport_check">
-                                    <div class="sport_check_inner"><img class="sport_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="sport_check">
-                                    <div class="sport_check_inner"><img class="sport_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="sport_check">
-                                    <div class="sport_check_inner"><img class="sport_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="sport_check">
-                                    <div class="sport_check_inner"><img class="sport_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="sport_check">
-                                    <div class="sport_check_inner"><img class="sport_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="sport_check">
-                                    <div class="sport_check_inner"><img class="sport_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="sport_check">
-                                    <div class="sport_check_inner"><img class="sport_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="sport_check">
-                                    <div class="sport_check_inner"><img class="sport_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="sport_check">
-                                    <div class="sport_check_inner"><img class="sport_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="sport_check">
-                                    <div class="sport_check_inner"><img class="sport_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="sport_check">
-                                    <div class="sport_check_inner"><img class="sport_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="sport_check">
-                                    <div class="sport_check_inner"><img class="sport_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
-                                <div class="sport_check">
-                                    <div class="sport_check_inner"><img class="sport_check_img" src="https://picsum.photos/id/684/220/130"></div>
-                                    <p class="font-14-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Architecto, nesciunt?</p>
-                                </div>
+                                <c:forEach var="PicBoardList" items="${PicBoardList}">
+	                                <a onClick="location.href='/board/pic/view?board_no=${PicBoardList.board_no}&currPage=${pageMaker.cri.currPage}'">
+	                                    <div class="sport_check" >
+
+	                                    <div class="sport_check_inner"><img class="sport_check_img" src="/display?fileName=${PicBoardList.path}/${PicBoardList.temp}_${PicBoardList.board_img_name}" onerror="this.src='/display?fileName=no-pictures.png'"></div>
+	                                        <!-- <div class="uploadResult" class="sport_check_inner" >
+
+	                                        </div> -->
+	             
+	                                        <p class="font-16-500 title_position"><c:out value="${PicBoardList.title}"/></p>
+	                                    </div>
+	                                </a>
+                                <!-- <script>$("#uploadResult").empty();</script> -->
+                                </c:forEach>    
+
 
                             </div>
 
                             <!-- 구분선 -->
+                            <br>
                             <hr class="hr-1"/>
                             
                             <!-- 하단 버튼 -->
@@ -197,10 +129,29 @@
                                     <button><i class="fa-solid fa-heart"></i></button>
                                 </a>
                             </div>
+	
+							<!-- 페이징 처리 하기  -->
+                            <div id="pagination">
+                                <ul>
+                                    <c:if test="${pageMaker.prev}">
+                                    <li class="prev"><a href="/board/pic/list?currPage=${pageMaker.startPage - 1}">Prev</a></li>
+                                    </c:if>
+                
+                					<!--pageNum은 변수명이고 시작과 끝페이지의 값 반복하게하기   -->
+				                    <c:forEach var="pageNum" begin="${pageMaker.startPage}" end="${pageMaker.endPage}" >
+				                        <li class="${pageMaker.cri.currPage==pageNum?'currPage':''}">
+				                        <a href="/board/pic/list?currPage=${pageNum}">${pageNum}</a></li>
+				                    </c:forEach>
+                                    
+                                    <c:if test="${pageMaker.next}">
+                                    <li class="next"><a href="/board/pic/list?currPage=${pageMaker.endPage + 1}">Next</a></li>
+                                    </c:if>
+                                </ul>
+                            </div>
 
                             <div class="sport_check_bottom">
                                 <!-- <a href="#" class="board_write"> -->
-                                    <button type="button" class="board_write" onClick="location.href='/board/pic/register'"><i class="fa-solid fa-pencil">글쓰기</i></button>
+                                    <button type="button" class="board_write" onClick="location.href='/board/pic/register?currPage=${pageMaker.cri.currPage}'" ><i class="fa-solid fa-pencil">글쓰기</i></button>
                                 <!-- </a> -->
                             </div>
                         </div>
@@ -208,7 +159,7 @@
 
 
 
-                </div>
+                </div> 
             </div>
 
         </section>
@@ -219,16 +170,22 @@
     </div>
 
 
+
+
     <!-- 메인화면 자바스크립트 -->
     <script src="/resources/include/js/main_header.js"></script>
-    
-    
-
+ 
+	<!-- 업로드 된 이미지 리스트 대표이미지로 뜨게하기 -->
+	 <script src="/resources/board/pic/js/list_image_file.js"></script>
+	 <script src="/resources/board/pic/js/search.js"></script>
+	 
 
     <!-- 부트스트랩 자바스크립트 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+
+
 </body>
 
 </html>

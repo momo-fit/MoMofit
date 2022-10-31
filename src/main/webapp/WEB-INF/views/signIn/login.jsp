@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>main</title>
+    <title>로그인</title>
     <!-- 부트스트랩 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
@@ -29,6 +29,15 @@
     <link rel="stylesheet" href="/resources/common/css/main_mediatag.css">
     
     <link rel="stylesheet" href="/resources/signIn/css/login.css">
+    <!-- 회원가입 status -->
+    <script>
+	    let loginFailResult = '${loginFailResult}';
+	    
+	    if(loginFailResult != null && loginFailResult.length > 0){
+	        alert(loginFailResult);
+	    }
+
+    </script>
 
 </head>
 
@@ -48,17 +57,17 @@
                             <br><h3 class="form_name">로그인</h3><br>
                             <!-- <span class="login_text">로그인</span><br> -->
                             
-                            <input type="text" name="login_id" id="login_id" autofocus="1" placeholder="아이디를 입력하세요."><br>
-                            <input type="password" name="login_pw" id="login_pw" placeholder="비밀번호를 입력하세요."><br>
+                            <input type="text" name="id" id="login_id" autofocus="1" placeholder="아이디를 입력하세요."><br>
+                            <input type="password" name="pass" id="login_pw" placeholder="비밀번호를 입력하세요."><br>
                             
                             <div class="checkbox_autologin">
 
-                                <input type="checkbox" class="checkbox_autologin" value="1"> 자동로그인
+                                <input type="checkbox" class="checkbox_autologin" name="rememberMe" id="rememberMe"> <label for="rememberMe">자동로그인</label>
                             
                             </div>
 
                             <!-- 로그인 버튼 -->
-                            <button type="submit" class="button_login" onclick="alert('로그인 성공!')" name="button_login">
+                            <button type="submit" class="button_login" name="button_login">
                             로그인
                             </button><br>
 
@@ -88,6 +97,7 @@
 
     <!-- 메인화면 자바스크립트 -->
     <script src="/resources/main/js/main.js"></script>
+    
 
     <!-- 부트스트랩 자바스크립트 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

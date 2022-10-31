@@ -46,24 +46,19 @@
             <div class="section_wrap">
                 <div class="s_box_board">
                     <div class="writing">
-                        <div class="writing_head"><br>게시글 작성</div>
+                        <div class="writing_head"><br>문의합니다</div>
                         <hr>
                         <!-- 게시글 작성 내용부분 -->
 
                         <form class="writing_form" 
-                            action="#" method="post">
+                            action="register" method="post">
 
                             <div class="writing_content">
 
                                 <!-- 1. 게시판 선택 -->
                                 게시판&nbsp;
                                 <select id="select_board" required>
-                                    <option value="">선택</option>
-                                    <option value="자유게시판">자유게시판</option>
-                                    <option value="운동팁">운동팁</option>
-                                    <option value="운동인증">운동인증</option>
-                                    <option value="중고거래">중고거래</option>
-                                    <option value="문의">문의</option>
+                                    <option value="문의" selected>문의</option>
                                 </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                                 <!-- 2-1. (중고거래 선택시) 팝니다/삽니다/나눔 선택 -->
@@ -75,14 +70,14 @@
                                 </select>
                                 
                                 <!-- 2-2. (문의 선택시) 공개/비공개 선택 -->
-                                <span id="access">
+                                <span>
                                     <input type="radio" name="access" value="1"> 공개
                                     <input type="radio" name="access" value="2" checked> 비공개
                                 </span><br>
 
                                 <!-- 3. 제목 -->
                                 <br>제목&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input type="text" class="writing_title" required>
+                                <input type="text" class="writing_title" name="title" required>
                                 <br><br>
 
                                 <!-- 4. 첨부파일 -->
@@ -100,14 +95,18 @@
 
                                 <!-- 5. 내용 -->
                                 내용<br>
-                                <textarea class="textarea_content" required></textarea>
+                                <textarea class="textarea_content" name="text" required></textarea>
 
                             </div>
 
 	                        <!-- 작성하기/취소하기 버튼 -->
                         <input type="button" class="cancel_button" value="취소" onClick="location='/center/qna/list'"></input>
-	                        <input type="submit" class="writing_submit" value="작성"></input>
-
+	                    <input type="submit" class="writing_submit" value="작성"></input>
+							
+					
+						<input type="hidden" name="img_check" value=0>
+                        <input type="hidden" name="qna_result" value=0>
+                        <input type="hidden" name="user_no" value="${sessionScope.__USER__.user_no}">
                         </form>
                         
                     </div>

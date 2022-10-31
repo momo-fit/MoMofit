@@ -31,6 +31,7 @@
     <!-- fontawesome -->
     <script src="https://kit.fontawesome.com/7d82554876.js" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/556efa47d7.js" crossorigin="anonymous"></script>
+    
 
     <!-- 전 페이지 공통 설정 -->
     <!-- CSS : font 설정 -->
@@ -51,6 +52,12 @@
     
     <!-- CSS : 마이페이지 컨텐츠 영역 CSS -->
     <link rel="stylesheet" href="/resources/mypage/css/mypage_content1.css">
+
+    <script src="/resources/mypage/js/module/mypage_comment_module.js"></script>
+	<script src="/resources/mypage/js/module/mypage_util_module.js"></script>
+	
+	<script src="/resources/mypage/js/mypage_comment.js"></script>
+	
 
 </head>
 
@@ -74,89 +81,53 @@
 
                     <div class="s_box_content">
                         <!-- 각 페이지 제목 -->
-                        <div class="mypage-content-title font-24-700">내 댓글</div>
+                        <div class="mypage-content-title font-24-700">내 댓글<span class="font-12-400 mp-total-page"></span></div>
                         <div class="mypage-border"></div><br>
     
                         <!-- 내 댓글 게시판 테이블 -->
                         <table class="mypage-table font-14-400">
                             <!-- 게시판 헤더 -->
                             <thead class="mypage-thead-tr">
-                                <tr>
-                                    <th>
-                                        <div class="mypage-checkbox"><input type="checkbox" name="comment-check" onclick='selectAll(this)'/></div>
-                                        댓글
+                                <tr class="mp-tr">
+                                    <th class="mypage-checkbox mc-checkbox"><input type="checkbox" name="comment_check" onclick='selectAll(this)'/></th>
+                                    <th class="mc-select">
+                                        <select name="cetegory_no" id="select-board-category">
+                                            <option value="0" selected>게시판</option>
+                                            <option value="1">자유게시판</option>
+                                            <option value="2">운동tip</option>
+                                            <option value="3">운동인증</option>
+                                            <option value="4">중고거래</option>
+                                        </select>
                                     </th>
-                                    <th>작성자</th>
-                                    <th>시간</th>
+                                    <th class="mc-title">게시글제목 / 내 댓글</th>
+                                    <th class="mc-date">작성일</th>
                                 </tr>
                             </thead>
                             <!-- 게시판 바디 -->
-                            <tbody>
-                                <!-- 내가 쓴 댓글 내용 -->
-                                <tr class="mypage-tbody-tr">
-                                    <td class="mypage-table-title">
-                                        <div class="mypage-checkbox"><input type="checkbox" name="comment-check"></div>
-                                        <div class="mypage-comment"><a href="#" class="mypage-link">소음 어때??</a></div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <!-- 원글 제목, 댓글 작성자, 작성 시간 -->
-                                <tr class="mypage-tr-border mypage-tbody-tr mypage-origin-board-title font-14-400">
-                                    <td>
-                                        <div class="td-title">
-                                            <div class="mypage-title-content">원문제목 : 위닉스 뽀송 제습기 후기</div>
-                                            <div class="mypage-comm-cnt">14</div>
-                                        </div>
-                                    </td>
-                                    <td>지리산불곰</td>
-                                    <td>22.01.12 00:12</td>
-                                </tr>
-                                <tr class="mypage-tbody-tr">
-                                    <td class="mypage-table-title">
-                                        <div class="mypage-checkbox"><input type="checkbox" name="comment-check"></div>
-                                        <div class="mypage-comment"><a href="#" class="mypage-link">소음 어때??</a></div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <!-- 원글 제목, 댓글 작성자, 작성 시간 -->
-                                <tr class="mypage-tr-border mypage-tbody-tr mypage-origin-board-title font-14-400">
-                                    <td>
-                                        <div class="td-title">
-                                            <div class="mypage-title-content">원문제목 : 위닉스 뽀송 제습기 후기</div>
-                                            <div class="mypage-comm-cnt">14</div>
-                                        </div>
-                                    </td>
-                                    <td>지리산불곰</td>
-                                    <td>22.01.12 00:12</td>
-                                </tr>
-                                <tr class="mypage-tbody-tr">
-                                    <td class="mypage-table-title">
-                                        <div class="mypage-checkbox"><input type="checkbox" name="comment-check"></div>
-                                        <div class="mypage-comment"><a href="#" class="mypage-link">소음 어때??</a></div>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <!-- 원글 제목, 댓글 작성자, 작성 시간 -->
-                                <tr class="mypage-tr-border mypage-tbody-tr mypage-origin-board-title font-14-400">
-                                    <td>
-                                        <div class="td-title">
-                                            <div class="mypage-title-content">원문제목 : 위닉스 뽀송 제습기 후기</div>
-                                            <div class="mypage-comm-cnt">14</div>
-                                        </div>
-                                    </td>
-                                    <td>지리산불곰</td>
-                                    <td>22.01.12 00:12</td>
-                                </tr>
+                            <tbody class="comment-tbody">
+                                <!-- 댓글 리스트 출력 영역 -->
+                            </tbody>   
                                 <!-- 댓글 삭제 버튼 -->
                                 <button class="mypage-btn"> 
                                     <span class="dropbtn_icon">삭제</span>
                                 </button>
-                                
-                            </tbody>
                         </table>
+
+                        <div class="bs-wrap">
+                            <select name="" id="bs-select" class="bs-select">
+                                <option value="0" selected>댓글</option>
+                            </select>
+                            <input type="text" class="bs-text">
+                            <button class="bs-btn">검색</button>
+                            <input type="hidden" id="hidden-bs-type">
+                            <input type="hidden" id="hidden-bs-text">
+                        </div>
+
+                        <div class="board-paging-div">
+                            <ul>
+                                <!-- 페이징 처리 -->
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -180,5 +151,298 @@
 
     <!-- 부트스트랩 자바스크립트 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
+    <script>
+
+        $(function(){
+
+            // 현재 페이지와 게시판 카테고리를 저장하기 위한, 변수 선언
+            var page = 1;
+            var category = 0;
+
+            // comment_list 페이지 초기화 시, 변수 초기화
+            var param = {
+                page : page,
+                category : category
+            }
+            
+            // 검색
+            var filter = {
+                type : '',
+                keyword : ''
+            }
+
+            // myPage - 내 댓글 목록 조회 (1번 Page)
+            showCommentList(param, filter);
+
+            function showCommentList(param, filter){
+                // console.log(param, filter);
+
+                mypageCommentService.getCommentList({page: param.page||1, category: param.category||0}, filter, function(data){
+
+                    let listVO = data.voList;
+                    let pageDTO = data.pageDTO;
+
+                    let str = "";
+                    let commentBox = $(".comment-tbody");
+
+                    for(var i=0, len = listVO.length; i<len; i++){
+                        // console.log("리스트 :", listVO[i]);
+
+                        var comm_no = listVO[i].comm_no;
+                        var board_no = listVO[i].board_no;
+                        var text = listVO[i].text;
+                        var comm_date = listVO[i].comm_date;
+                        var parent_no = listVO[i].parent_no;
+                        var user_no = listVO[i].user_no;    // 댓글 쓴 이 (나)
+
+                        var title = listVO[i].title;        // 댓글이 달린 글 제목
+                        var category_no = listVO[i].category_no;
+                        var category_name = listVO[i].category_name;    // 게시판 카테고리
+
+                        var format_comment_date = mypageUtilService.timeFormat(comm_date);
+
+
+                        str +=
+                        `<tr class="mypage-tbody-tr mypage-tr-border mp-tr">
+                            <td class="mypage-checkbox mc-checkbox"><input type="checkbox" name="comment-check" class="comment-check" value="\${comm_no}"></td>
+                            <td class="mc-selected">\${category_name}</td>
+                            <td class="mypage-table-title mc-title">
+                                <div class="mp-b-comm-wrap">`
+                        str +=     selectBoardLink(category_no, board_no, title);
+
+                        str +=     `<div class="mp-comm"><i class="fa-solid fa-arrow-right"></i>&nbsp;\${text}</div>
+                                </div>
+                            </td>
+                            <td class="mc-date">\${format_comment_date}</td>
+                        </tr>`
+                    } // for
+
+                    // 작성 댓글이 없을 때...
+                    if(listVO == null || listVO.length == 0){
+                        str += `<tr class="mypage-tbody-tr mypage-tr-border">
+                            <td colspan="4">작성 된 글이 없습니다.</td>
+                        </tr>`;
+                    };
+
+                    // 페이징 처리
+                    let cri = pageDTO.cri;
+                    let startPage = pageDTO.startPage;
+                    let endPage = pageDTO.endPage;
+                    let prev = pageDTO.prev;
+                    let next = pageDTO.next;
+                    let currPage = cri.currPage;
+
+                    let pagingul = $(".board-paging-div ul");
+                    var pagingli = "";
+
+                    if(prev){
+                        pagingli += `<li class="mb-prev font-16-700"><</li>`;
+                    }
+
+                    for(var step = startPage; step <= endPage; step++){
+                        if(startPage == 0){
+                            break;
+                        }
+
+                        if(currPage == step){
+                            pagingli +=  `<li class="mb-currPage mb-currPage-step font-16-700">\${step}</li>`
+                        } else {
+                            pagingli += `<li class="mb-currPage-step font-16-700">\${step}</li>`
+                        }
+                    } // for
+
+                    if(next){
+                        pagingli += `<li class="mb-next font-16-900">></li>`;
+                    }
+
+                    pagingul.html(pagingli);
+                    commentBox.html(str);
+
+                    //---------------------
+                    // 페이지 및 댓글 수 Info
+                    //---------------------
+                    let infoPageBox = $(".mp-total-page");     // 총  댓글 개수 + 페이지 위치
+
+                    var totalAmount = pageDTO.totalAmount;
+                    var realEndPage = pageDTO.realEndPage;
+
+                    var info = `total:\${totalAmount}, page \${currPage}/\${realEndPage}`;
+                    infoPageBox.text(info);
+                    
+                    //---------------------
+                    // 페이징 이동하기
+                    //---------------------
+                    $(".mb-currPage-step").on('click', function(){
+                        category = $("#select-board-category").val();   // 카테고리 선택
+                        page = $(this).text();    // 이동할 페이지 선택
+
+                        var param = {
+                            page: page,
+                            category: category
+                        };
+
+                        var filter = {
+                            type : $("#hidden-bs-type").val(),
+                            keyword :$("#hidden-bs-text").val()
+                        };
+
+                        showCommentList(param, filter);
+                    })
+
+
+                    //---------------------
+                    // Next 이동
+                    //---------------------
+                    $(".mb-next").on('click', function () {
+                        category = $("#select-board-category").val();   // 카테고리 선택
+                        page = endPage + 1;
+
+                        var param = {
+                            page: page,
+                            category: category
+                        };
+
+
+                        var filter = {
+                            type : $("#hidden-bs-type").val(),
+                            keyword :$("#hidden-bs-text").val()
+                        };
+
+                        showCommentList(param, filter);
+                    })
+
+                    //---------------------
+                    // prev 이동
+                    //---------------------
+                    $(".mb-prev").on('click', function(){
+                        category = $("#select-board-category").val();   // 카테고리 선택
+                        page = startPage - 1;
+
+                        var param = {
+                            page: page,
+                            category: category
+                        };
+
+                        var filter = {
+                            type : $("#hidden-bs-type").val(),
+                            keyword :$("#hidden-bs-text").val()
+                        };
+
+                        showCommentList(param, filter);
+                    })
+
+                })
+
+            }; // showCommentList
+
+            //---------------------
+            // 게시판 카테고리 선택
+            //---------------------               
+            $("#select-board-category").on('change', function() {
+                category = $(this).val();
+
+                var param = {
+                    page: 1,
+                    category: category
+                };
+
+                var filter = {
+                    type : $("#hidden-bs-type").val(),
+                    keyword :$("#hidden-bs-text").val()
+                };
+
+                showCommentList(param, filter);
+            });
+
+            //---------------------
+            // 게시판 검색 + 카테고리
+            //---------------------
+            $(".bs-btn").on('click', function() {
+                let category = $("#select-board-category").val();
+
+                let type = $("#bs-select").val();
+                let keyword = $(".bs-text").val();
+
+                $("#hidden-bs-type").attr('value', type);
+                $("#hidden-bs-text").attr('value', keyword);
+
+                var param = {
+                    page: 1,
+                    category: category
+                };
+
+                var filter = {
+                    type : $("#hidden-bs-type").val(),
+                    keyword :$("#hidden-bs-text").val()
+                };
+
+
+                showCommentList(param, filter);
+
+                $("#bs-select").prop('selectedIndex',0);
+
+                $(".bs-text").val('');
+            });
+
+            //---------------------
+            // 게시글 삭제
+            //---------------------
+            $(".mypage-btn").on('click', function() {
+                console.log("category : ", category);
+                console.log("page : ", page);
+
+                let removeResult = [];  // 삭제 Result결과
+
+                
+                $(".comment-check:checked").each(function () {
+                    var bno = $(this).val();
+
+                    //Delete을 input:checkbox가 checked된 수 만큼 반복 호출
+                    mypageCommentService.removeReply(bno, function(result){
+                        removeResult.push(result);
+                    })         
+                })
+
+                // input:checkbox check해제
+                $("input[name=comment-check]").prop("checked", false);
+
+                // 화면 새로고침 (초기화)
+
+
+                var param = {
+                    page : page,
+                    category : category
+                }
+                var filter = {
+                    type : $("#hidden-bs-type").val(),
+                    keyword :$("#hidden-bs-text").val()
+                }
+
+                showCommentList(param, filter);
+
+            })
+
+            function selectBoardLink(param_categoryNo, param_boardNo, param_title){
+                switch(param_categoryNo){
+                    // 자유게시판
+                    case 1 : return `<a href="../board/free/view?board_no=\${param_boardNo}" class="mypage-title-content mp-title-content mc-title-content">게시글 제목 : \${param_title}</a>`;
+                    // 운동Tip
+                    case 2 : return `<a href="../board/tip/view?board_no=\${param_boardNo}"  class="mypage-title-content mp-title-content mc-title-content">게시글 제목 : \${param_title}</a>`;
+                    // 운동인증
+                    case 3 : return `<a href="../board/pic/view?board_no=\${param_boardNo}"  class="mypage-title-content mp-title-content mc-title-content">게시글 제목 : \${param_title}</a>`;
+                    // 중고거래
+                    case 4 : return `<a href="../board/trade/view?board_no=\${param_boardNo}"  class="mypage-title-content mp-title-content mc-title-content">게시글 제목 : \${param_title}</a>`;
+                }
+
+            } // selectBoardLink
+
+
+        }) // entry-Point
+
+    </script>
+
+
 </body>
 </html>

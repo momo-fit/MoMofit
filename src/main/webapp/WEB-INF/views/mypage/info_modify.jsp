@@ -53,6 +53,9 @@
     <!-- CSS : 마이페이지 개인정보수정 CSS -->
     <link rel="stylesheet" href="/resources/mypage/css/mypage_info_modify.css">
 
+    <!-- RSA 암호화 라이브러리 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/3.2.1/jsencrypt.min.js" integrity="sha512-hI8jEOQLtyzkIiWVygLAcKPradIhgXQUl8I3lk2FUmZ8sZNbSSdHHrWo5mrmsW1Aex+oFZ+UUK7EJTVwyjiFLA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </head>
 
 <body>
@@ -79,8 +82,42 @@
     
                         <div class="s_box_content2">
                             <div class="name2 font-22-700">기본정보</div>
+                            <%@ page import = "org.zerock.momofit.domain.signIn.*" %>
+                            <%@ page import = "java.util.Date" %>
+                            <%
+                                LoginVO loginUserVO = (LoginVO) session.getAttribute("__USER__");
+
+  
+                                Date userDate = loginUserVO.getBirth();
+
+                                String userGender = loginUserVO.getGender();
+
+                                String userEmail= loginUserVO.getEmail();
+                                String[] emailSplit = userEmail.split(",");
+
+                                String emailID = emailSplit[0];
+                                String emailDomain = emailSplit[1];
+                                
+                                String userLocation = loginUserVO.getUser_loc();
+
+                                String user_profile_name = loginUserVO.getProfile_name();
+                                String user_profile_temp = loginUserVO.getProfile_temp();
+                                String user_profile_path = loginUserVO.getProfile_path();
+
+                                boolean isEmptyProfileImg = loginUserVO.isEmptyProfileImg();
+                    
+                            %>
+                            <c:set var="userGender" value="<%= userGender %>"/>
+                            <c:set var="emailID" value="<%= emailID %>"/>
+                            <c:set var="emailDomain" value="<%= emailDomain %>"/>
+                            <c:set var="userDate" value="<%= userDate %>"/>
+                            <c:set var="userLocation" value="<%= userLocation %>"/>
+
+                            <c:set var="profile_name" value="<%= user_profile_name %>"/>
+                            <c:set var="profile_temp" value="<%= user_profile_temp %>"/>
+                            <c:set var="profile_path" value="<%= user_profile_path %>"/>
     
-                            <form action="#" method="post">
+                            <form action="/mypage/info_modify" method="post" enctype="multipart/form-data">
                                 <table class="table table-boardered">
                                     <tr name3 class="name3 font-14-400">
                                         <th>아이디</th>
@@ -90,32 +127,43 @@
     
                                     <tr name3 class="name3 font-14-400">
                                         <th>닉네임</th>
-                                        <td><input type="text" class="form-control" name="nick_name" id="nick_name"
-                                                placeholder="id"></td>
-                                        <td><input type="button" value="중복확인" onclick="nickCheck()"
-                                                class="btn btn-primary" /></td>
+                                        <td><input type="text" class="form-control" name="nickname" id="nick_name"placeholder="id" value="<c:out value='${sessionScope.__USER__.nickname}'/>"></td>
+                                        <td><input type="button" value="중복확인" class="btn btn-primary" id="nickBtn" /></td>
+                                    </tr>
+
+                                    <tr>
+                                        <th></th>
+                                        <td><span id="nickNameResult" class="font-12-400"></span></td>
                                     </tr>
     
                                     <tr name3 class="name3 font-14-400">
                                         <th>비밀번호</th>
-                                        <td><input type="password" class="form-control" name="pass1" placeholder="비밀번호">
+                                        <td><input type="password" class="form-control pass1" name="pass1" placeholder="비밀번호">
+                                            <input type="hidden" name="pass" id="encrypted-pass">
                                         </td>
                                     </tr>
+
+
     
                                     <tr name3 class="name3 font-14-400">
                                         <th>비밀번호 확인</th>
-                                        <td><input type="password" class="form-control" name="pass2" placeholder="비밀번호 확인">
+                                        <td><input type="password" class="form-control pass2" name="pass2" placeholder="비밀번호 확인">
                                         </td>
+                                    </tr>
+
+                                    <tr class="pwCheck">
+                                        <th></th>
+                                        <td><span id="pwCheck" class="font-12-400"></span></td>
                                     </tr>
     
                                     <tr name3 class="name3 font-14-400">
                                         <th>이름</th>
-                                        <td><input type="text" class="form-control" name="real_name"></td>
+                                        <td><input type="text" class="form-control" name="user_name" value="<c:out value='${sessionScope.__USER__.user_name}'/>"></td>
                                     </tr>
     
                                     <tr name3 class="name3 font-14-400">
                                         <th>전화번호</th>
-                                        <td><input type="tel" class="form-control" name="tel" placeholder="000-0000-0000">
+                                        <td><input type="tel" class="form-control" name="tel" placeholder="-없이 숫자만 입력" maxlength="11" oninput="autoHypenPhone(this)" value="<c:out value='${sessionScope.__USER__.tel}'/>">
                                         </td>
                                     </tr>
     
@@ -123,9 +171,9 @@
                                         <th>성별</th>
                                         <td>
                                             <select name="gender" class="form-control">
-                                                <option value="gender_default">성별</option>
-                                                <option value="gender_man">남자</option>
-                                                <option value="gender_woman">여자</option>
+                                                <option value="">성별</option>
+                                                <option value="m" <c:if test="${userGender == 'm'}">selected</c:if>>남자</option>
+                                                <option value="f" <c:if test="${userGender == 'f'}">selected</c:if>>여자</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -133,33 +181,16 @@
                                     <tr name3 class="name3 font-14-400">
                                         <th>생년월일</th>
                                         <td>
-                                            <input type="date" name="birth" class="form-control">
+                                            <input type="date" name="birth" class="form-control" value="<c:out value='${userDate}' />">
                                         </td>
                                     </tr>
-    
+                                    
                                     <tr name3 class="name3 font-14-400">
                                         <th>이메일</th>
                                         <td>
-                                            <input class="form-control-sm" name="email1" type="text"> @ <input
-                                                class="form-control-sm" name="email2" type="text">
-                                            <select class="form-control-sm" name="select_email"
-                                                onChange="selectEmail(this)">
-                                                <option value="" selected>선택하세요</option>
-                                                <option value="naver.com">naver.com</option>
-                                                <option value="gmail.com">gmail.com</option>
-                                                <option value="hanmail.com">hanmail.com</option>
-                                                <option value="1">직접입력</option>
-                                            </select>
+                                            <input class="form-control-sm emailbox" name="email1" type="text" value="<c:out value='${emailID}'/>" readonly> @ <input
+                                                class="form-control-sm emailbox" name="email2" type="text" value="<c:out value='${emailDomain}'/>" readonly>
                                         </td>
-                                        <td><button type="button" class="btn btn-primary">인증</button></td>
-    
-                                    </tr>
-    
-                                    <tr name3 class="name3 font-14-400">
-    
-                                        <th>인증번호</th>
-                                        <td><input type="password" class="form-control" name="cer_num"
-                                                placeholder="인증번호를 입력하세요."></td>
                                     </tr>
     
                                     <tr>
@@ -171,23 +202,22 @@
     
                                     <tr name3 class="name3 font-14-400">
                                         <th>지역</th>
-                                        <td><input type="search" class="form-control" name="location" placeholder="지역"></td>
-                                        <td><button type="button" class="btn btn-primary">지역검색</button></td>
+                                        <td><input type="search" class="form-control" id="loc" name="user_loc" placeholder="지역" value="<c:out value='${userLocation}'/>"></td>
+                                        <td><button type="button" class="btn btn-primary btn-primary3">지역검색</button></td>
                                     </tr>
     
                                     <tr name3 class="name3 font-14-400">
                                         <th>관심운동</th>
                                         <td>
-                                            <input type="checkbox" name="hobby" value="헬스">헬스 &nbsp;
-                                            <input type="checkbox" name="hobby" value="등산">등산 &nbsp;
-                                            <input type="checkbox" name="hobby" value="축구">축구 &nbsp;
-                                            <input type="checkbox" name="hobby" value="농구">농구 &nbsp;
-                                            <input type="checkbox" name="hobby" value="농구">농구 &nbsp; <br>
-                                            <input type="checkbox" name="hobby" value="농구">농구 &nbsp;
-                                            <input type="checkbox" name="hobby" value="농구">농구 &nbsp;
-                                            <input type="checkbox" name="hobby" value="농구">농구 &nbsp;
-                                            <input type="checkbox" name="hobby" value="농구">농구 &nbsp;
-                                            <input type="checkbox" name="hobby" value="농구">농구 &nbsp;
+                                            <input type="checkbox" name="hobby" value="헬스/크로스핏" id="label1" onclick="CountChecked(this)"><label for="label1">헬스/크로스핏&nbsp;</label>
+                                            <input type="checkbox" name="hobby" value="등산" id="label2" onclick="CountChecked(this)"><label for="label2">등산&nbsp;</label>
+                                            <input type="checkbox" name="hobby" value="런닝" id="label3" onclick="CountChecked(this)"><label for="label3">런닝&nbsp;</label>
+                                            <input type="checkbox" name="hobby" value="싸이클" id="label4" onclick="CountChecked(this)"><label for="label4">싸이클&nbsp;</label> <br>
+                                            <input type="checkbox" name="hobby" value="축구/풋살" id="label5" onclick="CountChecked(this)"><label for="label5">축구/풋살&nbsp;</label>
+                                            <input type="checkbox" name="hobby" value="농구" id="label6" onclick="CountChecked(this)"><label for="label6">농구&nbsp;</label>
+                                            <input type="checkbox" name="hobby" value="야구" id="label7" onclick="CountChecked(this)"><label for="label7">야구&nbsp;</label>
+                                            <input type="checkbox" name="hobby" value="테니스" id="label8" onclick="CountChecked(this)"><label for="label8">테니스&nbsp;</label>
+                                            <input type="checkbox" name="hobby" value="배드민턴" id="label9" onclick="CountChecked(this)"><label for="label9">배드민턴 &nbsp;</label>
                                         </td>
                                     </tr>
     
@@ -195,28 +225,41 @@
                                         <div class="profile_wrap">
                                             <th>프로필 사진</th>
                                             <td>
-                                                <img src="/resources/mypage/img/profile.png" class="profile"><br>
-                                                <label class="btn btn-sm" for="input-file">추가</label><input type="file"
-                                                    id="input-file" style="display: none;">
-                                                <button type="button" class="btn btn-secondary btn-sm">기본</button>
+                                                <input type="hidden" name="profile_temp" class="hidden-user-img" value="<c:out value='${profile_temp}'/>">
+                                                <input type="hidden" name="profile_path" class="hidden-user-img" value="<c:out value='${profile_path}'/>">
+                                                <input type="hidden" name="profile_name" class="hidden-user-img" value="<c:out value='${profile_name}'/>">
+                                                <c:choose>
+                                                    <c:when test="${sessionScope.__USER__.isEmptyProfileImg()}">
+                                                        <div class="profile-img-box">
+                                                            <img src="/resources/mypage/img/profile.png" class="profile">
+                                                        </div>
+                                                    </c:when>
+
+                                                    <c:otherwise>
+                                                        <div class="profile-img-box">
+                                                            <img src="/display?fileName=${profile_path}/${profile_temp}_${profile_name}" class="profile">
+                                                        </div>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <br>
+                                                <label class="btn btn-sm" for="file" id="fileUp">추가</label>
+                                                <input type="file" id="file" name="file" style="display: none;" accept="image/*" >  
+                                                <button type="button" class="btn btn-secondary btn-sm" id="currImg">기본</button>   
                                             </td>
                                         </div>
                                     </tr>
     
                                     <tr name3 class="name3 font-14-400">
                                         <th>한줄 소개</th>
-                                        <td><input type="text" class="form-control" name="introduction" placeholder="(선택)">
+                                        <td><input type="text" class="form-control" name="profile_info" placeholder="(선택)" value="<c:out value='${__USER__.profile_info}'/>">
                                         </td>
                                     </tr>
     
                                 </table>
     
                                 <div>
-                                    <input type="submit" class="sign_up" value="수정하기">
+                                    <button type="button" class="sign_up">수정하기</button>
                                 </div>
-    
-    
-    
                             </form>
                         </div>
                     </div>
@@ -224,9 +267,56 @@
             </div>
         </section>
 
+
+
         <!-- 하단 Footer -->
  		<%@include file="../include/footer.jsp" %>
     </div>
+
+
+    <script>
+        var myUserNickname = "<c:out value='${sessionScope.__USER__.nickname}'/>";
+        var myUserSports1 = "<c:out value='${sessionScope.__USER__.sports1}'/>";
+        var myUserSports2 = "<c:out value='${sessionScope.__USER__.sports2}'/>";
+        var myUserSports3 = "<c:out value='${sessionScope.__USER__.sports3}'/>";
+
+        var serverPublicKey = "<c:out value='${__PUBLIC_KEY__}'/>";
+
+        // 이미지 - 기본버튼클릭
+        $("#currImg").on('click', function (){
+            // hidden태그 - 기존 이미지 정보 삭제
+            $(".hidden-user-img").val('');
+
+            // 이미지 박스 이미지 변경
+            $(".profile").attr('src','/resources/mypage/img/profile.png');
+        })
+
+         // 게시글 이미지 바로 수정
+        $("#file").on('change', function(){
+            readURL(this);
+            $(".hidden-user-img").val('');
+        });
+
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                $(".profile").attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+
+
+
+
+
+    </script>
+    
+    <!-- 팝업 open -->
+    <script src="/resources/signUp/js/mapPopup.js"></script>
 
     <!-- 마이페이지 개인정보수정 자바스크립트 -->
     <script src="/resources/mypage/js/mypage_info_modify.js"></script>

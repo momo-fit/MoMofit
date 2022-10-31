@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>main</title>
+    <title>회원가입</title>
     <!-- 부트스트랩 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -14,6 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.0/jquery-migrate.min.js"></script>
+    
 
     <!-- 폰트어썸 -->
     <script src="https://kit.fontawesome.com/3b1ef86e4b.js" crossorigin="anonymous"></script>
@@ -50,7 +51,7 @@
         <!-- 메인 컨텐츠부 -->
         <section>
 
-
+			
             <div class="section_wrap">
                 <div class="s_box_board">
                     <h2>회원가입</h2>
@@ -59,92 +60,112 @@
 
                         <div class="name2 font-22-700">기본정보</div>
 
-                        <form action="#" method="post">
+                        <form action="/signup" method="post" enctype="multipart/form-data">
 
                             <table class="table table-boardered">
 
 
-                                <tr class="name3 font-14-400">
+                                <tr class="font-14-400">
                                     <th>아이디*</th>
-                                    <td><input type="text" class="form-control" name="id" id="id" placeholder="id"></td>
-                                    <td><input type="button" value="중복확인" onclick="idCheck()" class="btn btn-primary" />
+                                    <td><input type="text" class="form-control" name="id" id="id" placeholder="id" oninput="handleOnInput(this)"></td>
+                                    <td><input type="button" value="중복확인" class="btn btn-primary" id="idBtn" />
                                     </td>
                                 </tr>
 
-                                <tr class="name3 font-14-400">
+                                <tr>
+                                    <th></th>
+                                    <td><span id="idResult" class="font-12-400"></span></td>
+                                </tr>
+
+                                <tr class="font-14-400">
                                     <th>닉네임*</th>
-                                    <td><input type="text" class="form-control" name="nick_name" id="nick_name"
-                                            placeholder="id"></td>
-                                    <td><input type="button" value="중복확인" onclick="nickCheck()"
-                                            class="btn btn-primary" /></td>
+                                    <td><input type="text" class="form-control" name="nickname" id="nick_name" placeholder="닉네임"></td>
+                                    <td><input type="button" value="중복확인" class="btn btn-primary" id="nickBtn" /></td>
+                                </tr>
+                                
+                                <tr>
+                                    <th></th>
+                                    <td><span id="nickNameResult" class="font-12-400"></span></td>
                                 </tr>
 
-                                <tr class="name3 font-14-400">
+                                <tr class="font-14-400">
                                     <th>비밀번호*</th>
-                                    <td><input type="password" class="form-control" name="pass1" placeholder="비밀번호">
+                                    <td><input type="password" class="form-control pass1" name="pass" placeholder="비밀번호" required>
                                     </td>
                                 </tr>
 
-                                <tr class="name3 font-14-400">
+                                <tr class="font-14-400">
                                     <th>비밀번호확인*</th>
-                                    <td><input type="password" class="form-control" name="pass2" placeholder="비밀번호 확인">
+                                    <td><input type="password" class="form-control pass2" placeholder="비밀번호 확인" required>
                                     </td>
                                 </tr>
+                                
+                                <tr class="pwCheck">
+                                    <th></th>
+                                    <td><span id="pwCheck" class="font-12-400"></span></td>
+                                </tr>
 
-                                <tr class="name3 font-14-400">
+                                <tr class="font-14-400">
                                     <th>이름*</th>
-                                    <td><input type="text" class="form-control" name="real_name"></td>
+                                    <td><input type="text" class="form-control" name="user_name" required></td>
                                 </tr>
 
-                                <tr class="name3 font-14-400">
+                                <tr class="font-14-400">
                                     <th>전화번호*</th>
-                                    <td><input type="tel" class="form-control" name="tel" placeholder="000-0000-0000">
+                                    <td><input type="tel" class="form-control" name="tel" placeholder="-없이 숫자만 입력" maxlength="11" oninput="autoHypenPhone(this)" required> 
                                     </td>
                                 </tr>
 
-                                <tr class="name3 font-14-400">
+                                <tr class="font-14-400">
                                     <th>성별*</th>
                                     <td>
-                                        <select name="gender" class="form-control">
-                                            <option value="gender_default">성별</option>
-                                            <option value="gender_man">남자</option>
-                                            <option value="gender_woman">여자</option>
+                                        <select name="gender" class="form-control" required>
+                                            <option value="">성별</option>
+                                            <option value="male">남자</option>
+                                            <option value="female">여자</option>
                                         </select>
                                     </td>
                                 </tr>
 
-                                <tr class="name3 font-14-400">
+                                <tr class="font-14-400">
                                     <th>생년월일*</th>
                                     <td>
-                                        <input type="date" name="birth" class="form-control">
+                                        <input type="date" name="birth" class="form-control" required>
                                     </td>
                                 </tr>
 
-                                <tr class="name3 font-14-400">
+                                <tr class="font-14-400">
                                     <th>이메일*</th>
                                     <td>
-                                        <input class="form-control-sm" name="email1" type="text"> @ <input
-                                            class="form-control-sm" name="email2" type="text">
-                                        <select class="form-control-sm" name="select_email"
-                                            onChange="selectEmail(this)">
+                                        <input class="form-control-sm" name="email" type="text" id="email1" required> @ <input
+                                            class="form-control-sm" name="email" type="text" id="addr" required>
+                                        <select class="form-control-sm" name="select_email" id="email2"
+                                            onChange="selectEmail(this)" required>
                                             <option value="" selected>선택하세요</option>
                                             <option value="naver.com">naver.com</option>
                                             <option value="gmail.com">gmail.com</option>
-                                            <option value="hanmail.com">hanmail.com</option>
+                                            <option value="daum.net">daum.net</option>
                                             <option value="1">직접입력</option>
                                         </select>
                                     </td>
-                                    <td><button type="button" class="btn btn-primary">인증</button></td>
+                                    <td><button type="button" class="btn btn-primary1" id="mailSend">인증</button></td>
 
                                 </tr>
 
-                                <tr class="name3 font-14-400">
+                                <tr class="font-14-400">
 
                                     <th>인증번호*</th>
-                                    <td><input type="password" class="form-control" name="cer_num"
-                                            placeholder="인증번호를 입력하세요."></td>
+                                    <td><input type="text" class="form-control" id="form-control" name="cer_num"
+                                            placeholder="인증번호를 입력하세요."  required></td>
+                                    <td><button type="button" class="btn btn-primary2" id="pinNumCheck">확인</button></td>
                                 </tr>
 
+                                <tr class="font-14-400">
+
+                                    <th></th>
+                                    <td><span id="pinNum"  class="font-12-400"></span></td>
+                                </tr>
+                               
                                 <tr>
                                     <td colspan="3">
                                         <hr>
@@ -152,41 +173,40 @@
                                     </td>
                                 </tr>
 
-                                <tr class="name3 font-14-400">
+                                <tr class="font-14-400">
                                     <th>지역</th>
-                                    <td><input type="text" class="form-control" id="loc" name="location" placeholder="지역"></td>
-                                    <td><button type="button" class="btn btn-primary">지역검색</button></td>
+                                    <td><input type="text" class="form-control" id="loc" name="user_loc" placeholder="지역"></td>
+                                    <td><button type="button" class="btn btn-primary3" id="btn-primary3">지역검색</button></td>
                                 </tr>
 
-                                <tr class="name3 font-14-400">
+                                <tr class="font-14-400">
                                     <th>관심운동</th>
                                     <td>
-                                        <input type="checkbox" name="hobby" value="헬스/크로스핏">헬스/크로스핏 &nbsp;
-                                        <input type="checkbox" name="hobby" value="요가/필라테스">등산 &nbsp;
-                                        <input type="checkbox" name="hobby" value="등산">등산 &nbsp;
-                                        <input type="checkbox" name="hobby" value="런닝">런닝 &nbsp;
-                                        <input type="checkbox" name="hobby" value="싸이클">싸이클 &nbsp; <br>
-                                        <input type="checkbox" name="hobby" value="축구/풋살">축구/풋살 &nbsp;
-                                        <input type="checkbox" name="hobby" value="농구">농구 &nbsp;
-                                        <input type="checkbox" name="hobby" value="야구">야구 &nbsp;
-                                        <input type="checkbox" name="hobby" value="테니스">테니스 &nbsp;
-                                        <input type="checkbox" name="hobby" value="배드민턴">배드민턴 &nbsp;
+                                        <input type="checkbox" name="hobby" value="헬스/크로스핏" id="label1" onclick="CountChecked(this)"><label for="label1">헬스/크로스핏&nbsp;</label>
+                                        <input type="checkbox" name="hobby" value="등산" id="label2" onclick="CountChecked(this)"><label for="label2">등산&nbsp;</label>
+                                        <input type="checkbox" name="hobby" value="런닝" id="label3" onclick="CountChecked(this)"><label for="label3">런닝&nbsp;</label>
+                                        <input type="checkbox" name="hobby" value="싸이클" id="label4" onclick="CountChecked(this)"><label for="label4">싸이클&nbsp;</label> <br>
+                                        <input type="checkbox" name="hobby" value="축구/풋살" id="label5" onclick="CountChecked(this)"><label for="label5">축구/풋살&nbsp;</label>
+                                        <input type="checkbox" name="hobby" value="농구" id="label6" onclick="CountChecked(this)"><label for="label6">농구&nbsp;</label>
+                                        <input type="checkbox" name="hobby" value="야구" id="label7" onclick="CountChecked(this)"><label for="label7">야구&nbsp;</label>
+                                        <input type="checkbox" name="hobby" value="테니스" id="label8" onclick="CountChecked(this)"><label for="label8">테니스&nbsp;</label>
+                                        <input type="checkbox" name="hobby" value="배드민턴" id="label9" onclick="CountChecked(this)"><label for="label9">배드민턴 &nbsp;</label>
                                     </td>
                                 </tr>
 
-                                <tr class="name3 font-14-400">
+                                <tr class="font-14-400">
                                     <th>프로필 사진</th>
                                     <td>
                                         <img src="/resources/signUp/img/profile.png" class="profile"><br>
-                                        <label class="btn btn-sm" for="input-file">추가</label><input type="file"
-                                            id="input-file" style="display: none;">
-                                        <button type="button" class="btn btn-secondary btn-sm">기본</button>
+                                        <label class="btn btn-sm" for="file" id="fileUp">추가</label>
+                                        <input type="file" id="file" name="file" style="display: none;" accept="image/*" >  
+                                        <button type="button" class="btn btn-secondary btn-sm" id="currImg">기본</button>                                         
                                     </td>
                                 </tr>
 
-                                <tr class="name3 font-14-400">
+                                <tr class="font-14-400">
                                     <th>한줄 소개</th>
-                                    <td><input type="text" class="form-control" name="introduction" placeholder="(선택)">
+                                    <td><input type="text" class="form-control" name="profile_info" placeholder="(선택)">
                                     </td>
                                 </tr>
 
@@ -196,7 +216,7 @@
                                     </td>
                                 </tr>
 
-                                <tr class="name3 font-14-400">
+                                <tr class="font-14-400">
                                     <th>약관동의</th>
                                     <td>
                                         <div class="checkbox_group">
@@ -218,7 +238,7 @@
                             </table>
 
                             <div>
-                                <input type="submit" class="sign_up" value="가입하기">
+                                <input type="button" class="sign_up" value="가입하기">
                             </div>
 
                         </form>
@@ -233,21 +253,24 @@
     </div>
 
 
-    <!-- 메인화면 자바스크립트
-    <script src="js/main.js"></script> -->
-    <!-- 팝업 open -->
-    <script src="/resources/signUp/js/mapPopup.js"></script>
+
+
+
     <!-- 체크박스 전체동의 자바스크립트 -->
     <script src="/resources/signUp/js/main_checkbox.js"></script>
     <!-- 이메일 선택 자바스크립트 -->
-    <script src="/resources/signUp/js/main_email.js"></script>
-    <!-- 아이디 중복확인 자바스크립트-->
-    <script src="/resources/signUp/js/main_idcheck.js"></script>
-
+    <script src="/resources/signUp/js/main_check.js"></script>
+    <!-- 이메일 선택 자바스크립트 -->
+    <script src="/resources/signUp/js/fileUplode.js"></script>
+	<!-- 팝업 -->
+    <script src="/resources/signUp/js/mapPopup.js"></script>
+	
+	
     <!-- 부트스트랩 자바스크립트 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+    </script>
 </body>
 
 </html>

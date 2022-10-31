@@ -1,3 +1,42 @@
+
+$(function () {
+	
+	// 게시물 클릭하면 바로 첨부된 이미지 보이기 시작
+	//let board_no = '<c:out value="${PicBoard.board_no}"/>';
+	
+	let uploadResult=$("#uploadResult");
+	
+	console.log(" *** 무조건 출력되어야함! \n " + String(board_no) );
+	
+	// getJSON(url[,data][,success]) 형식으로 씀
+	// DB에서 이미지 정보 불러오기
+	$.getJSON("/board/pic/imageList", {board_no : board_no}, function(arr) {  
+		
+		// 이미지가 없는 경우 바로 리턴
+		if(arr.length === 0) {
+			console.log("이미지가 없습니다.");
+			return;
+		}
+		
+		let str = "";
+		let obj = arr[0];	
+		
+		let fileCallPath = encodeURIComponent(obj.path + "/" + obj.temp + "_" + obj.board_img_name);
+		str += "<div id='result_card_main'";
+		str += "data-path='" + obj.path + "' data-uuid='" + obj.temp + "' data-filename='" + obj.board_img_name + "'";
+		str += ">";
+		str += "<img src='/display?fileName=" + fileCallPath +"'>";
+		str += "</div>";
+		
+		uploadResult.html(str);	
+	 });
+	
+});
+
+// 게시물 클릭하면 바로 첨부된 이미지 보이기 끝
+
+
+
 // 좋아요 이미지 클릭시 숫자 올라가는 제이쿼리
 $(function () {
 

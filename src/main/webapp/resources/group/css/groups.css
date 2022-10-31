@@ -17,8 +17,12 @@ section {
 
 }
 
+.linear-gradient{
+    background: linear-gradient(to top, rgba(255, 179, 0, 0.419) 50%, transparent 50%);
+}
+
 .best_inner {
-    width: 1050px;
+    width: 1150px;
     height: 243px;
 
     display: flex;
@@ -27,7 +31,7 @@ section {
 }
 
 .best_outter {
-    max-width: 1050px;
+    max-width: 1150px;
     margin-left: 50px;
     display: flex;
     align-content: center;
@@ -56,11 +60,12 @@ section {
 }
 
 .best_group{
-    width: 1050px;
+    width: 1150px;
 }
 
 
 /* 모임목록 */
+
 .groups {
     margin-top: 100px;
     margin-left: 40px;
@@ -71,16 +76,18 @@ section {
     width: 250px;
     height: 230px;
     box-shadow: 1px 1px 5px -1px gray;
-    margin: 7px 7px 0px 4px;
+    /* margin: 7px 7px 0px 4px; */
+    margin: 10px;
 
     border-radius: 7px 7px 7px 7px;
     overflow: hidden;
+
+    color:#32305b;
 }
 
 .group_box_inner {
     width: 250px;
     height: 150px;
-    
 }
 
 .group_box_img{
@@ -98,10 +105,10 @@ section {
 .group_inner {
     display: flex;
     flex-wrap: wrap;
-    align-content: space-around;
-    justify-content: center;
-    width: 1050px;
-    height: 1800px;
+    /* align-content: space-around; */
+    /* justify-content: center; */
+    width: 1150px;
+    /* height: 1800px; */
 }
 
 
@@ -113,7 +120,7 @@ section {
 }
 
 .hr-1 {
-    width: 1050px;
+    width: 1080px;
     border: solid 1px black;
 
     display: block;
@@ -121,6 +128,35 @@ section {
 
 
 /* 검색 */
+
+.search_area>select {
+    width: 200px;
+    height: 32px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 15px;
+    outline: none;
+    padding-left: 10px;
+    background-color: rgb(249, 247, 247);
+    
+    margin-bottom: 10px;
+    float: left;
+}
+
+.search_area>input {
+    width: 200px;
+    height: 32px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 15px;
+    outline: none;
+    padding-left: 10px;
+    background-color: rgb(249, 247, 247);
+    margin-left: 20px;
+    margin-bottom: 10px;
+    float: left;
+}
+
 .search {
     float: left;
     margin-left: 14px;
@@ -145,7 +181,8 @@ section {
     border-radius: 5px;
 }
 
-.search>button {
+.search_btn {
+    float: left;
     background-color: white;
     border: none;
     color: rgb(20 167 255);
@@ -196,13 +233,75 @@ section {
 }
 
 .board_write>button{
+    
     background-color: white;
     border: none;
     width: 130px;
     float: right;
     margin-right: 30px;
     font-size: 22px;
-    margin-top: 10px;
+    margin-top: 10px; 
+}
 
+/* 페이징 처리 : 게시판, 댓글*/ 
+#paging-div {
+    margin-top: 10px;
+}
+
+#paging-div ul a {
+    text-decoration: none;
     
 }
+
+#paging-div ul {
+    display: flex;
+    justify-content: center;
+}
+
+.mb-currPage-step {
+    padding : 10px, 10px;
+    text-align: center;
+    background-color: rgb(240, 240, 240);
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 18px;
+    cursor: pointer;
+
+}
+
+.mb-currPage-step a {
+    color: rgba(0, 0, 0, 0.797);
+}
+
+.mb-next, .mb-prev {
+    margin-left: 15px;
+    padding : 10px, 10px;
+    text-align: center;
+    background-color: rgb(240, 240, 240);
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+
+    border-radius: 18px;
+    cursor: pointer;
+}
+
+.mb-next a , .mb-prev a {
+    color: rgb(7, 92, 141);
+}
+
+.mb-currPage {
+    background-color: #2E4361;
+    
+}
+
+.mb-currPage a {
+    color: white;
+}
+
+#key1, #key2, #key3 {
+	display : none;
+}
+
+

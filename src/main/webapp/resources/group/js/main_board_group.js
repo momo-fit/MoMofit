@@ -13,6 +13,19 @@ $(function () {
 
 });
 
+
+// 수정일자 - 코드수정필요
+$(function () {
+    $('#edit').change(function() {
+        var state = $('#edit').val();
+        if ( state !== ' ' ) {
+            $('#edit').show();
+        } else {
+            $('#edit').hide();
+        }
+    })
+});
+
 // 댓글창 나왔다 숨기는 자바스크립트
 function clickFunc(){
     // 댓글창 선택 (btn1)

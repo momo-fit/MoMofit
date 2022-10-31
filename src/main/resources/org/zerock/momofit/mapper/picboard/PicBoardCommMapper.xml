@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.momofit.mapper.picboard.PicBoardCommMapper">
+
+   	 
+   	 
+  	 	 <!-- 작성하기 (댓글) -->
+	 <insert id="insertComm">
+	  	INSERT INTO COMM(comm_no,board_no,text,parent_no,user_no)
+	  	VALUES(COMM_SEQ.nextval,#{board_no},#{text},#{parent_no},#{user_no})
+	 	
+	 </insert>
+	 
+	 	 <!-- 삭제하기 (댓글) -->
+	 <delete id="deleteComm">
+	 	DELETE FROM COMM 
+	 	WHERE comm_no=#{comm_no}
+	 </delete>
+   	 
+   	 	  <!-- 수정하기 (댓글) -->
+	  <update id="updateComm">
+	  UPDATE COMM
+	  SET text= #{text},edit=current_date
+	  
+	  WHERE comm_no=#{comm_no}
+	  </update>
+	  
+	  
+
+      <!-- 조회하기 (댓글/페이징) -->
+	 <select id="readCommList" resultType="org.zerock.momofit.domain.picboard.PicBoardCommDTO">
+		SELECT 
+		   comm_no,
+		   board_no,
+		   text,
+		   comm_date,
+		   edit,
+		   parent_no,
+		   user_no,
+		   (SELECT NICKNAME FROM USERS WHERE USERS.USER_NO = comm.USER_NO) AS NICKNAME 
+        FROM COMM
+        WHERE board_no = #{board_no}
+    
+   	 </select>
+   	 
+  
+    
+</mapper> 
